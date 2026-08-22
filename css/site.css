@@ -1,0 +1,288 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   theward.online — everything that is not a token.
+   Sections are a flat numbered sequence; renumber rather than appending a
+   letter. No literal colours, sizes, families or durations: see tokens.css.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* 1 ── ground ───────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--text);
+  font-family: var(--f-txt);
+  font-size: 17px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--t-slow) ease, color var(--t-slow) ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--live); outline-offset: 3px; }
+
+.skip {
+  position: absolute; left: var(--s2); top: calc(var(--s2) * -8);
+  background: var(--band-bg); color: var(--band-text);
+  font-family: var(--f-sys); font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: var(--s2) var(--s3); z-index: 10;
+  transition: top var(--t-fast);
+}
+.skip:focus { top: var(--s2); }
+
+.shell { max-width: var(--page); margin: 0 auto; padding: 0 var(--s4); }
+
+/* 2 ── the band ─────────────────────────────────────────────────────────── */
+.band {
+  background: var(--band-bg);
+  color: var(--band-text);
+  padding: var(--s3) var(--s4);
+  display: flex; align-items: center; gap: var(--s3);
+}
+.band-mark { width: 46px; height: 46px; flex: none; }
+.band-text { display: grid; gap: 3px; min-width: 0; }
+.band-name {
+  font-family: var(--f-sys); font-weight: 700;
+  font-size: clamp(1.15rem, 3.2vw, 1.8rem);
+  letter-spacing: 0.2em; text-transform: uppercase; line-height: 1;
+}
+.band-meta {
+  font-family: var(--f-sys); font-size: 0.68rem;
+  letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7;
+}
+
+/* 3 ── the view ─────────────────────────────────────────────────────────── */
+/* ⚠ A live canvas must keep costing what it costs. Never hide the frame with
+   display:none / visibility / opacity:0 / an opaque cover — Chrome drops the
+   WebGL surface and restoring it lands as one blocked frame of many seconds. */
+.view {
+  aspect-ratio: 16 / 10;
+  background: var(--ground-2);
+  border: 1px solid var(--rule); border-top: none;
+  position: relative; overflow: hidden;
+}
+@media (max-width: 620px) { .view { aspect-ratio: 4 / 3; } }
+.view iframe { width: 100%; height: 100%; display: block; border: 0; }
+
+
+.layers {
+  display: flex; gap: var(--s0); flex-wrap: wrap;
+  border: 1px solid var(--rule); border-top: none;
+  padding: var(--s1); background: var(--ground-2);
+}
+.layer {
+  font-family: var(--f-sys); font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: var(--s1) var(--s2); background: transparent;
+  color: var(--text-soft); border: 1px solid transparent; cursor: pointer;
+  transition: color var(--t-fast), background var(--t-fast);
+}
+.layer:hover { color: var(--text); }
+.layer[aria-pressed="true"] { color: var(--band-text); background: var(--band-bg); }
+
+/* 4 ── sections ─────────────────────────────────────────────────────────── */
+.sec { padding: var(--s6) 0; border-top: 1px solid var(--rule); }
+.sec:first-of-type { border-top: none; }
+
+.copy { max-width: var(--measure); }
+.copy h2 {
+  font-family: var(--f-sys); font-weight: 600;
+  font-size: clamp(1.4rem, 3.4vw, 2rem);
+  letter-spacing: -0.012em; line-height: 1.15;
+  margin: 0 0 var(--s3); text-wrap: balance;
+}
+.copy h3 {
+  font-family: var(--f-sys); font-weight: 600; font-size: 1.12rem;
+  letter-spacing: -0.005em; line-height: 1.25; margin: var(--s4) 0 var(--s1);
+}
+.copy p { margin: 0 0 var(--s3); }
+.copy p:last-child { margin-bottom: 0; }
+.copy strong { font-weight: 600; }
+.lede { font-size: 1.14rem; line-height: 1.52; }
+
+.eyebrow {
+  font-family: var(--f-sys); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--live);
+  display: block; margin-bottom: var(--s2);
+}
+
+.note {
+  font-family: var(--f-sys); font-size: 0.74rem; line-height: 1.5;
+  color: var(--text-soft); margin: var(--s2) 0 0; max-width: 64ch;
+}
+
+/* 5 ── wayside ──────────────────────────────────────────────────────────── */
+.wayside {
+  border: 1px solid var(--rule); background: var(--ground-2);
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+}
+.wayside + .wayside { border-top: none; }
+@media (max-width: 780px) { .wayside { grid-template-columns: minmax(0, 1fr); } }
+
+.wayside-fig {
+  background: var(--ground-3);
+  border-right: 1px solid var(--rule-soft);
+  min-height: 210px;
+}
+@media (max-width: 780px) {
+  .wayside-fig { border-right: none; border-bottom: 1px solid var(--rule-soft); }
+}
+.wayside-fig svg { width: 100%; height: 100%; display: block; }
+
+.wayside-txt { padding: var(--s4); display: grid; gap: var(--s2); align-content: start; }
+.wayside-txt h3 {
+  font-family: var(--f-sys); font-weight: 600; font-size: 1.18rem;
+  letter-spacing: -0.005em; line-height: 1.2; margin: 0; text-wrap: balance;
+}
+.wayside-txt p { margin: 0; font-size: 0.99rem; line-height: 1.58; }
+
+/* 6 ── index of instruments ─────────────────────────────────────────────── */
+.index { border: 1px solid var(--rule); border-top: none; background: var(--ground-2); }
+.index-row {
+  display: grid; grid-template-columns: 176px minmax(0, 1fr);
+  gap: var(--s3); padding: var(--s3) var(--s4);
+  border-top: 1px solid var(--rule-soft); align-items: baseline;
+}
+@media (max-width: 700px) { .index-row { grid-template-columns: minmax(0, 1fr); gap: var(--s0); } }
+.index-name { font-family: var(--f-sys); font-weight: 600; font-size: 0.94rem; }
+.index-say { font-size: 0.96rem; line-height: 1.5; margin: 0; }
+
+/* 7 ── the ladder ───────────────────────────────────────────────────────── */
+.steps { display: grid; margin: var(--s4) 0 0; border-top: 1px solid var(--rule-soft); }
+.step {
+  display: grid; grid-template-columns: 34px minmax(0, 1fr);
+  gap: var(--s3); padding: var(--s3) 0;
+  border-bottom: 1px solid var(--rule-soft); align-items: start;
+}
+.step-n {
+  font-family: var(--f-sys); font-variant-numeric: tabular-nums;
+  font-weight: 700; font-size: 0.86rem; color: var(--live);
+  border: 1px solid var(--rule-soft); text-align: center; padding: 2px 0;
+}
+.step p { margin: 0; font-size: 1rem; line-height: 1.55; }
+.step-t {
+  font-family: var(--f-sys); font-weight: 600; font-size: 0.94rem;
+  display: block; margin-bottom: 2px;
+}
+
+.aside {
+  border-left: 3px solid var(--live); background: var(--ground-2);
+  padding: var(--s3) var(--s4); margin-top: var(--s4); max-width: var(--measure);
+}
+.aside p { margin: 0; font-size: 0.99rem; line-height: 1.55; }
+
+/* 8 ── calls to action ──────────────────────────────────────────────────── */
+.cta {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  background: var(--band-bg); color: var(--band-text);
+  font-family: var(--f-sys); font-weight: 700; font-size: 0.82rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: var(--s2) var(--s4); border: none; cursor: pointer;
+  margin-top: var(--s4); text-decoration: none;
+  transition: opacity var(--t-fast);
+}
+.cta:hover { opacity: 0.86; }
+.cta::after { content: "→"; letter-spacing: 0; }
+.cta-quiet {
+  background: transparent; color: var(--text);
+  border: 1px solid var(--rule);
+}
+
+.terms { display: grid; gap: var(--s2); margin-top: var(--s4); max-width: var(--measure); }
+.term { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: var(--s3); align-items: baseline; }
+@media (max-width: 700px) { .term { grid-template-columns: minmax(0, 1fr); gap: 0; } }
+.term-k {
+  font-family: var(--f-sys); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-soft);
+}
+.term-v { font-size: 0.98rem; line-height: 1.5; }
+
+/* 9 ── the title block ──────────────────────────────────────────────────── */
+.tblock { border: 1px solid var(--rule); background: var(--ground-2); }
+.tblock-head {
+  display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4);
+  justify-content: space-between; align-items: baseline;
+  padding: var(--s3) var(--s4); border-bottom: 1px solid var(--rule);
+  font-family: var(--f-sys);
+}
+.tblock-t { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+.tblock-legend { font-size: 0.68rem; color: var(--text-soft); display: flex; gap: var(--s3); flex-wrap: wrap; }
+
+.dot {
+  display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+  border: 1px solid var(--sign-soft); margin-right: 6px; vertical-align: 1px;
+}
+.dot-on { background: var(--sign-soft); }
+
+.tier { padding: var(--s3) var(--s4) var(--s4); border-bottom: 1px solid var(--rule-soft); }
+.tier:last-child { border-bottom: none; }
+.tier-name {
+  font-family: var(--f-sys); font-weight: 700; font-size: 0.8rem;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--sign);
+  display: block; margin-bottom: var(--s0);
+}
+.tier-say { font-size: 0.94rem; line-height: 1.5; color: var(--text-soft); margin: 0 0 var(--s3); max-width: 60ch; }
+
+.row {
+  display: grid; grid-template-columns: minmax(0, 190px) minmax(0, 1fr) minmax(0, 148px);
+  gap: var(--s2) var(--s3); padding: var(--s2) 0;
+  border-top: 1px solid var(--rule-soft); align-items: baseline;
+}
+.row:first-of-type { border-top: none; }
+@media (max-width: 720px) { .row { grid-template-columns: minmax(0, 1fr); gap: var(--s0); } }
+.r-name { font-family: var(--f-sys); font-size: 0.84rem; font-weight: 600; line-height: 1.35; }
+.r-src { display: grid; gap: 2px; }
+.r-src span { font-size: 0.88rem; line-height: 1.4; }
+.r-src em { font-style: normal; font-family: var(--f-sys); font-size: 0.74rem; color: var(--text-soft); }
+.r-terms {
+  font-family: var(--f-sys); font-size: 0.72rem; line-height: 1.4;
+  color: var(--text-soft); font-variant-numeric: tabular-nums;
+}
+
+/* 10 ── the clock ───────────────────────────────────────────────────────── */
+.clock {
+  display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap;
+  font-family: var(--f-sys); font-size: 0.7rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft);
+}
+.clock-state { color: var(--live); font-weight: 700; }
+.clock-btns { display: flex; gap: var(--s0); }
+.clock-btn {
+  font-family: var(--f-sys); font-size: 0.66rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 3px var(--s1); background: transparent; color: var(--text-soft);
+  border: 1px solid var(--rule-soft); cursor: pointer;
+  transition: color var(--t-fast), border-color var(--t-fast);
+}
+.clock-btn:hover { color: var(--text); border-color: var(--rule); }
+.clock-btn[aria-pressed="true"] { color: var(--band-text); background: var(--band-bg); border-color: var(--band-bg); }
+
+/* 11 ── colophon ────────────────────────────────────────────────────────── */
+.colophon {
+  border-top: 1px solid var(--rule); margin-top: var(--s6);
+  padding: var(--s4) 0 0;
+  display: grid; gap: var(--s3);
+  font-family: var(--f-sys); font-size: 0.73rem; line-height: 1.6; color: var(--text-soft);
+}
+.colophon a { text-underline-offset: 3px; }
+.colophon-row { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: var(--s3); align-items: baseline; }
+@media (max-width: 700px) { .colophon-row { grid-template-columns: minmax(0, 1fr); gap: var(--s0); } }
+.colophon-k { font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); }
+.colophon-foot {
+  display: flex; flex-wrap: wrap; gap: var(--s3);
+  justify-content: space-between; align-items: center;
+  border-top: 1px solid var(--rule-soft); padding: var(--s3) 0 var(--s6);
+  letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.68rem;
+}

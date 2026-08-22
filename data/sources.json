@@ -1,0 +1,212 @@
+{
+  "tiers": [
+    {
+      "title": "Automatic",
+      "say": "Global open datasets that cover everywhere and arrive on their own. The kit picks the right base for the region; the operator never makes the call.",
+      "rows": [
+        {
+          "name": "Street & building base",
+          "auto": true,
+          "sources": [
+            {
+              "name": "OpenStreetMap",
+              "note": "global"
+            }
+          ],
+          "terms": "ODbL · free · no account"
+        },
+        {
+          "name": "Building footprints",
+          "auto": true,
+          "sources": [
+            {
+              "name": "Microsoft Global ML Footprints",
+              "note": ""
+            }
+          ],
+          "terms": "free · no account"
+        }
+      ]
+    },
+    {
+      "title": "Public records",
+      "say": "Published by an institution — a national survey, a county assessor, a forestry department, a heritage register. Free; two are a genuine hunt for the right municipal portal.",
+      "rows": [
+        {
+          "name": "Ground elevation",
+          "auto": true,
+          "sources": [
+            {
+              "name": "USGS 3DEP",
+              "note": "US"
+            },
+            {
+              "name": "any GeoTIFF",
+              "note": "the reader is source-agnostic"
+            }
+          ],
+          "terms": "public domain · free"
+        },
+        {
+          "name": "Parcels, zoning, year built",
+          "auto": false,
+          "sources": [
+            {
+              "name": "the county assessor",
+              "note": "per jurisdiction"
+            }
+          ],
+          "terms": "public record"
+        },
+        {
+          "name": "Tree census",
+          "auto": false,
+          "sources": [
+            {
+              "name": "OpenStreetMap",
+              "note": "real trunk positions"
+            },
+            {
+              "name": "city forestry inventory",
+              "note": ""
+            },
+            {
+              "name": "authored park census",
+              "note": "hand-curated for a signature park"
+            },
+            {
+              "name": "a public-records request",
+              "note": "when the contractor never published it"
+            }
+          ],
+          "terms": "free · no key"
+        },
+        {
+          "name": "Canopy raster",
+          "auto": true,
+          "sources": [
+            {
+              "name": "NLCD Tree Canopy (USDA)",
+              "note": "US"
+            },
+            {
+              "name": "ESA WorldCover",
+              "note": "10 m · global"
+            }
+          ],
+          "terms": "public domain · CC BY"
+        },
+        {
+          "name": "Historic designation",
+          "auto": true,
+          "sources": [
+            {
+              "name": "National Register (NPS)",
+              "note": ""
+            }
+          ],
+          "terms": "public record · free"
+        },
+        {
+          "name": "Street lamps",
+          "auto": true,
+          "sources": [
+            {
+              "name": "OpenStreetMap",
+              "note": ""
+            }
+          ],
+          "terms": "free · no account"
+        },
+        {
+          "name": "Facade imagery",
+          "auto": false,
+          "sources": [
+            {
+              "name": "Mapillary",
+              "note": "street-level"
+            }
+          ],
+          "terms": "free account · API key"
+        },
+        {
+          "name": "Species dossiers",
+          "auto": false,
+          "sources": [
+            {
+              "name": "USDA PLANTS",
+              "note": ""
+            },
+            {
+              "name": "Silvics of North America",
+              "note": "USDA Forest Service"
+            },
+            {
+              "name": "i-Tree Species",
+              "note": "USFS"
+            }
+          ],
+          "terms": "free"
+        },
+        {
+          "name": "Species routing",
+          "auto": false,
+          "sources": [
+            {
+              "name": "the city planting list",
+              "note": "with hardiness zone"
+            }
+          ],
+          "terms": "free"
+        }
+      ]
+    },
+    {
+      "title": "Local knowledge",
+      "say": "No dataset holds any of this. You look, you ask, you walk around. A neighborhood is the only party that can supply it — which is why it sits at the top of the stack rather than the bottom.",
+      "rows": [
+        {
+          "name": "Businesses & hours",
+          "auto": false,
+          "sources": [
+            {
+              "name": "Overture Places",
+              "note": ""
+            },
+            {
+              "name": "OpenStreetMap POIs",
+              "note": ""
+            }
+          ],
+          "terms": "free"
+        },
+        {
+          "name": "Menus",
+          "auto": false,
+          "sources": [
+            {
+              "name": "the restaurant",
+              "note": "no endpoint exists"
+            }
+          ],
+          "terms": "—"
+        },
+        {
+          "name": "Photographs & logos",
+          "auto": false,
+          "sources": [
+            {
+              "name": "the business",
+              "note": "credit their domain · never hotlink"
+            },
+            {
+              "name": "Wikimedia Commons",
+              "note": "for landmarks"
+            }
+          ],
+          "terms": "free"
+        }
+      ]
+    }
+  ]
+}

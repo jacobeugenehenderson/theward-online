@@ -1,0 +1,90 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   TOKENS — every colour, size, family and duration on this site.
+   Rule 1: if you are about to type a hex code or a px size into site.css,
+   add a token here instead.
+
+   Two grounds. DAY is a warm worked ground; NIGHT is not its inverse —
+   the browns LIFT into a lit tan rather than falling to grey, and the amber
+   begins to glow. The relationship is a day passing, not a colour flip.
+
+   The viewer has three states: an explicit choice stamps data-theme on the
+   root; the default stamps nothing and only prefers-color-scheme separates
+   them. All three are declared. js/site.js stamps data-theme from the
+   neighborhood's own sun, and a manual choice beats it.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── DAY ───────────────────────────────────────────────────────────────── */
+  --ground:      #EFE8D8;
+  --ground-2:    #E5DBC6;
+  --ground-3:    #DACEB4;
+
+  --text:        #1C1815;
+  --text-soft:   #6B6152;
+  --text-faint:  #9C9280;
+
+  --sign:        #4C3B27;   /* routed-sign brown — STRUCTURAL, never decorative */
+  --sign-soft:   #7A6448;
+
+  --live:        #B96A12;   /* ⚠ RESERVED. Only where something is actually live. */
+
+  --rule:        rgba(28, 24, 21, 0.22);
+  --rule-soft:   rgba(28, 24, 21, 0.10);
+
+  --band-bg:     #1C1815;
+  --band-text:   #EFE8D8;
+
+  /* ── type ──────────────────────────────────────────────────────────────── */
+  --f-sys: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --f-txt: "Source Serif 4", Georgia, "Times New Roman", serif;
+
+  /* ── scale ─────────────────────────────────────────────────────────────── */
+  --s0: 0.25rem;
+  --s1: 0.5rem;
+  --s2: 0.75rem;
+  --s3: 1rem;
+  --s4: 1.5rem;
+  --s5: 2.25rem;
+  --s6: 3.5rem;
+  --s7: 5.5rem;
+
+  --measure: 62ch;
+  --page:    1180px;
+
+  --t-fast: 140ms;
+  --t-slow: 420ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:     #16130F;
+    --ground-2:   #201B15;
+    --ground-3:   #2B241B;
+    --text:       #E9E1CE;
+    --text-soft:  #958A76;
+    --text-faint: #6B6252;
+    --sign:       #C3A47C;
+    --sign-soft:  #9A8058;
+    --live:       #F2B44E;
+    --rule:       rgba(233, 225, 206, 0.24);
+    --rule-soft:  rgba(233, 225, 206, 0.11);
+    --band-bg:    #E9E1CE;
+    --band-text:  #16130F;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground:     #16130F;
+  --ground-2:   #201B15;
+  --ground-3:   #2B241B;
+  --text:       #E9E1CE;
+  --text-soft:  #958A76;
+  --text-faint: #6B6252;
+  --sign:       #C3A47C;
+  --sign-soft:  #9A8058;
+  --live:       #F2B44E;
+  --rule:       rgba(233, 225, 206, 0.24);
+  --rule-soft:  rgba(233, 225, 206, 0.11);
+  --band-bg:    #E9E1CE;
+  --band-text:  #16130F;
+}
