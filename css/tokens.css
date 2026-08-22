@@ -34,6 +34,21 @@
   --band-bg:     #1C1815;
   --band-text:   #EFE8D8;
 
+  /* ── the sky, as data ──────────────────────────────────────────────────
+     Four states of the neighborhood's own sky, used by the horizon in the
+     colophon. js/site.js picks one from the sun's real elevation; it never
+     writes a colour. These are an approximation of the Look's authored day —
+     the correct version reads the per-slot sky out of the installation's
+     own design.json, which is a project, not a token edit. */
+  --sky-day-top:      #6E93B8;
+  --sky-day-horizon:  #C4D2DC;
+  --sky-gold-top:     #7E86A6;
+  --sky-gold-horizon: #E5B173;
+  --sky-dusk-top:     #3B3C63;
+  --sky-dusk-horizon: #A96A55;
+  --sky-night-top:    #0E1220;
+  --sky-night-horizon:#232A3C;
+
   /* ── type ──────────────────────────────────────────────────────────────── */
   --f-sys: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --f-txt: "Source Serif 4", Georgia, "Times New Roman", serif;

@@ -38,8 +38,8 @@
 
   <div class="layers">
     <button class="layer" type="button" data-layer="" aria-pressed="true">Both</button>
-    <button class="layer" type="button" data-layer="slab" aria-pressed="false">The ground</button>
-    <button class="layer" type="button" data-layer="player" aria-pressed="false">The commons</button>
+    <button class="layer" type="button" data-layer="slab" aria-pressed="false">Place</button>
+    <button class="layer" type="button" data-layer="player" aria-pressed="false">People</button>
   </div>
 </header>
 
@@ -195,7 +195,7 @@
       <div class="term"><span class="term-k">What we do</span><span class="term-v">Pour the neighborhood, stand it up, and keep it running.</span></div>
       <div class="term"><span class="term-k">What you do</span><span class="term-v">Know the place. Bring the businesses in. Decide what your Ward is for.</span></div>
       <div class="term"><span class="term-k">What it costs</span><span class="term-v">No licence per view, no meter, no key anyone can revoke. The map is poured from public record and it stays poured.</span></div>
-      <div class="term"><span class="term-k">Who holds it</span><span class="term-v">The kit is held by a small company; the civic-memory work by a nonprofit. Your installation&rsquo;s character is held by you.</span></div>
+      <div class="term"><span class="term-k">Who decides</span><span class="term-v">You do. What your Ward is for, who it speaks to, what belongs on it — nobody else rules on that.</span></div>
     </div>
 
     <div class="copy">
@@ -316,18 +316,23 @@
       <span class="colophon-k">Sources</span>
       <span>Street and building geometry &copy; OpenStreetMap contributors, <a href="https://opendatacommons.org/licenses/odbl/">ODbL</a>. Building footprints from Microsoft Global ML Building Footprints, ODbL. Elevation from USGS 3DEP, public domain. Canopy from NLCD (USDA) and ESA WorldCover, CC&nbsp;BY. Street-level imagery from Mapillary, CC&nbsp;BY-SA. Parcels, zoning and historic designation from public records.</span>
     </div>
-    <div class="colophon-row">
-      <span class="colophon-k">The Ward</span>
-      <span>The kit is held by a small company; the civic-memory work by a nonprofit. A Ward is hosted by the neighborhood it is of.</span>
-    </div>
     <div class="colophon-foot">
-      <span class="clock">
-        <span class="clock-state" data-clock-state>&mdash;</span>
-        <span>in the neighborhood</span>
-        <span class="clock-btns">
-          <button class="clock-btn" type="button" data-clock="auto" aria-pressed="true">Clock</button>
-          <button class="clock-btn" type="button" data-clock="day" aria-pressed="false">Day</button>
-          <button class="clock-btn" type="button" data-clock="night" aria-pressed="false">Night</button>
+      <span class="horizon">
+        <button class="horizon-disc" type="button" data-horizon-flip aria-label="Hold the other one">
+          <svg viewBox="0 0 40 40" aria-hidden="true" data-horizon-sky>
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" data-sky-top/>
+                <stop offset="1" data-sky-horizon/>
+              </linearGradient>
+            </defs>
+            <rect width="40" height="40" fill="url(#sky)"/>
+            <circle data-sky-body cx="20" cy="20" r="5"/>
+          </svg>
+        </button>
+        <span class="horizon-say">
+          <span class="horizon-state"><b data-clock-state>&mdash;</b> in the neighborhood</span>
+          <button class="horizon-follow" type="button" data-clock="auto" hidden>follow the neighborhood</button>
         </span>
       </span>
       <span><a href="mailto:hello@theward.online">hello@theward.online</a></span>

@@ -169,6 +169,8 @@ decision, and it is one line.
 | The sources block | generated, current, audit-checked |
 | The embed | loads the real product from staging; layer switch wired to the product's contract, **not yet confirmed end-to-end in a browser** |
 | The courier section | built; destination is `interest` |
+| The joint | a 3px rule in the reserved colour under the band. The seam vanished at night when band and sky were both near-black; the rule says *below this line, everything is live* |
+| The horizon | replaces a three-button clock strip that explained nothing. The disc shows the neighborhood's real sky and the sun or moon at its true height, and clicking it holds the other one. It keeps showing the REAL sky while held, so an override never makes the page lie |
 | `/host` as a standalone page | **not built.** Section 07 is in the scroll only; sales happens in fragments and it should also be a page you can send cold |
 | Privacy / terms pages | **not built** |
 | Favicon | **not built.** The mark's 16 px cousin — a thick ring with a bright notch — is the intended asset |
@@ -179,4 +181,26 @@ decision, and it is one line.
   would be a fourth. The copy is written **without figures** until the rate is
   ruled on.
 - The wayside figures are geometric placeholders. They are honest — they are
-  drawings, not fake renders — but they are the weakest thing on the page.
+  drawings, not fake renders — but they are the weakest thing on the page. The
+  right answer is to **capture them from the product**: the Look is authored
+  across a whole day and the Meteorologist scrubs weather live, so the sky
+  figure and the neon figure can be stills of the actual installation. That is
+  a capture pass, not an illustration commission.
+- **The sky tokens are an approximation.** `--sky-*` in `tokens.css` guesses the
+  four states. The correct version reads the per-slot sky out of the
+  installation's own `design.json`, so the page and the map are lit by one
+  authored day. A project, not a token edit.
+- Whether a QR belongs on the page, and what it may point at. See §8.
+
+---
+
+## 8. ⚠ A QR on this site cannot be a working check-in
+
+A check-in code is meaningful because you have to be standing in front of it.
+Publishing a scannable one lets anyone anywhere earn a townie's standing without
+ever visiting, which empties the only credential the neighborhood has.
+
+So a QR here may only ever be **an illustration of the physical object** — the
+card a place puts in its window — and it must resolve to an explainer, never to
+a check-in route. Shown that way it does real work: it makes an abstract trust
+ladder into a thing you have seen.

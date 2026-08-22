@@ -60,10 +60,22 @@ RESERVED = {
     '--s7': 'spacing scale step — as above',
 }
 refs = set(re.findall(r'var\((--[a-z0-9-]+)', site + toks + js))
+
+# Tokens reached by a COMPUTED name — getPropertyValue('--sky-' + key + '-top').
+# The literal prefix is the contract; every token under it counts as referenced,
+# and is reported as dynamic so it is never mistaken for a static use.
+dynamic = set()
+for prefix in re.findall(r"getPropertyValue\('(--[a-z0-9-]*)", js):
+    if len(prefix) > 2:
+        dynamic |= {t for t in declared if t.startswith(prefix)}
+refs |= dynamic
+
 drift = declared - refs - set(RESERVED)
 check('unused token', not drift, f'{sorted(drift)}')
 for t in sorted((declared - refs) & set(RESERVED)):
     print(f'  reserved    : {t} — {RESERVED[t]}')
+if dynamic:
+    print(f'  dynamic     : {len(dynamic)} token(s) reached by computed name from js/site.js')
 
 # ── structure: balanced comments and tags ───────────────────────────────────
 check('comments', html.count('<!--') == html.count('-->'),

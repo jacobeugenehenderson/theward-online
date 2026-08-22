@@ -60,9 +60,41 @@
 
   var isNight = false
 
+  /* The sky, from the sun's real height. Every colour is a token — this
+     picks which pair, it never writes one. Four states rather than a
+     continuous ramp, because the Look itself is authored in slots. */
+  function skyFor(elev) {
+    if (elev > 12)  return { key: 'day',   body: 'sun',  y: 34 - Math.min(elev, 60) * 0.42 }
+    if (elev > 0)   return { key: 'gold',  body: 'sun',  y: 34 - elev * 0.9 }
+    if (elev > -6)  return { key: 'dusk',  body: 'sun',  y: 34 }
+    return            { key: 'night', body: 'moon', y: 30 + Math.max(elev, -40) * 0.25 }
+  }
+
+  function paintHorizon(elev) {
+    var svg = document.querySelector('[data-horizon-sky]')
+    if (!svg) return
+    var sky = skyFor(elev)
+    var cs  = getComputedStyle(document.documentElement)
+    var top = svg.querySelector('[data-sky-top]')
+    var hor = svg.querySelector('[data-sky-horizon]')
+    var bod = svg.querySelector('[data-sky-body]')
+    if (top) top.setAttribute('stop-color', cs.getPropertyValue('--sky-' + sky.key + '-top').trim())
+    if (hor) hor.setAttribute('stop-color', cs.getPropertyValue('--sky-' + sky.key + '-horizon').trim())
+    if (bod) {
+      bod.setAttribute('cy', String(Math.max(6, Math.min(34, sky.y))))
+      bod.setAttribute('r', sky.body === 'moon' ? '3.6' : '5')
+      bod.setAttribute('fill', sky.body === 'moon'
+        ? cs.getPropertyValue('--band-text').trim()
+        : cs.getPropertyValue('--live').trim())
+      bod.setAttribute('opacity', sky.body === 'moon' ? '0.85' : '1')
+    }
+    var flip = document.querySelector('[data-horizon-flip]')
+    if (flip) flip.setAttribute('aria-label', isNight ? 'Hold this page on day' : 'Hold this page on night')
+  }
+
   function applyClock() {
-    var night = mode === 'night' ||
-      (mode === 'auto' && solarElevation(new Date(), GEO.lat, GEO.lon) < -6)
+    var elev  = solarElevation(new Date(), GEO.lat, GEO.lon)
+    var night = mode === 'night' || (mode === 'auto' && elev < -6)
 
     isNight = night
     document.documentElement.setAttribute('data-theme', night ? 'dark' : 'light')
@@ -71,10 +103,13 @@
     var state = document.querySelector('[data-clock-state]')
     if (state) state.textContent = night ? 'Night' : 'Day'
 
-    var btns = document.querySelectorAll('[data-clock]')
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].setAttribute('aria-pressed', String(btns[i].getAttribute('data-clock') === mode))
-    }
+    /* The disc always shows the REAL sky, even when the page is held on the
+       other one — otherwise the override quietly makes the page lie about
+       what it is reporting. */
+    paintHorizon(elev)
+
+    var follow = document.querySelector('[data-clock="auto"]')
+    if (follow) follow.hidden = (mode === 'auto')
   }
 
   /* ── 2. the layer switch ───────────────────────────────────────────────
@@ -111,16 +146,16 @@
 
   /* ── boot ──────────────────────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function () {
-    // clock
+    // the horizon: the disc holds the other one, the link goes back to the sun
     applyClock()
-    var clockBtns = document.querySelectorAll('[data-clock]')
-    for (var i = 0; i < clockBtns.length; i++) {
-      clockBtns[i].addEventListener('click', function () {
-        mode = this.getAttribute('data-clock')
-        applyClock()
-      })
-    }
-    setInterval(function () { if (mode === 'auto') applyClock() }, 60000)
+    var flip = document.querySelector('[data-horizon-flip]')
+    if (flip) flip.addEventListener('click', function () {
+      mode = isNight ? 'day' : 'night'
+      applyClock()
+    })
+    var follow = document.querySelector('[data-clock="auto"]')
+    if (follow) follow.addEventListener('click', function () { mode = 'auto'; applyClock() })
+    setInterval(function () { applyClock() }, 60000)
 
     // the view
     var frame = document.querySelector('[data-ward-frame]')

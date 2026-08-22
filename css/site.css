@@ -70,7 +70,12 @@ a { color: inherit; }
 .view {
   aspect-ratio: 16 / 10;
   background: var(--ground-2);
-  border: 1px solid var(--rule); border-top: none;
+  border: 1px solid var(--rule);
+  /* ⚠ THE JOINT. The band is near-black and so is a night sky, so the seam
+     between the printed page and the live view vanishes for half of every
+     day. This rule is the boundary, in the one reserved colour: below it,
+     everything is live. It reads against noon and midnight equally. */
+  border-top: 3px solid var(--live);
   position: relative; overflow: hidden;
 }
 @media (max-width: 620px) { .view { aspect-ratio: 4 / 3; } }
@@ -252,22 +257,30 @@ a { color: inherit; }
 }
 
 /* 10 ── the clock ───────────────────────────────────────────────────────── */
-.clock {
-  display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap;
-  font-family: var(--f-sys); font-size: 0.7rem;
-  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft);
+.horizon { display: flex; align-items: center; gap: var(--s2); }
+
+/* The control IS a picture of the sky there. A disc that shows the actual
+   sky and the sun or moon at its true height explains itself; a row of
+   labelled buttons did not. Click it to hold the other one. */
+.horizon-disc {
+  width: 40px; height: 40px; flex: none; padding: 0;
+  background: transparent; border: 1px solid var(--rule-soft);
+  border-radius: 50%; overflow: hidden; cursor: pointer;
+  transition: border-color var(--t-fast);
 }
-.clock-state { color: var(--live); font-weight: 700; }
-.clock-btns { display: flex; gap: var(--s0); }
-.clock-btn {
-  font-family: var(--f-sys); font-size: 0.66rem; font-weight: 600;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  padding: 3px var(--s1); background: transparent; color: var(--text-soft);
-  border: 1px solid var(--rule-soft); cursor: pointer;
-  transition: color var(--t-fast), border-color var(--t-fast);
+.horizon-disc:hover { border-color: var(--rule); }
+.horizon-disc svg { width: 100%; height: 100%; display: block; }
+
+.horizon-say { display: grid; gap: 1px; text-transform: none; letter-spacing: 0; }
+.horizon-state { font-size: 0.82rem; color: var(--text); }
+.horizon-state b { font-weight: 700; color: var(--live); font-style: normal; }
+.horizon-follow {
+  font-size: 0.72rem; color: var(--text-soft);
+  background: none; border: 0; padding: 0; cursor: pointer;
+  text-align: left; text-decoration: underline; text-underline-offset: 3px;
+  font-family: var(--f-sys);
 }
-.clock-btn:hover { color: var(--text); border-color: var(--rule); }
-.clock-btn[aria-pressed="true"] { color: var(--band-text); background: var(--band-bg); border-color: var(--band-bg); }
+.horizon-follow[hidden] { display: none; }
 
 /* 11 ── colophon ────────────────────────────────────────────────────────── */
 .colophon {
@@ -283,6 +296,6 @@ a { color: inherit; }
 .colophon-foot {
   display: flex; flex-wrap: wrap; gap: var(--s3);
   justify-content: space-between; align-items: center;
-  border-top: 1px solid var(--rule-soft); padding: var(--s3) 0 var(--s6);
+  border-top: 1px solid var(--rule-soft); padding: var(--s4) 0 var(--s6);
   letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.68rem;
 }
