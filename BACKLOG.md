@@ -8,10 +8,11 @@ product lives in `INTEGRATION.md`.
 
 ## Blocked on the product
 
-**The diorama's tree.** The figure area is already shaped for it and the pill
-already says *The trees*. **Nothing is blocking it any more** — both blockers
-this entry used to name were my errors, not the product's. Full brief:
-`BRIEF-tree-and-sky-embed.md` in the lafayette‑square repo, §3.
+**The diorama's tree — ✅ BUILT, ready to place here.** `?embed=tree`
+(`src/components/TreeDiorama.jsx`, `04739db5`): sky and specimen in ONE Canvas,
+lit by `CelestialBodies`' own lights, driven by `ward-time`. Both blockers this
+entry once named were my errors, not the product's. **The remaining work is
+site-side: swap the CSS band for the embed in the diorama figure.**
 
 ⭐ **The tree that deploys is `/baked/<look>/trees/…`, it is tracked, and staging
 serves it today.** An earlier version of this line claimed the GLBs were missing
@@ -80,6 +81,10 @@ place this page names the town.
 
 **The season ramp.** Autumn leaves are genuinely unbuilt in the Arborist — the
 backlog there says the fall pack is still unprocessed. Summer green works today.
+⛔ **The copy claimed otherwise and has been fixed** — *"the leaves know what
+season it is"* shipped in the trees panel while this very file recorded the
+feature as unbuilt. **Two files, two rooms apart, disagreeing.** Removed in
+`git show` below; kept here as the reason the audit should learn to catch it.
 
 ---
 
@@ -105,6 +110,12 @@ part that has been argued through.
   trust ladder without "three days". You can describe a neighborhood without
   counting its buildings.
 - **The site names no town.** The audit checks it.
+- ⛔ **The page may not promise what the product does not do**, and the tell is
+  that this file already says so. Two live cases: **wind** — the diorama does not
+  sway, because wind is authored by the meteorologist and almost no directive
+  carries one; and **season** — the autumn pack is unprocessed. ⭐ Both are
+  *aspiration*, not rot: they are owed features, so the copy waits rather than
+  the backlog being quietly corrected.
 - ⛔ **Deleting an element means grepping its class name.** Removing the tree left
   its declarations behind with no selector, and CSS **fails open** — no error, no
   console, just a silently mis-parsed cascade that dropped the whole
