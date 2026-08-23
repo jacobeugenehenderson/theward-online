@@ -325,9 +325,16 @@
     timePending = true
     requestAnimationFrame(function () {
       timePending = false
+      /* ⭐ EVERY frame on this page is on the SAME clock — the map AND the
+         tree standing in the sky band. Posting to only one was how the day
+         could disagree with itself across two pictures of the same minute. */
+      var msg = { type: 'ward-time', minute: held }
       var w = frameWin()
-      if (!w) return
-      try { w.postMessage({ type: 'ward-time', minute: held }, embedOrigin) } catch (e) { /* not ready */ }
+      if (w) { try { w.postMessage(msg, embedOrigin) } catch (e) { /* not ready */ } }
+      var tf = document.querySelector('[data-tree-frame]')
+      if (tf && tf.contentWindow) {
+        try { tf.contentWindow.postMessage(msg, embedOrigin) } catch (e) { /* not ready */ }
+      }
     })
   }
 
@@ -409,6 +416,17 @@
     for (var ei = 0; ei < embeds.length; ei++) {
       embeds[ei].src = embedUrl + '?embed=' + embeds[ei].getAttribute('data-embed') +
         '&place=' + encodeURIComponent(FEATURED_PLACE)
+    }
+
+    // ── the tree, standing in the sky band ───────────────────────────────
+    // `alpha=1` → no sky of its own, so the band behind shows through the
+    // canopy and the tree takes its light from the scene at this minute.
+    var treeFrame = document.querySelector('[data-tree-frame]')
+    if (treeFrame) {
+      treeFrame.src = embedUrl + '?embed=tree&alpha=1'
+      treeFrame.addEventListener('load', function () {
+        setTimeout(postTime, 400)   // it mounts before it can listen
+      })
     }
 
     // ── the card in the tablet ───────────────────────────────────────────
