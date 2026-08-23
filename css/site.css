@@ -176,17 +176,55 @@ a { color: inherit; }
 @media (max-width: 780px) { .wayside-fig--frame iframe { min-height: 340px; } }
 .wayside--directory .wayside-fig { min-height: 420px; }
 
-/* The card, full width beneath the pair above it — the reveal the section has
-   been building to: "and behind every address a card". */
-.cardwin { border: 1px solid var(--rule); border-top: none; background: var(--ground-2); }
-.cardwin .pill { margin: var(--s3) var(--s4) 0; }
-.cardwin-frame { padding: var(--s3) var(--s4) 0; }
-.cardwin-frame iframe {
-  width: 100%; height: 560px; display: block; border: 1px solid var(--rule-soft);
+
+/* ── The card, in a tablet ─────────────────────────────────────────────────
+   Flat, drawn in the page's own ink, correct proportion (a portrait 11-inch is
+   about 1 : 1.43). It exists to give the card the size it was designed for and
+   to stop a full-width card dominating a section that is not about it. */
+.cardwin {
+  border: 1px solid var(--rule); border-top: none; background: var(--ground-2);
+  display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  gap: var(--s5); padding: var(--s5) var(--s4);
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .cardwin { grid-template-columns: minmax(0, 1fr); gap: var(--s4); justify-items: center; }
+}
+
+.tablet {
+  position: relative;
+  width: 100%; max-width: 320px;
+  aspect-ratio: 1 / 1.43;
+  border: 1px solid var(--sign-soft);
+  border-radius: 18px;
+  /* ⭐ THE BEZEL IS A GRAB SURFACE, not just a drawing. An iframe swallows
+     wheel and drag, so a card sitting flush to the page leaves a visitor
+     scrolling the card when they meant to scroll the page. The bezel is the
+     margin where the page is still the page — generous on purpose. */
+  padding: 16px;
   background: var(--ground-3);
 }
-@media (max-width: 700px) { .cardwin-frame iframe { height: 460px; } }
-.cardwin .note { padding: 0 var(--s4) var(--s3); margin-top: var(--s2); }
+.tablet-screen {
+  width: 100%; height: 100%;
+  border-radius: 7px; overflow: hidden;
+  background: var(--ground-2);
+  border: 1px solid var(--rule-soft);
+}
+.tablet-screen iframe { width: 100%; height: 100%; display: block; border: 0; }
+/* the lens: one dot, because a device drawn without one reads as a picture frame */
+.tablet-lens {
+  position: absolute; top: 5px; left: 50%; transform: translateX(-50%);
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--sign-soft); opacity: 0.7;
+}
+
+.cardwin-say { max-width: 52ch; }
+.cardwin-say h3 {
+  font-family: var(--f-sys); font-weight: 600; font-size: 1.18rem;
+  letter-spacing: -0.005em; line-height: 1.2; margin: 0 0 var(--s2);
+}
+.cardwin-say p { margin: 0 0 var(--s2); font-size: 0.99rem; line-height: 1.58; }
+.cardwin-say .note { margin-top: var(--s1); }
 
 /* 6 ── index of instruments ─────────────────────────────────────────────── */
 .index { border: 1px solid var(--rule); border-top: none; background: var(--ground-2); }

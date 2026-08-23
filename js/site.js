@@ -341,20 +341,11 @@
       embeds[ei].src = embedUrl + '?embed=' + embeds[ei].getAttribute('data-embed')
     }
 
-    // ── the card window: the pill chooses which place, the frame shows it ─
+    // ── the card in the tablet ───────────────────────────────────────────
     var cardFrame = document.querySelector('[data-card-frame]')
-    var placeBtns = document.querySelectorAll('[data-place]')
-    function showPlace(id) {
-      if (cardFrame) cardFrame.src = embedUrl + '?embed=card&place=' + encodeURIComponent(id)
-      for (var c = 0; c < placeBtns.length; c++) {
-        placeBtns[c].setAttribute('aria-selected', String(placeBtns[c].getAttribute('data-place') === id))
-      }
-    }
-    if (cardFrame && placeBtns.length) {
-      showPlace(placeBtns[0].getAttribute('data-place'))
-      for (var pb = 0; pb < placeBtns.length; pb++) {
-        placeBtns[pb].addEventListener('click', function () { showPlace(this.getAttribute('data-place')) })
-      }
+    if (cardFrame) {
+      cardFrame.src = embedUrl + '?embed=card&place=' +
+        encodeURIComponent(cardFrame.getAttribute('data-place'))
     }
 
     // ── the instruments pill: one figure area, two things to say about it ─
