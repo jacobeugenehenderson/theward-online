@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
-<link rel="stylesheet" href="css/tokens.css?v=1787452919223">
-<link rel="stylesheet" href="css/site.css?v=1787453277045">
+<link rel="stylesheet" href="css/tokens.css?v=1787453621327">
+<link rel="stylesheet" href="css/site.css?v=1787453621328">
 </head>
 <body>
 
@@ -65,55 +65,25 @@
     <span class="eyebrow">The instruments</span>
 
     <div class="wayside">
-      <div class="wayside-fig">
-        <svg viewBox="0 0 320 240" role="img" aria-label="Sun, moon and cloud over a street" data-fig="weather">
-          <defs><clipPath id="fig-sky"><rect width="320" height="240"/></clipPath></defs>
-          <g clip-path="url(#fig-sky)">
-            <circle cx="80" cy="70" r="20" fill="var(--live)" opacity="0.85"/>
-            <circle cx="230" cy="54" r="12" fill="none" stroke="var(--sign)" stroke-width="2"/>
-            <path d="M230 42 a12 12 0 0 0 0 24 a8 12 0 0 1 0 -24" fill="var(--sign)" opacity="0.7"/>
-            <g fill="var(--sign)" opacity="0.15">
-              <ellipse cx="150" cy="100" rx="60" ry="19"/>
-              <ellipse cx="194" cy="93" rx="40" ry="15"/>
-              <ellipse cx="112" cy="95" rx="33" ry="13"/>
-            </g>
-            <path d="M0 176 L32 176 L32 148 L56 134 L80 148 L80 176 L124 176 L124 140 L152 122 L180 140 L180 176 L228 176 L228 155 L258 140 L288 155 L288 176 L320 176 L320 240 L0 240 Z" fill="var(--sign)" opacity="0.9"/>
-            <g stroke="var(--ground-3)" stroke-width="1.5" opacity="0.55"><path d="M0 200 H320 M0 218 H320"/></g>
-          </g>
-        </svg>
-        <!-- ⭐ THE ALMANAC IS AN INSTRUMENT, NOT A DIVIDER. It shares the figure
-             area with the sky and the trees because it is the same subject seen
-             a third way — and because that area is where the diorama lands: one
-             scene, this slider driving it, the tree lit by this gradient. -->
-        <div class="skyband" data-sky-strip data-fig="almanac" hidden>
+      <!-- ⭐ ONE FIGURE FOR ALL THREE. The sky, the trees and the Almanac are
+           the same scene described three ways, so the pill changes only the
+           words. This IS the diorama: when the tree can be captured on an
+           alpha it stands in here, lit by this gradient, and the slider that
+           already moves the day moves the light across it. -->
+      <div class="wayside-fig wayside-fig--diorama">
+        <div class="skyband" data-sky-strip>
       <span class="skyband-wash" data-sky-wash aria-hidden="true"></span>
       <span class="skyband-mark" data-sky-mark aria-hidden="true"></span>
       <span class="skyband-sun" data-sky-sun aria-hidden="true"></span>
-      <span class="skyband-moon" data-sky-moon aria-hidden="true"></span>
+      <span class="skyband-moon" data-sky-moon aria-hidden="true">
+        <span class="moon-half" data-moon-half></span>
+        <span class="moon-lune" data-moon-lune></span>
+        <span class="moon-maria"></span>
+      </span>
       <input class="skyband-input" type="range" min="0" max="1439" step="5" value="720"
              data-sky-range aria-label="The hour of the day in the neighborhood">
       <button class="skyband-now" type="button" data-sky-now hidden>now</button>
         </div>
-        <svg viewBox="0 0 320 240" role="img" aria-label="A single tree at full height beside a human figure for scale" data-fig="trees" hidden>
-          <defs><clipPath id="fig-tree"><rect width="320" height="240"/></clipPath></defs>
-          <g clip-path="url(#fig-tree)">
-            <g stroke="var(--sign)" fill="none" stroke-width="5" stroke-linecap="round">
-              <path d="M186 214 V116"/>
-              <path d="M186 152 L152 122 M186 168 L214 140 M186 132 L162 104 M186 122 L208 100"/>
-            </g>
-            <g fill="var(--sign)" opacity="0.30">
-              <ellipse cx="186" cy="92" rx="76" ry="46"/>
-              <ellipse cx="146" cy="110" rx="42" ry="27"/>
-              <ellipse cx="226" cy="108" rx="40" ry="26"/>
-            </g>
-            <!-- the yardstick: a person, so the height is a claim and not a shape -->
-            <g fill="var(--sign)" opacity="0.55">
-              <circle cx="70" cy="186" r="5"/>
-              <path d="M65 194 h10 v14 h-4 v10 h-2 v-10 h-4 z"/>
-            </g>
-            <g stroke="var(--ground-3)" stroke-width="1.5" opacity="0.55"><path d="M0 214 H320 M0 228 H320"/></g>
-          </g>
-        </svg>
       </div>
 
       <div class="wayside-txt">
@@ -125,7 +95,7 @@
 
         <div data-inst-panel="weather">
           <h3>The weather overhead is the weather outside</h3>
-          <p>The Ward reads the live conditions for the ground it stands on and shows what is happening now &mdash; the overcast that arrived this afternoon, golden hour at the true minute, the first snow as it falls. The sun and moon sit where they actually are, and the moon shows its actual phase. Look up at night and the stars are in their real places, each in the colour it really is.</p>
+          <p>The Ward reads the live conditions for the ground it stands on and shows what is happening now &mdash; the overcast that rolled in this afternoon, golden hour at the true minute, the first snow as it falls. Nothing here is a season setting or a weather mode; if it is raining on that street it is raining on this map, and if it is not, it is not. Look up at night and the stars are in their real places, each in the colour it really is.</p>
         </div>
 
         <div data-inst-panel="almanac" hidden>
@@ -208,6 +178,9 @@
       </h2>
       <p class="lede">A ticker runs across the top of the map carrying whatever the neighborhood has put there &mdash; an event from any place card, tonight&rsquo;s menu, a notice somebody posted this afternoon.</p>
       <p>And every business that is open wears <strong>neon</strong>, coloured by what kind of place it is and lit from its own posted hours. You can read the street at a glance: the block that is still awake, the corner that has gone quiet.</p>
+      <h3>The board</h3>
+      <p>Buy Nothing, services, notices, missed connections. Anyone recognized can post, and some corners are anonymous by default because some things need to be said that way. What goes up there is a good deal of what the ticker ends up carrying.</p>
+
       <p>None of this is scheduled content, and none of it was written this morning. It is the neighborhood reporting itself — a place is alive or it is not, and the map should be able to tell you which.</p>
     </div>
   </section>
@@ -413,6 +386,6 @@
 <!-- SKY:BEGIN — generated by tools/build-sky.mjs. Do not edit by hand. -->
 <script type="application/json" id="sky-table">{"doy":{"spring":79,"summer":172,"autumn":265,"winter":355},"bands":["horizon","low","mid","high","sunGlow"],"cards":{"winter":[["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#2a222e","#222032","#141725","#0a0c11","#5b231a"],["#cb9a7b","#a2868f","#737ba8","#344b69","#ffc386"],["#b6b2a3","#96a2ad","#79a0bd","#5589af","#ffe6cc"],["#a0c3d0","#8bbad0","#6facd0","#64a5d0","#ffeedd"],["#a0c3d0","#8bbad0","#6facd0","#64a5d0","#ffeedd"],["#a0c3d0","#8bbad0","#6facd0","#64a5d0","#ffeedd"],["#a0c3d0","#8bbad0","#6facd0","#64a5d0","#ffeedd"],["#a0c3d0","#8bbad0","#6facd0","#64a5d0","#ffeedd"],["#b5a895","#98979c","#759db8","#5386ac","#ffe2c4"],["#cb8662","#ab7574","#696c9a","#2c405f","#ffb367"],["#4a2a2d","#281e2a","#121322","#090c10","#5a1a0c"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"]],"spring":[["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#372836","#302545","#151534","#0a0b19","#9d4532"],["#d8bc83","#ae999f","#7d87be","#385393","#ffd0a2"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#ccb881","#a99a94","#7490c2","#4368b0","#ffd9b3"],["#cf7339","#a25557","#513971","#161736","#ff8a3f"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"]],"summer":[["#1a1525","#0f0f18","#080810","#050508","#000000"],["#1a1525","#0f0f18","#080810","#050508","#000000"],["#1a1525","#0f0f18","#080810","#050508","#000000"],["#1a1525","#0f0f18","#080810","#050508","#000000"],["#1b1525","#100f19","#080811","#050508","#000000"],["#ce875a","#9b6a80","#5c4f93","#1b244b","#faa56c"],["#c8ba97","#a1a3b1","#7396c5","#3d70b3","#ffe0c2"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#bdb293","#9d9ca3","#6994c7","#3f74b9","#ffe2c5"],["#da813d","#b76b63","#635298","#192350","#ffa552"],["#2b1b26","#18131e","#0b0a17","#06060b","#000000"],["#1a1525","#0f0f18","#080810","#050508","#000000"],["#1a1525","#0f0f18","#080810","#050508","#000000"],["#1a1525","#0f0f18","#080810","#050508","#000000"]],"autumn":[["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#ac4d3a","#7a4572","#33296d","#0c1533","#f38c5f"],["#c6a87d","#9f9ba6","#6692bc","#266aa8","#ffddbc"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#ca884f","#a97873","#5d7caf","#20558f","#ffcb96"],["#782218","#40203b","#101034","#070b1a","#cf5625"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"]]}}</script>
 <!-- SKY:END -->
-<script src="js/site.js?v=1787453210568"></script>
+<script src="js/site.js?v=1787453593900"></script>
 </body>
 </html>

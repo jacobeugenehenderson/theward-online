@@ -168,6 +168,10 @@ a { color: inherit; }
   object-fit: cover; object-position: center;
 }
 
+/* The diorama: one scene, three things to say about it. No padding, because
+   the sky reaches the edges of its frame. */
+.wayside-fig--diorama { padding: 0; }
+
 /* A frame instead of a drawing: the product's own panel, mounted alone. */
 .wayside-fig--frame { padding: 0; background: var(--ground-2); }
 .wayside-fig--frame iframe {
@@ -418,14 +422,45 @@ a { color: inherit; }
    glow radius scale with its illuminated fraction (set from js), which is how
    that preview shows a phase without drawing a terminator — better than the
    crescent I had, and it is the product's answer rather than my guess. */
+/* Bigger than the Sky Builder's preview, because that is a 100px slice in a
+   panel and this is the page's one romantic object. The treatment is still
+   its own — the colours, the glow, and hiding below the horizon. */
 .skyband-sun {
-  width: 14px; height: 14px;
+  width: 26px; height: 26px;
   background: var(--sun);
-  box-shadow: 0 0 12px 4px var(--sun-glow);
+  box-shadow: 0 0 22px 8px var(--sun-glow), 0 0 60px 24px var(--sun-glow);
 }
+
+/* ── The moon, with a face and a real phase ──────────────────────────────
+   Four layers inside one disc:
+     the disc        the lit moon
+     .moon-half      exactly half of it in shadow — which side depends on
+                     whether it is waxing or waning
+     .moon-lune      an ellipse that either EXTENDS that shadow (crescent) or
+                     CARVES IT BACK (gibbous); its width is the phase
+     .moon-maria     the seas, laid over everything, so they read faintly
+                     through the shadow as well — earthshine, and the reason
+                     this is worth doing at all
+   The alternative — fading the whole disc by illumination — is what the
+   preview does at 10px and it is right there. At this size a phase has to be
+   a SHAPE. */
 .skyband-moon {
-  width: 10px; height: 10px;
+  width: 36px; height: 36px;
   background: var(--moon);
+  overflow: hidden;
+}
+.moon-half, .moon-lune, .moon-maria {
+  position: absolute; inset: 0; border-radius: 50%;
+}
+.moon-half { background: var(--moon-night); }
+.moon-lune { background: var(--moon-night); }
+.moon-maria {
+  background-image:
+    radial-gradient(circle at 33% 29%, var(--maria-1) 0 13%, transparent 14%),
+    radial-gradient(circle at 61% 43%, var(--maria-2) 0 17%, transparent 18%),
+    radial-gradient(circle at 44% 67%, var(--maria-1) 0 20%, transparent 21%),
+    radial-gradient(circle at 71% 71%, var(--maria-3) 0 11%, transparent 12%),
+    radial-gradient(circle at 24% 55%, var(--maria-4) 0 9%, transparent 10%);
 }
 
 /* ⭐ THE sunGlow BAND IS A HORIZON WASH, NOT A HALO — this is what that fifth

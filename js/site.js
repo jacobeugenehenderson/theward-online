@@ -218,11 +218,29 @@
     if (moon) {
       /* the moon keeps its own hour — it leads or trails the sun by its age */
       var mTop = placeBody(moon, m.alt, ((minute / 1439 + (1 - m.phase)) % 1) * 100)
-      if (mTop === null || m.lit <= 0.05) {
+      if (mTop === null || m.lit <= 0.02) {
         moon.style.opacity = '0'
       } else {
-        moon.style.opacity = String(0.4 + m.lit * 0.6)
-        moon.style.boxShadow = '0 0 ' + (4 + m.lit * 6).toFixed(1) + 'px 2px var(--moon-glow)'
+        moon.style.opacity = String(0.55 + m.lit * 0.45)
+        moon.style.boxShadow = '0 0 ' + (10 + m.lit * 18).toFixed(1) + 'px 4px var(--moon-glow)'
+
+        /* The phase as a SHAPE. Waxing (age under half a cycle) is lit on the
+           right, so the shadow takes the left half — and the lune either
+           extends that shadow across the face or carves it back toward the
+           limb, depending on which side of half-full we are on. */
+        var waxing = m.phase < 0.5
+        var half = moon.querySelector('[data-moon-half]')
+        var lune = moon.querySelector('[data-moon-lune]')
+        if (half) half.style.clipPath = waxing ? 'inset(0 50% 0 0)' : 'inset(0 0 0 50%)'
+        if (lune) {
+          lune.style.transform = 'scaleX(' + Math.abs(1 - 2 * m.lit).toFixed(3) + ')'
+          lune.style.background = m.lit < 0.5
+            ? 'var(--moon-night)'   /* crescent: the shadow reaches past centre */
+            : 'var(--moon)'         /* gibbous: give the lit face back */
+          lune.style.transformOrigin = waxing ? 'right center' : 'left center'
+          lune.style.left = waxing ? '0' : 'auto'
+          lune.style.right = waxing ? 'auto' : '0'
+        }
       }
     }
 
