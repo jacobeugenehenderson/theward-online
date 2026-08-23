@@ -38,12 +38,12 @@
       }
     },
     "guardian": {
-      "emoji": "🌳",
+      "emoji": "🛡️",
       "label": "Guardian",
       "ink": {
-        "inkH": 0.985,
-        "inkW": 0.905,
-        "nudgeY": 0.0325
+        "inkH": 1.0,
+        "inkW": 0.67,
+        "nudgeY": 0.035
       }
     },
     "keyholder": {
