@@ -132,6 +132,10 @@ a { color: inherit; }
 .wayside {
   border: 1px solid var(--rule); background: var(--ground-2);
   display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  /* ⚠ START, not stretch. Otherwise the longest paragraph sets the height of
+     the picture beside it, and the sky grows or shrinks depending on how much
+     was written that day. */
+  align-items: start;
 }
 .wayside + .wayside { border-top: none; }
 @media (max-width: 780px) { .wayside { grid-template-columns: minmax(0, 1fr); } }
@@ -170,7 +174,13 @@ a { color: inherit; }
 
 /* The diorama: one scene, three things to say about it. No padding, because
    the sky reaches the edges of its frame. */
-.wayside-fig--diorama { padding: 0; }
+.wayside-fig--diorama {
+  padding: 0;
+  /* Fixed, and the tallest of the three figures: the sun's arc needs the room
+     and the copy must never be what decides it. */
+  height: 420px;
+}
+@media (max-width: 780px) { .wayside-fig--diorama { height: 300px; } }
 
 /* A frame instead of a drawing: the product's own panel, mounted alone. */
 .wayside-fig--frame { padding: 0; background: var(--ground-2); }
