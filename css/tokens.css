@@ -40,9 +40,6 @@
   --moon-glow:   rgba(200, 210, 230, 0.5);
   /* the unlit side is not black — earthshine, and it is the romantic part */
   --moon-night:  rgba(22, 27, 42, 0.90);
-  /* the tree's own shadow against the sky — it is standing in light, not
-     pasted on */
-  --tree-cast:   rgba(0, 0, 0, 0.35);
   /* the seas, at four weights — the moon's face is the one texture on the
      page, so its greys are tokens like everything else */
   --maria-1:     rgba(40, 48, 70, 0.30);

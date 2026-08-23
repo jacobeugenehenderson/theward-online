@@ -81,7 +81,6 @@ a { color: inherit; }
 @media (max-width: 620px) { .view { aspect-ratio: 4 / 3; } }
 .view iframe { width: 100%; height: 100%; display: block; border: 0; }
 
-
 .layers {
   display: flex; gap: var(--s0); flex-wrap: wrap;
   border: 1px solid var(--rule); border-top: none;
@@ -190,7 +189,6 @@ a { color: inherit; }
 @media (max-width: 780px) { .wayside-fig--frame iframe { min-height: 340px; } }
 .wayside--directory .wayside-fig { min-height: 420px; }
 
-
 /* ── The card, in a tablet ─────────────────────────────────────────────────
    Flat, drawn in the page's own ink, correct proportion (a portrait 11-inch is
    about 1 : 1.43). It exists to give the card the size it was designed for and
@@ -241,7 +239,6 @@ a { color: inherit; }
   width: 4px; height: 4px; border-radius: 50%;
   background: var(--sign-soft); opacity: 0.7;
 }
-
 
 /* 7 ── the ladder ───────────────────────────────────────────────────────── */
 .steps { display: grid; margin: var(--s4) 0 0; border-top: 1px solid var(--rule-soft); }
@@ -435,13 +432,11 @@ a { color: inherit; }
    short, so a viewBox scaled to fit turns every circle into an oval. */
 /* Standing on the bottom edge, sized to the frame rather than to the page, and
    deaf to the pointer so dragging the day still works straight through it. */
-.skyband-tree {
   position: absolute; left: 8%; bottom: 0;
   height: 82%; width: auto; max-width: none;
   pointer-events: none;
   filter: drop-shadow(0 0 18px var(--tree-cast));
 }
-@media (max-width: 780px) { .skyband-tree { left: 4%; height: 70%; } }
 
 .skyband-sun, .skyband-moon {
   position: absolute; pointer-events: none;
