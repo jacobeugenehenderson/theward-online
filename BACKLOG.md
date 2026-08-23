@@ -86,7 +86,7 @@ lines of `IntersectionObserver` and no product work at all. Copy from
 **`/host` as a standalone page.** Section 07 exists only inside the scroll. Sales
 happens in fragments — this is the page you send cold.
 
-**The QR that reaches Jacob**, replacing the hatched placeholder in `/host`.
+**The QR that reaches Jacob**, replacing the hatched placeholder — now in the ask section at the foot of the page, not in `/host`.
 ⛔ Never a scannable *check‑in* code: publishing one lets anyone anywhere earn a
 townie's standing without visiting, which empties the only credential the
 neighborhood has.
@@ -94,9 +94,6 @@ neighborhood has.
 **Privacy and terms pages.** Absent. Note that the product's own are hard‑wired
 in `LegalPage.jsx` and state the courier fee schedule — so this page would be a
 *fourth* place that number lives.
-
-**A favicon.** The mark's 16 px cousin — a thick ring with a bright notch — is
-the intended asset. The gate mark stops reading as a gate below about 20 px.
 
 ---
 

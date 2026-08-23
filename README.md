@@ -278,10 +278,11 @@ decision, and it is one line.
 | The place card | **`?embed=card&place=<id>` — the card itself, running, in a drawn tablet.** Confirmed: photo, logo, rating, tabs, and no close button. **To swap the place: change `data-place` in index.html and nothing else** — and that is true again; `js/site.js` had grown a constant that quietly took over, leaving the attribute dead while two docs told you to edit it (restored 2026-08-23). It now seeds BOTH frames; the ids come from the directory above it |
 | The joint | a 3px rule in the reserved colour under the band. The seam vanished at night when band and sky were both near-black; the rule says *below this line, everything is live* |
 | The sky band | a short divider between what the Ward holds and what is living in it, carrying the neighborhood's own authored sky (`tools/build-sky.mjs`). It reports; it does not ask |
+| The ask | **its own section, and the page's last word.** It sat mid-page inside §host with two sections after it, and the address was stranded again in the footer. One home now, at the end. The footer carries sources + `© 2026 Jacob Henderson LLC` |
 | `/host` as a standalone page | **not built.** Section 07 is in the scroll only; sales happens in fragments and it should also be a page you can send cold |
 | Privacy / terms pages | **not built** |
 | The five participant badges | **settled.** One authored master — cream field, deep rim, halo on the glyph — so every emoji reads and any emoji can be swapped in. ☕ 🏡 🛡️ 🔑 🚲 — the guardian is a shield, which is the only one of them that is itself a heraldic device, and so the only one already in the register the badge is borrowing. They are the ladder's step markers, replacing the numbers 1–4; the courier is not a rung and wears its badge in the Cary room. Size and centring are generated from each glyph's measured ink |
-| Favicon | **not built.** The mark's 16 px cousin — a thick ring with a bright notch — is the intended asset |
+| Favicon | **built** — `assets/favicon.svg`. The mark's 16 px cousin: thick ring, bright notch, and the band mark's street grid dropped because it turns to mud below ~20 px. Token colours, theme-aware. ⚠ SVG only — Safari shows nothing rather than something wrong |
 
 **Open, needing Jacob:**
 
