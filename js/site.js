@@ -386,8 +386,17 @@
         for (var k = 0; k < all.length; k++) {
           all[k].setAttribute('aria-selected', String(all[k].getAttribute('data-inst') === want))
         }
+        /* ⚠ setAttribute, NOT `.hidden`. `hidden` is a property of HTMLElement
+           and NOT of SVGElement, so `svg.hidden = true` silently sets a plain
+           JS property and the figure keeps rendering. Two figures were showing
+           at once and my own check missed it, because I read back the same
+           property I had just written. Set the ATTRIBUTE and verify against
+           COMPUTED DISPLAY. */
         var figs = document.querySelectorAll('[data-fig]')
-        for (var q = 0; q < figs.length; q++) figs[q].hidden = figs[q].getAttribute('data-fig') !== want
+        for (var q = 0; q < figs.length; q++) {
+          if (figs[q].getAttribute('data-fig') === want) figs[q].removeAttribute('hidden')
+          else figs[q].setAttribute('hidden', '')
+        }
         var panels = document.querySelectorAll('[data-inst-panel]')
         for (var p2 = 0; p2 < panels.length; p2++) {
           panels[p2].hidden = panels[p2].getAttribute('data-inst-panel') !== want
