@@ -9,11 +9,15 @@ product lives in `INTEGRATION.md`.
 ## Blocked on the product
 
 **The diorama's tree.** The figure area is already shaped for it and the pill
-already says *The trees*. Two blockers, neither of them the site's:
-`?embed=` with a Canvas does not size (see below), and the tree GLBs are **not
-in the deployed build** — staging 404s on them, because `dist` is 7.7 GB against
-a 1 GB Pages limit. Full brief: `BRIEF-tree-and-sky-embed.md` in the
-lafayette‑square repo.
+already says *The trees*. **One blocker, and it is not the site's:** `?embed=`
+with a Canvas does not size (see below). Full brief:
+`BRIEF-tree-and-sky-embed.md` in the lafayette‑square repo.
+
+⭐ **The tree that deploys is `/baked/<look>/trees/…`, it is tracked, and staging
+serves it today.** An earlier version of this line claimed the GLBs were missing
+from the build and invented a size limit as the reason. Both were wrong:
+`public/trees/` is the Arborist's authoring source pool and is gitignored on
+purpose. ⛔ **Do not treat a 404 there as a defect** — it is the architecture.
 
 **`?embed=sky`.** Mounts, creates a WebGL context, throws no errors, every
 ancestor measures correctly — and the canvas sits at R3F's default 300×150. The
