@@ -209,7 +209,8 @@ decision, and it is one line.
 | The sources block | generated, current, audit-checked |
 | The embed | loads the real product; **layer switch confirmed end-to-end** — Both / Place / People all switch in place, and the return is instant |
 | The courier section | built; destination is `interest` |
-| The directory | **`?embed=society` — the product's own panel, mounted alone.** Route, exports and the site pane are all in and the frame loads. ⚠ **It does not paint yet** — the pane is empty. Cross-origin, so it cannot be inspected from the page; open the embed inside a same-origin test frame to see what `LafayettePagesTab` is doing without the app around it. Likely the layout chain or an unhydrated content layer, not the route |
+| The directory | **`?embed=society` — the product's own panel, mounted alone, and it paints.** Real accordion, real counts, real scrolling. ⚠ It boots in ~5s and the frame is `loading="lazy"`, so it is blank on arrival and fills in — that is what looked like a failure |
+| Every building opens | its own claim again, with a labelled gap awaiting an overhead of the neighborhood. It is NOT the directory's claim and the two were briefly collapsed |
 | The joint | a 3px rule in the reserved colour under the band. The seam vanished at night when band and sky were both near-black; the rule says *below this line, everything is live* |
 | The sky band | a short divider between what the Ward holds and what is living in it, carrying the neighborhood's own authored sky (`tools/build-sky.mjs`). It reports; it does not ask |
 | `/host` as a standalone page | **not built.** Section 07 is in the scroll only; sales happens in fragments and it should also be a page you can send cold |

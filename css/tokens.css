@@ -33,6 +33,7 @@
      high band made it a black hole at night — it was the same colour as the
      thing behind it. */
   --moon:        #E8E2D2;
+  --moon-glow:   rgba(232, 226, 210, 0.34);
 
   --rule:        rgba(28, 24, 21, 0.22);
   --rule-soft:   rgba(28, 24, 21, 0.10);

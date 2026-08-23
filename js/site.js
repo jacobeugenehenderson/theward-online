@@ -197,6 +197,9 @@
       }
     }
 
+    var mark = band.querySelector('[data-sky-mark]')
+    if (mark) mark.style.left = xPct + '%'
+
     var range = band.querySelector('[data-sky-range]')
     if (range && document.activeElement !== range) range.value = String(minute)
     var nowBtn = band.querySelector('[data-sky-now]')
