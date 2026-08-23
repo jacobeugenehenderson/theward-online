@@ -20,7 +20,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const CHECK = process.argv.includes('--check')
 const args = CHECK ? ['--check'] : []
 
-for (const tool of ['build-sources.mjs', 'build-sky.mjs']) {
+for (const tool of ['build-sources.mjs', 'build-sky.mjs', 'build-vignettes.mjs']) {
   execFileSync('node', [resolve(ROOT, 'tools', tool), ...args], { stdio: 'inherit', cwd: ROOT })
 }
 

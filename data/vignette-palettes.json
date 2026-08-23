@@ -1,0 +1,81 @@
+{
+  "_comment": [
+    "MEASURED, not authored. Each palette is the output of the product's own",
+    "extractEmojiColors() run against the emoji in a real browser — the same",
+    "code path the Ward uses when a person picks an avatar.",
+    "",
+    "WHY THIS IS DATA AND NOT A GENERATOR STEP: extractEmojiColors renders the",
+    "emoji with canvas fillText and reads the pixels back. There is no canvas in",
+    "node, so the capture cannot run at build time. The PRESET MATH is still read",
+    "from the product's source at every build (tools/build-vignettes.mjs imports",
+    "vignettePresets.js itself) — only this capture is held still.",
+    "",
+    "TO RE-CAPTURE, or to add a role: open the Ward on localhost and run",
+    "  const m = await import('/src/lib/emojiColor.js')",
+    "  m.extractEmojiColors('<emoji>')",
+    "then paste the three {h,s,l} here. The generator THROWS on a role with no",
+    "palette, so a new role breaks the build rather than shipping a guess.",
+    "",
+    "'fallback' records whether the extractor fell through to its codepoint-hue",
+    "path (it does when a platform renders emoji monochrome to canvas). A true",
+    "here means the colour is derived from the codepoint, not from the artwork —",
+    "which is a legitimate result but not a measurement of the emoji, so it is",
+    "recorded rather than hidden."
+  ],
+  "capturedOn": "2026-08-23",
+  "capturedWith": "Chrome/151.0.0.0 · MacIntel · Apple Color Emoji",
+  "preset": "v0",
+  "roles": {
+    "townie": {
+      "emoji": "☕",
+      "label": "Townie",
+      "fallback": false,
+      "palette": [
+        { "h": 60.0000, "s": 13.0409, "l": 91.6340 },
+        { "h": 39.9862, "s": 42.4399, "l": 65.7119 },
+        { "h": 22.4103, "s": 98.2177, "l": 18.2724 }
+      ]
+    },
+    "resident": {
+      "emoji": "🏡",
+      "label": "Resident",
+      "fallback": false,
+      "palette": [
+        { "h": 40.0494, "s": 76.8036, "l": 76.1999 },
+        { "h": 13.3841, "s": 78.6797, "l": 45.2566 },
+        { "h": 95.8927, "s": 87.6792, "l": 43.3787 }
+      ]
+    },
+    "guardian": {
+      "emoji": "🌳",
+      "label": "Guardian",
+      "fallback": false,
+      "palette": [
+        { "h": 81.9106, "s": 97.3014, "l": 36.3424 },
+        { "h": 45.6470, "s": 98.3352, "l": 31.3012 },
+        { "h": 95.3756, "s": 100.0000, "l": 20.6690 }
+      ]
+    },
+    "keyholder": {
+      "emoji": "🔑",
+      "label": "Keyholder",
+      "fallback": false,
+      "palette": [
+        { "h": 44.7579, "s": 93.0804, "l": 49.1455 },
+        { "h": 25.7566, "s": 100.0000, "l": 32.2222 },
+        { "h": 55.7566, "s": 70.0000, "l": 12.2222 }
+      ]
+    },
+    "courier": {
+      "emoji": "🚲",
+      "label": "Courier",
+      "fallback": false,
+      "palette": [
+        { "h": 213.9569, "s": 97.2239, "l": 35.6577 },
+        { "h": 193.3448, "s": 98.3798, "l": 29.7413 },
+        { "h": 240.2778, "s": 100.0000, "l": 28.4069 }
+      ]
+    }
+  },
+  "order": ["townie", "resident", "guardian", "keyholder", "courier"]
+}

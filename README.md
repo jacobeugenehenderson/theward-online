@@ -79,8 +79,11 @@ css/tokens.css      every colour, size, family and duration
 css/site.css        everything else, in numbered sections
 js/site.js          the clock, the layer switch, nothing else
 tools/build-sources.mjs   the sources block, generated from the product
+tools/build-sky.mjs       the sky strip, generated from the product
+tools/build-vignettes.mjs the five participant vignettes, ditto
 tools/audit.py      conformance — run before committing
 data/sources.json   generated; the same data the block is built from
+data/vignette-palettes.json  MEASURED; the emoji colours the vignettes are built from
 ```
 
 ---
@@ -136,6 +139,25 @@ stale. The audit runs it.
 anchors × twenty-four hours × four bands of authored hex — so the strip is the
 same table the map is lit by, not a designer's guess at it. It validates every
 hex and fails if the sky model changes shape.
+
+**`tools/build-vignettes.mjs` is the same pattern for the five participant
+types.** The Ward gives every person an emoji on a vignette whose colours are
+pulled *out of that emoji*; this block puts Townie, Resident, Guardian,
+Keyholder and Courier on the page wearing the same treatment, so the roles are
+shown in the product's own visual language rather than in swatches invented
+here. It imports the product's `vignettePresets.js` at every build, so a retuned
+preset lands here too.
+
+⚠ **One thing is held still, and it says so.** `extractEmojiColors` renders the
+emoji to a canvas and reads the pixels back, and node has no canvas — so the
+palettes are a **capture**, in `data/vignette-palettes.json`, which records what
+browser and platform measured them and how to re-measure. ⛔ **A role with no
+captured palette throws**, so a sixth type breaks the build rather than shipping
+a guessed colour.
+
+⭐ The colours land in `tokens.css` and nowhere else — rule 1 forbids a literal
+in `site.css`, so `.role-vig--*` is `var()` all the way down and a stale token
+block shows as a *flat* circle rather than a *wrong* one.
 
 ⭐ **There is no time control on this page, deliberately, and there are two
 reasons.** First: a three-button strip and then a horizon disc both had to be
@@ -243,6 +265,7 @@ decision, and it is one line.
 | The sky band | a short divider between what the Ward holds and what is living in it, carrying the neighborhood's own authored sky (`tools/build-sky.mjs`). It reports; it does not ask |
 | `/host` as a standalone page | **not built.** Section 07 is in the scroll only; sales happens in fragments and it should also be a page you can send cold |
 | Privacy / terms pages | **not built** |
+| The five participant vignettes | generated from the product's own avatar treatment; audit-checked. Emoji are ☕ 🏡 🌳 🔑 🚲, preset `v0`. ⛔ 🕯️ was the strongest Guardian candidate on meaning and was **rejected because gold is the reserved `--live` colour** (rule 5) |
 | Favicon | **not built.** The mark's 16 px cousin — a thick ring with a bright notch — is the intended asset |
 
 **Open, needing Jacob:**
