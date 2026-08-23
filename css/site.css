@@ -242,42 +242,46 @@ a { color: inherit; }
 
 /* 7 ── the ladder ───────────────────────────────────────────────────────── */
 
-/* The five participant types, wearing the product's own avatar treatment.
-   These ARE the ladder's step markers — they replaced the numbers 1–4, and the
-   courier (which is not a rung) wears its own beside the aside that explains it.
-
-   ⛔ EVERY COLOUR AND THE EMOJI ITSELF ARRIVE AS GENERATED TOKENS — see
-   tools/build-vignettes.mjs. Rule 1 forbids a literal colour in this file, so a
-   vignette whose tokens went stale shows as a FLAT, EMPTY circle rather than as
-   a wrong one. If that is what you are looking at, the token block in tokens.css
-   is stale: run `node tools/build-vignettes.mjs`. */
+/* The five participant types, as merit badges.
+   ⭐ ONE MASTER FIELD, and that is the design — see --vig-field in tokens.css
+   for why a per-emoji ground was the wrong shape. Everything here is the same
+   for every badge except the glyph, its SIZE and its CENTRING, and those two
+   are generated from a measurement rather than eyeballed.
+   ⛔ EVERY COLOUR ARRIVES AS A TOKEN. Rule 1 forbids a literal in this file, so
+   a badge whose tokens went stale shows as a FLAT, EMPTY disc rather than a
+   wrong one. If that is what you see, run `node tools/build-vignettes.mjs`. */
 .role-vig {
   width: 62px; height: 62px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 31px; line-height: 1;
-  border: 2px solid transparent;
+  background: var(--vig-field);
+  box-shadow: var(--vig-rim);
   flex-shrink: 0;
 }
-/* The emoji is content, not markup — one source, and it cannot drift.
-   ⭐ AND IT IS SIZED AND CENTRED BY ITS OWN INK. A flex box centres the LINE
-   BOX, not the glyph, and every emoji fills its box by a different amount:
-   measured, 🚲's ink is 0.48 of its box where 🌳 and 🔑 are 0.70 — so at one
-   font-size the bicycle really was ~30% smaller, and it hung ~0.09 of a box
-   lower than its siblings. Both were visible and both are now arithmetic.
-   The scale and the nudge are GENERATED per role from that measurement, so an
-   emoji swapped in later is corrected by its own geometry rather than by a
-   hand-tuned fudge. */
+/* ⭐ THE HALO IS WHAT LETS ANY EMOJI BE USED. Four hairline offsets plus a soft
+   drop give the glyph a guaranteed edge against the field whatever its own
+   colours are — measured, the bicycle had only 16% of its ink clearing 3:1 on
+   its own, and every other glyph a different number. The halo removes the
+   variable instead of tuning around it.
+   The emoji is content, not markup — one source, and it cannot drift. */
 .role-vig::before {
   content: var(--vig-emoji, "");
   display: block;
+  filter:
+    drop-shadow(0 1px 0 var(--vig-halo))
+    drop-shadow(1px 0 0 var(--vig-halo))
+    drop-shadow(0 -1px 0 var(--vig-halo))
+    drop-shadow(-1px 0 0 var(--vig-halo))
+    drop-shadow(0 2px 2px var(--vig-drop));
   transform: scale(var(--vig-scale, 1)) translateY(var(--vig-nudge, 0em));
 }
 
-.role-vig--townie    { background: var(--vig-townie-bg);    box-shadow: var(--vig-townie-edge);    border-color: var(--vig-townie-border);    --vig-emoji: var(--vig-townie-emoji); --vig-scale: var(--vig-townie-scale); --vig-nudge: var(--vig-townie-nudge); }
-.role-vig--resident  { background: var(--vig-resident-bg);  box-shadow: var(--vig-resident-edge);  border-color: var(--vig-resident-border);  --vig-emoji: var(--vig-resident-emoji); --vig-scale: var(--vig-resident-scale); --vig-nudge: var(--vig-resident-nudge); }
-.role-vig--guardian  { background: var(--vig-guardian-bg);  box-shadow: var(--vig-guardian-edge);  border-color: var(--vig-guardian-border);  --vig-emoji: var(--vig-guardian-emoji); --vig-scale: var(--vig-guardian-scale); --vig-nudge: var(--vig-guardian-nudge); }
-.role-vig--keyholder { background: var(--vig-keyholder-bg); box-shadow: var(--vig-keyholder-edge); border-color: var(--vig-keyholder-border); --vig-emoji: var(--vig-keyholder-emoji); --vig-scale: var(--vig-keyholder-scale); --vig-nudge: var(--vig-keyholder-nudge); }
-.role-vig--courier   { background: var(--vig-courier-bg);   box-shadow: var(--vig-courier-edge);   border-color: var(--vig-courier-border);   --vig-emoji: var(--vig-courier-emoji); --vig-scale: var(--vig-courier-scale); --vig-nudge: var(--vig-courier-nudge); }
+/* Only the glyph differs. */
+.role-vig--townie    { --vig-emoji: var(--vig-townie-emoji);    --vig-scale: var(--vig-townie-scale);    --vig-nudge: var(--vig-townie-nudge); }
+.role-vig--resident  { --vig-emoji: var(--vig-resident-emoji);  --vig-scale: var(--vig-resident-scale);  --vig-nudge: var(--vig-resident-nudge); }
+.role-vig--guardian  { --vig-emoji: var(--vig-guardian-emoji);  --vig-scale: var(--vig-guardian-scale);  --vig-nudge: var(--vig-guardian-nudge); }
+.role-vig--keyholder { --vig-emoji: var(--vig-keyholder-emoji); --vig-scale: var(--vig-keyholder-scale); --vig-nudge: var(--vig-keyholder-nudge); }
+.role-vig--courier   { --vig-emoji: var(--vig-courier-emoji);   --vig-scale: var(--vig-courier-scale);   --vig-nudge: var(--vig-courier-nudge); }
 
 .steps { display: grid; margin: var(--s4) 0 0; border-top: 1px solid var(--rule-soft); }
 .step {

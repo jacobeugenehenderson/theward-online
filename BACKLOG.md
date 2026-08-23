@@ -40,41 +40,21 @@ exists not to make.
 
 ## Ready to do
 
-**The vignette treatments are picked per role and could still be better.**
-Measured across all 5×8 on 2026-08-23 — emoji-vs-ground contrast ranged **1.7 to
-14.0** — and set at `townie:v1 · resident:v3 · guardian:v7 · keyholder:v2 ·
-courier:v6`, worst cell **5.6**.
+**The badges are settled; what is left is which emoji.** They are one authored
+master — cream field, deep rim, a halo on the glyph — so every emoji reads and
+any emoji can be swapped in. ⛔ **Do not re-derive the ground from the emoji.**
+That was tried and it guarantees the worst case: a blue bicycle got a blue ground
+and 16% of its ink cleared 3:1. Measured across a neutral sweep from black to
+white, **no single flat value serves them all** — mid-tones take the worst glyph
+to ~0% legible ink, white kills 🔑 and ☕, black kills 🚲. The halo is what
+removed the variable instead of tuning around it.
 
-⛔ **The rule that was learned the hard way: one preset across all five makes the
-set read uniform.** The eight are per-*emoji* treatments. ⛔ **And legibility
-alone is NOT a sufficient rule either** — the per-cell maximum picks `v7` four
-times out of five, which reproduces the uniformity. **Variety is the second
-axis**, and the current set trades ~1 point of contrast for five distinct
-treatments.
+⭐ Size and centring are generated per glyph from its measured ink, so a new
+emoji is corrected by its own geometry rather than by a hand fudge.
 
-⭐ Licence from Jacob: *"I don't care about sticking close to the color brief;
-the map itself and all the insets are very colorful."* The muted ground governs
-the page, not these objects — which also **reopens 🕯️ for Guardian**, rejected
-earlier only on the reserved-amber rule.
-
-✅ **Size and optical centring are SOLVED and are no longer a judgement call.**
-Each glyph is scaled toward an ink height of 0.70 and centred on its own ink,
-from a measurement in the capture — so any emoji swapped in later is corrected by
-its own geometry. 🚲 measured `inkH 0.48` against 🌳/🔑 at `0.70` (it really was
-~30% smaller at one font-size) and `inkDy +0.004` against ~`-0.09` for everything
-else (it hung ~0.09 of a box low). Both were Jacob's, on sight, and both were
-arithmetic once measured.
-
-**Still open:** ⛔ **the courier's COLOUR is still wrong to Jacob's eye** — 🚲 at
-`v6` is a blue bicycle on rust. Candidates measured and rendered: `📦 v3` and
-`🛵 v3` score best and are warm; `🥡 v2`, `🧺 v7` also read. **Needs Jacob's
-pick — do not choose this one unilaterally, it has been reverted once.** Also:
-designing a **ninth preset** for this job is in scope and untried; ☕ at `v1` is
-the palest badge; and no colour-blind simulation has been run.
-
-▶ Re-run the comparison any time: the 5×8 grid and the contrast scoring are a
-~30-line snippet against the product's own `emojiColor` + `vignettePresets` —
-see `git show` on this commit for it.
+**Open:** 🚲 is still the least characterful of the five and 📦 / 🛵 were the
+better-measuring candidates — but that is now purely a choice of emoji, not of
+treatment, and it is Jacob's. No colour-blind simulation has been run.
 
 **`?embed=masthead` under "There is no account."** Built on the product side and
 unplaced here. The four live counts — Townies · Residents · Guardians · Couriers

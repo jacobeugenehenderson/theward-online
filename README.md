@@ -80,10 +80,10 @@ css/site.css        everything else, in numbered sections
 js/site.js          the clock, the layer switch, nothing else
 tools/build-sources.mjs   the sources block, generated from the product
 tools/build-sky.mjs       the sky strip, generated from the product
-tools/build-vignettes.mjs the five participant vignettes, ditto
+tools/build-vignettes.mjs the badges' glyph geometry (NOT from the product)
 tools/audit.py      conformance — run before committing
 data/sources.json   generated; the same data the block is built from
-data/vignette-palettes.json  MEASURED; the emoji colours the vignettes are built from
+data/vignette-glyphs.json    MEASURED; each badge emoji and its ink geometry
 ```
 
 ---
@@ -140,24 +140,26 @@ anchors × twenty-four hours × four bands of authored hex — so the strip is t
 same table the map is lit by, not a designer's guess at it. It validates every
 hex and fails if the sky model changes shape.
 
-**`tools/build-vignettes.mjs` is the same pattern for the five participant
-types.** The Ward gives every person an emoji on a vignette whose colours are
-pulled *out of that emoji*; this block puts Townie, Resident, Guardian,
-Keyholder and Courier on the page wearing the same treatment, so the roles are
-shown in the product's own visual language rather than in swatches invented
-here. It imports the product's `vignettePresets.js` at every build, so a retuned
-preset lands here too.
+⛔ **`tools/build-vignettes.mjs` IS NOT ONE OF THESE, AND USED TO BE.** It read
+the product's `vignettePresets.js` and derived each participant badge's ground
+from its own emoji's colours. That was demoted deliberately, and the reason is
+worth keeping: **deriving the ground from the emoji guarantees the worst case.**
+A blue bicycle got a blue ground, and 16% of its ink cleared 3:1 against it.
 
-⚠ **One thing is held still, and it says so.** `extractEmojiColors` renders the
-emoji to a canvas and reads the pixels back, and node has no canvas — so the
-palettes are a **capture**, in `data/vignette-palettes.json`, which records what
-browser and platform measured them and how to re-measure. ⛔ **A role with no
-captured palette throws**, so a sixth type breaks the build rather than shipping
-a guessed colour.
+⭐ Swept across a neutral ground from black to white, **no single flat value
+serves every emoji** — mid-tones take the worst glyph to ~0% legible ink, white
+kills 🔑 and ☕, black kills 🚲. So the badge does what a merit badge does: **one
+authored master field, a deep rim, and a halo on the emblem.** The halo clears
+16.5:1 against the field, which is why any emoji can now be dropped in.
 
-⭐ The colours land in `tokens.css` and nowhere else — rule 1 forbids a literal
-in `site.css`, so `.role-vig--*` is `var()` all the way down and a stale token
-block shows as a *flat* circle rather than a *wrong* one.
+The generator still exists because two things remain **measurements**, not
+choices: the emoji as a token (so no copy of it lives in the markup), and a
+per-role **scale and nudge** — a flex box centres the line box, not the glyph,
+and 🚲's ink is 0.48 of its box where 🌳's is 0.70. ⛔ A role with no measured ink
+throws.
+
+⚠️ **So the product-generated blocks are the sources table and the sky strip,
+those two only.** Do not re-add the badges to that claim.
 
 ⭐ **There is no time control on this page, deliberately, and there are two
 reasons.** First: a three-button strip and then a horizon disc both had to be
@@ -265,7 +267,7 @@ decision, and it is one line.
 | The sky band | a short divider between what the Ward holds and what is living in it, carrying the neighborhood's own authored sky (`tools/build-sky.mjs`). It reports; it does not ask |
 | `/host` as a standalone page | **not built.** Section 07 is in the scroll only; sales happens in fragments and it should also be a page you can send cold |
 | Privacy / terms pages | **not built** |
-| The five participant vignettes | generated from the product's own avatar treatment; audit-checked. Emoji ☕ 🏡 🌳 🔑 🚲, preset `v3` (the neon ring — the washed-out presets buried the emoji). **They are the ladder's step markers**, replacing the numbers 1–4; the courier is not a rung and wears its badge in the aside instead. ⛔ 🕯️ was the strongest Guardian candidate on meaning and was **rejected because gold is the reserved `--live` colour** (rule 5). ⚠ The courier badge is the weakest of the five and the reason is mechanical, not aesthetic: 🚲's three captured clusters are 214°/193°/240°, **all blue**, and `v3` builds its base from the dark cluster — so a blue bike sits on a navy ground. Every other role's palette spans more than one hue family. Fix is a warmer courier emoji, not a preset change |
+| The five participant badges | **settled.** One authored master — cream field, deep rim, halo on the glyph — so every emoji reads and any emoji can be swapped in. ☕ 🏡 🌳 🔑 🚲. They are the ladder's step markers, replacing the numbers 1–4; the courier is not a rung and wears its badge in the Cary room. Size and centring are generated from each glyph's measured ink |
 | Favicon | **not built.** The mark's 16 px cousin — a thick ring with a bright notch — is the intended asset |
 
 **Open, needing Jacob:**

@@ -1,0 +1,68 @@
+{
+  "_comment": [
+    "GLYPH GEOMETRY for the participant badges. ⛔ THIS FILE NO LONGER CARRIES COLOUR, and that is the point: the badge is now ONE AUTHORED MASTER (css/tokens.css, --vig-field / --vig-rim / --vig-halo) rather than a per-emoji derivation.",
+    "",
+    "WHY THE DERIVATION WENT. Pulling the ground out of the emoji's own colours guarantees the worst case — a blue bicycle got a blue ground and 16% of its ink cleared 3:1. Measured across a neutral sweep from black to white, NO single flat ground works for all five: mid-tones drop the worst glyph to ~0% legible ink, white kills 🔑 and ☕, black kills 🚲.",
+    "",
+    "WHAT REPLACED IT is what a real merit badge does — a constant field and a HALO on the emblem. The halo clears 16.5:1 against the field, so EVERY glyph has a guaranteed edge whatever its own colours are. That is why any emoji can be dropped in now.",
+    "",
+    "WHAT IS STILL MEASURED, AND MUST BE. A flex box centres the LINE BOX, not the glyph, and every emoji fills its box by a different amount:",
+    "  inkH  = inked height as a fraction of the box. 🚲 is 0.48 where 🌳/🔑 are 0.70 — the bicycle really is ~30% smaller at one font-size.",
+    "  inkDy = how far the ink centre sits from the box centre (+down). 🚲 is +0.004 where the rest are about -0.09.",
+    "The generator turns these into a per-role scale (toward `inkTarget`) and a nudge. ⛔ RE-MEASURE WHEN YOU CHANGE AN EMOJI — the generator throws on a role with no ink block, and on an inkH near zero (which means the glyph did not render when captured, not that it is small).",
+    "",
+    "TO RE-MEASURE: open the Ward on localhost and run the inkBox snippet from the commit that introduced this file."
+  ],
+  "capturedOn": "2026-08-23",
+  "capturedWith": "Chrome/151.0.0.0 · MacIntel · Apple Color Emoji",
+  "inkTarget": 0.7,
+  "roles": {
+    "townie": {
+      "emoji": "☕",
+      "label": "Townie",
+      "ink": {
+        "inkH": 0.6172,
+        "inkDy": -0.1172
+      }
+    },
+    "resident": {
+      "emoji": "🏡",
+      "label": "Resident",
+      "ink": {
+        "inkH": 0.6953,
+        "inkDy": -0.0781
+      }
+    },
+    "guardian": {
+      "emoji": "🌳",
+      "label": "Guardian",
+      "ink": {
+        "inkH": 0.7031,
+        "inkDy": -0.0898
+      }
+    },
+    "keyholder": {
+      "emoji": "🔑",
+      "label": "Keyholder",
+      "ink": {
+        "inkH": 0.7031,
+        "inkDy": -0.0898
+      }
+    },
+    "courier": {
+      "emoji": "🚲",
+      "label": "Courier",
+      "ink": {
+        "inkH": 0.4844,
+        "inkDy": 0.0039
+      }
+    }
+  },
+  "order": [
+    "townie",
+    "resident",
+    "guardian",
+    "keyholder",
+    "courier"
+  ]
+}
