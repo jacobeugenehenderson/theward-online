@@ -57,10 +57,20 @@ the map itself and all the insets are very colorful."* The muted ground governs
 the page, not these objects — which also **reopens 🕯️ for Guardian**, rejected
 earlier only on the reserved-amber rule.
 
-**Still open:** designing a **ninth preset** aimed at this job is in scope and
-untried; ☕ at `v1` is the palest badge and may want a warmer emoji or its own
-treatment; and the four green/warm roles have not been tested against a
-colour-blind simulation.
+✅ **Size and optical centring are SOLVED and are no longer a judgement call.**
+Each glyph is scaled toward an ink height of 0.70 and centred on its own ink,
+from a measurement in the capture — so any emoji swapped in later is corrected by
+its own geometry. 🚲 measured `inkH 0.48` against 🌳/🔑 at `0.70` (it really was
+~30% smaller at one font-size) and `inkDy +0.004` against ~`-0.09` for everything
+else (it hung ~0.09 of a box low). Both were Jacob's, on sight, and both were
+arithmetic once measured.
+
+**Still open:** ⛔ **the courier's COLOUR is still wrong to Jacob's eye** — 🚲 at
+`v6` is a blue bicycle on rust. Candidates measured and rendered: `📦 v3` and
+`🛵 v3` score best and are warm; `🥡 v2`, `🧺 v7` also read. **Needs Jacob's
+pick — do not choose this one unilaterally, it has been reverted once.** Also:
+designing a **ninth preset** for this job is in scope and untried; ☕ at `v1` is
+the palest badge; and no colour-blind simulation has been run.
 
 ▶ Re-run the comparison any time: the 5×8 grid and the contrast scoring are a
 ~30-line snippet against the product's own `emojiColor` + `vignettePresets` —

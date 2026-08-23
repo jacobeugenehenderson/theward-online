@@ -22,7 +22,12 @@
     "which is a legitimate result but not a measurement of the emoji, so it is",
     "recorded rather than hidden.",
     "",
-    "PRESET IS PER ROLE. `roles.<name>.preset` picks the treatment; the top-level `preset` is only the fallback for a role that names none. ⛔ Do NOT set them all to one value — the eight presets are per-EMOJI treatments and one across all five makes the set read uniform, which is the failure that got the first pass reverted. Measured 2026-08-23 across all 5x8: emoji-vs-ground contrast ranged 1.7 to 14.0, and the per-cell maximum picks v7 four times out of five, so legibility alone is NOT a sufficient rule — variety is the second axis."
+    "PRESET IS PER ROLE. `roles.<name>.preset` picks the treatment; the top-level `preset` is only the fallback for a role that names none. ⛔ Do NOT set them all to one value — the eight presets are per-EMOJI treatments and one across all five makes the set read uniform, which is the failure that got the first pass reverted. Measured 2026-08-23 across all 5x8: emoji-vs-ground contrast ranged 1.7 to 14.0, and the per-cell maximum picks v7 four times out of five, so legibility alone is NOT a sufficient rule — variety is the second axis.",
+    "",
+    "INK GEOMETRY — measured the same way and for the same reason as the palettes. A flex box centres the LINE BOX, not the glyph, and every emoji fills its box by a different amount, so a single font-size makes some badges look small and some look off-centre. Both were real complaints (Jacob, 2026-08-23: the bicycle is 'too small and not optically centered').",
+    "  inkH  = the glyph's inked height as a fraction of its box. 🚲 is 0.48 where 🌳/🔑 are 0.70 — the bicycle really is ~30% smaller at the same font-size; that is measurement, not perception.",
+    "  inkDy = how far the ink's centre sits from the box centre (+down). 🚲 is +0.004 where everything else is about -0.09, so it hangs ~0.09 of a box lower than its siblings.",
+    "The generator turns these into a per-role scale (toward `inkTarget`) and a nudge, so ANY emoji anyone picks later is sized and centred by its own ink rather than by luck. ⛔ Re-measure when you change an emoji — the same snippet that captures the palette can capture this; see the commit that added it."
   ],
   "capturedOn": "2026-08-23",
   "capturedWith": "Chrome/151.0.0.0 · MacIntel · Apple Color Emoji",
@@ -32,6 +37,10 @@
       "emoji": "☕",
       "label": "Townie",
       "preset": "v1",
+      "ink": {
+        "inkH": 0.6172,
+        "inkDy": -0.1172
+      },
       "fallback": false,
       "palette": [
         {
@@ -55,6 +64,10 @@
       "emoji": "🏡",
       "label": "Resident",
       "preset": "v3",
+      "ink": {
+        "inkH": 0.6953,
+        "inkDy": -0.0781
+      },
       "fallback": false,
       "palette": [
         {
@@ -78,6 +91,10 @@
       "emoji": "🌳",
       "label": "Guardian",
       "preset": "v7",
+      "ink": {
+        "inkH": 0.7031,
+        "inkDy": -0.0898
+      },
       "fallback": false,
       "palette": [
         {
@@ -101,6 +118,10 @@
       "emoji": "🔑",
       "label": "Keyholder",
       "preset": "v2",
+      "ink": {
+        "inkH": 0.7031,
+        "inkDy": -0.0898
+      },
       "fallback": false,
       "palette": [
         {
@@ -124,6 +145,10 @@
       "emoji": "🚲",
       "label": "Courier",
       "preset": "v6",
+      "ink": {
+        "inkH": 0.4844,
+        "inkDy": 0.0039
+      },
       "fallback": false,
       "palette": [
         {
@@ -150,5 +175,6 @@
     "guardian",
     "keyholder",
     "courier"
-  ]
+  ],
+  "inkTarget": 0.7
 }

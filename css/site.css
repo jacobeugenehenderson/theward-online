@@ -258,14 +258,26 @@ a { color: inherit; }
   border: 2px solid transparent;
   flex-shrink: 0;
 }
-/* The emoji is content, not markup — one source, and it cannot drift. */
-.role-vig::before { content: var(--vig-emoji, ""); }
+/* The emoji is content, not markup — one source, and it cannot drift.
+   ⭐ AND IT IS SIZED AND CENTRED BY ITS OWN INK. A flex box centres the LINE
+   BOX, not the glyph, and every emoji fills its box by a different amount:
+   measured, 🚲's ink is 0.48 of its box where 🌳 and 🔑 are 0.70 — so at one
+   font-size the bicycle really was ~30% smaller, and it hung ~0.09 of a box
+   lower than its siblings. Both were visible and both are now arithmetic.
+   The scale and the nudge are GENERATED per role from that measurement, so an
+   emoji swapped in later is corrected by its own geometry rather than by a
+   hand-tuned fudge. */
+.role-vig::before {
+  content: var(--vig-emoji, "");
+  display: block;
+  transform: scale(var(--vig-scale, 1)) translateY(var(--vig-nudge, 0em));
+}
 
-.role-vig--townie    { background: var(--vig-townie-bg);    box-shadow: var(--vig-townie-edge);    border-color: var(--vig-townie-border);    --vig-emoji: var(--vig-townie-emoji); }
-.role-vig--resident  { background: var(--vig-resident-bg);  box-shadow: var(--vig-resident-edge);  border-color: var(--vig-resident-border);  --vig-emoji: var(--vig-resident-emoji); }
-.role-vig--guardian  { background: var(--vig-guardian-bg);  box-shadow: var(--vig-guardian-edge);  border-color: var(--vig-guardian-border);  --vig-emoji: var(--vig-guardian-emoji); }
-.role-vig--keyholder { background: var(--vig-keyholder-bg); box-shadow: var(--vig-keyholder-edge); border-color: var(--vig-keyholder-border); --vig-emoji: var(--vig-keyholder-emoji); }
-.role-vig--courier   { background: var(--vig-courier-bg);   box-shadow: var(--vig-courier-edge);   border-color: var(--vig-courier-border);   --vig-emoji: var(--vig-courier-emoji); }
+.role-vig--townie    { background: var(--vig-townie-bg);    box-shadow: var(--vig-townie-edge);    border-color: var(--vig-townie-border);    --vig-emoji: var(--vig-townie-emoji); --vig-scale: var(--vig-townie-scale); --vig-nudge: var(--vig-townie-nudge); }
+.role-vig--resident  { background: var(--vig-resident-bg);  box-shadow: var(--vig-resident-edge);  border-color: var(--vig-resident-border);  --vig-emoji: var(--vig-resident-emoji); --vig-scale: var(--vig-resident-scale); --vig-nudge: var(--vig-resident-nudge); }
+.role-vig--guardian  { background: var(--vig-guardian-bg);  box-shadow: var(--vig-guardian-edge);  border-color: var(--vig-guardian-border);  --vig-emoji: var(--vig-guardian-emoji); --vig-scale: var(--vig-guardian-scale); --vig-nudge: var(--vig-guardian-nudge); }
+.role-vig--keyholder { background: var(--vig-keyholder-bg); box-shadow: var(--vig-keyholder-edge); border-color: var(--vig-keyholder-border); --vig-emoji: var(--vig-keyholder-emoji); --vig-scale: var(--vig-keyholder-scale); --vig-nudge: var(--vig-keyholder-nudge); }
+.role-vig--courier   { background: var(--vig-courier-bg);   box-shadow: var(--vig-courier-edge);   border-color: var(--vig-courier-border);   --vig-emoji: var(--vig-courier-emoji); --vig-scale: var(--vig-courier-scale); --vig-nudge: var(--vig-courier-nudge); }
 
 .steps { display: grid; margin: var(--s4) 0 0; border-top: 1px solid var(--rule-soft); }
 .step {
@@ -279,11 +291,12 @@ a { color: inherit; }
   display: block; margin-bottom: 2px;
 }
 
+/* ⛔ Single column again. It was a two-column grid to seat the courier badge;
+   the badge moved to the Cary room and the empty 62px track went with it —
+   dead layout is dead code, and CSS fails open (see 442bc8a, the moon). */
 .aside {
   border-left: 3px solid var(--live); background: var(--ground-2);
   padding: var(--s3) var(--s4); margin-top: var(--s4); max-width: var(--measure);
-  display: grid; grid-template-columns: 62px minmax(0, 1fr);
-  gap: var(--s3); align-items: start;
 }
 .aside p { margin: 0; font-size: 0.99rem; line-height: 1.55; }
 
