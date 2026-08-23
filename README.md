@@ -7,9 +7,17 @@ itself; one generator, for one block.
 ```
 serve   python3 -m http.server 8791 --bind 127.0.0.1
 open    http://127.0.0.1:8791
-audit   python3 tools/audit.py
-build   node tools/build-sources.mjs
+build   node tools/build.mjs        # every generator, then stamp the assets
+audit   python3 tools/audit.py      # runs the build in --check mode
 ```
+
+⚠ **`build.mjs` stamps `?v=<mtime>` on every local css/js link, and that is not
+housekeeping.** A browser will happily keep running a script it fetched ten
+edits ago, and every symptom then looks like a bug in code that is already
+correct. A whole session was lost to exactly that here: the page was executing
+16,015 bytes while the server served 14,871, and two "fixes" were made to code
+that had never run. Never debug this site without checking that what ran is
+what is on disk.
 
 Deploys from `main` to GitHub Pages, custom domain in `CNAME`.
 

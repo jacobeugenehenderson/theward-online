@@ -112,12 +112,6 @@
     return (d.getUTCHours() * 60 + d.getUTCMinutes() + Math.round(GEO.lon / 15 * 60) + 1440) % 1440
   }
 
-  function sayHour(m) {
-    var h = Math.floor(m / 60), mm = m % 60
-    var ap = h < 12 ? 'am' : 'pm', hh = h % 12 === 0 ? 12 : h % 12
-    return hh + ':' + (mm < 10 ? '0' : '') + mm + ' ' + ap
-  }
-
   function paintSky(minute) {
     var strip = document.querySelector('[data-sky-strip]')
     if (!strip || !SKY) return
@@ -125,8 +119,6 @@
     if (!stops) return
     var names = ['horizon', 'low', 'mid', 'high']
     for (var i = 0; i < stops.length; i++) strip.style.setProperty('--sky-' + names[i], stops[i])
-    var hr = strip.querySelector('[data-sky-hour]')
-    if (hr) hr.textContent = sayHour(minute)
   }
 
   /* ⚠ There is no time control on this page, deliberately. The Almanac inside

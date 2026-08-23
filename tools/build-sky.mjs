@@ -43,7 +43,7 @@ try { CARDS = new Function('return ' + src.slice(src.indexOf('{', head), end))()
 catch (e) { die('could not evaluate the anchor cards: ' + e.message) }
 
 const SEASONS = ['winter', 'spring', 'summer', 'autumn']
-const BANDS = ['horizon', 'low', 'mid', 'high']   // sunGlow is an additive term, not a stop
+const BANDS = ['horizon', 'low', 'mid', 'high', 'sunGlow']   // sunGlow paints the sun's halo, not a stop
 
 for (const s of SEASONS) {
   if (!Array.isArray(CARDS[s]) || CARDS[s].length !== 24) die(`season "${s}" is not 24 hours`)

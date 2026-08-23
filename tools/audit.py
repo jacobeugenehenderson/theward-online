@@ -50,6 +50,7 @@ check('theme parity', not (dark_only - declared), f'defined only in a theme bloc
 used = set()
 for c in re.findall(r'class="([^"]*)"', html): used.update(c.split())
 used.update(re.findall(r"querySelectorAll?\('\.([a-z0-9-]+)", js))
+used.update(re.findall(r'class="([^"]*)"', html and '' or ''))  # no-op guard
 defined = set(re.findall(r'\.([a-zA-Z][a-zA-Z0-9_-]*)', bare))
 check('undefined css', not (used - defined), f'{sorted(used - defined)}')
 check('unused css', not (defined - used), f'{sorted(defined - used)}')
@@ -105,10 +106,9 @@ leak = sorted(set(re.findall(r'Lafayette|St\.? ?Louis|Missouri|Łódź|Lodz|Alta
 check('names a town', not leak, f'{leak}')
 
 # ── the sources block is generated, and current ─────────────────────────────
-for tool, label in (('build-sources.mjs', 'sources'), ('build-sky.mjs', 'sky')):
-    gen = subprocess.run(['node', 'tools/' + tool, '--check'], cwd=ROOT,
-                         capture_output=True, text=True)
-    check(label, gen.returncode == 0, (gen.stdout + gen.stderr).strip())
+gen = subprocess.run(['node', 'tools/build.mjs', '--check'], cwd=ROOT,
+                     capture_output=True, text=True)
+check('generated', gen.returncode == 0, (gen.stdout + gen.stderr).strip())
 
 # ── the courier route is not live ───────────────────────────────────────────
 m = re.search(r"var COURIER_INTAKE = '(\w+)'", js)

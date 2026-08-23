@@ -276,16 +276,6 @@ a { color: inherit; }
     var(--sky-horizon, var(--ground-2)) 100%);
   transition: background var(--t-slow) linear;
 }
-.skyband-read {
-  position: absolute; right: var(--s3); top: 50%; transform: translateY(-50%);
-  font-family: var(--f-sys); font-size: 0.68rem;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  /* the band runs from noon-pale to midnight, so the label carries its own
-     ground rather than trusting either theme's text to read on it */
-  background: var(--band-bg); color: var(--band-text);
-  padding: 2px var(--s1);
-}
-.skyband-read b { font-weight: 700; font-variant-numeric: tabular-nums; }
 
 /* 11 ── colophon ────────────────────────────────────────────────────────── */
 .colophon {
