@@ -304,6 +304,22 @@
      renderer during testing. The page repaints at full rate — that is local
      and cheap — and the product hears at most one message per frame. */
   var timePending = false
+  /* ⭐ THE PAGE'S HALF OF THE BARGAIN. The Ward cannot see where it sits in
+     this page — a framed document's IntersectionObserver measures against its
+     OWN viewport, and cross-origin it can see nothing of ours. So we watch,
+     and we tell it. It decides what to do about it; that part is the Ward's.
+
+     Threshold at half: mostly visible is worth full rate, mostly gone is not.
+     The frames it drops go straight back into scrolling. */
+  var presence = null
+  function postPresence(next) {
+    if (next === presence) return
+    presence = next
+    var w = frameWin()
+    if (!w) return
+    try { w.postMessage({ type: 'ward-perf', presence: next }, embedOrigin) } catch (e) { /* not ready */ }
+  }
+
   function postTime() {
     if (timePending) return
     timePending = true
@@ -362,8 +378,14 @@
       f.src = embedUrl
       // the product mounts before it can listen; sync once it is up
       f.addEventListener('load', function () {
-        setTimeout(function () { postLayer(); postTime() }, 400)
+        setTimeout(function () { postLayer(); postTime(); presence = null; postPresence('active') }, 400)
       })
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          postPresence(entries[0].intersectionRatio >= 0.5 ? 'active' : 'idle')
+        }, { threshold: [0, 0.5, 1] }).observe(f)
+      }
+
       var layerBtns = document.querySelectorAll('[data-layer]')
       for (var j = 0; j < layerBtns.length; j++) {
         layerBtns[j].addEventListener('click', function () { setLayer(this.getAttribute('data-layer')) })

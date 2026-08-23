@@ -173,6 +173,18 @@ Three things are load-bearing, all of them paid for elsewhere:
   a fully opaque cover, all make Chrome drop the WebGL surface, and restoring
   it lands as one blocked frame of many seconds. Leave it rendering.
 
+### The page's half of the frame budget
+
+An `IntersectionObserver` on the hero frame posts
+`{ type: 'ward-perf', presence: 'idle' | 'active' }` as the Ward crosses half
+visibility. **The Ward does the throttling** — this page only reports what it
+can see, because a framed document cannot observe its own position in ours.
+The capability and the reasoning live in the product, at
+`ls/FEATURES.md §Embedded`; do not reimplement the behaviour here.
+
+⛔ Never send anything that would pause it. Idle is a lower frame rate, not a
+stop — a stopped canvas is dropped by the browser and costs seconds to restore.
+
 **The Ward does not self-size**, deliberately: self-sizing is for apps whose
 height is their content. This is a landscape you look *across*, so the frame
 keeps a fixed aspect — 16:10, and 4:3 on a phone so the horizon survives.
