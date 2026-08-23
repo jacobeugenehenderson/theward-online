@@ -47,6 +47,12 @@
      so the pair reads as one instrument rather than two things that happen to
      be near each other.
      ⛔ TO CHANGE THE PLACE: this line. The id comes from the directory. */
+  /* ⛔ THE SOURCE IS `data-place` ON THE CARD FRAME, and this is only the
+     fallback for when that attribute is missing. index.html and README both
+     say "to swap the place, change data-place and nothing else" — that was
+     true, then a constant here quietly took over and the attribute became
+     dead markup describing a contract nothing honoured. Restored 2026-08-23:
+     read the attribute, and both frames boot on the same id. */
   var FEATURED_PLACE = 'lmk-028'
 
   /* ═══ 1. THE DAY ═══════════════════════════════════════════════════════
@@ -372,11 +378,15 @@
       applyDay()
     })
 
+    // ── which place both frames start on ─────────────────────────────────
+    var cardFrame = document.querySelector('[data-card-frame]')
+    var shownPlace = (cardFrame && cardFrame.getAttribute('data-place')) || FEATURED_PLACE
+
     // ── the panel embeds: the product's own parts, mounted alone ─────────
     var embeds = document.querySelectorAll('[data-embed]')
     for (var ei = 0; ei < embeds.length; ei++) {
       embeds[ei].src = embedUrl + '?embed=' + embeds[ei].getAttribute('data-embed') +
-        '&place=' + encodeURIComponent(FEATURED_PLACE)
+        '&place=' + encodeURIComponent(shownPlace)
     }
 
     // ── the tree, standing in the sky band ───────────────────────────────
@@ -393,10 +403,32 @@
     }
 
     // ── the card in the tablet ───────────────────────────────────────────
-    var cardFrame = document.querySelector('[data-card-frame]')
     if (cardFrame) {
-      cardFrame.src = embedUrl + '?embed=card&place=' + encodeURIComponent(FEATURED_PLACE)
+      cardFrame.src = embedUrl + '?embed=card&place=' + encodeURIComponent(shownPlace)
     }
+
+    /* ── the directory and the card, agreeing ─────────────────────────────
+       Pick a place in the directory above and the card below turns to it —
+       which is how this page shows that a bar, a church and a laundry are the
+       same object with different contents, rather than saying so.
+
+       ⛔ THE TWO FRAMES CANNOT SEE EACH OTHER. They are cross-origin, so
+       neither can read or call the other; this page is the only thing that can
+       carry a selection across, and it is a RELAY — it does not decide
+       anything. The product posts what was picked and the product renders it.
+
+       ⛔ POST, NEVER RE-SRC. Setting the card's src would reload the whole app
+       inside it — the same rule the hero's layer switch is built on. */
+    window.addEventListener('message', function (e) {
+      if (e.origin !== embedOrigin) return
+      var m = e.data
+      if (!m || m.type !== 'ward-place' || !m.id) return
+      if (m.id === shownPlace) return
+      shownPlace = m.id
+      if (cardFrame && cardFrame.contentWindow) {
+        cardFrame.contentWindow.postMessage({ type: 'ward-place', id: m.id }, embedOrigin)
+      }
+    })
 
     // ── the instruments pill: one figure area, two things to say about it ─
     var pills = document.querySelectorAll('[data-inst]')

@@ -17,8 +17,8 @@ side.
 | on the page | mode | what it is |
 |---|---|---|
 | the hero | *(no param)* / `?layer=slab` / `?layer=player` | the whole map, and either half alone |
-| the directory | `?embed=society&place=<id>` | the Society Pages panel, from the search bar down |
-| the card | `?embed=card&place=<id>` | one place card, mounted alone |
+| the directory | `?embed=society&place=<id>` | the Society Pages panel, from the search bar down — **posts `ward-place`** |
+| the card | `?embed=card&place=<id>` | one place card, mounted alone — **follows `ward-place`** |
 | *(built, unplaced)* | `?embed=masthead` | the four role counts |
 | the diorama | `?embed=tree` | sky and one specimen in ONE Canvas, lit together |
 | *(built, unplaced)* | `?embed=sky` | the celestial layer alone |
@@ -48,6 +48,7 @@ before changing anything here.
 { type: 'ward-layer', layer: null|'slab'|'player', ground: 'paper'|'plate' }
 { type: 'ward-time',  minute: 0..1439 | null }      // null = the neighborhood's own
 { type: 'ward-perf',  presence: 'active'|'idle' }
+{ type: 'ward-place', id: '<listing id>' }          // out of society, in to card
 ```
 
 **`ward-layer`** switches which payload the hero shows. ⛔ Switch **by message,
@@ -65,6 +66,29 @@ before acting, so adopt → announce → adopt cannot loop. **Outbound posts are
 coalesced to one per animation frame** — a drag fires `pointermove` ~60×/s and
 each post re‑times the product's whole scene; sending them raw froze the
 renderer.
+
+**`ward-place`** is what makes the directory and the card agree: pick a place in
+`?embed=society` and the `?embed=card` frame beside it turns to that place. The
+two frames are cross-origin and cannot see each other, so **this page is a relay,
+not a decider** — the product posts what was picked and the product renders it.
+
+⛔ **The echo guard here is STRUCTURAL, not a comparison.** The society embed only
+ever *speaks* and the card embed only ever *listens*, so adopt → announce → adopt
+has no cycle to run around. (`ward-time` needs a value comparison because there
+both sides genuinely own the same store.)
+
+⛔ **POST, NEVER RE-SRC** — the same rule the hero's layer switch is built on.
+
+⭐ **And on the product side the card is KEYED to the id.** `PlaceCard` is
+stateful — open tab, photo index, edit context — and swapping `listing` under a
+reused instance renders an **empty card**; that was measured, not guessed. Keying
+remounts the *card*, which is cheap DOM, while the *frame* stays put. The rule was
+never "never remount"; it is "never reload the frame."
+
+⚠️ **`data-place` on the card frame is the single source for BOTH frames' starting
+id.** It had become dead markup — `js/site.js` had grown its own constant and the
+attribute this doc and index.html both told you to edit was read by nothing.
+Restored 2026-08-23.
 
 **`ward-perf`** is the throttle. An `IntersectionObserver` on the hero reports
 when the Ward crosses half visibility; the product drops to about a third of its
