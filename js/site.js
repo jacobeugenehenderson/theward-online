@@ -199,51 +199,12 @@
     var xPct = (minute / 1439) * 100
     var sunAlt = solarElevation(at, GEO.lat, GEO.lon)
 
-    var sun = band.querySelector('[data-sky-sun]')
-    if (sun) sun.style.opacity = placeBody(sun, sunAlt, xPct) === null ? '0' : '1'
-
-    /* The wash peaks as the sun crosses the horizon and falls away either
-       side — the Sky Builder's own curve, in degrees rather than radians. */
-    var wash = band.querySelector('[data-sky-wash]')
-    if (wash) {
-      var a = Math.max(0, Math.min(1, 1 - Math.abs(sunAlt) / 17.2))
-      wash.style.background = a > 0.05
-        ? 'linear-gradient(to top, ' + css(stops[4]) + ' 0%, rgba(0,0,0,0) 30%)'
-        : 'none'
-      wash.style.opacity = a > 0.05 ? String(a) : '0'
-    }
-
-    var m = moonAt(at, GEO.lat, GEO.lon)
-    var moon = band.querySelector('[data-sky-moon]')
-    if (moon) {
-      /* the moon keeps its own hour — it leads or trails the sun by its age */
-      var mTop = placeBody(moon, m.alt, ((minute / 1439 + (1 - m.phase)) % 1) * 100)
-      if (mTop === null || m.lit <= 0.02) {
-        moon.style.opacity = '0'
-      } else {
-        moon.style.opacity = String(0.55 + m.lit * 0.45)
-        moon.style.boxShadow = '0 0 ' + (10 + m.lit * 18).toFixed(1) + 'px 4px var(--moon-glow)'
-
-        /* The phase as a SHAPE. Waxing (age under half a cycle) is lit on the
-           right, so the shadow takes the left half — and the lune either
-           extends that shadow across the face or carves it back toward the
-           limb, depending on which side of half-full we are on. */
-        var waxing = m.phase < 0.5
-        var half = moon.querySelector('[data-moon-half]')
-        var lune = moon.querySelector('[data-moon-lune]')
-        if (half) half.style.clipPath = waxing ? 'inset(0 50% 0 0)' : 'inset(0 0 0 50%)'
-        if (lune) {
-          lune.style.transform = 'scaleX(' + Math.abs(1 - 2 * m.lit).toFixed(3) + ')'
-          lune.style.background = m.lit < 0.5
-            ? 'var(--moon-night)'   /* crescent: the shadow reaches past centre */
-            : 'var(--moon)'         /* gibbous: give the lit face back */
-          lune.style.transformOrigin = waxing ? 'right center' : 'left center'
-          lune.style.left = waxing ? '0' : 'auto'
-          lune.style.right = waxing ? 'auto' : '0'
-        }
-      }
-    }
-
+    /* ⛔ THE SUN, MOON AND WASH USED TO BE PAINTED HERE, and their DOM is gone
+       (index.html says why): flat CSS discs placed by percentage cannot share a
+       projection with the perspective render standing next to them. The scene
+       draws its own, correctly placed and occluded by the canopy.
+       ⚠ What remains below still earns its keep: the MARK and the RANGE are
+       page chrome, not sky — they sit ON the figure rather than in it. */
     var mark = band.querySelector('[data-sky-mark]')
     if (mark) mark.style.left = xPct + '%'
 
@@ -423,7 +384,9 @@
     // canopy and the tree takes its light from the scene at this minute.
     var treeFrame = document.querySelector('[data-tree-frame]')
     if (treeFrame) {
-      treeFrame.src = embedUrl + '?embed=tree&alpha=1'
+      /* ⛔ NOT alpha any more. The scene draws its OWN sky, because its sun
+         and moon are in the SAME projection as the tree — see index.html. */
+      treeFrame.src = embedUrl + '?embed=tree'
       treeFrame.addEventListener('load', function () {
         setTimeout(postTime, 400)   // it mounts before it can listen
       })
