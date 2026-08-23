@@ -28,12 +28,16 @@
 
   --live:        #B96A12;   /* ⚠ RESERVED. Only where something is actually live. */
 
-  /* The moon is lit by the sun, not by the page: ONE value, declared once and
-     deliberately absent from both theme blocks. Filling it from the sky's own
-     high band made it a black hole at night — it was the same colour as the
-     thing behind it. */
-  --moon:        #E8E2D2;
-  --moon-glow:   rgba(232, 226, 210, 0.34);
+  /* ⭐ THE BODIES, TAKEN FROM THE SKY BUILDER VERBATIM
+     (cartograph/SkyGradientGrid.jsx, its "now" preview). The sun and moon are
+     lit by the sun, not by the page, so these are declared ONCE and are
+     deliberately absent from both theme blocks. Do not "harmonise" them with
+     the palette — they are the product's values and matching them is the whole
+     point of the band. */
+  --sun:         #FFF5D6;
+  --sun-glow:    rgba(255, 220, 140, 0.8);
+  --moon:        #DDE6F5;
+  --moon-glow:   rgba(200, 210, 230, 0.5);
 
   --rule:        rgba(28, 24, 21, 0.22);
   --rule-soft:   rgba(28, 24, 21, 0.10);

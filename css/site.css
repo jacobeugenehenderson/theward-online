@@ -423,20 +423,29 @@ a { color: inherit; }
   transform: translate(-50%, -50%);
   transition: opacity var(--t-slow) linear;
 }
+/* Sizes, colours and glows are the Sky Builder's own. The moon's OPACITY and
+   glow radius scale with its illuminated fraction (set from js), which is how
+   that preview shows a phase without drawing a terminator — better than the
+   crescent I had, and it is the product's answer rather than my guess. */
 .skyband-sun {
-  width: 18px; height: 18px;
-  box-shadow: 0 0 26px 14px var(--sky-glow, transparent);
+  width: 14px; height: 14px;
+  background: var(--sun);
+  box-shadow: 0 0 12px 4px var(--sun-glow);
 }
 .skyband-moon {
-  width: 13px; height: 13px; overflow: hidden;
-  /* the moon carries its own halo — cool and small, next to the sun's warm
-     and wide. Without it a lit disc on a dark sky reads as a sticker. */
-  box-shadow: 0 0 14px 5px var(--moon-glow);
+  width: 10px; height: 10px;
+  background: var(--moon);
 }
-/* the terminator: a disc of sky slid across the moon by its phase */
-.skyband-moon > span {
-  position: absolute; inset: 0; border-radius: 50%;
-  transform: translateX(var(--moon-shadow, 0%));
+
+/* ⭐ THE sunGlow BAND IS A HORIZON WASH, NOT A HALO — this is what that fifth
+   channel is for, and I had been painting it onto the sun. It rises from the
+   bottom edge and peaks as the sun crosses the horizon, which is the whole
+   look of a sunrise. Screen blend, so it lightens the sky rather than sitting
+   on top of it. */
+.skyband-wash {
+  position: absolute; inset: 0; pointer-events: none;
+  mix-blend-mode: screen;
+  transition: opacity var(--t-slow) linear;
 }
 
 /* ⚠ THE BAND NEEDS TO LOOK DRAGGABLE. A cursor change is not an affordance

@@ -157,15 +157,34 @@
     })
   }
 
-  /* The sun and moon ride the band at their real altitude, so dragging the day
-     is watching them rise and set. Positioned in CSS percentages, NOT an SVG
-     viewBox — the band is wide and short, and a fitted viewBox turns every
-     circle into an oval. */
+  /* ⭐ PORTED FROM THE SKY BUILDER'S OWN "now" PREVIEW
+     (cartograph/SkyGradientGrid.jsx). Three things it does that my version did
+     not, and each is better:
+
+       · a body BELOW about -3° is simply not drawn, rather than faded
+       · the moon's opacity AND glow radius scale with its illuminated
+         fraction, and under 5% lit it is not drawn at all — that is how the
+         preview shows a phase without drawing a terminator
+       · sunGlow is a HORIZON WASH peaking as the sun crosses the horizon,
+         not a halo on the sun
+
+     The x axis is this band's own idea — a whole day laid flat — so only the
+     vertical mapping and the treatment come across. */
+  var HIDE_BELOW = -2.9   // degrees; the Sky Builder's -0.05 rad
+
+  function altToTopPct(altDeg) {
+    if (altDeg < HIDE_BELOW) return null
+    var t = Math.max(0, Math.min(1, altDeg / 90))
+    return (1 - t) * 100
+  }
+
   function placeBody(el, altDeg, xPct) {
-    if (!el) return
+    if (!el) return null
+    var top = altToTopPct(altDeg)
+    if (top === null) { el.style.opacity = '0'; return null }
     el.style.left = xPct + '%'
-    el.style.top = (94 - (Math.max(-12, Math.min(90, altDeg)) / 90) * 88) + '%'
-    el.style.opacity = altDeg < -2 ? '0' : '1'
+    el.style.top = top + '%'
+    return top
   }
 
   function paintSky(minute, at) {
@@ -177,29 +196,33 @@
     var names = ['horizon', 'low', 'mid', 'high', 'sunGlow']
     for (var i = 0; i < stops.length; i++) band.style.setProperty('--sky-' + names[i], css(stops[i]))
 
-    var glow = stops[4]
-    var glowIsBlack = (glow[0] + glow[1] + glow[2]) === 0
-
     var xPct = (minute / 1439) * 100
     var sunAlt = solarElevation(at, GEO.lat, GEO.lon)
+
     var sun = band.querySelector('[data-sky-sun]')
-    if (sun) {
-      placeBody(sun, sunAlt, xPct)
-      sun.style.background = css(glowIsBlack ? stops[3] : glow)
-      band.style.setProperty('--sky-glow', (sunAlt < -2 || glowIsBlack) ? 'transparent' : css(glow))
+    if (sun) sun.style.opacity = placeBody(sun, sunAlt, xPct) === null ? '0' : '1'
+
+    /* The wash peaks as the sun crosses the horizon and falls away either
+       side — the Sky Builder's own curve, in degrees rather than radians. */
+    var wash = band.querySelector('[data-sky-wash]')
+    if (wash) {
+      var a = Math.max(0, Math.min(1, 1 - Math.abs(sunAlt) / 17.2))
+      wash.style.background = a > 0.05
+        ? 'linear-gradient(to top, ' + css(stops[4]) + ' 0%, rgba(0,0,0,0) 30%)'
+        : 'none'
+      wash.style.opacity = a > 0.05 ? String(a) : '0'
     }
 
     var m = moonAt(at, GEO.lat, GEO.lon)
     var moon = band.querySelector('[data-sky-moon]')
     if (moon) {
       /* the moon keeps its own hour — it leads or trails the sun by its age */
-      placeBody(moon, m.alt, ((minute / 1439 + (1 - m.phase)) % 1) * 100)
-      /* lit, not sky-coloured — see --moon in tokens.css */
-      moon.style.background = getComputedStyle(document.documentElement).getPropertyValue('--moon').trim()
-      var sh = moon.querySelector('[data-sky-moon-shadow]')
-      if (sh) {
-        sh.style.background = css(stops[2])
-        moon.style.setProperty('--moon-shadow', ((m.lit * 2 - 1) * 100).toFixed(0) + '%')
+      var mTop = placeBody(moon, m.alt, ((minute / 1439 + (1 - m.phase)) % 1) * 100)
+      if (mTop === null || m.lit <= 0.05) {
+        moon.style.opacity = '0'
+      } else {
+        moon.style.opacity = String(0.4 + m.lit * 0.6)
+        moon.style.boxShadow = '0 0 ' + (4 + m.lit * 6).toFixed(1) + 'px 2px var(--moon-glow)'
       }
     }
 
