@@ -46,6 +46,10 @@ Deploys from `main` to GitHub Pages, custom domain in `CNAME`.
 
 ---
 
+**Companion docs.** `INTEGRATION.md` — how this page links to the product, and
+every change it required on the product side. `BACKLOG.md` — what is open, and
+the standing rules that should not be re-litigated.
+
 ## 1. What the site argues
 
 One claim. Copy or components that do not serve it should be cut rather than
