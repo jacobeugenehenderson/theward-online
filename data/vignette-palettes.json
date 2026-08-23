@@ -20,7 +20,9 @@
     "path (it does when a platform renders emoji monochrome to canvas). A true",
     "here means the colour is derived from the codepoint, not from the artwork —",
     "which is a legitimate result but not a measurement of the emoji, so it is",
-    "recorded rather than hidden."
+    "recorded rather than hidden.",
+    "",
+    "PRESET IS PER ROLE. `roles.<name>.preset` picks the treatment; the top-level `preset` is only the fallback for a role that names none. ⛔ Do NOT set them all to one value — the eight presets are per-EMOJI treatments and one across all five makes the set read uniform, which is the failure that got the first pass reverted. Measured 2026-08-23 across all 5x8: emoji-vs-ground contrast ranged 1.7 to 14.0, and the per-cell maximum picks v7 four times out of five, so legibility alone is NOT a sufficient rule — variety is the second axis."
   ],
   "capturedOn": "2026-08-23",
   "capturedWith": "Chrome/151.0.0.0 · MacIntel · Apple Color Emoji",
@@ -29,53 +31,124 @@
     "townie": {
       "emoji": "☕",
       "label": "Townie",
+      "preset": "v1",
       "fallback": false,
       "palette": [
-        { "h": 60.0000, "s": 13.0409, "l": 91.6340 },
-        { "h": 39.9862, "s": 42.4399, "l": 65.7119 },
-        { "h": 22.4103, "s": 98.2177, "l": 18.2724 }
+        {
+          "h": 60.0,
+          "s": 13.0409,
+          "l": 91.634
+        },
+        {
+          "h": 39.9862,
+          "s": 42.4399,
+          "l": 65.7119
+        },
+        {
+          "h": 22.4103,
+          "s": 98.2177,
+          "l": 18.2724
+        }
       ]
     },
     "resident": {
       "emoji": "🏡",
       "label": "Resident",
+      "preset": "v3",
       "fallback": false,
       "palette": [
-        { "h": 40.0494, "s": 76.8036, "l": 76.1999 },
-        { "h": 13.3841, "s": 78.6797, "l": 45.2566 },
-        { "h": 95.8927, "s": 87.6792, "l": 43.3787 }
+        {
+          "h": 40.0494,
+          "s": 76.8036,
+          "l": 76.1999
+        },
+        {
+          "h": 13.3841,
+          "s": 78.6797,
+          "l": 45.2566
+        },
+        {
+          "h": 95.8927,
+          "s": 87.6792,
+          "l": 43.3787
+        }
       ]
     },
     "guardian": {
       "emoji": "🌳",
       "label": "Guardian",
+      "preset": "v7",
       "fallback": false,
       "palette": [
-        { "h": 81.9106, "s": 97.3014, "l": 36.3424 },
-        { "h": 45.6470, "s": 98.3352, "l": 31.3012 },
-        { "h": 95.3756, "s": 100.0000, "l": 20.6690 }
+        {
+          "h": 81.9106,
+          "s": 97.3014,
+          "l": 36.3424
+        },
+        {
+          "h": 45.647,
+          "s": 98.3352,
+          "l": 31.3012
+        },
+        {
+          "h": 95.3756,
+          "s": 100.0,
+          "l": 20.669
+        }
       ]
     },
     "keyholder": {
       "emoji": "🔑",
       "label": "Keyholder",
+      "preset": "v2",
       "fallback": false,
       "palette": [
-        { "h": 44.7579, "s": 93.0804, "l": 49.1455 },
-        { "h": 25.7566, "s": 100.0000, "l": 32.2222 },
-        { "h": 55.7566, "s": 70.0000, "l": 12.2222 }
+        {
+          "h": 44.7579,
+          "s": 93.0804,
+          "l": 49.1455
+        },
+        {
+          "h": 25.7566,
+          "s": 100.0,
+          "l": 32.2222
+        },
+        {
+          "h": 55.7566,
+          "s": 70.0,
+          "l": 12.2222
+        }
       ]
     },
     "courier": {
       "emoji": "🚲",
       "label": "Courier",
+      "preset": "v6",
       "fallback": false,
       "palette": [
-        { "h": 213.9569, "s": 97.2239, "l": 35.6577 },
-        { "h": 193.3448, "s": 98.3798, "l": 29.7413 },
-        { "h": 240.2778, "s": 100.0000, "l": 28.4069 }
+        {
+          "h": 213.9569,
+          "s": 97.2239,
+          "l": 35.6577
+        },
+        {
+          "h": 193.3448,
+          "s": 98.3798,
+          "l": 29.7413
+        },
+        {
+          "h": 240.2778,
+          "s": 100.0,
+          "l": 28.4069
+        }
       ]
     }
   },
-  "order": ["townie", "resident", "guardian", "keyholder", "courier"]
+  "order": [
+    "townie",
+    "resident",
+    "guardian",
+    "keyholder",
+    "courier"
+  ]
 }

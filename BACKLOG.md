@@ -40,48 +40,31 @@ exists not to make.
 
 ## Ready to do
 
-**The participant vignettes need a real design pass, and the preset is a
-placeholder until then.** The five badges are built and placed (they are the
-ladder's step markers); what is unresolved is which *treatment* each wears.
+**The vignette treatments are picked per role and could still be better.**
+Measured across all 5×8 on 2026-08-23 — emoji-vs-ground contrast ranged **1.7 to
+14.0** — and set at `townie:v1 · resident:v3 · guardian:v7 · keyholder:v2 ·
+courier:v6`, worst cell **5.6**.
 
-⛔ **The error to not repeat: one preset was applied to all five.** The presets
-are per-emoji treatments — the point is that a different one flatters a
-different emoji — so using one globally guarantees the set reads uniform. That
-is the whole reason they were "all similarly boring."
+⛔ **The rule that was learned the hard way: one preset across all five makes the
+set read uniform.** The eight are per-*emoji* treatments. ⛔ **And legibility
+alone is NOT a sufficient rule either** — the per-cell maximum picks `v7` four
+times out of five, which reproduces the uniformity. **Variety is the second
+axis**, and the current set trades ~1 point of contrast for five distinct
+treatments.
 
-⚠️ **There are EIGHT, not four.** `v0` Decorator · `v1` Soft · `v2` Vivid ·
-`v3` Bold · `v4` Complement · `v5` Cool · `v6` Warm · `v7` Midnight. Only four
-were ever put in front of Jacob, which is what made this look like a four-way
-choice. Roster: the product's `src/lib/vignettePresets.js`.
+⭐ Licence from Jacob: *"I don't care about sticking close to the color brief;
+the map itself and all the insets are very colorful."* The muted ground governs
+the page, not these objects — which also **reopens 🕯️ for Guardian**, rejected
+earlier only on the reserved-amber rule.
 
-⭐ **The selection rule probably wants to be MECHANICAL, not taste — and there
-is a measured reason to think so.** `v3` builds its base from the palette's
-*dark* cluster, so an emoji whose three clusters sit in one hue family gets a
-base in its own colour and disappears into it:
+**Still open:** designing a **ninth preset** aimed at this job is in scope and
+untried; ☕ at `v1` is the palest badge and may want a warmer emoji or its own
+treatment; and the four green/warm roles have not been tested against a
+colour-blind simulation.
 
-    🚲  214° · 193° · 240°   all blue   → base hsl(240,30%,8%), bike invisible
-    🌳   82° ·  46° ·  95°   all green  → same failure, milder
-
-⇒ so a first candidate rule is *pick the preset whose base lands furthest in hue
-from the emoji's own ink*. Note that `v4` Complement, `v5` Cool and `v6` Warm
-exist precisely to introduce a hue the emoji does not have — they may be the
-answer for exactly the two roles that fail above. ⛔ But do not assume the
-existing eight are sufficient; **designing a ninth for this job is in scope.**
-
-⭐ **Licence from Jacob, 2026-08-23, and it matters:** *"I don't care about
-sticking close to the color brief; the map itself and all the insets are very
-colorful so hewing faithfully to the rigid scheme in the design doc isn't
-pressing here."* The muted ground governs the page; **it does not govern these
-objects.** (This also reopens 🕯️ for Guardian, which was rejected only on the
-reserved-amber rule.)
-
-**Build note:** `preset` is currently one global value in
-`data/vignette-palettes.json`. Per-role selection needs it moved onto each role
-— a small change to `build-vignettes.mjs`, deliberately not made yet.
-
-**Held at `v0` in the meantime**, which is the washed-out one. That is a
-placeholder, not a decision, and it is recorded here so nobody reads it as one.
-
+▶ Re-run the comparison any time: the 5×8 grid and the contrast scoring are a
+~30-line snippet against the product's own `emojiColor` + `vignettePresets` —
+see `git show` on this commit for it.
 
 **`?embed=masthead` under "There is no account."** Built on the product side and
 unplaced here. The four live counts — Townies · Residents · Guardians · Couriers
