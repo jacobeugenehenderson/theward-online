@@ -20,7 +20,7 @@ side.
 | the directory | `?embed=society&place=<id>` | the Society Pages panel, from the search bar down |
 | the card | `?embed=card&place=<id>` | one place card, mounted alone |
 | *(built, unplaced)* | `?embed=masthead` | the four role counts |
-| *(built, not working)* | `?embed=sky` | the celestial layer alone — see BACKLOG |
+| *(built, unplaced)* | `?embed=sky` | the celestial layer alone |
 
 `?layer=` and every `?embed=` are **framed‑only**: a direct visit falls through
 to the app, so nobody is ever shown half a product.
@@ -71,7 +71,15 @@ next person can see the cost of the embedding surface in one place.
 **New routes** — `src/App.jsx`, `parseRoute()` and the embed branch
 `?embed=society | masthead | card | sky`, plus `&place=`. Chrome‑only: no
 Scene, no controls, no ticker. `?embed=sky` is the exception — it mounts a
-Canvas, and is the one that does not work yet.
+Canvas.
+
+⚠️ **A Canvas embed can look broken and not be.** `?embed=sky` was reported here
+as not sizing for a day; it sizes on the first real paint. R3F gates its setup on
+a `ResizeObserver`, which cannot deliver in a throttled tab, so an embed inspected
+in a background tab shows a 300×150 canvas and an **empty `style.width`**.
+⛔ Do not check this with `canvas.getContext()` — that call *creates* the context
+and can never report one missing. Read `style.width`: empty means `setSize` never
+ran.
 
 **Named exports** — `src/components/SidePanel.jsx` now exports
 `LafayettePagesTab` and `SocietyMasthead`. ⭐ Nothing else was needed: the panel's

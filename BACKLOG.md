@@ -9,9 +9,9 @@ product lives in `INTEGRATION.md`.
 ## Blocked on the product
 
 **The diorama's tree.** The figure area is already shaped for it and the pill
-already says *The trees*. **One blocker, and it is not the site's:** `?embed=`
-with a Canvas does not size (see below). Full brief:
-`BRIEF-tree-and-sky-embed.md` in the lafayette‑square repo.
+already says *The trees*. **Nothing is blocking it any more** — both blockers
+this entry used to name were my errors, not the product's. Full brief:
+`BRIEF-tree-and-sky-embed.md` in the lafayette‑square repo, §3.
 
 ⭐ **The tree that deploys is `/baked/<look>/trees/…`, it is tracked, and staging
 serves it today.** An earlier version of this line claimed the GLBs were missing
@@ -19,12 +19,19 @@ from the build and invented a size limit as the reason. Both were wrong:
 `public/trees/` is the Arborist's authoring source pool and is gitignored on
 purpose. ⛔ **Do not treat a 404 there as a defect** — it is the architecture.
 
-**`?embed=sky`.** Mounts, creates a WebGL context, throws no errors, every
-ancestor measures correctly — and the canvas sits at R3F's default 300×150. The
-site's overlay was **reverted rather than left half‑built**, so the CSS band
-still works here. What is already ruled out is in the brief; do not re‑test it.
+**`?embed=sky` — ✅ IT WORKS. This entry was wrong.** The canvas sizes correctly
+on the first real paint; the 300×150 is what a **throttled tab** looks like.
+R3F v8 gates its setup on a `ResizeObserver` rect, and an observer cannot deliver
+while the frame is not being painted. It self‑heals. ⛔ **And "creates a WebGL
+context, throws no errors" was not evidence of anything** — `canvas.getContext()`
+*creates* the context, so it can never report one missing. Measured and retracted
+in the brief's §2, which is now worth reading for the traps rather than the claim.
 
-**The moon.** Stays the CSS one until the sky embed lands. The product has a
+The site's overlay was **reverted rather than left half‑built**, so the CSS band
+still works here — that decision holds and is why nothing on the page is broken.
+
+**The moon.** Stays the CSS one until the sky embed is *placed here* — which is
+now a site-side job, not a wait. The product has a
 real moon — a photographed surface with its terminator derived from the sun's
 direction — and drawing a worse one beside it is the whole mistake this page
 exists not to make.
