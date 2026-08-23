@@ -11,8 +11,20 @@ build   node tools/build.mjs        # every generator, then stamp the assets
 audit   python3 tools/audit.py      # runs the build in --check mode
 ```
 
-⚠ **`build.mjs` stamps `?v=<mtime>` on every local css/js link, and that is not
-housekeeping.** A browser will happily keep running a script it fetched ten
+⚠⚠ **CACHING LIES AT TWO LEVELS, AND IT COST THIS PROJECT TWO SESSIONS.**
+`build.mjs` stamps `?v=<mtime>` on every local css/js link — but the browser
+also caches **index.html**, so it keeps serving the OLD stamps and the new files
+are never requested. When testing a change, load `http://127.0.0.1:8791/?cb=N`
+with a fresh N, or hard-reload. Before believing any symptom, check that what
+RAN is what is on disk:
+
+```js
+const fresh = await fetch('/js/site.js?x=' + Date.now()).then(r => r.text())
+const ran = performance.getEntriesByType('resource').find(e => e.name.includes('site.js'))
+ran.decodedBodySize === fresh.length   // false ⇒ you are debugging a ghost
+```
+
+⚠ **The stamp itself is not housekeeping.** A browser will happily keep running a script it fetched ten
 edits ago, and every symptom then looks like a bug in code that is already
 correct. A whole session was lost to exactly that here: the page was executing
 16,015 bytes while the server served 14,871, and two "fixes" were made to code
