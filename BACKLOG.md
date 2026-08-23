@@ -105,3 +105,8 @@ part that has been argued through.
   trust ladder without "three days". You can describe a neighborhood without
   counting its buildings.
 - **The site names no town.** The audit checks it.
+- ⛔ **Deleting an element means grepping its class name.** Removing the tree left
+  its declarations behind with no selector, and CSS **fails open** — no error, no
+  console, just a silently mis-parsed cascade that dropped the whole
+  `.skyband-sun, .skyband-moon` rule and blew the moon's maria up to the size of
+  the band. Dead CSS is dead code. `git show 442bc8a` has the measurement.
