@@ -337,6 +337,20 @@ a { color: inherit; }
 }
 .term-v { font-size: 0.98rem; line-height: 1.5; }
 
+/* 8 ── the ask, and it is the page's last word ─────────────────────────── */
+/* Set apart because it is the one thing the page wants a reader to DO. A rule
+   above it and its own ground: quiet, but unmistakably a different kind of
+   block from the argument that precedes it. */
+.sec--ask {
+  border-top: 3px solid var(--sign);
+  background: var(--ground-2);
+  padding: var(--s5) var(--s4);
+  margin: var(--s5) 0 0;
+}
+/* ⚠️ NOT var(--live). Amber means something is running; an invitation is not.
+   The routed-sign brown is the page's structural ink and it is the right one. */
+.eyebrow--ask { color: var(--sign); }
+
 /* 8a ── Cary: a separate product, in its own room ──────────────────────── */
 /* ⛔ NOT a full-bleed band, deliberately. `.shell` is a max-width container, so
    breaking out needs 50vw arithmetic that fights the scrollbar — and the inset
@@ -411,7 +425,15 @@ a { color: inherit; }
 .ticker { text-wrap: pretty; min-height: 2.4em; margin-top: 0; }
 .ticker-slot { box-shadow: none; } }
 
-.host-foot { display: flex; flex-wrap: wrap; gap: var(--s5); align-items: flex-end; }
+/* ⛔ Was `.host-foot`, when the ask lived mid-page inside the host section.
+   Same layout, new owner — RENAMED rather than copied, so there is one rule for
+   one thing and no dead twin left behind. */
+.ask-foot { display: flex; flex-wrap: wrap; gap: var(--s5); align-items: flex-end; }
+/* ⚠️ It WRAPS here, and that is fine — but it was paying for the wrap twice.
+   The placeholder is a grid and stretches to the column (322px measured), so it
+   can never sit beside a 321px button in a 542px column; it then added its own
+   top margin on top of the flex gap. One gap, not two. */
+.ask-foot .placeholder { margin-top: 0; }
 .placeholder { margin: var(--s4) 0 0; display: grid; gap: var(--s1); justify-items: start; }
 .placeholder-box {
   width: 104px; height: 104px;

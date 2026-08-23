@@ -9,7 +9,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="css/tokens.css?v=1787500911864">
-<link rel="stylesheet" href="css/site.css?v=1787502669177">
+<link rel="stylesheet" href="css/site.css?v=1787509693966">
+  <!-- ⭐ THE MARK'S 16px COUSIN, not the mark shrunk — the band mark's street
+       grid turns to mud below about 20px. SVG only, deliberately: it is theme
+       aware (a tab bar is dark as often as light) and one file beats a pile of
+       PNGs. ⚠️ Safari does not render SVG favicons; it will show nothing rather
+       than something wrong, which is the acceptable failure of the two. -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 
@@ -297,7 +303,7 @@
         <div class="term"><span class="term-k">Turning one down</span><span class="term-v">Costs you nothing at all.</span></div>
         <div class="term"><span class="term-k">Verification</span><span class="term-v">Couriers are the one part of the Ward that is verified, because you will be at someone&rsquo;s door. A deliberate exception, not an oversight.</span></div>
       </div>
-      <a class="cta cta-quiet" data-courier href="mailto:hello@theward.online?subject=Carrying%20for%20my%20neighborhood">Tell me when couriers open</a>
+      <a class="cta cta-quiet" data-courier href="mailto:jacob@theward.online?subject=Carrying%20for%20my%20neighborhood">Tell me when couriers open</a>
       <p class="note">Not open yet. Couriers open neighborhood by neighborhood, once there are places to carry from.</p>
     </div>
   </section>
@@ -317,15 +323,6 @@
       <div class="term"><span class="term-k">Who decides</span><span class="term-v">You do. What your Ward is for, who it speaks to, what belongs on it — nobody else rules on that.</span></div>
     </div>
 
-    <div class="host-foot">
-      <a class="cta" href="mailto:hello@theward.online?subject=Hosting%20a%20Ward">Ask about hosting a Ward</a>
-      <!-- Labelled, obvious, and not a plausible-looking fake: the real code
-           goes straight to Jacob, and the section is meant to be printable. -->
-      <figure class="placeholder">
-        <div class="placeholder-box" aria-hidden="true"></div>
-        <figcaption>Code goes here &mdash; scans through to a person</figcaption>
-      </figure>
-    </div>
   </section>
 
   <!-- ═══ HOW A WARD IS MADE ═════════════════════════════════════════════ -->
@@ -432,6 +429,30 @@
     <p class="note">The terms column reading <em>public domain &middot; free &middot; no account</em> down the page is the whole argument, made without an argument.</p>
   </section>
 
+  <!-- ⭐ THE ASK IS THE LAST THING, AND IT IS ITS OWN ROOM. It sat mid-page
+       inside the host section with two more sections after it — the page made
+       its request and then kept talking. And the address was stranded a second
+       time in the footer: a bare mailto under a wall of source attributions,
+       belonging to nothing (Jacob, 2026-08-23: "doesn't really make sense as a
+       standalone footer"). One place, at the end, where a reader who has gone
+       all the way down arrives at the thing to do next. -->
+  <section class="sec sec--ask">
+    <div class="copy">
+      <span class="eyebrow eyebrow--ask">Get in touch</span>
+      <h2>Bring one to your neighborhood</h2>
+      <p class="lede">A host is a partner rather than a customer, so this begins as a conversation &mdash; about the place, what it needs, and whether this is the right shape for it.</p>
+      <div class="ask-foot">
+        <a class="cta" href="mailto:jacob@theward.online?subject=Hosting%20a%20Ward">Ask about hosting a Ward</a>
+        <!-- Labelled, obvious, and not a plausible-looking fake: the real code
+             goes straight to a person, and this section is meant to be printable. -->
+        <figure class="placeholder">
+          <div class="placeholder-box" aria-hidden="true"></div>
+          <figcaption>Code goes here &mdash; scans through to a person</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <!-- ═══ COLOPHON ═════════════════════════════════════════════════════════ -->
@@ -442,7 +463,7 @@
       <span>Street and building geometry &copy; OpenStreetMap contributors, <a href="https://opendatacommons.org/licenses/odbl/">ODbL</a>. Building footprints from Microsoft Global ML Building Footprints, ODbL. Elevation from USGS 3DEP, public domain. Canopy from NLCD (USDA) and ESA WorldCover, CC&nbsp;BY. Street-level imagery from Mapillary, CC&nbsp;BY-SA. Parcels, zoning and historic designation from public records.</span>
     </div>
     <div class="colophon-foot">
-      <span><a href="mailto:hello@theward.online">hello@theward.online</a></span>
+      <span>&copy; 2026 Jacob Henderson LLC</span>
     </div>
   </div>
 </footer>
