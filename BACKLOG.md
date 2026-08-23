@@ -60,6 +60,13 @@ on 0–1% of their ink. ⚠️ And do not rank candidates by that number: 🔑 s
 and looks perfectly clear, because its 6% is a continuous outline. It answers
 "is there a contour at all", nothing finer.
 
+**⚠️ An audit gap found while wiring the courier's rim:** `site.css` referenced
+`--vig-rim-accent` before `tokens.css` declared it, and **the audit passed.** It
+checks for tokens declared-but-unused, and for classes used-but-undefined — but
+not for a **token used but never declared**, which silently drops the whole
+declaration to its initial value. One more regex in `tools/audit.py`, and it is
+the same shape as the `undefined css` check already there.
+
 **Open:** 🚲 is still the least characterful of the five and 📦 / 🛵 were the
 better-measuring candidates — but that is now purely a choice of emoji, not of
 treatment, and it is Jacob's. No colour-blind simulation has been run.

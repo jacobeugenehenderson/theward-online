@@ -285,7 +285,10 @@ a { color: inherit; }
 .role-vig--resident  { --vig-emoji: var(--vig-resident-emoji);  --vig-scale: var(--vig-resident-scale);  --vig-nudge: var(--vig-resident-nudge); }
 .role-vig--guardian  { --vig-emoji: var(--vig-guardian-emoji);  --vig-scale: var(--vig-guardian-scale);  --vig-nudge: var(--vig-guardian-nudge); }
 .role-vig--keyholder { --vig-emoji: var(--vig-keyholder-emoji); --vig-scale: var(--vig-keyholder-scale); --vig-nudge: var(--vig-keyholder-nudge); }
-.role-vig--courier   { --vig-emoji: var(--vig-courier-emoji);   --vig-scale: var(--vig-courier-scale);   --vig-nudge: var(--vig-courier-nudge); }
+/* ⭐ The one override, and it earns it: the courier is the deliberate exception,
+   and this is the Cary room's verdigris, so the badge points at the section that
+   explains it. Field, halo and geometry are untouched. */
+.role-vig--courier   { --vig-emoji: var(--vig-courier-emoji);   --vig-scale: var(--vig-courier-scale);   --vig-nudge: var(--vig-courier-nudge); box-shadow: var(--vig-rim-accent); }
 
 .steps { display: grid; margin: var(--s4) 0 0; border-top: 1px solid var(--rule-soft); }
 .step {
