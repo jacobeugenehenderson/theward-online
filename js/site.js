@@ -172,6 +172,33 @@
 
   /* ── boot ──────────────────────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function () {
+    // the instruments pill — one figure area, two things to say about it
+    var pills = document.querySelectorAll('[data-inst]')
+    for (var pi = 0; pi < pills.length; pi++) {
+      pills[pi].addEventListener('click', function () {
+        var want = this.getAttribute('data-inst')
+        var all = document.querySelectorAll('[data-inst]')
+        for (var k = 0; k < all.length; k++) {
+          all[k].setAttribute('aria-selected', String(all[k].getAttribute('data-inst') === want))
+        }
+        var figs = document.querySelectorAll('[data-fig]')
+        for (var f = 0; f < figs.length; f++) figs[f].hidden = figs[f].getAttribute('data-fig') !== want
+        var panels = document.querySelectorAll('[data-inst-panel]')
+        for (var q = 0; q < panels.length; q++) panels[q].hidden = panels[q].getAttribute('data-inst-panel') !== want
+      })
+    }
+
+    // the ticker, ticking. Slow enough to read, and still for anyone who asked.
+    var slot = document.querySelector('[data-ticker]')
+    if (slot && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var lines = slot.children, at = 0
+      setInterval(function () {
+        lines[at].hidden = true
+        at = (at + 1) % lines.length
+        lines[at].hidden = false
+      }, 3200)
+    }
+
     // the sky, and the day it carries
     applyClock()
     setInterval(applyClock, 60000)

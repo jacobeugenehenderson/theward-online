@@ -145,6 +145,10 @@ a { color: inherit; }
   .wayside-fig { border-right: none; border-bottom: 1px solid var(--rule-soft); }
 }
 .wayside-fig svg { width: 100%; height: 100%; display: block; }
+/* ⚠ `.wayside-fig svg { display: block }` BEATS the UA's `[hidden]{display:none}`,
+   so a hidden figure kept rendering on top of the section below it. State it
+   explicitly. Check computed display, never the attribute. */
+.wayside-fig svg[hidden] { display: none; }
 
 .wayside-txt { padding: var(--s4); display: grid; gap: var(--s2); align-content: start; }
 .wayside-txt h3 {
@@ -213,6 +217,57 @@ a { color: inherit; }
   letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-soft);
 }
 .term-v { font-size: 0.98rem; line-height: 1.5; }
+
+/* 8b ── the pill, the ticker, the placeholder ──────────────────────────── */
+.pill {
+  /* justify-self, because a grid stretches its children and the border would
+     otherwise run the width of the column with nothing in it */
+  display: inline-flex; justify-self: start; gap: 0; margin-bottom: var(--s1);
+  border: 1px solid var(--rule);
+}
+.pill-btn {
+  font-family: var(--f-sys); font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: var(--s1) var(--s2);
+  background: transparent; color: var(--text-soft);
+  border: 0; cursor: pointer;
+  transition: color var(--t-fast), background var(--t-fast);
+}
+.pill-btn + .pill-btn { border-left: 1px solid var(--rule); }
+.pill-btn:hover { color: var(--text); }
+.pill-btn[aria-selected="true"] { color: var(--band-text); background: var(--band-bg); }
+
+/* The one place besides the map where something moves, and it moves because
+   the subject IS motion — a ticker described in still type is a ticker that
+   has not been shown. Reduced motion gets the first phrase and no cycling. */
+.ticker { text-wrap: pretty; }
+.ticker-slot { display: inline-block; position: relative; padding-bottom: 4px; }
+/* The tube, not a halo: a lit bar under the words. A box-shadow on the span
+   glows on all four sides and reads as a border, which is the opposite of
+   neon. */
+.ticker-slot::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: var(--live);
+  box-shadow: 0 0 6px 1px var(--live), 0 0 16px 3px var(--live);
+  opacity: 0.9;
+}
+.ticker-slot > span { transition: opacity var(--t-fast) linear; }
+.ticker-slot > span[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) { .ticker { text-wrap: pretty; }
+.ticker-slot { box-shadow: none; } }
+
+.host-foot { display: flex; flex-wrap: wrap; gap: var(--s5); align-items: flex-end; }
+.placeholder { margin: var(--s4) 0 0; display: grid; gap: var(--s1); justify-items: start; }
+.placeholder-box {
+  width: 104px; height: 104px;
+  border: 1px dashed var(--rule);
+  background: repeating-linear-gradient(
+    45deg, transparent 0 7px, var(--rule-soft) 7px 8px);
+}
+.placeholder figcaption {
+  font-family: var(--f-sys); font-size: 0.66rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint);
+}
 
 /* 9 ── the title block ──────────────────────────────────────────────────── */
 .tblock { border: 1px solid var(--rule); background: var(--ground-2); }
