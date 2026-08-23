@@ -445,67 +445,14 @@ a { color: inherit; }
   pointer-events: none;
 }
 
-.skyband-sun, .skyband-moon {
-  position: absolute; pointer-events: none;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: opacity var(--t-slow) linear;
-}
-/* Sizes, colours and glows are the Sky Builder's own. The moon's OPACITY and
-   glow radius scale with its illuminated fraction (set from js), which is how
-   that preview shows a phase without drawing a terminator — better than the
-   crescent I had, and it is the product's answer rather than my guess. */
-/* Bigger than the Sky Builder's preview, because that is a 100px slice in a
-   panel and this is the page's one romantic object. The treatment is still
-   its own — the colours, the glow, and hiding below the horizon. */
-.skyband-sun {
-  width: 26px; height: 26px;
-  background: var(--sun);
-  box-shadow: 0 0 22px 8px var(--sun-glow), 0 0 60px 24px var(--sun-glow);
-}
-
-/* ── The moon, with a face and a real phase ──────────────────────────────
-   Four layers inside one disc:
-     the disc        the lit moon
-     .moon-half      exactly half of it in shadow — which side depends on
-                     whether it is waxing or waning
-     .moon-lune      an ellipse that either EXTENDS that shadow (crescent) or
-                     CARVES IT BACK (gibbous); its width is the phase
-     .moon-maria     the seas, laid over everything, so they read faintly
-                     through the shadow as well — earthshine, and the reason
-                     this is worth doing at all
-   The alternative — fading the whole disc by illumination — is what the
-   preview does at 10px and it is right there. At this size a phase has to be
-   a SHAPE. */
-.skyband-moon {
-  width: 36px; height: 36px;
-  background: var(--moon);
-  overflow: hidden;
-}
-.moon-half, .moon-lune, .moon-maria {
-  position: absolute; inset: 0; border-radius: 50%;
-}
-.moon-half { background: var(--moon-night); }
-.moon-lune { background: var(--moon-night); }
-.moon-maria {
-  background-image:
-    radial-gradient(circle at 33% 29%, var(--maria-1) 0 13%, transparent 14%),
-    radial-gradient(circle at 61% 43%, var(--maria-2) 0 17%, transparent 18%),
-    radial-gradient(circle at 44% 67%, var(--maria-1) 0 20%, transparent 21%),
-    radial-gradient(circle at 71% 71%, var(--maria-3) 0 11%, transparent 12%),
-    radial-gradient(circle at 24% 55%, var(--maria-4) 0 9%, transparent 10%);
-}
-
-/* ⭐ THE sunGlow BAND IS A HORIZON WASH, NOT A HALO — this is what that fifth
-   channel is for, and I had been painting it onto the sun. It rises from the
-   bottom edge and peaks as the sun crosses the horizon, which is the whole
-   look of a sunrise. Screen blend, so it lightens the sky rather than sitting
-   on top of it. */
-.skyband-wash {
-  position: absolute; inset: 0; pointer-events: none;
-  mix-blend-mode: screen;
-  transition: opacity var(--t-slow) linear;
-}
+/* ⛔ THE BAND NO LONGER DRAWS THE SUN, THE MOON OR THE HORIZON WASH.
+   They were flat discs positioned in percentages, and the band now contains a
+   PERSPECTIVE RENDER (?embed=tree). Two projections cannot share a sky: the
+   screenshot that settled it had the moon sitting inside the canopy. The scene
+   draws its own bodies, correctly, so these are gone rather than hidden.
+   ⭐ Their CSS outlived their DOM by one commit and the AUDIT caught it —
+   `unused css` — which is the whole reason that check exists. Removed here,
+   with the tokens it stranded. Archived: git show ef50392^:css/site.css */
 
 /* ⚠ THE BAND NEEDS TO LOOK DRAGGABLE. A cursor change is not an affordance
    for anyone who does not happen to hover it — Jacob looked at this and asked

@@ -28,24 +28,11 @@
 
   --live:        #B96A12;   /* ⚠ RESERVED. Only where something is actually live. */
 
-  /* ⭐ THE BODIES, TAKEN FROM THE SKY BUILDER VERBATIM
-     (cartograph/SkyGradientGrid.jsx, its "now" preview). The sun and moon are
-     lit by the sun, not by the page, so these are declared ONCE and are
-     deliberately absent from both theme blocks. Do not "harmonise" them with
-     the palette — they are the product's values and matching them is the whole
-     point of the band. */
-  --sun:         #FFF5D6;
-  --sun-glow:    rgba(255, 220, 140, 0.8);
-  --moon:        #DDE6F5;
-  --moon-glow:   rgba(200, 210, 230, 0.5);
-  /* the unlit side is not black — earthshine, and it is the romantic part */
-  --moon-night:  rgba(22, 27, 42, 0.90);
-  /* the seas, at four weights — the moon's face is the one texture on the
-     page, so its greys are tokens like everything else */
-  --maria-1:     rgba(40, 48, 70, 0.30);
-  --maria-2:     rgba(40, 48, 70, 0.24);
-  --maria-3:     rgba(40, 48, 70, 0.20);
-  --maria-4:     rgba(40, 48, 70, 0.16);
+  /* ⛔ THE SUN, MOON AND MARIA TOKENS ARE GONE — the band stopped drawing flat
+     bodies when it started containing a perspective render, and the scene draws
+     its own. They were taken from the Sky Builder verbatim; if a CSS sky ever
+     returns, take them from the product again rather than from memory:
+     cartograph/SkyGradientGrid.jsx. Archived: git show ef50392^:css/tokens.css */
 
   --rule:        rgba(28, 24, 21, 0.22);
   --rule-soft:   rgba(28, 24, 21, 0.10);
