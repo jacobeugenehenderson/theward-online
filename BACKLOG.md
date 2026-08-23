@@ -8,11 +8,10 @@ product lives in `INTEGRATION.md`.
 
 ## Blocked on the product
 
-**The diorama's tree — ✅ BUILT, ready to place here.** `?embed=tree`
-(`src/components/TreeDiorama.jsx`, `04739db5`): sky and specimen in ONE Canvas,
-lit by `CelestialBodies`' own lights, driven by `ward-time`. Both blockers this
-entry once named were my errors, not the product's. **The remaining work is
-site-side: swap the CSS band for the embed in the diorama figure.**
+**The day slider is invisible.** The diorama frame is opaque and covers
+`.skyband-mark`, so the band no longer shows where you are in the day — it is
+still draggable, but nothing says so, which is the exact affordance problem the
+mark was added to solve in the first place. Jacob has it on his list.
 
 ⭐ **The tree that deploys is `/baked/<look>/trees/…`, it is tracked, and staging
 serves it today.** An earlier version of this line claimed the GLBs were missing

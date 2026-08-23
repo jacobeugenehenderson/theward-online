@@ -20,7 +20,18 @@ side.
 | the directory | `?embed=society&place=<id>` | the Society Pages panel, from the search bar down |
 | the card | `?embed=card&place=<id>` | one place card, mounted alone |
 | *(built, unplaced)* | `?embed=masthead` | the four role counts |
+| the diorama | `?embed=tree` | sky and one specimen in ONE Canvas, lit together |
 | *(built, unplaced)* | `?embed=sky` | the celestial layer alone |
+
+⛔ **The diorama is OPAQUE, not alpha, and the band draws no sky of its own.**
+Flat discs placed in CSS percentages cannot share a projection with a perspective
+render — the screenshot that settled it had the moon inside the canopy. ⚠️ **Known
+consequence, on Jacob's list:** the opaque frame covers `.skyband-mark`, so the
+day slider is currently invisible though still draggable.
+
+⛔ **Never describe the diorama as swaying.** Wind is authored by the
+meteorologist and almost no directive carries a `wind` block, so `uWindIntensity`
+sits at 0. It is owed, not shipped.
 
 `?layer=` and every `?embed=` are **framed‑only**: a direct visit falls through
 to the app, so nobody is ever shown half a product.
@@ -91,6 +102,25 @@ hid the masthead, which is why "from the search bar down" needed no new flag.
 `CelestialBodies`, `CloudDome`, `WeatherEffects`, the two tickers,
 `AtmosphereDirectiveDriver`. `TimeTicker` and `SkyStateTicker` were exported
 from `Scene.jsx` rather than reimplemented.
+
+**⛔⛔ `memo()` ON ANY EMBED THAT MOUNTS A CANVAS — this is a rule, not a fix.**
+`App` re-renders on every store tick. A bare `<Canvas>` under it re-renders too,
+R3F re-runs `root.render()` under a fresh context Bridge, and **the entire scene
+subtree is torn down and rebuilt before React can commit an effect.** Measured in
+the tree embed at 472×420: a `useMemo([scene])` recomputing **~46×/second on a
+dep that never changed**, `scene.uuid` identical throughout, and the measure
+effect committing **zero** times. Geometry rebuilt every frame; the camera never
+posed. Fix is one line — `export default memo(TreeDiorama)` (`ec4547c1`).
+
+⚠️ **`SkyEmbed` has the same exposure and looks fine**, because it has no effect
+to lose — it is remounting its scene every frame regardless. Know that before
+profiling anything framed.
+
+⭐ **What made it findable was a sentence, not a probe: *"it was there but then it
+disappeared."*** That distinguishes NEVER-MOUNTED from MOUNTED-THEN-REMOVED, and
+only the second points at a remount. An hour went into ground, shadows, camera fit
+and the atlas first — all innocent. **When a framed symptom is intermittent, ask
+whether it never appeared or appeared and left, before touching code.**
 
 **`src/lib/framedPresence.js`** — where the throttle's state lives, and why it
 lives in the Ward rather than here.
