@@ -11,6 +11,13 @@ build   node tools/build.mjs        # every generator, then stamp the assets
 audit   python3 tools/audit.py      # runs the build in --check mode
 ```
 
+⚠ **`loading="lazy"` starts its clock when the frame ENTERS VIEW, not on load.**
+Twice I screenshotted a lazy embed a second after scrolling to it and reported a
+blank pane as a failure when the thing was simply not there yet. The two panel
+embeds are DOM-only and small, so they are no longer lazy — the hero is the
+heavy frame and lazy-loading the light ones only made them start late, behind
+it, looking broken.
+
 ⚠⚠ **CACHING LIES AT TWO LEVELS, AND IT COST THIS PROJECT TWO SESSIONS.**
 `build.mjs` stamps `?v=<mtime>` on every local css/js link — but the browser
 also caches **index.html**, so it keeps serving the OLD stamps and the new files
@@ -211,7 +218,7 @@ decision, and it is one line.
 | The courier section | built; destination is `interest` |
 | The directory | **`?embed=society` — the product's own panel, mounted alone, and it paints.** Real accordion, real counts, real scrolling. ⚠ It boots in ~5s and the frame is `loading="lazy"`, so it is blank on arrival and fills in — that is what looked like a failure |
 | Every building opens | its own claim again, with a labelled gap awaiting an overhead of the neighborhood. It is NOT the directory's claim and the two were briefly collapsed |
-| The place cards | **`?embed=card&place=<id>` — the card itself, running.** A pill switches which place. ⚠ Built and building clean, **not yet confirmed on screen** — the page's scroll kept resetting under me and I stopped rather than keep guessing. **To swap a place: change `data-place` in index.html and nothing else**; the ids come from the directory beside it |
+| The place card | **`?embed=card&place=<id>` — the card itself, running, in a drawn tablet.** Confirmed: photo, logo, rating, tabs, and no close button. **To swap the place: change `data-place` in index.html and nothing else**; the ids come from the directory above it |
 | The joint | a 3px rule in the reserved colour under the band. The seam vanished at night when band and sky were both near-black; the rule says *below this line, everything is live* |
 | The sky band | a short divider between what the Ward holds and what is living in it, carrying the neighborhood's own authored sky (`tools/build-sky.mjs`). It reports; it does not ask |
 | `/host` as a standalone page | **not built.** Section 07 is in the scroll only; sales happens in fragments and it should also be a page you can send cold |
