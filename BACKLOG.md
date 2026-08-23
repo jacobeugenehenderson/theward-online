@@ -8,10 +8,12 @@ product lives in `INTEGRATION.md`.
 
 ## Blocked on the product
 
-**The day slider is invisible.** The diorama frame is opaque and covers
-`.skyband-mark`, so the band no longer shows where you are in the day — it is
-still draggable, but nothing says so, which is the exact affordance problem the
-mark was added to solve in the first place. Jacob has it on his list.
+✅ **The day slider is visible again.** The diorama frame now stops short of the
+bottom edge and the mark rides the strip that leaves — a track under the tree.
+⛔ Still ONE control: the whole sky stays draggable, and a second visible slider
+would be the second slider this page deliberately does not have. The `now` button
+already appeared only when the day is held off live (`nowBtn.hidden = held ===
+null`) — that behaviour was built and simply had nowhere visible to appear.
 
 ⭐ **The tree that deploys is `/baked/<look>/trees/…`, it is tracked, and staging
 serves it today.** An earlier version of this line claimed the GLBs were missing
@@ -146,6 +148,11 @@ part that has been argued through.
   carries one; and **season** — the autumn pack is unprocessed. ⭐ Both are
   *aspiration*, not rot: they are owed features, so the copy waits rather than
   the backlog being quietly corrected.
+- ⛔ **`loading="lazy"` is now AUDITED, not just written down.** It was the
+  README's loudest rule and it was broken anyway — the tree frame shipped lazy
+  and the sky band sat black under programmatic scroll, indistinguishable from a
+  broken embed. That is the fourth round this rule has cost. A rule stated only in
+  prose is a rule that comes back.
 - ⛔ **Deleting an element means grepping its class name.** Removing the tree left
   its declarations behind with no selector, and CSS **fails open** — no error, no
   console, just a silently mis-parsed cascade that dropped the whole

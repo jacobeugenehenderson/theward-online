@@ -28,6 +28,15 @@ fams  = [v for v in re.findall(r'font-family:\s*([^;]+)', bare) if not v.strip()
 check('literals', not (hexes or rgba or fams),
       f'hex={hexes[:3]} rgba={rgba[:3]} font-family={fams[:2]}')
 
+# ── the loudest rule on the page, and nothing was checking it ────────────────
+# README §1 leads with "NOTHING ON THIS PAGE IS loading=lazy, AND THAT IS A RULE"
+# and records that it cost three separate debugging rounds. It then happened a
+# fourth time: the tree frame shipped with loading="lazy" and the sky band sat
+# black under programmatic scroll — indistinguishable from a broken embed. A rule
+# stated only in prose is a rule that comes back.
+lazy = re.findall(r'<(\w+)[^>]*loading="lazy"', html)
+check('lazy loading', not lazy, f'loading="lazy" on: {lazy} — README §1 forbids it')
+
 # ── rule 2: no inline style attributes; rule 3: no <style> blocks ────────────
 check('inline style', 'style="' not in html, 'found a style attribute in index.html')
 check('style blocks', '<style' not in html, 'found a <style> block; all CSS lives in css/')

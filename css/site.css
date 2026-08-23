@@ -502,8 +502,13 @@ a { color: inherit; }
    dome; see `?embed=tree&alpha=1`.)
    Deaf to the pointer so dragging the day still works straight through it. */
 .skyband-tree {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  width: 100%; height: 100%;
+  /* ⛔ Stops at the track — full-height is what buried the mark. And the height
+     is EXPLICIT, not top+bottom: an iframe is a REPLACED element, so it does not
+     stretch between offsets the way a div does. Setting only top/bottom silently
+     collapsed it to the iframe's intrinsic 150px default — measured, 472x150 in
+     a 420-tall band — which looks exactly like "the tree failed to load." */
+  position: absolute; left: 0; right: 0; top: 0;
+  width: 100%; height: calc(100% - var(--track-h));
   border: 0; background: transparent;
   pointer-events: none;
 }
@@ -517,18 +522,38 @@ a { color: inherit; }
    `unused css` — which is the whole reason that check exists. Removed here,
    with the tokens it stranded. Archived: git show ef50392^:css/site.css */
 
-/* ⚠ THE BAND NEEDS TO LOOK DRAGGABLE. A cursor change is not an affordance
-   for anyone who does not happen to hover it — Jacob looked at this and asked
-   where the slider was. The mark says both "you are here in the day" and
-   "this is a thing you can pull". */
+/* ⚠ THE BAND NEEDS TO LOOK DRAGGABLE. A cursor change is not an affordance for
+   anyone who does not happen to hover it — Jacob asked where the slider was, and
+   the mark was the answer: it says both "you are here in the day" and "this is a
+   thing you can pull".
+   ⛔ THEN THE DIORAMA COVERED IT. The tree embed went opaque (it draws its own
+   sky, because flat CSS discs cannot share a projection with a perspective
+   render) and the mark spent its life behind an iframe. The control still
+   worked; nothing said so. Jacob, 2026-08-23: "we lost the actual visible on
+   screen time slider so the effect still works but you have to know it's there."
+   ⭐ THE FIX IS A TRACK THE TREE CANNOT REACH, not a second control. The frame
+   now stops short of the bottom edge and the mark rides the strip that leaves —
+   "an unmarked slider under the tree", which is what was asked for, and still
+   ONE control. A second visible slider would be the second slider this page
+   deliberately does not have. */
+.skyband { --track-h: 18px; }
+/* The track. A pseudo-element, so it costs no markup and no class. */
+.skyband::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+  height: var(--track-h);
+  background: var(--band-bg); opacity: 0.9;
+  pointer-events: none;
+}
 .skyband-mark {
-  position: absolute; top: 0; bottom: 0; width: 1px;
+  position: absolute; top: 0; bottom: 0; width: 1px; z-index: 2;
   background: var(--live); opacity: 0.55;
   transform: translateX(-50%); pointer-events: none;
 }
+/* The handle, sitting IN the track where nothing can paint over it. */
 .skyband-mark::after {
-  content: ""; position: absolute; left: 50%; bottom: 0;
-  width: 15px; height: 5px; transform: translateX(-50%);
+  content: ""; position: absolute; left: 50%; bottom: 4px;
+  width: 17px; height: 10px; border-radius: 5px;
+  transform: translateX(-50%);
   background: var(--live);
 }
 .skyband:hover .skyband-mark { opacity: 0.95; }
@@ -546,8 +571,12 @@ a { color: inherit; }
 /* Appears only once the day has been moved: without it a visitor can strand
    the neighborhood at 3am with no way back. A conditional control, not a
    caption. */
+/* ⭐ Appears ONLY when the day is held off live — js/site.js sets
+   `nowBtn.hidden = (held === null)`. So the control announces itself exactly
+   when there is something to undo, and never before. */
 .skyband-now {
-  position: absolute; right: var(--s2); top: 50%; transform: translateY(-50%);
+  position: absolute; right: var(--s1); bottom: 0; z-index: 3;
+  height: var(--track-h); line-height: var(--track-h); padding: 0 var(--s1);
   font-family: var(--f-sys); font-size: 0.64rem; font-weight: 600;
   letter-spacing: 0.14em; text-transform: uppercase;
   background: var(--band-bg); color: var(--band-text);
