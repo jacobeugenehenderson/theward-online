@@ -167,7 +167,7 @@ decision, and it is one line.
 | The scroll — eight sections | built |
 | Copy | **provisional**, all of it, and expected to be rewritten |
 | The sources block | generated, current, audit-checked |
-| The embed | loads the real product from staging; layer switch wired to the product's contract, **not yet confirmed end-to-end in a browser** |
+| The embed | loads the real product; **layer switch confirmed end-to-end** — Both / Place / People all switch in place, and the return is instant |
 | The courier section | built; destination is `interest` |
 | The joint | a 3px rule in the reserved colour under the band. The seam vanished at night when band and sky were both near-black; the rule says *below this line, everything is live* |
 | The horizon | replaces a three-button clock strip that explained nothing. The disc shows the neighborhood's real sky and the sun or moon at its true height, and clicking it holds the other one. It keeps showing the REAL sky while held, so an override never makes the page lie |
