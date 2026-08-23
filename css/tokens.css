@@ -34,6 +34,18 @@
      returns, take them from the product again rather than from memory:
      cartograph/SkyGradientGrid.jsx. Archived: git show ef50392^:css/tokens.css */
 
+  /* ── CARY ──────────────────────────────────────────────────────────────
+     Cary is a separate product living inside the Ward, and the page should say
+     so before the copy does. ⭐ THE HUE IS NOT INVENTED: verdigris is the
+     product's OWN authored courier colour — SocietyMasthead's Couriers stat,
+     rgba(61,175,138). Taken from the product rather than picked here, for the
+     same reason the sky strip is.
+     ⚠️ And it is deliberately NOT `--live`: amber is reserved for what is
+     actually running, and couriers are not open yet. The section's own note
+     says so. Using amber here would have been the rule's first breach. */
+  --cary-ground: #E4DCC9;
+  --cary-rule:   #2F7D63;
+
   --rule:        rgba(28, 24, 21, 0.22);
   --rule-soft:   rgba(28, 24, 21, 0.10);
 
@@ -100,7 +112,11 @@
     --sign:       #C3A47C;
     --sign-soft:  #9A8058;
     --live:       #F2B44E;
-    --rule:       rgba(233, 225, 206, 0.24);
+    --cary-ground: #1C201E;
+    --cary-rule:   #56B892;
+    --cary-ground: #1C201E;
+  --cary-rule:   #56B892;
+  --rule:       rgba(233, 225, 206, 0.24);
     --rule-soft:  rgba(233, 225, 206, 0.11);
     --band-bg:    #E9E1CE;
     --band-text:  #16130F;

@@ -313,6 +313,25 @@ a { color: inherit; }
 }
 .term-v { font-size: 0.98rem; line-height: 1.5; }
 
+/* 8a ── Cary: a separate product, in its own room ──────────────────────── */
+/* ⛔ NOT a full-bleed band, deliberately. `.shell` is a max-width container, so
+   breaking out needs 50vw arithmetic that fights the scrollbar — and the inset
+   panel is the truer statement anyway: Cary is a thing pinned INSIDE the Ward,
+   not a different chapter of it. */
+.sec--cary {
+  background: var(--cary-ground);
+  border-top: 3px solid var(--cary-rule);
+  padding: var(--s5) var(--s4);
+  margin: var(--s5) 0;
+}
+.cary-head { display: flex; align-items: center; gap: var(--s3); margin-bottom: var(--s3); }
+/* The ladder's badge, smaller — same tokens, so it cannot drift from the rung. */
+.carymark { width: 44px; height: 44px; font-size: 22px; }
+/* ⚠️ NOT var(--live). Amber is reserved for what is actually running and
+   couriers are not open yet — the section's own note says so three lines down. */
+.eyebrow--cary { color: var(--cary-rule); margin-bottom: 0; }
+.sec--cary .cta { margin-top: var(--s4); }
+
 /* 8b ── the pill, the ticker, the placeholder ──────────────────────────── */
 .pill {
   /* justify-self, because a grid stretches its children and the border would

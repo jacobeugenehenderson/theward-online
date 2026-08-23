@@ -257,7 +257,7 @@ decision, and it is one line.
 | Copy | **provisional**, all of it, and expected to be rewritten |
 | The sources block | generated, current, audit-checked |
 | The embed | loads the real product; **layer switch confirmed end-to-end** — Both / Place / People all switch in place, and the return is instant |
-| The courier section | built; destination is `interest` |
+| The courier section | built; destination is `interest`. **Cary has its own room** — an inset panel with its own ground and a verdigris rule, marked with the courier badge from the ladder. ⭐ The hue is the product's own: `SocietyMasthead`'s Couriers stat. ⚠ NOT `--live` — amber is for what is running, and couriers are not open. Its four rules moved from two paragraphs into `.terms` (same words) |
 | The directory | **`?embed=society` — the product's own panel, mounted alone, and it paints.** Real accordion, real counts, real scrolling. ⚠ It boots in ~5s and the frame is `loading="lazy"`, so it is blank on arrival and fills in — that is what looked like a failure |
 | Every building opens | its own claim again, with a labelled gap awaiting an overhead of the neighborhood. It is NOT the directory's claim and the two were briefly collapsed |
 | The place card | **`?embed=card&place=<id>` — the card itself, running, in a drawn tablet.** Confirmed: photo, logo, rating, tabs, and no close button. **To swap the place: change `data-place` in index.html and nothing else** — and that is true again; `js/site.js` had grown a constant that quietly took over, leaving the attribute dead while two docs told you to edit it (restored 2026-08-23). It now seeds BOTH frames; the ids come from the directory above it |
