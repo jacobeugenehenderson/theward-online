@@ -430,13 +430,6 @@ a { color: inherit; }
    is watching them rise and set.
    ⚠ Positioned in CSS percentages, NOT in an SVG viewBox: the band is wide and
    short, so a viewBox scaled to fit turns every circle into an oval. */
-/* Standing on the bottom edge, sized to the frame rather than to the page, and
-   deaf to the pointer so dragging the day still works straight through it. */
-  position: absolute; left: 8%; bottom: 0;
-  height: 82%; width: auto; max-width: none;
-  pointer-events: none;
-  filter: drop-shadow(0 0 18px var(--tree-cast));
-}
 
 .skyband-sun, .skyband-moon {
   position: absolute; pointer-events: none;
