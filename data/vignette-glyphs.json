@@ -1,60 +1,67 @@
 {
   "_comment": [
-    "GLYPH GEOMETRY for the participant badges. ⛔ THIS FILE NO LONGER CARRIES COLOUR, and that is the point: the badge is now ONE AUTHORED MASTER (css/tokens.css, --vig-field / --vig-rim / --vig-halo) rather than a per-emoji derivation.",
+    "GLYPH GEOMETRY for the participant badges. ⛔ NO COLOUR LIVES HERE — the badge is ONE AUTHORED MASTER (css/tokens.css: --vig-field, --vig-rim, --vig-drop).",
     "",
-    "WHY THE DERIVATION WENT. Pulling the ground out of the emoji's own colours guarantees the worst case — a blue bicycle got a blue ground and 16% of its ink cleared 3:1. Measured across a neutral sweep from black to white, NO single flat ground works for all five: mid-tones drop the worst glyph to ~0% legible ink, white kills 🔑 and ☕, black kills 🚲.",
+    "⭐ THESE NUMBERS CENTRE THE GRAPHIC, NOT THE CHARACTER. `align-items:center` centres the LINE BOX — the font's metrics — which has almost nothing to do with where the picture sits inside it. All values are em, at font-size 1.",
+    "  inkH / inkW = the inked height and width of the actual rastered pixels. 🚲 is 0.665 tall where 🔑 is 1.000 — the bicycle really is ~30% smaller at one font-size. inkH drives the scale, toward `inkTarget`.",
+    "  nudgeY      = the translateY that lands the graphic's ink centred in the disc. Already signed and ready to use.",
     "",
-    "WHAT REPLACED IT is what a real merit badge does — a constant field and a HALO on the emblem. The halo clears 16.5:1 against the field, so EVERY glyph has a guaranteed edge whatever its own colours are. That is why any emoji can be dropped in now.",
+    "⛔⛔ MEASURE IN THE FRAME YOU APPLY IN. The first version of this rastered with canvas `textBaseline:'middle'` and applied the result to a CSS flex box. Those are DIFFERENT REFERENCES and the error is not small: Apple Color Emoji reports ascent 1.0 and descent 0.315, so its content box is 1.315em inside a 1em line box and the baseline lands at 0.84em, not 0.5em. Every badge came out ~0.1em too low and Jacob caught it on sight.",
+    "  ⇒ The raster is now taken FROM THE BASELINE, and the baseline is then placed the way CSS places it (line-height 1 centres the content box). ⛔ Do not go back to a 'middle' raster.",
     "",
-    "WHAT IS STILL MEASURED, AND MUST BE. A flex box centres the LINE BOX, not the glyph, and every emoji fills its box by a different amount:",
-    "  inkH  = inked height as a fraction of the box. 🚲 is 0.48 where 🌳/🔑 are 0.70 — the bicycle really is ~30% smaller at one font-size.",
-    "  inkDy = how far the ink centre sits from the box centre (+down). 🚲 is +0.004 where the rest are about -0.09.",
-    "The generator turns these into a per-role scale (toward `inkTarget`) and a nudge. ⛔ RE-MEASURE WHEN YOU CHANGE AN EMOJI — the generator throws on a role with no ink block, and on an inkH near zero (which means the glyph did not render when captured, not that it is small).",
+    "⛔ Horizontal is not corrected, deliberately: measured, every glyph's inked width is 0.90–1.00em, i.e. they are already centred side to side. Jacob: \"The horizontal isn't the problem.\"",
     "",
-    "TO RE-MEASURE: open the Ward on localhost and run the inkBox snippet from the commit that introduced this file."
+    "⛔ RE-MEASURE WHEN YOU CHANGE AN EMOJI. The generator throws on a missing or degenerate ink block and warns if a scaled glyph would overflow its disc.",
+    "",
+    "⚠️ AND CHECK THE NEW GLYPH HAS A DARK CONTOUR — there is no outline on the emblem (it read as a sticker), so a pale graphic has nothing to read against the cream field: 🥚 ☁️ 🦢 clear 3:1 on 0–1% of their ink. ⚠️ Do not RANK by that number though: 🔑 scores 6% and is perfectly clear, because its 6% is a continuous outline."
   ],
   "capturedOn": "2026-08-23",
-  "capturedWith": "Chrome/151.0.0.0 · MacIntel · Apple Color Emoji",
-  "inkTarget": 0.7,
+  "capturedWith": "Chrome/151 · MacIntel · Apple Color Emoji · rastered from the baseline at 200px",
+  "inkTarget": 0.97,
   "roles": {
     "townie": {
       "emoji": "☕",
       "label": "Townie",
       "ink": {
-        "inkH": 0.6172,
-        "inkDy": -0.1172
+        "inkH": 0.865,
+        "inkW": 0.985,
+        "nudgeY": 0.0725
       }
     },
     "resident": {
       "emoji": "🏡",
       "label": "Resident",
       "ink": {
-        "inkH": 0.6953,
-        "inkDy": -0.0781
+        "inkH": 0.965,
+        "inkW": 0.985,
+        "nudgeY": 0.0175
       }
     },
     "guardian": {
       "emoji": "🌳",
       "label": "Guardian",
       "ink": {
-        "inkH": 0.7031,
-        "inkDy": -0.0898
+        "inkH": 0.985,
+        "inkW": 0.905,
+        "nudgeY": 0.0325
       }
     },
     "keyholder": {
       "emoji": "🔑",
       "label": "Keyholder",
       "ink": {
-        "inkH": 0.7031,
-        "inkDy": -0.0898
+        "inkH": 1.0,
+        "inkW": 1.0,
+        "nudgeY": 0.035
       }
     },
     "courier": {
       "emoji": "🚲",
       "label": "Courier",
       "ink": {
-        "inkH": 0.4844,
-        "inkDy": 0.0039
+        "inkH": 0.665,
+        "inkW": 0.995,
+        "nudgeY": -0.1025
       }
     }
   },

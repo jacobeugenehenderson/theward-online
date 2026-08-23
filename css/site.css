@@ -270,7 +270,17 @@ a { color: inherit; }
   transform: scale(var(--vig-scale, 1)) translateY(var(--vig-nudge, 0em));
 }
 
-/* Only the glyph differs. */
+/* ⭐ CENTRED ON THE GRAPHIC, NOT ON THE CHARACTER. `align-items: center` centres
+   the LINE BOX — the font's metrics — which has almost nothing to do with where
+   the picture sits inside it. Apple Color Emoji reports ascent 1.0 / descent
+   0.315, so its content box is 1.315em inside a 1em line box and the baseline
+   lands at 0.84em. The nudges are measured in THAT frame and land each graphic's
+   ink in the middle of the disc.
+   ⛔ An earlier version measured from a canvas 'middle' anchor and applied the
+   result here — a different reference — and every badge sat ~0.1em too low.
+   ⛔ Horizontal is not corrected: measured, every glyph's inked width is
+   0.90–1.00em, so they are already centred side to side.
+   Only the glyph differs. */
 .role-vig--townie    { --vig-emoji: var(--vig-townie-emoji);    --vig-scale: var(--vig-townie-scale);    --vig-nudge: var(--vig-townie-nudge); }
 .role-vig--resident  { --vig-emoji: var(--vig-resident-emoji);  --vig-scale: var(--vig-resident-scale);  --vig-nudge: var(--vig-resident-nudge); }
 .role-vig--guardian  { --vig-emoji: var(--vig-guardian-emoji);  --vig-scale: var(--vig-guardian-scale);  --vig-nudge: var(--vig-guardian-nudge); }
@@ -289,12 +299,12 @@ a { color: inherit; }
   display: block; margin-bottom: 2px;
 }
 
-/* ⛔ Single column again. It was a two-column grid to seat the courier badge;
-   the badge moved to the Cary room and the empty 62px track went with it —
-   dead layout is dead code, and CSS fails open (see 442bc8a, the moon). */
+/* Two columns: the courier badge, then the paragraph that explains it. */
 .aside {
   border-left: 3px solid var(--live); background: var(--ground-2);
   padding: var(--s3) var(--s4); margin-top: var(--s4); max-width: var(--measure);
+  display: grid; grid-template-columns: 62px minmax(0, 1fr);
+  gap: var(--s3); align-items: start;
 }
 .aside p { margin: 0; font-size: 0.99rem; line-height: 1.55; }
 
@@ -335,9 +345,6 @@ a { color: inherit; }
   padding: var(--s5) var(--s4);
   margin: var(--s5) 0;
 }
-.cary-head { display: flex; align-items: center; gap: var(--s3); margin-bottom: var(--s3); }
-/* The ladder's badge, smaller — same tokens, so it cannot drift from the rung. */
-.carymark { width: 44px; height: 44px; font-size: 22px; }
 /* ⚠️ NOT var(--live). Amber is reserved for what is actually running and
    couriers are not open yet — the section's own note says so three lines down. */
 .eyebrow--cary { color: var(--cary-rule); margin-bottom: 0; }
