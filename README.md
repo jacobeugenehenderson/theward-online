@@ -265,7 +265,7 @@ decision, and it is one line.
 | The sky band | a short divider between what the Ward holds and what is living in it, carrying the neighborhood's own authored sky (`tools/build-sky.mjs`). It reports; it does not ask |
 | `/host` as a standalone page | **not built.** Section 07 is in the scroll only; sales happens in fragments and it should also be a page you can send cold |
 | Privacy / terms pages | **not built** |
-| The five participant vignettes | generated from the product's own avatar treatment; audit-checked. Emoji are ☕ 🏡 🌳 🔑 🚲, preset `v0`. ⛔ 🕯️ was the strongest Guardian candidate on meaning and was **rejected because gold is the reserved `--live` colour** (rule 5) |
+| The five participant vignettes | generated from the product's own avatar treatment; audit-checked. Emoji ☕ 🏡 🌳 🔑 🚲, preset `v3` (the neon ring — the washed-out presets buried the emoji). **They are the ladder's step markers**, replacing the numbers 1–4; the courier is not a rung and wears its badge in the aside instead. ⛔ 🕯️ was the strongest Guardian candidate on meaning and was **rejected because gold is the reserved `--live` colour** (rule 5). ⚠ The courier badge is the weakest of the five and the reason is mechanical, not aesthetic: 🚲's three captured clusters are 214°/193°/240°, **all blue**, and `v3` builds its base from the dark cluster — so a blue bike sits on a navy ground. Every other role's palette spans more than one hue family. Fix is a warmer courier emoji, not a preset change |
 | Favicon | **not built.** The mark's 16 px cousin — a thick ring with a bright notch — is the intended asset |
 
 **Open, needing Jacob:**

@@ -243,42 +243,35 @@ a { color: inherit; }
 /* 7 ── the ladder ───────────────────────────────────────────────────────── */
 
 /* The five participant types, wearing the product's own avatar treatment.
-   ⛔ EVERY COLOUR HERE ARRIVES AS A TOKEN and the tokens are GENERATED — see
+   These ARE the ladder's step markers — they replaced the numbers 1–4, and the
+   courier (which is not a rung) wears its own beside the aside that explains it.
+
+   ⛔ EVERY COLOUR AND THE EMOJI ITSELF ARRIVE AS GENERATED TOKENS — see
    tools/build-vignettes.mjs. Rule 1 forbids a literal colour in this file, so a
-   vignette that stopped resolving would show as a transparent circle rather
-   than as a wrong one. If these go flat, the token block in tokens.css is stale:
-   run `node tools/build-vignettes.mjs`. */
-.roles {
-  display: flex; flex-wrap: wrap; gap: var(--s3) var(--s4);
-  margin: var(--s4) 0; padding: 0 0 var(--s3);
-}
-.role { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 76px; }
+   vignette whose tokens went stale shows as a FLAT, EMPTY circle rather than as
+   a wrong one. If that is what you are looking at, the token block in tokens.css
+   is stale: run `node tools/build-vignettes.mjs`. */
 .role-vig {
-  width: 54px; height: 54px; border-radius: 50%;
+  width: 62px; height: 62px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 27px; line-height: 1;
+  font-size: 31px; line-height: 1;
   border: 2px solid transparent;
+  flex-shrink: 0;
 }
-.role-name {
-  font-family: var(--f-sys); font-size: 0.78rem; font-weight: 600;
-  letter-spacing: 0.02em; color: var(--text-soft); text-align: center;
-}
-.role-vig--townie    { background: var(--vig-townie-bg);    box-shadow: var(--vig-townie-edge);    border-color: var(--vig-townie-border); }
-.role-vig--resident  { background: var(--vig-resident-bg);  box-shadow: var(--vig-resident-edge);  border-color: var(--vig-resident-border); }
-.role-vig--guardian  { background: var(--vig-guardian-bg);  box-shadow: var(--vig-guardian-edge);  border-color: var(--vig-guardian-border); }
-.role-vig--keyholder { background: var(--vig-keyholder-bg); box-shadow: var(--vig-keyholder-edge); border-color: var(--vig-keyholder-border); }
-.role-vig--courier   { background: var(--vig-courier-bg);   box-shadow: var(--vig-courier-edge);   border-color: var(--vig-courier-border); }
+/* The emoji is content, not markup — one source, and it cannot drift. */
+.role-vig::before { content: var(--vig-emoji, ""); }
+
+.role-vig--townie    { background: var(--vig-townie-bg);    box-shadow: var(--vig-townie-edge);    border-color: var(--vig-townie-border);    --vig-emoji: var(--vig-townie-emoji); }
+.role-vig--resident  { background: var(--vig-resident-bg);  box-shadow: var(--vig-resident-edge);  border-color: var(--vig-resident-border);  --vig-emoji: var(--vig-resident-emoji); }
+.role-vig--guardian  { background: var(--vig-guardian-bg);  box-shadow: var(--vig-guardian-edge);  border-color: var(--vig-guardian-border);  --vig-emoji: var(--vig-guardian-emoji); }
+.role-vig--keyholder { background: var(--vig-keyholder-bg); box-shadow: var(--vig-keyholder-edge); border-color: var(--vig-keyholder-border); --vig-emoji: var(--vig-keyholder-emoji); }
+.role-vig--courier   { background: var(--vig-courier-bg);   box-shadow: var(--vig-courier-edge);   border-color: var(--vig-courier-border);   --vig-emoji: var(--vig-courier-emoji); }
 
 .steps { display: grid; margin: var(--s4) 0 0; border-top: 1px solid var(--rule-soft); }
 .step {
-  display: grid; grid-template-columns: 34px minmax(0, 1fr);
+  display: grid; grid-template-columns: 62px minmax(0, 1fr);
   gap: var(--s3); padding: var(--s3) 0;
   border-bottom: 1px solid var(--rule-soft); align-items: start;
-}
-.step-n {
-  font-family: var(--f-sys); font-variant-numeric: tabular-nums;
-  font-weight: 700; font-size: 0.86rem; color: var(--live);
-  border: 1px solid var(--rule-soft); text-align: center; padding: 2px 0;
 }
 .step p { margin: 0; font-size: 1rem; line-height: 1.55; }
 .step-t {
@@ -289,6 +282,8 @@ a { color: inherit; }
 .aside {
   border-left: 3px solid var(--live); background: var(--ground-2);
   padding: var(--s3) var(--s4); margin-top: var(--s4); max-width: var(--measure);
+  display: grid; grid-template-columns: 62px minmax(0, 1fr);
+  gap: var(--s3); align-items: start;
 }
 .aside p { margin: 0; font-size: 0.99rem; line-height: 1.55; }
 
