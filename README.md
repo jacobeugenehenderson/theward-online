@@ -96,6 +96,17 @@ Everything about the public block is a rule applied to the panel's data:
 `node tools/build-sources.mjs --check` fails if the block in `index.html` is
 stale. The audit runs it.
 
+**`tools/build-sky.mjs` is the same pattern for the sky.** It lifts
+`ANCHOR_CARDS_PROCEDURAL` out of the product's `skyGrid.js` — four season
+anchors × twenty-four hours × four bands of authored hex — so the strip is the
+same table the map is lit by, not a designer's guess at it. It validates every
+hex and fails if the sky model changes shape.
+
+⭐ **There is no clock control, deliberately.** A three-button strip and then a
+horizon disc both had to be explained; a band of sky does not. Day and night are
+*shown*, and moving the hour moves the whole page with it. Do not reintroduce a
+widget for this.
+
 Point it elsewhere with `WARD_SOURCES_PANEL=/path/to/SourcesPanel.jsx`.
 
 ---
@@ -170,7 +181,7 @@ decision, and it is one line.
 | The embed | loads the real product; **layer switch confirmed end-to-end** — Both / Place / People all switch in place, and the return is instant |
 | The courier section | built; destination is `interest` |
 | The joint | a 3px rule in the reserved colour under the band. The seam vanished at night when band and sky were both near-black; the rule says *below this line, everything is live* |
-| The horizon | replaces a three-button clock strip that explained nothing. The disc shows the neighborhood's real sky and the sun or moon at its true height, and clicking it holds the other one. It keeps showing the REAL sky while held, so an override never makes the page lie |
+| The sky strip | the neighborhood's own authored sky, extracted from the product (`tools/build-sky.mjs`), scrubbable. Moving the hour moves the strip, the page's day, and the embed's sheet together |
 | `/host` as a standalone page | **not built.** Section 07 is in the scroll only; sales happens in fragments and it should also be a page you can send cold |
 | Privacy / terms pages | **not built** |
 | Favicon | **not built.** The mark's 16 px cousin — a thick ring with a bright notch — is the intended asset |
@@ -186,10 +197,6 @@ decision, and it is one line.
   across a whole day and the Meteorologist scrubs weather live, so the sky
   figure and the neon figure can be stills of the actual installation. That is
   a capture pass, not an illustration commission.
-- **The sky tokens are an approximation.** `--sky-*` in `tokens.css` guesses the
-  four states. The correct version reads the per-slot sky out of the
-  installation's own `design.json`, so the page and the map are lit by one
-  authored day. A project, not a token edit.
 - Whether a QR belongs on the page, and what it may point at. See §8.
 
 ---

@@ -41,8 +41,7 @@
      The page is in day or night because the NEIGHBORHOOD is. Solar elevation
      at the installation's own latitude; civil twilight (-6°) is the line,
      which is also when its lamps come on. A manual choice always wins. */
-  var GEO  = { lat: 38.6, lon: -90.2 }
-  var mode = 'auto'
+  var GEO = { lat: 38.6, lon: -90.2 }
 
   function solarElevation(date, lat, lon) {
     var rad = Math.PI / 180
@@ -60,56 +59,99 @@
 
   var isNight = false
 
-  /* The sky, from the sun's real height. Every colour is a token — this
-     picks which pair, it never writes one. Four states rather than a
-     continuous ramp, because the Look itself is authored in slots. */
-  function skyFor(elev) {
-    if (elev > 12)  return { key: 'day',   body: 'sun',  y: 34 - Math.min(elev, 60) * 0.42 }
-    if (elev > 0)   return { key: 'gold',  body: 'sun',  y: 34 - elev * 0.9 }
-    if (elev > -6)  return { key: 'dusk',  body: 'sun',  y: 34 }
-    return            { key: 'night', body: 'moon', y: 30 + Math.max(elev, -40) * 0.25 }
+  /* ── the sky ───────────────────────────────────────────────────────────
+     Four season anchors × 24 hours × four bands of the neighborhood's OWN
+     authored sky, extracted from the product by tools/build-sky.mjs. The
+     strip is not a decorative gradient; it is the table the map is lit by.
+
+     Scrubbing the hour moves the strip, the page's day, and the readout
+     together — one clock, shown rather than announced. That is why there is
+     no clock widget: a band of sky says "it is dusk there" without a label. */
+  var SKY = null
+  try { SKY = JSON.parse(document.getElementById('sky-table').textContent) } catch (e) { SKY = null }
+
+  var minuteOverride = null   // null = the neighborhood's own minute
+
+  function mix(a, b, t) {
+    function rgb(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)] }
+    var x = rgb(a), y = rgb(b)
+    return 'rgb(' + x.map(function (v, i) { return Math.round(v + (y[i] - v) * t) }).join(',') + ')'
   }
 
-  function paintHorizon(elev) {
-    var svg = document.querySelector('[data-horizon-sky]')
-    if (!svg) return
-    var sky = skyFor(elev)
-    var cs  = getComputedStyle(document.documentElement)
-    var top = svg.querySelector('[data-sky-top]')
-    var hor = svg.querySelector('[data-sky-horizon]')
-    var bod = svg.querySelector('[data-sky-body]')
-    if (top) top.setAttribute('stop-color', cs.getPropertyValue('--sky-' + sky.key + '-top').trim())
-    if (hor) hor.setAttribute('stop-color', cs.getPropertyValue('--sky-' + sky.key + '-horizon').trim())
-    if (bod) {
-      bod.setAttribute('cy', String(Math.max(6, Math.min(34, sky.y))))
-      bod.setAttribute('r', sky.body === 'moon' ? '3.6' : '5')
-      bod.setAttribute('fill', sky.body === 'moon'
-        ? cs.getPropertyValue('--band-text').trim()
-        : cs.getPropertyValue('--live').trim())
-      bod.setAttribute('opacity', sky.body === 'moon' ? '0.85' : '1')
+  /* Between the two flanking season anchors and between the two flanking
+     hours — the same interpolation the product does, rather than snapping. */
+  function skyAt(minute, doy) {
+    if (!SKY) return null
+    var names = Object.keys(SKY.doy).sort(function (a, b) { return SKY.doy[a] - SKY.doy[b] })
+    var lo = names[names.length - 1], hi = names[0], t = 0
+    for (var i = 0; i < names.length; i++) {
+      var d0 = SKY.doy[names[i]], d1 = SKY.doy[names[(i + 1) % names.length]]
+      var span = (d1 - d0 + 365) % 365
+      var into = (doy - d0 + 365) % 365
+      if (into <= span) { lo = names[i]; hi = names[(i + 1) % names.length]; t = span ? into / span : 0; break }
     }
-    var flip = document.querySelector('[data-horizon-flip]')
-    if (flip) flip.setAttribute('aria-label', isNight ? 'Hold this page on day' : 'Hold this page on night')
+    var h = minute / 60, h0 = Math.floor(h) % 24, h1 = (h0 + 1) % 24, ht = h - Math.floor(h)
+    return SKY.bands.map(function (_, band) {
+      var a = mix(SKY.cards[lo][h0][band], SKY.cards[lo][h1][band], ht)
+      var b = mix(SKY.cards[hi][h0][band], SKY.cards[hi][h1][band], ht)
+      // the season blend runs on already-blended hours, so mix in rgb space
+      return t === 0 ? a : mixRGB(a, b, t)
+    })
+  }
+
+  function mixRGB(a, b, t) {
+    function n(s) { return s.match(/\d+/g).map(Number) }
+    var x = n(a), y = n(b)
+    return 'rgb(' + x.map(function (v, i) { return Math.round(v + (y[i] - v) * t) }).join(',') + ')'
+  }
+
+  function dayOfYear(d) {
+    return Math.floor((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) - Date.UTC(d.getFullYear(), 0, 0)) / 86400000)
+  }
+
+  function localMinuteNow() {
+    var d = new Date()
+    return (d.getUTCHours() * 60 + d.getUTCMinutes() + Math.round(GEO.lon / 15 * 60) + 1440) % 1440
+  }
+
+  function sayHour(m) {
+    var h = Math.floor(m / 60), mm = m % 60
+    var ap = h < 12 ? 'am' : 'pm', hh = h % 12 === 0 ? 12 : h % 12
+    return hh + ':' + (mm < 10 ? '0' : '') + mm + ' ' + ap
+  }
+
+  function paintSky() {
+    var strip = document.querySelector('[data-sky-strip]')
+    if (!strip || !SKY) return
+    var minute = minuteOverride === null ? localMinuteNow() : minuteOverride
+    var stops = skyAt(minute, dayOfYear(new Date()))
+    if (!stops) return
+    var names = ['horizon', 'low', 'mid', 'high']
+    for (var i = 0; i < stops.length; i++) strip.style.setProperty('--sky-' + names[i], stops[i])
+
+    var hr = strip.querySelector('[data-sky-hour]')
+    var say = strip.querySelector('[data-sky-say]')
+    if (hr) hr.textContent = sayHour(minute)
+    if (say) say.textContent = minuteOverride === null ? 'in the neighborhood' : 'in the neighborhood \u2014 moved'
+
+    var now = document.querySelector('[data-sky-now]')
+    if (now) now.hidden = (minuteOverride === null)
+    var range = document.querySelector('[data-sky-range]')
+    if (range && document.activeElement !== range) range.value = String(minute)
   }
 
   function applyClock() {
-    var elev  = solarElevation(new Date(), GEO.lat, GEO.lon)
-    var night = mode === 'night' || (mode === 'auto' && elev < -6)
+    /* The page's day follows the SCRUBBED hour, not only the wall clock —
+       moving the sky moves the whole page, which is the point of moving it. */
+    var minute = minuteOverride === null ? localMinuteNow() : minuteOverride
+    var d = new Date()
+    d.setUTCHours(0, 0, 0, 0)
+    d.setUTCMinutes(minute - Math.round(GEO.lon / 15 * 60))
 
-    isNight = night
-    document.documentElement.setAttribute('data-theme', night ? 'dark' : 'light')
+    isNight = solarElevation(d, GEO.lat, GEO.lon) < -6
+    document.documentElement.setAttribute('data-theme', isNight ? 'dark' : 'light')
     post()   // the product cannot read our ground from inside a cross-origin frame
-
-    var state = document.querySelector('[data-clock-state]')
-    if (state) state.textContent = night ? 'Night' : 'Day'
-
-    /* The disc always shows the REAL sky, even when the page is held on the
-       other one — otherwise the override quietly makes the page lie about
-       what it is reporting. */
-    paintHorizon(elev)
-
-    var follow = document.querySelector('[data-clock="auto"]')
-    if (follow) follow.hidden = (mode === 'auto')
+    paintSky()
   }
 
   /* ── 2. the layer switch ───────────────────────────────────────────────
@@ -146,16 +188,16 @@
 
   /* ── boot ──────────────────────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function () {
-    // the horizon: the disc holds the other one, the link goes back to the sun
+    // the sky, and the day it carries
     applyClock()
-    var flip = document.querySelector('[data-horizon-flip]')
-    if (flip) flip.addEventListener('click', function () {
-      mode = isNight ? 'day' : 'night'
+    var range = document.querySelector('[data-sky-range]')
+    if (range) range.addEventListener('input', function () {
+      minuteOverride = Number(this.value)
       applyClock()
     })
-    var follow = document.querySelector('[data-clock="auto"]')
-    if (follow) follow.addEventListener('click', function () { mode = 'auto'; applyClock() })
-    setInterval(function () { applyClock() }, 60000)
+    var now = document.querySelector('[data-sky-now]')
+    if (now) now.addEventListener('click', function () { minuteOverride = null; applyClock() })
+    setInterval(function () { if (minuteOverride === null) applyClock() }, 60000)
 
     // the view
     var frame = document.querySelector('[data-ward-frame]')

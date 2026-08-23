@@ -65,7 +65,8 @@ refs = set(re.findall(r'var\((--[a-z0-9-]+)', site + toks + js))
 # The literal prefix is the contract; every token under it counts as referenced,
 # and is reported as dynamic so it is never mistaken for a static use.
 dynamic = set()
-for prefix in re.findall(r"getPropertyValue\('(--[a-z0-9-]*)", js):
+for prefix in re.findall(r"setProperty\('(--[a-z0-9-]*)", js) + \
+              re.findall(r"getPropertyValue\('(--[a-z0-9-]*)", js):
     if len(prefix) > 2:
         dynamic |= {t for t in declared if t.startswith(prefix)}
 refs |= dynamic
@@ -104,9 +105,10 @@ leak = sorted(set(re.findall(r'Lafayette|St\.? ?Louis|Missouri|Łódź|Lodz|Alta
 check('names a town', not leak, f'{leak}')
 
 # ── the sources block is generated, and current ─────────────────────────────
-gen = subprocess.run(['node', 'tools/build-sources.mjs', '--check'], cwd=ROOT,
-                     capture_output=True, text=True)
-check('sources', gen.returncode == 0, gen.stdout.strip() + gen.stderr.strip())
+for tool, label in (('build-sources.mjs', 'sources'), ('build-sky.mjs', 'sky')):
+    gen = subprocess.run(['node', 'tools/' + tool, '--check'], cwd=ROOT,
+                         capture_output=True, text=True)
+    check(label, gen.returncode == 0, (gen.stdout + gen.stderr).strip())
 
 # ── the courier route is not live ───────────────────────────────────────────
 m = re.search(r"var COURIER_INTAKE = '(\w+)'", js)
