@@ -40,6 +40,49 @@ exists not to make.
 
 ## Ready to do
 
+**The participant vignettes need a real design pass, and the preset is a
+placeholder until then.** The five badges are built and placed (they are the
+ladder's step markers); what is unresolved is which *treatment* each wears.
+
+⛔ **The error to not repeat: one preset was applied to all five.** The presets
+are per-emoji treatments — the point is that a different one flatters a
+different emoji — so using one globally guarantees the set reads uniform. That
+is the whole reason they were "all similarly boring."
+
+⚠️ **There are EIGHT, not four.** `v0` Decorator · `v1` Soft · `v2` Vivid ·
+`v3` Bold · `v4` Complement · `v5` Cool · `v6` Warm · `v7` Midnight. Only four
+were ever put in front of Jacob, which is what made this look like a four-way
+choice. Roster: the product's `src/lib/vignettePresets.js`.
+
+⭐ **The selection rule probably wants to be MECHANICAL, not taste — and there
+is a measured reason to think so.** `v3` builds its base from the palette's
+*dark* cluster, so an emoji whose three clusters sit in one hue family gets a
+base in its own colour and disappears into it:
+
+    🚲  214° · 193° · 240°   all blue   → base hsl(240,30%,8%), bike invisible
+    🌳   82° ·  46° ·  95°   all green  → same failure, milder
+
+⇒ so a first candidate rule is *pick the preset whose base lands furthest in hue
+from the emoji's own ink*. Note that `v4` Complement, `v5` Cool and `v6` Warm
+exist precisely to introduce a hue the emoji does not have — they may be the
+answer for exactly the two roles that fail above. ⛔ But do not assume the
+existing eight are sufficient; **designing a ninth for this job is in scope.**
+
+⭐ **Licence from Jacob, 2026-08-23, and it matters:** *"I don't care about
+sticking close to the color brief; the map itself and all the insets are very
+colorful so hewing faithfully to the rigid scheme in the design doc isn't
+pressing here."* The muted ground governs the page; **it does not govern these
+objects.** (This also reopens 🕯️ for Guardian, which was rejected only on the
+reserved-amber rule.)
+
+**Build note:** `preset` is currently one global value in
+`data/vignette-palettes.json`. Per-role selection needs it moved onto each role
+— a small change to `build-vignettes.mjs`, deliberately not made yet.
+
+**Held at `v0` in the meantime**, which is the washed-out one. That is a
+placeholder, not a decision, and it is recorded here so nobody reads it as one.
+
+
 **`?embed=masthead` under "There is no account."** Built on the product side and
 unplaced here. The four live counts — Townies · Residents · Guardians · Couriers
 — are proof the roles are a working system rather than four paragraphs. ⭐ And
