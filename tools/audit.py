@@ -100,6 +100,11 @@ check('unique ids', len(ids) == len(set(ids)), f'duplicated: {[i for i in set(id
 for href in re.findall(r'href="#([^"]+)"', html):
     if href not in ids: fails.append('anchor'); print(f'anchor        : #{href} goes nowhere')
 
+# ── every referenced local asset exists ─────────────────────────────────────
+missing = [src for src in re.findall(r'(?:src|href)="((?:assets|css|js)/[^"?]+)', html)
+           if not (ROOT / src).exists()]
+check('assets', not missing, f'{missing}')
+
 # ── the site names no town ──────────────────────────────────────────────────
 text = re.sub(r'<[^>]+>', ' ', body)
 leak = sorted(set(re.findall(r'Lafayette|St\.? ?Louis|Missouri|Łódź|Lodz|Altadena|Poland', text, re.I)))

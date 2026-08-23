@@ -11,12 +11,16 @@ build   node tools/build.mjs        # every generator, then stamp the assets
 audit   python3 tools/audit.py      # runs the build in --check mode
 ```
 
-⚠ **`loading="lazy"` starts its clock when the frame ENTERS VIEW, not on load.**
-Twice I screenshotted a lazy embed a second after scrolling to it and reported a
-blank pane as a failure when the thing was simply not there yet. The two panel
-embeds are DOM-only and small, so they are no longer lazy — the hero is the
-heavy frame and lazy-loading the light ones only made them start late, behind
-it, looking broken.
+⛔ **NOTHING ON THIS PAGE IS `loading="lazy"`, AND THAT IS A RULE.** It cost
+three separate debugging rounds: two embeds and an image, each reported as
+broken when it was simply not loaded. Lazy starts its clock when an element
+*enters view*, and programmatic scrolling does not reliably trip it — an image
+sitting at `top: 90px` stayed unloaded indefinitely and fetched instantly the
+moment the attribute came off.
+
+The page is short and its assets are few. The only heavy thing is the hero
+frame, which is not lazy either because it is the first thing anyone sees.
+**If you add `loading="lazy"` here, you are choosing a bug over a byte.**
 
 ⚠⚠ **CACHING LIES AT TWO LEVELS, AND IT COST THIS PROJECT TWO SESSIONS.**
 `build.mjs` stamps `?v=<mtime>` on every local css/js link — but the browser
