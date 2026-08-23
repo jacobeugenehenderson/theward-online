@@ -183,7 +183,7 @@ a { color: inherit; }
    to stop a full-width card dominating a section that is not about it. */
 .cardwin {
   border: 1px solid var(--rule); border-top: none; background: var(--ground-2);
-  display: grid; gap: var(--s3); padding: var(--s4);
+  display: grid; gap: var(--s3); padding: var(--s5) var(--s4) var(--s4);
 }
 
 /* Landscape, and the full width of the section — the card was designed for a
@@ -217,13 +217,6 @@ a { color: inherit; }
   background: var(--sign-soft); opacity: 0.7;
 }
 
-.cardwin-say { max-width: 62ch; }
-.cardwin-say h3 {
-  font-family: var(--f-sys); font-weight: 600; font-size: 1.18rem;
-  letter-spacing: -0.005em; line-height: 1.2; margin: 0 0 var(--s2);
-}
-.cardwin-say p { margin: 0 0 var(--s2); font-size: 0.99rem; line-height: 1.58; }
-.cardwin-say .note { margin-top: var(--s1); }
 .cardwin-note { margin: 0; }
 
 /* 6 ── index of instruments ─────────────────────────────────────────────── */

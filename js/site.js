@@ -43,6 +43,12 @@
 
   var GEO = { lat: 38.6, lon: -90.2 }
 
+  /* ⭐ ONE PLACE, TWO FRAMES. The directory opens on it and the card shows it,
+     so the pair reads as one instrument rather than two things that happen to
+     be near each other.
+     ⛔ TO CHANGE THE PLACE: this line. The id comes from the directory. */
+  var FEATURED_PLACE = 'lmk-028'
+
   /* ═══ 1. THE DAY ═══════════════════════════════════════════════════════
      `held` is the scrubbed minute, or null for the neighborhood's own.
 
@@ -338,14 +344,14 @@
     // ── the panel embeds: the product's own parts, mounted alone ─────────
     var embeds = document.querySelectorAll('[data-embed]')
     for (var ei = 0; ei < embeds.length; ei++) {
-      embeds[ei].src = embedUrl + '?embed=' + embeds[ei].getAttribute('data-embed')
+      embeds[ei].src = embedUrl + '?embed=' + embeds[ei].getAttribute('data-embed') +
+        '&place=' + encodeURIComponent(FEATURED_PLACE)
     }
 
     // ── the card in the tablet ───────────────────────────────────────────
     var cardFrame = document.querySelector('[data-card-frame]')
     if (cardFrame) {
-      cardFrame.src = embedUrl + '?embed=card&place=' +
-        encodeURIComponent(cardFrame.getAttribute('data-place'))
+      cardFrame.src = embedUrl + '?embed=card&place=' + encodeURIComponent(FEATURED_PLACE)
     }
 
     // ── the instruments pill: one figure area, two things to say about it ─
