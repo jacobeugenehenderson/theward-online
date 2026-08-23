@@ -109,6 +109,14 @@
       </div>
     </div>
 
+    <!-- A short band of the neighborhood's ACTUAL sky, dividing what the Ward
+         holds from what is living in it. No control: the Almanac already owns
+         the time slider, and two sliders that do not drive each other is worse
+         than one. The band reports; it does not ask. -->
+    <div class="skyband" data-sky-strip>
+      <span class="skyband-read"><b data-sky-hour>&mdash;</b> there</span>
+    </div>
+
     <div class="index">
       <div class="index-row">
         <span class="index-name">The living landscape</span>
@@ -123,26 +131,6 @@
         <p class="index-say">Buy Nothing, services, notices, missed connections. Anyone recognized can post; some corners are anonymous by default, because some things need to be said that way.</p>
       </div>
     </div>
-  </section>
-
-  <!-- ═══ THE SKY STRIP ══════════════════════════════════════════════════ -->
-  <!-- Not decoration and not a widget. The colours are the neighborhood's own
-       authored sky, extracted from the product; scrubbing the hour moves the
-       page's whole day with it. This is where day and night became legible,
-       which is why there is no longer a clock control anywhere. -->
-  <section class="sec sec-sky" aria-labelledby="sky-h">
-    <div class="sky" data-sky-strip>
-      <span class="sky-read">
-        <b data-sky-hour>&mdash;</b>
-        <span data-sky-say>in the neighborhood</span>
-      </span>
-    </div>
-    <label class="sky-scrub">
-      <span class="sky-scrub-k" id="sky-h">Move the day</span>
-      <input type="range" min="0" max="1439" step="5" value="720" data-sky-range
-             aria-label="Hour of the day in the neighborhood">
-      <button type="button" class="sky-now" data-sky-now hidden>back to now</button>
-    </label>
   </section>
 
   <!-- ═══ THE PRESENT MOMENT ═════════════════════════════════════════════ -->

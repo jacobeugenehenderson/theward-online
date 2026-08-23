@@ -70,8 +70,6 @@
   var SKY = null
   try { SKY = JSON.parse(document.getElementById('sky-table').textContent) } catch (e) { SKY = null }
 
-  var minuteOverride = null   // null = the neighborhood's own minute
-
   function mix(a, b, t) {
     function rgb(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)] }
     var x = rgb(a), y = rgb(b)
@@ -120,30 +118,24 @@
     return hh + ':' + (mm < 10 ? '0' : '') + mm + ' ' + ap
   }
 
-  function paintSky() {
+  function paintSky(minute) {
     var strip = document.querySelector('[data-sky-strip]')
     if (!strip || !SKY) return
-    var minute = minuteOverride === null ? localMinuteNow() : minuteOverride
     var stops = skyAt(minute, dayOfYear(new Date()))
     if (!stops) return
     var names = ['horizon', 'low', 'mid', 'high']
     for (var i = 0; i < stops.length; i++) strip.style.setProperty('--sky-' + names[i], stops[i])
-
     var hr = strip.querySelector('[data-sky-hour]')
-    var say = strip.querySelector('[data-sky-say]')
     if (hr) hr.textContent = sayHour(minute)
-    if (say) say.textContent = minuteOverride === null ? 'in the neighborhood' : 'in the neighborhood \u2014 moved'
-
-    var now = document.querySelector('[data-sky-now]')
-    if (now) now.hidden = (minuteOverride === null)
-    var range = document.querySelector('[data-sky-range]')
-    if (range && document.activeElement !== range) range.value = String(minute)
   }
 
+  /* ⚠ There is no time control on this page, deliberately. The Almanac inside
+     the product already owns the day slider, and two sliders that do not drive
+     each other is worse than one. If the page should ever move with the hour,
+     the right shape is the PRODUCT posting its time outward and this page
+     following — one slider, two surfaces — not a second slider here. */
   function applyClock() {
-    /* The page's day follows the SCRUBBED hour, not only the wall clock —
-       moving the sky moves the whole page, which is the point of moving it. */
-    var minute = minuteOverride === null ? localMinuteNow() : minuteOverride
+    var minute = localMinuteNow()
     var d = new Date()
     d.setUTCHours(0, 0, 0, 0)
     d.setUTCMinutes(minute - Math.round(GEO.lon / 15 * 60))
@@ -151,7 +143,7 @@
     isNight = solarElevation(d, GEO.lat, GEO.lon) < -6
     document.documentElement.setAttribute('data-theme', isNight ? 'dark' : 'light')
     post()   // the product cannot read our ground from inside a cross-origin frame
-    paintSky()
+    paintSky(minute)
   }
 
   /* ── 2. the layer switch ───────────────────────────────────────────────
@@ -190,14 +182,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     // the sky, and the day it carries
     applyClock()
-    var range = document.querySelector('[data-sky-range]')
-    if (range) range.addEventListener('input', function () {
-      minuteOverride = Number(this.value)
-      applyClock()
-    })
-    var now = document.querySelector('[data-sky-now]')
-    if (now) now.addEventListener('click', function () { minuteOverride = null; applyClock() })
-    setInterval(function () { if (minuteOverride === null) applyClock() }, 60000)
+    setInterval(applyClock, 60000)
 
     // the view
     var frame = document.querySelector('[data-ward-frame]')

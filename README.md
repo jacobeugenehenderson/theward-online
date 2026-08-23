@@ -102,10 +102,19 @@ anchors × twenty-four hours × four bands of authored hex — so the strip is t
 same table the map is lit by, not a designer's guess at it. It validates every
 hex and fails if the sky model changes shape.
 
-⭐ **There is no clock control, deliberately.** A three-button strip and then a
-horizon disc both had to be explained; a band of sky does not. Day and night are
-*shown*, and moving the hour moves the whole page with it. Do not reintroduce a
-widget for this.
+⭐ **There is no time control on this page, deliberately, and there are two
+reasons.** First: a three-button strip and then a horizon disc both had to be
+explained; a band of sky does not. Second: **the Almanac inside the product
+already owns the day slider, and two sliders that do not drive each other is
+worse than one.** If the page should ever move with the hour, the right shape is
+the product posting its time outward and this page following — one slider, two
+surfaces. ⛔ Never a second slider here.
+
+⚠ Consequence, recorded rather than hidden: the page follows the neighborhood's
+clock even for a viewer whose system asks for light. Contrast holds in both
+grounds, so this is a preference override rather than a legibility failure — but
+it is an override, and if it ever needs an escape hatch, the product-posts-time
+route above is the one that earns it.
 
 Point it elsewhere with `WARD_SOURCES_PANEL=/path/to/SourcesPanel.jsx`.
 
@@ -181,7 +190,7 @@ decision, and it is one line.
 | The embed | loads the real product; **layer switch confirmed end-to-end** — Both / Place / People all switch in place, and the return is instant |
 | The courier section | built; destination is `interest` |
 | The joint | a 3px rule in the reserved colour under the band. The seam vanished at night when band and sky were both near-black; the rule says *below this line, everything is live* |
-| The sky strip | the neighborhood's own authored sky, extracted from the product (`tools/build-sky.mjs`), scrubbable. Moving the hour moves the strip, the page's day, and the embed's sheet together |
+| The sky band | a short divider between what the Ward holds and what is living in it, carrying the neighborhood's own authored sky (`tools/build-sky.mjs`). It reports; it does not ask |
 | `/host` as a standalone page | **not built.** Section 07 is in the scroll only; sales happens in fragments and it should also be a page you can send cold |
 | Privacy / terms pages | **not built** |
 | Favicon | **not built.** The mark's 16 px cousin — a thick ring with a bright notch — is the intended asset |

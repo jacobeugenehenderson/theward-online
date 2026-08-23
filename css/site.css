@@ -258,57 +258,34 @@ a { color: inherit; }
 
 /* 10 ── the clock ───────────────────────────────────────────────────────── */
 
-/* 10b ── the sky strip ──────────────────────────────────────────────────
+/* 10b ── the sky band ───────────────────────────────────────────────────
    The one band of colour on the page, and it is not chosen: js/site.js sets
-   --sky-* from the extracted table for the scrubbed hour. Nothing here names
-   a colour, which is the same rule everything else follows. */
-.sec-sky { padding: var(--s5) 0; }
-
-.sky {
-  height: 132px;
+   --sky-* from the extracted table for the neighborhood's own minute. It
+   divides the instruments from the index — what the Ward holds, from what is
+   living in it — and it is why day and night need no widget. */
+.skyband {
+  height: 56px;
   border: 1px solid var(--rule);
+  border-top: none;
   position: relative;
-  overflow: hidden;
   background: linear-gradient(
     to bottom,
     var(--sky-high, var(--ground-3)) 0%,
-    var(--sky-mid, var(--ground-3)) 38%,
-    var(--sky-low, var(--ground-2)) 72%,
+    var(--sky-mid, var(--ground-3)) 34%,
+    var(--sky-low, var(--ground-2)) 70%,
     var(--sky-horizon, var(--ground-2)) 100%);
-  transition: background var(--t-fast) linear;
+  transition: background var(--t-slow) linear;
 }
-
-.sky-read {
-  position: absolute; left: var(--s3); bottom: var(--s2);
-  display: flex; align-items: baseline; gap: var(--s1);
-  font-family: var(--f-sys); font-size: 0.78rem;
-  /* over a sky that runs from noon-pale to midnight, so it carries its own
-     ground rather than trusting either theme's ink to read on it */
+.skyband-read {
+  position: absolute; right: var(--s3); top: 50%; transform: translateY(-50%);
+  font-family: var(--f-sys); font-size: 0.68rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  /* the band runs from noon-pale to midnight, so the label carries its own
+     ground rather than trusting either theme's text to read on it */
   background: var(--band-bg); color: var(--band-text);
-  padding: var(--s0) var(--s2);
+  padding: 2px var(--s1);
 }
-.sky-read b { font-weight: 700; font-variant-numeric: tabular-nums; }
-.sky-read span { opacity: 0.72; }
-
-.sky-scrub {
-  display: flex; align-items: center; gap: var(--s2);
-  margin-top: var(--s2); flex-wrap: wrap;
-}
-.sky-scrub-k {
-  font-family: var(--f-sys); font-size: 0.66rem; font-weight: 700;
-  letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint);
-}
-.sky-scrub input[type="range"] {
-  flex: 1 1 220px; min-width: 160px;
-  accent-color: var(--live);
-  background: transparent;
-}
-.sky-now {
-  font-family: var(--f-sys); font-size: 0.7rem; color: var(--text-soft);
-  background: none; border: 0; padding: 0; cursor: pointer;
-  text-decoration: underline; text-underline-offset: 3px;
-}
-.sky-now[hidden] { display: none; }
+.skyband-read b { font-weight: 700; font-variant-numeric: tabular-nums; }
 
 /* 11 ── colophon ────────────────────────────────────────────────────────── */
 .colophon {
