@@ -258,21 +258,15 @@ a { color: inherit; }
   box-shadow: var(--vig-rim);
   flex-shrink: 0;
 }
-/* ⭐ THE HALO IS WHAT LETS ANY EMOJI BE USED. Four hairline offsets plus a soft
-   drop give the glyph a guaranteed edge against the field whatever its own
-   colours are — measured, the bicycle had only 16% of its ink clearing 3:1 on
-   its own, and every other glyph a different number. The halo removes the
-   variable instead of tuning around it.
+/* ⛔ NO OUTLINE ON THE GLYPH. One was built — four hairline offsets giving a
+   guaranteed 16.5:1 edge — and cut on sight: it read as a sticker. What is left
+   is a whisper of drop-shadow for relief, not for legibility; the cream field
+   does the reading. See tokens.css for what that costs on a pale glyph.
    The emoji is content, not markup — one source, and it cannot drift. */
 .role-vig::before {
   content: var(--vig-emoji, "");
   display: block;
-  filter:
-    drop-shadow(0 1px 0 var(--vig-halo))
-    drop-shadow(1px 0 0 var(--vig-halo))
-    drop-shadow(0 -1px 0 var(--vig-halo))
-    drop-shadow(-1px 0 0 var(--vig-halo))
-    drop-shadow(0 2px 2px var(--vig-drop));
+  filter: drop-shadow(0 1px 1px var(--vig-drop));
   transform: scale(var(--vig-scale, 1)) translateY(var(--vig-nudge, 0em));
 }
 

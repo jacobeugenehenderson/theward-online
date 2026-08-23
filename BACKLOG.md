@@ -52,6 +52,14 @@ removed the variable instead of tuning around it.
 ⭐ Size and centring are generated per glyph from its measured ink, so a new
 emoji is corrected by its own geometry rather than by a hand fudge.
 
+⛔ **An outline on the glyph was built and cut — it read as a sticker.** Only a
+whisper of drop-shadow remains, for relief rather than legibility. ⚠️ **So
+checking a new emoji is a STEP now, not a guarantee:** a glyph with no dark
+contour of its own has nothing to read against a pale field — 🥚 ☁️ 🦢 clear 3:1
+on 0–1% of their ink. ⚠️ And do not rank candidates by that number: 🔑 scores 6%
+and looks perfectly clear, because its 6% is a continuous outline. It answers
+"is there a contour at all", nothing finer.
+
 **Open:** 🚲 is still the least characterful of the five and 📦 / 🛵 were the
 better-measuring candidates — but that is now purely a choice of emoji, not of
 treatment, and it is Jacob's. No colour-blind simulation has been run.

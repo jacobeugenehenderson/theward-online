@@ -149,8 +149,21 @@ A blue bicycle got a blue ground, and 16% of its ink cleared 3:1 against it.
 ⭐ Swept across a neutral ground from black to white, **no single flat value
 serves every emoji** — mid-tones take the worst glyph to ~0% legible ink, white
 kills 🔑 and ☕, black kills 🚲. So the badge does what a merit badge does: **one
-authored master field, a deep rim, and a halo on the emblem.** The halo clears
-16.5:1 against the field, which is why any emoji can now be dropped in.
+authored master field and a deep rim**, in the page's own cream.
+
+⛔ **An outline on the glyph was built and cut.** It gave a guaranteed 16.5:1
+edge and it read as a sticker. Only a whisper of drop-shadow remains, for relief
+rather than legibility.
+
+⚠️ **What that costs, recorded rather than discovered later:** a glyph with no
+dark contour of its own has nothing to read against a pale field — 🥚 ☁️ 🦢 clear
+3:1 on **0–1%** of their ink here. The five in use are fine. **Checking a new
+emoji is now a step, not a guarantee.**
+
+⚠️ **And a caution about the number itself:** *share of ink clearing 3:1* is a
+poor proxy where a thin dark contour carries the whole read. 🔑 scores **6%** on
+this field and looks perfectly clear, because that 6% is a continuous outline.
+Trust it for "is there any contour at all" — not as a ranking.
 
 The generator still exists because two things remain **measurements**, not
 choices: the emoji as a token (so no copy of it lives in the markup), and a
