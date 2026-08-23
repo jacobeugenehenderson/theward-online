@@ -157,6 +157,14 @@ a { color: inherit; }
 }
 .wayside-txt p { margin: 0; font-size: 0.99rem; line-height: 1.58; }
 
+/* A frame instead of a drawing: the product's own panel, mounted alone. */
+.wayside-fig--frame { padding: 0; background: var(--ground-2); }
+.wayside-fig--frame iframe {
+  width: 100%; height: 100%; min-height: 420px; display: block; border: 0;
+}
+@media (max-width: 780px) { .wayside-fig--frame iframe { min-height: 340px; } }
+.wayside--directory .wayside-fig { min-height: 420px; }
+
 /* 6 ── index of instruments ─────────────────────────────────────────────── */
 .index { border: 1px solid var(--rule); border-top: none; background: var(--ground-2); }
 .index-row {
@@ -240,7 +248,10 @@ a { color: inherit; }
 /* The one place besides the map where something moves, and it moves because
    the subject IS motion — a ticker described in still type is a ticker that
    has not been shown. Reduced motion gets the first phrase and no cycling. */
-.ticker { text-wrap: pretty; }
+/* ⚠ The phrases differ in length, so the heading must not resize as they
+   cycle — reserve two lines and let a short one leave the space empty. A
+   headline that jumps every three seconds is a headline nobody reads. */
+.ticker { text-wrap: pretty; min-height: 2.4em; }
 .ticker-slot { display: inline-block; position: relative; padding-bottom: 4px; }
 /* The tube, not a halo: a lit bar under the words. A box-shadow on the span
    glows on all four sides and reads as a border, which is the opposite of
@@ -253,7 +264,10 @@ a { color: inherit; }
 }
 .ticker-slot > span { transition: opacity var(--t-fast) linear; }
 .ticker-slot > span[hidden] { display: none; }
-@media (prefers-reduced-motion: reduce) { .ticker { text-wrap: pretty; }
+@media (prefers-reduced-motion: reduce) { /* ⚠ The phrases differ in length, so the heading must not resize as they
+   cycle — reserve two lines and let a short one leave the space empty. A
+   headline that jumps every three seconds is a headline nobody reads. */
+.ticker { text-wrap: pretty; min-height: 2.4em; }
 .ticker-slot { box-shadow: none; } }
 
 .host-foot { display: flex; flex-wrap: wrap; gap: var(--s5); align-items: flex-end; }

@@ -28,6 +28,12 @@
 
   --live:        #B96A12;   /* ⚠ RESERVED. Only where something is actually live. */
 
+  /* The moon is lit by the sun, not by the page: ONE value, declared once and
+     deliberately absent from both theme blocks. Filling it from the sky's own
+     high band made it a black hole at night — it was the same colour as the
+     thing behind it. */
+  --moon:        #E8E2D2;
+
   --rule:        rgba(28, 24, 21, 0.22);
   --rule-soft:   rgba(28, 24, 21, 0.10);
 

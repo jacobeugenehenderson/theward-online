@@ -188,7 +188,8 @@
     if (moon) {
       /* the moon keeps its own hour — it leads or trails the sun by its age */
       placeBody(moon, m.alt, ((minute / 1439 + (1 - m.phase)) % 1) * 100)
-      moon.style.background = css(stops[3])
+      /* lit, not sky-coloured — see --moon in tokens.css */
+      moon.style.background = getComputedStyle(document.documentElement).getPropertyValue('--moon').trim()
       var sh = moon.querySelector('[data-sky-moon-shadow]')
       if (sh) {
         sh.style.background = css(stops[2])
@@ -330,6 +331,12 @@
       held = next
       applyDay()
     })
+
+    // ── the panel embeds: the product's own parts, mounted alone ─────────
+    var embeds = document.querySelectorAll('[data-embed]')
+    for (var ei = 0; ei < embeds.length; ei++) {
+      embeds[ei].src = embedUrl + '?embed=' + embeds[ei].getAttribute('data-embed')
+    }
 
     // ── the instruments pill: one figure area, two things to say about it ─
     var pills = document.querySelectorAll('[data-inst]')
