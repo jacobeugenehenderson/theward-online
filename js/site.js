@@ -459,7 +459,7 @@
     var courier = document.querySelector('[data-courier]')
     if (courier && COURIER_INTAKE === 'live') {
       courier.setAttribute('href', embedUrl + 'cary/apply')
-      courier.textContent = 'Sign up to carry'
+      courier.textContent = 'Sign up to cary'
     }
   })
 })()
