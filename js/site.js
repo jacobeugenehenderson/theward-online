@@ -478,6 +478,22 @@
       }, 3200)
     }
 
+    /* ── the scroll guards ────────────────────────────────────────────────
+       An iframe eats the wheel. Each guard belongs to THIS document and sits
+       over its embed, so a reader scrolling down sails past instead of being
+       captured. Click to dismiss; leaving the frame re-arms it.
+       ⛔ Re-arming on mouseleave is the load-bearing half. Dismiss-once-forever
+       would mean the reader is trapped on every subsequent pass down the page —
+       the exact problem, just deferred to the second scroll. */
+    var guards = document.querySelectorAll('[data-scrollguard]')
+    for (var gi = 0; gi < guards.length; gi++) {
+      (function (guard) {
+        var frame = guard.parentNode
+        guard.addEventListener('click', function () { guard.hidden = true })
+        frame.addEventListener('mouseleave', function () { guard.hidden = false })
+      })(guards[gi])
+    }
+
     // ── courier intake: the button is real; where it goes is a decision ──
     var courier = document.querySelector('[data-courier]')
     if (courier && COURIER_INTAKE === 'live') {

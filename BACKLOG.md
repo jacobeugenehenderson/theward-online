@@ -163,6 +163,20 @@ part that has been argued through.
 
 ## ⛔ Standing rules, so they are not re-litigated
 
+- ⛔ **An embed gets a SCROLL GUARD, never a gutter.** An iframe eats the mouse
+  wheel, so a reader on their way down gets captured by the directory or the
+  card. The first fix was two rails down the sides, on the theory that the outer
+  thirds were dead space. **They are not** — the card's tabs run to the LEFT edge
+  and the directory's chevrons to the RIGHT, so no margin is safe on both. The
+  guard covers the whole frame, belongs to this document (so the wheel scrolls
+  the page), and a click dismisses it. Leaving the frame re-arms it — ⭐ that
+  half is load-bearing: dismiss-once-forever just defers the trap to the second
+  pass down the page.
+- ⛔ **NEVER put a guard over the hero.** That frame is WebGL and `src/index.css`
+  carries the measurement: covering a live canvas makes Chrome drop the surface
+  and restoring it costs seconds. The directory and card are DOM-only, which is
+  the whole reason a cover is safe on those two and nowhere else.
+
 - **Nothing is `loading="lazy"`.** It cost three separate debugging rounds — two
   embeds and an image, each reported broken when it was merely not loaded.
 - **No captures where the product can be embedded.** The page's argument is that

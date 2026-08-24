@@ -205,8 +205,9 @@ a { color: inherit; }
 }
 @media (max-width: 780px) { .wayside-fig--diorama { height: 300px; } }
 
-/* A frame instead of a drawing: the product's own panel, mounted alone. */
-.wayside-fig--frame { padding: 0; background: var(--ground-2); }
+/* A frame instead of a drawing: the product's own panel, mounted alone.
+   `relative` so the scroll guard has something to pin to. */
+.wayside-fig--frame { padding: 0; background: var(--ground-2); position: relative; }
 .wayside-fig--frame iframe {
   width: 100%; height: 100%; min-height: 420px; display: block; border: 0;
 }
@@ -246,17 +247,12 @@ a { color: inherit; }
   border-radius: 7px; overflow: hidden;
   background: var(--ground-2);
   border: 1px solid var(--rule-soft);
+  position: relative;   /* pins the scroll guard */
 }
 .tablet-screen iframe { width: 100%; height: 100%; display: block; border: 0; }
 /* Transparent, and deliberately not marked: an affordance here would be an
    apology for a problem the reader should never notice. A third each side
    leaves a generous middle for the card itself. */
-.tablet-rail {
-  position: absolute; top: 0; bottom: 0; width: 33.33%;
-  z-index: 2; cursor: default;
-}
-.tablet-rail--l { left: 0; }
-.tablet-rail--r { right: 0; }
 
 /* the lens: one dot, because a device drawn without one reads as a picture
    frame. Landscape, so it sits on the left edge where a tablet's camera is. */
@@ -362,6 +358,38 @@ a { color: inherit; }
   padding: var(--s5) var(--s4);
   margin: var(--s5) 0 0;
 }
+
+/* 7b ── the scroll guard ───────────────────────────────────────────────── */
+/* ⛔ AN IFRAME EATS THE MOUSE WHEEL. With the cursor over the directory or the
+   card, the wheel scrolls THAT — not the page — so a reader on their way down
+   gets caught and has to fight their way out.
+   ⛔ THE GUTTER FIX DOES NOT WORK, and this is the record of why so nobody
+   rebuilds it: the card's tabs run to the LEFT edge and the directory's
+   chevrons to the RIGHT, so there is no margin that is dead on both sides.
+   ⭐ SO THE GUARD COVERS THE WHOLE FRAME. It belongs to THIS document, so the
+   wheel scrolls the page normally — the reader sails past. A click dismisses
+   it and the embed is fully live, every chevron and tab included. Leaving the
+   frame re-arms it, so the next scroll-past is safe again. Same shape as a
+   Google Maps embed, and for the same reason.
+   ⛔ NEVER PUT ONE OVER THE HERO. That frame is WebGL, and index.css records
+   the measurement: covering a live canvas makes Chrome drop the surface and
+   restoring it costs seconds. These two are DOM-only, which is what makes a
+   cover safe here and nowhere else. */
+.scrollguard {
+  position: absolute; inset: 0; z-index: 4;
+  cursor: pointer;
+  display: grid; place-items: end center;
+  padding-bottom: var(--s2);
+}
+.scrollguard[hidden] { display: none; }
+.scrollguard-hint {
+  font-family: var(--f-sys); font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  background: var(--band-bg); color: var(--band-text);
+  padding: 4px var(--s2);
+  opacity: 0; transition: opacity var(--t-fast);
+}
+.scrollguard:hover .scrollguard-hint { opacity: 0.92; }
 
 /* 8a ── Cary: a separate product, in its own room ──────────────────────── */
 /* ⛔ NOT a full-bleed band, deliberately. `.shell` is a max-width container, so
