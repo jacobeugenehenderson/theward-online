@@ -6,6 +6,9 @@ product lives in `INTEGRATION.md`.
 
 ---
 
+**LIVE at `https://theward.online`** — Pages from `main`, cert issued, `https_enforced`, `http`→`https`, apex + `www`. A push deploys; there is no CI.
+▶ `curl -s -o /dev/null -w "%{http_code}\n" https://theward.online/`
+
 ## Blocked on the product
 
 ✅ **The day slider is visible again.** The diorama frame now stops short of the
@@ -108,13 +111,6 @@ signing today, which is why this is logged rather than blocking — but it is a
 legal document, and it should be the *agreement* that gets corrected, not the
 page quietly matched to it.
 
-**Copy the rewrite did not cover, KEPT rather than cut.** Absence from a draft is
-not an instruction to delete, so these stayed and are Jacob's to remove: the
-**"What it costs"** term (*no licence per view, no meter, no key anyone can
-revoke* — the page's only statement on pricing), **"Stewardship, not
-ownership"**, the **place-card tablet** and its copy, and the courier CTA
-**"Tell me when couriers open"** with its *not open yet* note.
-
 
 **The courier rate.** The copy is written **without figures** because the
 product says 22 % (cart math, the public legal page, and the Cary brief all
@@ -147,15 +143,6 @@ feature as unbuilt. **Two files, two rooms apart, disagreeing.** Removed in
 
 ## Not yet started
 
-**Deployment.** The site is **pushed but not served.** `origin` is
-`git@github.com:jacobeugenehenderson/theward-online.git` and `main` is in sync
-(`cd16429`, 2026-08-23); `CNAME` is in place; GitHub Pages from `main`, same as
-the studio. No CI exists yet. ⚠ What is missing is the Pages source being turned
-on and DNS — `curl -s -o /dev/null -w "%{http_code}" https://theward.online/`
-returns **000**, and it is the only check worth trusting here: a green push says
-nothing about whether anyone can read the page. This entry said "has never been
-deployed" through the session that added the remote and pushed it.
-
 **All copy is a first draft** and expected to be rewritten. The structure is the
 part that has been argued through.
 
@@ -187,6 +174,18 @@ part that has been argued through.
   trust ladder without "three days". You can describe a neighborhood without
   counting its buildings.
 - **The site names no town.** The audit checks it.
+- ⛔ **THE TRAP, FOR THE NEXT DOMAIN: set the custom domain AFTER DNS resolves.**
+  Pages was enabled while `CNAME` was already committed, so GitHub ran certificate
+  verification against the registrar's parking IP, failed, and **did not retry** —
+  which presents as an indefinite "cert pending" with nothing visibly wrong (DNS
+  correct, no CAA, no stale AAAA). The fix is to make it look again: unset the
+  custom domain, set it back. ⚠️ That round-trip rewrites `CNAME` on the remote as
+  two commits, so expect to rebase before your next push.
+- ⛔ **The page carries NO pricing figure, deliberately** (Jacob, 2026-08-23):
+  *"we don't have a price or cost structure set up so it's question begging in
+  the wrong direction."* The rewrite dropped the old "no licence per view, no
+  meter" term and it is not to be restored as a placeholder. ⚠️ Distinct from
+  **the courier rate** above, which is a live 22 %-vs-25 % contradiction.
 - ⛔ **The page may not promise what the product does not do**, and the tell is
   that this file already says so. Two live cases: **wind** — the diorama does not
   sway, because wind is authored by the meteorologist and almost no directive
