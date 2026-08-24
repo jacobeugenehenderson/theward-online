@@ -116,6 +116,18 @@ a { color: inherit; }
 .copy strong { font-weight: 600; }
 .lede { font-size: 1.14rem; line-height: 1.52; }
 
+/* ⭐ .coda — the sentence a section rests on. Set off with a rule and air
+   rather than a box: the ladder above is already five bordered rows, and a
+   sixth panel would read as another rung instead of the conclusion. Italic +
+   the body face (not the UI face) keeps it a spoken aside, not a label. */
+.coda {
+  font-family: var(--f-txt); font-style: italic;
+  font-size: 1.06rem; line-height: 1.5;
+  margin: var(--s4) 0 0; padding: var(--s3) 0 0;
+  border-top: 1px solid var(--rule-soft);
+  max-width: var(--measure);
+}
+
 .eyebrow {
   font-family: var(--f-sys); font-size: 0.66rem; font-weight: 700;
   letter-spacing: 0.2em; text-transform: uppercase; color: var(--live);
