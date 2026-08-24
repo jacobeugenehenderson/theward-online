@@ -161,6 +161,21 @@ a { color: inherit; }
   padding: var(--s4); display: grid; gap: var(--s2); align-content: start;
   max-width: var(--measure);
 }
+/* ⛔ THE PANEL BOX MUST NOT RESIZE WHEN THE PILL CHANGES. Measured, the three
+   are 73px (Almanac), 98px (Sky) and 123px (Trees) — a 50px jump, so the whole
+   page below shifts under the reader's cursor every time they switch.
+   ⭐ ALL THREE OCCUPY THE SAME GRID CELL and the inactive ones are hidden with
+   `visibility`, not `display`. So they still take part in layout and the box is
+   always as tall as the tallest — automatically, with no magic number to go
+   stale the next time the copy is rewritten. A hardcoded min-height would have
+   been wrong within a day; this copy has changed twice today alone. */
+.inst-panels { display: grid; }
+.inst-panels > [data-inst-panel] { grid-area: 1 / 1; }
+.inst-panels > [data-inst-panel][hidden] {
+  display: block;          /* override the UA rule for [hidden] */
+  visibility: hidden;
+}
+
 .wayside-txt h3 {
   font-family: var(--f-sys); font-weight: 600; font-size: 1.18rem;
   letter-spacing: -0.005em; line-height: 1.2; margin: 0; text-wrap: balance;
