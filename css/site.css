@@ -122,10 +122,6 @@ a { color: inherit; }
   display: block; margin-bottom: var(--s2);
 }
 
-.note {
-  font-family: var(--f-sys); font-size: 0.74rem; line-height: 1.5;
-  color: var(--text-soft); margin: var(--s2) 0 0; max-width: 64ch;
-}
 
 /* 5 ── wayside ──────────────────────────────────────────────────────────── */
 .wayside {
@@ -315,10 +311,6 @@ a { color: inherit; }
 }
 .cta:hover { opacity: 0.86; }
 .cta::after { content: "→"; letter-spacing: 0; }
-.cta-quiet {
-  background: transparent; color: var(--text);
-  border: 1px solid var(--rule);
-}
 
 .terms { display: grid; gap: var(--s2); margin-top: var(--s4); max-width: var(--measure); }
 .term { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: var(--s3); align-items: baseline; }
@@ -339,9 +331,6 @@ a { color: inherit; }
   padding: var(--s5) var(--s4);
   margin: var(--s5) 0 0;
 }
-/* ⚠️ NOT var(--live). Amber means something is running; an invitation is not.
-   The routed-sign brown is the page's structural ink and it is the right one. */
-.eyebrow--ask { color: var(--sign); }
 
 /* 8a ── Cary: a separate product, in its own room ──────────────────────── */
 /* ⛔ NOT a full-bleed band, deliberately. `.shell` is a max-width container, so
@@ -356,7 +345,6 @@ a { color: inherit; }
 }
 /* ⚠️ NOT var(--live). Amber is reserved for what is actually running and
    couriers are not open yet — the section's own note says so three lines down. */
-.eyebrow--cary { color: var(--cary-rule); margin-bottom: 0; }
 .sec--cary .cta { margin-top: var(--s4); }
 
 /* 8b ── the pill, the ticker, the placeholder ──────────────────────────── */
