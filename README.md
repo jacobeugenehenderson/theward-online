@@ -1,6 +1,7 @@
 # theward.online
 
-The marketing site for **The Ward** — a living model of a neighborhood. Static
+The marketing site for **The Ward** — a reusable kit for building a digital
+presence for real neighborhoods. Static
 HTML, CSS and a little JavaScript. No framework, no build step for the site
 itself; one generator, for one block.
 
