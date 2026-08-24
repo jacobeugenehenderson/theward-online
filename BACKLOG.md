@@ -121,9 +121,20 @@ product says 22 % (cart math, the public legal page, and the Cary brief all
 agree) and Jacob said 25 %. Whichever is right, it must move in all four places
 at once, and the legal page is the canonical public statement.
 
-**Whether the overhead capture keeps its title block.** The image names the city
-and state in small type. Illegible at the size it renders, but it is the one
-place this page names the town.
+⛔ **THE OVERHEAD CAPTURE NOW NAMES THE TOWN LEGIBLY, and that is a live rule
+break.** This entry used to end *"illegible at the size it renders"* — that was
+true, and **stacking the wayside blocks (2026-08-23) made it false.** Full-width
+at 16:9 the title block reads clearly: `…TTE PARK · ST. LOUIS, MO`, and Park
+Avenue and Mississippi Avenue are legible street labels besides.
+
+⚠️ **`tools/audit.py`'s `names a town` check cannot see this** — it scans the
+page's TEXT. An image is invisible to it, so this would have shipped silently and
+the audit would have said `ok`.
+
+▶ **Three ways, needs a ruling:** re-capture the overhead with the title block
+off (the real fix, needs the product) · crop it out (the label sits near centre,
+so this is unreliable) · or decide rule 7 does not apply to imagery, which is a
+change to the rule and should be written as one.
 
 **The season ramp.** Autumn leaves are genuinely unbuilt in the Arborist — the
 backlog there says the fall pack is still unprocessed. Summer green works today.

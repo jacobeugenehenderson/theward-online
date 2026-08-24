@@ -124,24 +124,27 @@ a { color: inherit; }
 
 
 /* 5 ── wayside ──────────────────────────────────────────────────────────── */
+/* ⭐ FIGURE, THEN CAPTION — not figure BESIDE column. This page is imitating a
+   wayside panel at an overlook, and on a real one the picture is large and the
+   text is a caption near it. The two-column form was built for 4–6 line
+   paragraphs; when the copy became 2–3 lines (2026-08-23) each block turned
+   into a short caption floating in a tall empty column, which reads as missing
+   content rather than as air.
+   ⭐ Stacking means short copy is a FEATURE rather than a shortfall: nobody has
+   to write to fill a column again, and the figures can get BIGGER, not smaller.
+   ⛔ It also gives the place-card tablet somewhere to be labelled, which the
+   side-by-side form never had. */
 .wayside {
   border: 1px solid var(--rule); background: var(--ground-2);
-  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  /* ⚠ START, not stretch. Otherwise the longest paragraph sets the height of
-     the picture beside it, and the sky grows or shrinks depending on how much
-     was written that day. */
-  align-items: start;
+  display: grid; grid-template-columns: minmax(0, 1fr);
 }
 .wayside + .wayside { border-top: none; }
-@media (max-width: 780px) { .wayside { grid-template-columns: minmax(0, 1fr); } }
-
 .wayside-fig {
   background: var(--ground-3);
-  border-right: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--rule-soft);
   min-height: 210px;
 }
 @media (max-width: 780px) {
-  .wayside-fig { border-right: none; border-bottom: 1px solid var(--rule-soft); }
 }
 .wayside-fig svg { width: 100%; height: 100%; display: block; }
 /* ⚠ `.wayside-fig svg { display: block }` BEATS the UA's `[hidden]{display:none}`,
@@ -151,7 +154,13 @@ a { color: inherit; }
    will not be an svg either. */
 .wayside-fig > [hidden] { display: none; }
 
-.wayside-txt { padding: var(--s4); display: grid; gap: var(--s2); align-content: start; }
+/* ⛔ CAPPED AT THE MEASURE. Stacked, the caption inherits the full page width —
+   about 130 characters, twice what this site sets as readable. The two-column
+   form was capping it by accident; now it has to be said. */
+.wayside-txt {
+  padding: var(--s4); display: grid; gap: var(--s2); align-content: start;
+  max-width: var(--measure);
+}
 .wayside-txt h3 {
   font-family: var(--f-sys); font-weight: 600; font-size: 1.18rem;
   letter-spacing: -0.005em; line-height: 1.2; margin: 0; text-wrap: balance;
@@ -161,7 +170,11 @@ a { color: inherit; }
 /* A capture from the product, not an illustration of it. Cover, because the
    figure's height is set by the text beside it and the frame should crop
    rather than letterbox. */
-.wayside-fig--shot { padding: 0; overflow: hidden; }
+/* ⛔ AN ASPECT, NOW THAT IT IS STACKED. In the two-column form the grid row
+   capped this figure's height for free; full-width, `height: 100%` of an
+   auto-height parent resolves to the image's NATURAL height, so a 578KB
+   overhead ran to roughly 850px and swallowed the screen. */
+.wayside-fig--shot { padding: 0; overflow: hidden; aspect-ratio: 16 / 9; }
 .wayside-fig--shot img {
   width: 100%; height: 100%; display: block;
   object-fit: cover; object-position: center;
@@ -182,6 +195,9 @@ a { color: inherit; }
 .wayside-fig--frame iframe {
   width: 100%; height: 100%; min-height: 420px; display: block; border: 0;
 }
+/* The live panels keep their generous height — they are things you scroll,
+   not pictures you glance at. */
+.wayside--directory .wayside-fig--frame { aspect-ratio: 21 / 9; }
 @media (max-width: 780px) { .wayside-fig--frame iframe { min-height: 340px; } }
 .wayside--directory .wayside-fig { min-height: 420px; }
 
