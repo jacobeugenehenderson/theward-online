@@ -22,6 +22,10 @@ The page is short and its assets are few. The only heavy thing is the hero
 frame, which is not lazy either because it is the first thing anyone sees.
 **If you add `loading="lazy"` here, you are choosing a bug over a byte.**
 
+⛔ **`tools/audit.py` now enforces this, and that is the fourth round talking.**
+The rule was the loudest sentence in this file and the tree frame shipped lazy
+anyway. A rule stated only in prose is a rule that comes back.
+
 ⚠⚠ **CACHING LIES AT TWO LEVELS, AND IT COST THIS PROJECT TWO SESSIONS.**
 `build.mjs` stamps `?v=<mtime>` on every local css/js link — but the browser
 also caches **index.html**, so it keeps serving the OLD stamps and the new files
@@ -55,10 +59,20 @@ the standing rules that should not be re-litigated.
 One claim. Copy or components that do not serve it should be cut rather than
 kept.
 
-> **A neighborhood, documented with care and handed back to the people in it.**
-> The ground comes from public record; the meaning comes from the people. Two
-> audiences read the same page at different depths — a visitor who wants to
-> look, and a host who wants one.
+> **A reusable kit for building a digital presence for real neighborhoods.**
+> The Ward begins with the character of a real place — its streets, landscape,
+> businesses and people — and connects that to the information and activity that
+> make it a community. Two audiences read the same page at different depths: a
+> visitor who wants to look, and a host who wants one.
+
+⚠️ **THE CLAIM CHANGED ON 2026-08-23 and the change is the point.** It used to
+read *"A neighborhood, documented with care and handed back to the people in
+it."* That described **one installation**. The page now sells **the kit** — which
+is what the product actually is (`CLAUDE.md` Layer 0: *"We are building a KIT
+that pours neighborhoods"*), and what a reader arriving cold needs to hear first.
+⛔ The old claim is not wrong, it is *downstream*: it is what a Ward is once it
+exists. Copy that argues for one lovingly-made neighborhood still belongs on the
+page; copy that implies there is only one does not.
 
 **One spine, descending in register.** A visitor reads the top and stops; a host
 keeps going. There is no audience switcher — the page changes weight instead,
@@ -273,12 +287,12 @@ decision, and it is one line.
 | The sources block | generated, current, audit-checked |
 | The embed | loads the real product; **layer switch confirmed end-to-end** — Both / Place / People all switch in place, and the return is instant |
 | The courier section | built; destination is `interest`. **Cary has its own room** — an inset panel with its own ground and a verdigris rule, marked with the courier badge from the ladder. ⭐ The hue is the product's own: `SocietyMasthead`'s Couriers stat. ⚠ NOT `--live` — amber is for what is running, and couriers are not open. Its four rules moved from two paragraphs into `.terms` (same words) |
-| The directory | **`?embed=society` — the product's own panel, mounted alone, and it paints.** Real accordion, real counts, real scrolling. ⚠ It boots in ~5s and the frame is `loading="lazy"`, so it is blank on arrival and fills in — that is what looked like a failure |
+| The directory | **`?embed=society` — the product's own panel, mounted alone, and it paints.** Real accordion, real counts, real scrolling. ⚠ It boots in ~5s, so it is blank on arrival and fills in — that is what looked like a failure. ⛔ **The cause is boot time, not `loading="lazy"`.** This row named lazy as the reason until 2026-08-23, by which point nothing on the page was lazy and §1's rule was audited — a corrected rule left a stale explanation behind it, which is the more expensive half to leave lying around |
 | Every building opens | its own claim again, with a labelled gap awaiting an overhead of the neighborhood. It is NOT the directory's claim and the two were briefly collapsed |
 | The place card | **`?embed=card&place=<id>` — the card itself, running, in a drawn tablet.** Confirmed: photo, logo, rating, tabs, and no close button. **To swap the place: change `data-place` in index.html and nothing else** — and that is true again; `js/site.js` had grown a constant that quietly took over, leaving the attribute dead while two docs told you to edit it (restored 2026-08-23). It now seeds BOTH frames; the ids come from the directory above it |
 | The joint | a 3px rule in the reserved colour under the band. The seam vanished at night when band and sky were both near-black; the rule says *below this line, everything is live* |
 | The sky band | a short divider between what the Ward holds and what is living in it, carrying the neighborhood's own authored sky (`tools/build-sky.mjs`). It reports; it does not ask |
-| The ask | **its own section, and the page's last word.** It sat mid-page inside §host with two sections after it, and the address was stranded again in the footer. One home now, at the end. The footer carries sources + `© 2026 Jacob Henderson LLC` |
+| The ask | **its own section, and the page's last word.** It sat mid-page inside §host with two sections after it, and the address was stranded again in the footer. One home now, at the end. The footer carries sources + `© 2026 Jacob Henderson LLC` The QR is a **labelled placeholder** — hatched, captioned *code goes here*. ⭐ What it points at is **settled, not open**: it scans through to a person, never to a check-in (§8), so what is left is the artwork. §7 listed this as a question needing Jacob until 2026-08-23, after the page had already answered it |
 | `/host` as a standalone page | **not built.** Section 07 is in the scroll only; sales happens in fragments and it should also be a page you can send cold |
 | Privacy / terms pages | **not built** |
 | The five participant badges | **settled.** One authored master — cream field, deep rim, halo on the glyph — so every emoji reads and any emoji can be swapped in. ☕ 🏡 🛡️ 🔑 🚲 — the guardian is a shield, which is the only one of them that is itself a heraldic device, and so the only one already in the register the badge is borrowing. They are the ladder's step markers, replacing the numbers 1–4; the courier is not a rung and wears its badge in the Cary room. Size and centring are generated from each glyph's measured ink |
@@ -295,7 +309,6 @@ decision, and it is one line.
   across a whole day and the Meteorologist scrubs weather live, so the sky
   figure and the neon figure can be stills of the actual installation. That is
   a capture pass, not an illustration commission.
-- Whether a QR belongs on the page, and what it may point at. See §8.
 
 ---
 

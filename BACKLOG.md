@@ -99,6 +99,23 @@ in `LegalPage.jsx` and state the courier fee schedule — so this page would be 
 
 ## Needs a decision from Jacob
 
+⛔ **`cary/legal/courier-agreement.md` IS STALE ON THE AGE GATES.** The site now
+says *"Sixteen and over. Alcohol deliveries are 21+."* The agreement still
+carries a third gate — **Drive 18+ (motor vehicle)** — which Jacob ruled was
+written anticipating a **ride-share**, not delivery (2026-08-23). ⚠️ So the
+document a courier signs and the page a courier reads now disagree. Nobody is
+signing today, which is why this is logged rather than blocking — but it is a
+legal document, and it should be the *agreement* that gets corrected, not the
+page quietly matched to it.
+
+**Copy the rewrite did not cover, KEPT rather than cut.** Absence from a draft is
+not an instruction to delete, so these stayed and are Jacob's to remove: the
+**"What it costs"** term (*no licence per view, no meter, no key anyone can
+revoke* — the page's only statement on pricing), **"Stewardship, not
+ownership"**, the **place-card tablet** and its copy, and the courier CTA
+**"Tell me when couriers open"** with its *not open yet* note.
+
+
 **The courier rate.** The copy is written **without figures** because the
 product says 22 % (cart math, the public legal page, and the Cary brief all
 agree) and Jacob said 25 %. Whichever is right, it must move in all four places
@@ -119,8 +136,14 @@ feature as unbuilt. **Two files, two rooms apart, disagreeing.** Removed in
 
 ## Not yet started
 
-**Deployment.** The site has never been deployed. `CNAME` is in place;
-GitHub Pages from `main`, same as the studio. No CI exists yet.
+**Deployment.** The site is **pushed but not served.** `origin` is
+`git@github.com:jacobeugenehenderson/theward-online.git` and `main` is in sync
+(`cd16429`, 2026-08-23); `CNAME` is in place; GitHub Pages from `main`, same as
+the studio. No CI exists yet. ⚠ What is missing is the Pages source being turned
+on and DNS — `curl -s -o /dev/null -w "%{http_code}" https://theward.online/`
+returns **000**, and it is the only check worth trusting here: a green push says
+nothing about whether anyone can read the page. This entry said "has never been
+deployed" through the session that added the remote and pushed it.
 
 **All copy is a first draft** and expected to be rewritten. The structure is the
 part that has been argued through.

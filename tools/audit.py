@@ -17,7 +17,7 @@ js   = (ROOT / 'js/site.js').read_text()
 
 fails = []
 def check(label, ok, detail=''):
-    print(f'{label:<14}: {"ok" if ok else detail or "FAIL"}')
+    print(f'{label:<15}: {"ok" if ok else detail or "FAIL"}')
     if not ok: fails.append(label)
 
 # ── rule 1: no literal colours, sizes, families or durations outside tokens ──
@@ -88,6 +88,39 @@ for t in sorted((declared - refs) & set(RESERVED)):
 if dynamic:
     print(f'  dynamic     : {len(dynamic)} token(s) reached by computed name from js/site.js')
 
+# ── the other half of the token check, and the expensive half ───────────────
+# `unused token` above catches a token declared and never reached. This catches
+# the reverse — a token REACHED and never declared — and that one is not a tidy
+# ness problem, it is a silent bug.
+#
+#   ⛔ AN UNDEFINED CUSTOM PROPERTY DOES NOT FALL THROUGH. IT WINS, THEN EVAPORATES.
+#
+# `border-radius: var(--shape-corner-md)` with no fallback outranks a utility
+# class on specificity and takes the cascade; only AFTERWARDS does the undefined
+# var make the declaration invalid at computed-value time, resetting the property
+# to its initial value. So the rule that beat everything paints nothing, and the
+# rule that would have worked never gets its turn. There is no error, no console
+# warning, and nothing wrong-looking in either rule.
+#
+# Paid for twice. Every control in Codedesk rendered square for this reason, and
+# `--vig-rim-accent` was referenced here before tokens.css declared it — while
+# THIS FILE reported ok, because it only ever looked at the declared side.
+#
+# A `var()` WITH a fallback is safe by construction and is deliberately allowed:
+# the fallback is the author saying what happens when the token is absent.
+nof  = set(re.findall(r'var\((--[a-z0-9-]+)\s*\)', site + toks))
+# Declared anywhere a browser would find it: tokens.css, a local on a component
+# in site.css, or seeded onto an element by js (including a COMPUTED name, whose
+# literal prefix is the contract — same rule as `dynamic` above).
+local  = set(re.findall(r'(--[a-z0-9-]+)\s*:', bare))
+seeded = set(re.findall(r"setProperty\('(--[a-z0-9-]+)", js))
+def seeded_ok(t):
+    return any(len(p) > 2 and t.startswith(p) for p in seeded)
+undef = {t for t in nof - declared - local if t not in seeded and not seeded_ok(t)}
+check('undefined token', not undef,
+      f'{sorted(undef)} — used in var() with no fallback and declared nowhere; '
+      'the declaration wins on specificity and then paints nothing')
+
 # ── structure: balanced comments and tags ───────────────────────────────────
 check('comments', html.count('<!--') == html.count('-->'),
       f'{html.count("<!--")} open / {html.count("-->")} close')
@@ -127,7 +160,7 @@ check('generated', gen.returncode == 0, (gen.stdout + gen.stderr).strip())
 # ── the courier route is not live ───────────────────────────────────────────
 m = re.search(r"var COURIER_INTAKE = '(\w+)'", js)
 live = m and m.group(1) == 'live'
-print(f'courier       : {"⚠ LIVE — the backend close-out must have landed" if live else "interest (touches no backend)"}')
+print(f'courier        : {"⚠ LIVE — the backend close-out must have landed" if live else "interest (touches no backend)"}')
 
 print()
 print('AUDIT ' + ('PASSED' if not fails else 'FAILED: ' + ', '.join(sorted(set(fails)))))

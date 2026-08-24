@@ -460,7 +460,17 @@
     // ── the ticker, ticking. Slow enough to read; still if asked. ────────
     var slot = document.querySelector('[data-ticker]')
     if (slot && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      var lines = slot.children, at = 0
+      var lines = slot.children
+      /* ⭐ START SOMEWHERE NEW EACH VISIT. Fifteen phrases at 3.2s is 48 seconds
+         to see them all, and nobody reads this page for 48 seconds — always
+         starting at the first means most visitors only ever meet "who's open
+         late". A random entry point costs one line and shows the range.
+         ⛔ It picks a START, it does not shuffle: the order is authored.
+         ⚠️ Under prefers-reduced-motion this whole block is skipped, so that
+         reader sees whichever phrase is unhidden in the markup — which is why
+         the first one has to stand on its own. */
+      var at = Math.floor(Math.random() * lines.length)
+      if (at !== 0) { lines[0].hidden = true; lines[at].hidden = false }
       setInterval(function () {
         lines[at].hidden = true
         at = (at + 1) % lines.length
