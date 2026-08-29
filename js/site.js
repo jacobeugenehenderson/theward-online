@@ -478,6 +478,18 @@
       }, 3200)
     }
 
+    /* ── arming the hero ──────────────────────────────────────────────────
+       The hero cannot take a scrollguard (WebGL — see css/site.css). Instead
+       the frame stops hit-testing until the reader asks for it, so scrolling
+       past cannot nudge the camera. Leaving the view re-arms it, so the next
+       pass down the page is safe again — same contract as the guards below. */
+    var wardView = document.querySelector('[data-ward-view]')
+    var wardArm = document.querySelector('[data-ward-arm]')
+    if (wardView && wardArm) {
+      wardArm.addEventListener('click', function () { wardView.dataset.live = 'true' })
+      wardView.addEventListener('mouseleave', function () { wardView.dataset.live = 'false' })
+    }
+
     /* ── the scroll guards ────────────────────────────────────────────────
        An iframe eats the wheel. Each guard belongs to THIS document and sits
        over its embed, so a reader scrolling down sails past instead of being
