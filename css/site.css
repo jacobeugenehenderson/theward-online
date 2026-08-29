@@ -169,9 +169,21 @@ a { color: inherit; }
    paragraph, and capped so it stays one or two lines at any width. */
 .sec-lede {
   max-width: 46ch;
-  margin: calc(var(--s2) * -1) 0 var(--s3);
+  margin: calc(var(--s2) * -1) 0 0;
   color: var(--text-soft);
 }
+
+/* ⛔ ONE GAP BETWEEN PROSE AND THE BLOCK UNDER IT, and it was set three different
+   ways before this: the sources table butted straight against its own paragraph
+   (0), a lede sat 16px off its figure, and nothing said which was intended
+   (Jacob, 2026-08-29: "we need to make sure we are leaving a breathing-room
+   carriage return between text and tables — either way it should be consistent").
+   ⭐ The gap belongs to the BLOCK, not to the paragraph: a lede's bottom margin
+   only works until something other than a lede comes first. This rule fires on
+   whatever follows the prose and stops there — `.wayside + .wayside` stay flush,
+   because they are one stack sharing borders and a gap would break the seam. */
+.sec > .copy + *,
+.sec > .sec-lede + * { margin-top: var(--s4); }
 
 
 /* 5 ── wayside ──────────────────────────────────────────────────────────── */
@@ -253,6 +265,10 @@ a { color: inherit; }
    capped this figure's height for free; full-width, `height: 100%` of an
    auto-height parent resolves to the image's NATURAL height, so a 578KB
    overhead ran to roughly 850px and swallowed the screen. */
+/* A figure with no text beside it — the claim it argues is the section's own
+   heading now, so the frame carries the whole width and needs no bottom rule
+   dividing it from a caption that is not there. */
+.wayside--solo .wayside-fig { border-bottom: none; }
 .wayside-fig--shot { padding: 0; overflow: hidden; aspect-ratio: 16 / 9; }
 .wayside-fig--shot img {
   width: 100%; height: 100%; display: block;
@@ -425,11 +441,16 @@ a { color: inherit; }
 /* Set apart because it is the one thing the page wants a reader to DO. A rule
    above it and its own ground: quiet, but unmistakably a different kind of
    block from the argument that precedes it. */
+/* ⚠️ A ROOM, NOT A NEW RHYTHM. These two carry their own ground and their own rule,
+   which is the point — but they also carried their own vertical margin AND a
+   smaller padding, so the run into them measured 128px against every other
+   section boundary's 112, and the eye reads that as a hole. Same padding as a
+   plain `.sec` now, no margin: the ground and the rule do the separating. */
 .sec--ask {
   border-top: 3px solid var(--sign);
   background: var(--ground-2);
-  padding: var(--s5) var(--s4);
-  margin: var(--s5) 0 0;
+  padding: var(--s6) var(--s4);
+  margin: 0;
 }
 
 /* 7b ── the scroll guard ───────────────────────────────────────────────── */
@@ -472,8 +493,8 @@ a { color: inherit; }
 .sec--cary {
   background: var(--cary-ground);
   border-top: 3px solid var(--cary-rule);
-  padding: var(--s5) var(--s4);
-  margin: var(--s5) 0;
+  padding: var(--s6) var(--s4);
+  margin: 0;
 }
 /* ⚠️ NOT var(--live). Amber is reserved for what is actually running and
    couriers are not open yet — the section's own note says so three lines down. */
