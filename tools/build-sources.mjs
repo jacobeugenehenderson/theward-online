@@ -64,9 +64,9 @@ const CLASSIFY = {
 /* One line per tier, written here rather than generated: it is the only prose
    in this block, and the panel's own tier comments are dev-register. */
 const TIER_SAY = {
-  'Automatic': 'Global open datasets that cover everywhere and arrive on their own. The kit picks the right base for the region; the operator never makes the call.',
-  'Public records': 'Published by an institution — a national survey, a county assessor, a forestry department, a heritage register. Free; two are a genuine hunt for the right municipal portal.',
-  'Local knowledge': 'No dataset holds any of this. You look, you ask, you walk around. A neighborhood is the only party that can supply it — which is why it sits at the top of the stack rather than the bottom.',
+  'Automatic': 'Some of the foundation is already there. Streets, buildings, elevation, land cover, and other large-scale geographic data can be drawn from open datasets.',
+  'Public records': 'Other information belongs to the place. Parcels, zoning, trees, historic designations, and similar records come from the agencies and institutions that maintain them.',
+  'Local knowledge': 'The rest comes from the neighborhood itself. Businesses, menus, photographs, landmarks, names, habits, and the details that distinguish one place from another.',
 }
 
 /* A note may not name a place this site does not name. */

@@ -539,7 +539,6 @@ a { color: inherit; }
   padding: var(--s3) var(--s4); border-bottom: 1px solid var(--rule);
   font-family: var(--f-sys);
 }
-.tblock-t { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
 .tblock-legend { font-size: 0.68rem; color: var(--text-soft); display: flex; gap: var(--s3); flex-wrap: wrap; }
 
 .dot {
