@@ -5,6 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Ward</title>
 <meta name="description" content="A digital presence for real neighborhoods. The Ward gives a neighborhood a place of its own online — the people, places, businesses, events and local knowledge that already make it a community, easier to see and use.">
+<meta name="robots" content="index, follow">
+<!-- ⭐ THE LINK PREVIEW — what a forwarded text shows. It is the FAVICON MARK, big:
+     the thick ring and the amber notch, on the masthead band's own ground, in token
+     values and no new colours.
+     ⛔ IT CANNOT BE THE SVG. Every preview scraper — iMessage, Signal, Slack,
+     WhatsApp — rasterises nothing; an SVG og:image shows as a blank card. So the
+     mark is rendered to PNG at the 1200×630 OG standard by `tools/build-og.py`,
+     from the same path data as `assets/favicon.svg`, and regenerated rather than
+     hand-drawn so the two cannot drift.
+     ⛔ ABSOLUTE URLS. A scraper is not a browser and does not resolve a relative
+     path against the page; a bare `assets/og.png` is simply dropped. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Ward">
+<meta property="og:url" content="https://theward.online/">
+<meta property="og:title" content="The Ward">
+<meta property="og:description" content="A digital presence for real neighborhoods.">
+<meta property="og:image" content="https://theward.online/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Ward's mark: a heavy ring open at the top, with an amber light in the gap.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">

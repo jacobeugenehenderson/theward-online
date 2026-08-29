@@ -335,6 +335,28 @@ argument about the PITCH. A governing-law clause is not the pitch; a court sits
 somewhere. So `legal.html` may use the two strings a forum-selection clause needs
 and nothing more, and every other town name still fails everywhere.
 
+## 7c. The link preview
+
+`assets/og.png` — what a forwarded text, Slack paste or DM shows. It is the FAVICON
+MARK at 1200×630 on the masthead band's ground.
+
+⛔ **It cannot be the SVG, and that is the whole reason this file exists.** The mark
+is `assets/favicon.svg`, which is right for a tab — theme-aware, one file. But every
+preview scraper (iMessage, Signal, Slack, WhatsApp) fetches `og:image` and
+**rasterises nothing**, so an SVG there shows a blank card — worse than no card,
+because the link reads as broken rather than plain.
+⛔ **And the URL must be ABSOLUTE.** A scraper is not a browser and does not resolve
+a relative path against the page.
+
+⭐ **Generated, not drawn:** `python3 tools/build-og.py` renders it from the
+favicon's own path data, so the card cannot drift away from the tab icon. The script
+PINS that geometry — if the mark's path changes it refuses to run rather than
+quietly emitting the previous ring under a new favicon. `--check` verifies the file.
+Both are wired into `tools/audit.py` (`link preview`, `preview image`).
+
+⚠️ The card takes the band's dark values in both themes. A preview is baked at build
+time and the reader's theme is unknowable, so it looks like the top of the page.
+
 ## 8. ⚠ A QR on this site cannot be a working check-in
 
 A check-in code is meaningful because you have to be standing in front of it.

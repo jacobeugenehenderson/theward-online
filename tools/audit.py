@@ -186,6 +186,27 @@ for name, page in PAGES.items():
     if words: town_fails[name] = sorted(set(words))
 check('names a town', not town_fails, f'{town_fails}')
 
+# ── the link preview: the card a forwarded text shows ───────────────────────
+# ⛔ AN og:image MUST BE ABSOLUTE AND MUST NOT BE THE SVG. A scraper is not a
+# browser: it does not resolve a relative path, and it rasterises nothing. Either
+# mistake yields a BLANK CARD, which reads as a broken link rather than a plain one —
+# and neither is visible from the page itself, so nothing else here would catch it.
+og_fails = []
+for name, page in PAGES.items():
+    m = re.search(r'<meta property="og:image" content="([^"]+)"', page)
+    if not m:
+        og_fails.append(f'{name}: no og:image'); continue
+    src = m.group(1)
+    if not src.startswith('https://'): og_fails.append(f'{name}: og:image is not absolute — {src}')
+    if src.endswith('.svg'):           og_fails.append(f'{name}: og:image is an SVG — scrapers show a blank card')
+    local = ROOT / src.split('theward.online/')[-1]
+    if 'theward.online/' in src and not local.exists():
+        og_fails.append(f'{name}: og:image is not on disk — {local.name}')
+check('link preview', not og_fails, f'{og_fails}')
+og = subprocess.run(['python3', 'tools/build-og.py', '--check'], cwd=ROOT,
+                    capture_output=True, text=True)
+check('preview image', og.returncode == 0, (og.stdout + og.stderr).strip())
+
 # ── the sources block is generated, and current ─────────────────────────────
 gen = subprocess.run(['node', 'tools/build.mjs', '--check'], cwd=ROOT,
                      capture_output=True, text=True)
