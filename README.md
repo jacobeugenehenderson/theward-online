@@ -61,10 +61,11 @@ One claim. Copy or components that do not serve it should be cut rather than
 kept.
 
 > **A reusable kit for building a digital presence for real neighborhoods.**
-> The Ward begins with the character of a real place — its streets, landscape,
-> businesses and people — and connects that to the information and activity that
-> make it a community. Two audiences read the same page at different depths: a
-> visitor who wants to look, and a host who wants one.
+> The Ward gives a neighborhood a place of its own online — the people, places,
+> businesses, events, exchanges and local knowledge that already make it a
+> community, made easier to see and use. Not another social network; the one
+> that is already there, strengthened. Two audiences read the same page at
+> different depths: a visitor who wants to look, and a host who wants one.
 
 ⚠️ **THE CLAIM CHANGED ON 2026-08-23 and the change is the point.** It used to
 read *"A neighborhood, documented with care and handed back to the people in
