@@ -562,7 +562,9 @@ a { color: inherit; }
    "email or text", and a QR does not need to be told it gets scanned. */
 .ask-foot .qr { margin-top: 0; }
 .qr { margin: var(--s4) 0 0; display: grid; gap: var(--s1); justify-items: start; }
+.qr a { display: block; line-height: 0; }
 .qr img { width: 104px; height: 104px; display: block; }
+.qr a:focus-visible { outline: 2px solid var(--live); outline-offset: 3px; }
 .qr figcaption {
   font-family: var(--f-sys); font-size: 0.66rem;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint);

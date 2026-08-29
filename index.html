@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="css/tokens.css?v=a48754fb40fc">
-<link rel="stylesheet" href="css/site.css?v=a2d559b20ca7">
+<link rel="stylesheet" href="css/site.css?v=23e1c57863ac">
   <!-- ⭐ THE MARK'S 16px COUSIN, not the mark shrunk — the band mark's street
        grid turns to mud below about 20px. SVG only, deliberately: it is theme
        aware (a tab bar is dark as often as light) and one file beats a pile of
@@ -448,12 +448,23 @@
         <!-- ⭐ THE REAL CODE. `sms:` — it opens the reader's own messages app with
              the number filled in, so it reaches a person rather than a form, which
              is what README §8 settled: a QR here scans through to a person and is
-             never a check-in route. ⛔ NOT a link: a scannable code on a screen is
-             for the phone in your hand, and wrapping it in an <a> only invites a
-             click that goes nowhere useful on the device already showing it. -->
+             never a check-in route.
+             ⭐ AND IT IS A LINK, which an earlier note here said it must not be, on
+             the theory that a click on the device already showing the code goes
+             nowhere. Wrong, and checked rather than argued: macOS Messages declares
+             the `sms` scheme (`Messages.app/Contents/Info.plist` → CFBundleURLTypes),
+             so a desktop click opens a message to the same number the camera would.
+             Where no app claims the scheme the click is inert, which is exactly
+             where it was before. It also makes the code keyboard-reachable.
+             ⛔ THE HREF CARRIES NO `body`, deliberately, though the encoded image
+             does. `&body=` is the iOS separator; a desktop handler reading it as
+             part of the recipient would open a message addressed to nothing, and a
+             link that goes to the wrong place is worse than one that goes nowhere. -->
         <figure class="qr reach">
-          <img src="assets/message.png" width="104" height="104" decoding="async"
-               alt="A QR code that opens a text message to (877) 335-1917.">
+          <a href="sms:+18773351917">
+            <img src="assets/message.png" width="104" height="104" decoding="async"
+                 alt="A QR code that opens a text message to (877) 335-1917.">
+          </a>
           <figcaption>Text</figcaption>
         </figure>
       </div>
