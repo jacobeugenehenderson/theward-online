@@ -314,6 +314,27 @@ decision, and it is one line.
 
 ---
 
+## 7b. The legal page
+
+`legal.html` — the website's terms, linked from the footer. It is the SITE, not a
+document parked beside it: same band, same stamped stylesheets, same tokens, and it
+is covered by the same audit.
+
+⛔ **`tools/audit.py` reads every `*.html` at the root, not `index.html`.** It read
+only the front page until 2026-08-29, so the day a second page arrived every rule
+went quiet on it at once — no lazy-loading check, no inline-style check, no
+missing-asset check, and every class it used scored as UNUSED CSS. The page list is
+the filesystem now, so the next page is covered on the day it lands.
+⚠️ Two checks are **per page**, deliberately: id uniqueness and anchor resolution are
+properties of a DOCUMENT, and checking the concatenation reported `#main` and the
+mark's `#mark-clip` as duplicates the moment a second page existed.
+
+⭐ **The "names a town" rule is SCOPED, not switched off.** That rule exists because
+the page sells the kit and naming one town collapses it into one instance — an
+argument about the PITCH. A governing-law clause is not the pitch; a court sits
+somewhere. So `legal.html` may use the two strings a forum-selection clause needs
+and nothing more, and every other town name still fails everywhere.
+
 ## 8. ⚠ A QR on this site cannot be a working check-in
 
 A check-in code is meaningful because you have to be standing in front of it.

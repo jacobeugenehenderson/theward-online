@@ -10,7 +10,17 @@ Every line reports ok or names what is wrong; a failure exits non-zero.
 import re, sys, subprocess, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-html = (ROOT / 'index.html').read_text()
+
+# ⛔ EVERY PAGE, NOT JUST THE FRONT ONE. This read `index.html` alone, so the day
+# `legal.html` arrived every rule below went quiet on it at once — no lazy-loading
+# check, no inline-style check, no missing-asset check, and every class it used
+# scored as UNUSED CSS. A lint that silently stops covering a new file is worse
+# than no lint, because the green line still prints.
+# ⭐ So the page list is the FILESYSTEM. A page added tomorrow is covered on the
+# day it lands, with nothing to remember.
+PAGES = {f.name: f.read_text() for f in sorted(ROOT.glob('*.html'))}
+html = '\n'.join(PAGES.values())            # the checks that are about the whole site
+index = PAGES['index.html']                  # the ones that are about the front page
 site = (ROOT / 'css/site.css').read_text()
 toks = (ROOT / 'css/tokens.css').read_text()
 js   = (ROOT / 'js/site.js').read_text()
@@ -38,8 +48,10 @@ lazy = re.findall(r'<(\w+)[^>]*loading="lazy"', html)
 check('lazy loading', not lazy, f'loading="lazy" on: {lazy} — README §1 forbids it')
 
 # ── rule 2: no inline style attributes; rule 3: no <style> blocks ────────────
-check('inline style', 'style="' not in html, 'found a style attribute in index.html')
-check('style blocks', '<style' not in html, 'found a <style> block; all CSS lives in css/')
+check('inline style', 'style="' not in html,
+      f'style attribute in: {[n for n,h in PAGES.items() if chr(34) in h and "style=" + chr(34) in h]}')
+check('style blocks', '<style' not in html,
+      f'<style> block in: {[n for n,h in PAGES.items() if "<style" in h]} — all CSS lives in css/')
 
 # ── rule 4: no !important ───────────────────────────────────────────────────
 bad_imp = [l.strip() for l in site.splitlines()
@@ -137,10 +149,19 @@ for m in re.finditer(r'<(/?)([a-zA-Z][a-zA-Z0-9]*)\b[^>]*?(/?)>', body):
 check('tags', not stack and not mismatch, f'unclosed={stack[:4]} mismatch={mismatch[:4]}')
 
 # ── ids unique, and every reference resolves ────────────────────────────────
-ids = re.findall(r'\sid="([^"]+)"', html)
-check('unique ids', len(ids) == len(set(ids)), f'duplicated: {[i for i in set(ids) if ids.count(i) > 1]}')
-for href in re.findall(r'href="#([^"]+)"', html):
-    if href not in ids: fails.append('anchor'); print(f'anchor        : #{href} goes nowhere')
+# ⛔ PER PAGE, NOT ACROSS PAGES. Uniqueness is a property of a DOCUMENT; two pages
+# sharing `#main` or the mark's `#mark-clip` is correct and expected. Checking the
+# concatenation reported both as duplicates the moment a second page existed —
+# a lint crying wolf about the very thing it should be indifferent to.
+dup_ids, dead_anchors = {}, {}
+for name, page in PAGES.items():
+    pids = re.findall(r'\sid="([^"]+)"', page)
+    dups = sorted({i for i in pids if pids.count(i) > 1})
+    if dups: dup_ids[name] = dups
+    dead = sorted({h for h in re.findall(r'href="#([^"]+)"', page) if h not in pids})
+    if dead: dead_anchors[name] = dead
+check('unique ids', not dup_ids, f'{dup_ids}')
+check('anchor', not dead_anchors, f'{dead_anchors}')
 
 # ── every referenced local asset exists ─────────────────────────────────────
 missing = [src for src in re.findall(r'(?:src|href)="((?:assets|css|js)/[^"?]+)', html)
@@ -148,9 +169,22 @@ missing = [src for src in re.findall(r'(?:src|href)="((?:assets|css|js)/[^"?]+)'
 check('assets', not missing, f'{missing}')
 
 # ── the site names no town ──────────────────────────────────────────────────
-text = re.sub(r'<[^>]+>', ' ', body)
-leak = sorted(set(re.findall(r'Lafayette|St\.? ?Louis|Missouri|Łódź|Lodz|Altadena|Poland', text, re.I)))
-check('names a town', not leak, f'{leak}')
+# ⭐ WHY THE RULE EXISTS: the page sells the KIT, and naming one town collapses it
+# into one instance. That is an argument about the PITCH.
+# ⛔ A GOVERNING-LAW CLAUSE IS NOT THE PITCH. It has to name a jurisdiction — a
+# court sits somewhere — so the rule is SCOPED rather than switched off, and only
+# the two strings a forum-selection clause actually needs are allowed, only on the
+# legal page. Anything else, anywhere, still fails.
+TOWNS = r'Lafayette|St\.? ?Louis|Missouri|Łódź|Lodz|Altadena|Poland'
+JURISDICTION = {'missouri', 'st. louis', 'st louis'}
+town_fails = {}
+for name, page in PAGES.items():
+    body_ = page[page.find('<body'):] if '<body' in page else page
+    words = re.findall(TOWNS, re.sub(r'<[^>]+>', ' ', body_), re.I)
+    if name == 'legal.html':
+        words = [w for w in words if w.lower() not in JURISDICTION]
+    if words: town_fails[name] = sorted(set(words))
+check('names a town', not town_fails, f'{town_fails}')
 
 # ── the sources block is generated, and current ─────────────────────────────
 gen = subprocess.run(['node', 'tools/build.mjs', '--check'], cwd=ROOT,

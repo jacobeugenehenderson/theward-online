@@ -746,3 +746,33 @@ a { color: inherit; }
   border-top: 1px solid var(--rule-soft); padding: var(--s4) 0 var(--s6);
   letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.68rem;
 }
+
+/* 12 ── the legal page ──────────────────────────────────────────────────────
+   Prose at length, so it is set for READING rather than for the section rhythm
+   the front page uses: one column at the measure, numbered headings that a
+   reader can scan for, and generous space between clauses. No new tokens and no
+   new type ramp — this page is the site, not a document parked beside it. */
+.legal { margin-top: var(--s5); }
+.legal-sec { margin: 0 0 var(--s5); max-width: var(--measure); }
+.legal-sec h2 {
+  font-family: var(--f-sys); font-weight: 600; font-size: 1.02rem;
+  letter-spacing: -0.005em; line-height: 1.25; margin: 0 0 var(--s2);
+}
+.legal-sec p { margin: 0 0 var(--s2); line-height: 1.62; }
+.legal-sec p:last-child { margin-bottom: 0; }
+.legal-date {
+  font-family: var(--f-sys); font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint);
+  margin-top: calc(var(--s2) * -1);
+}
+.legal-list { margin: 0 0 var(--s2); padding-left: var(--s4); }
+.legal-list li { margin-bottom: var(--s1); line-height: 1.62; }
+/* ⛔ THE CAPITALS ARE THE SOURCE TEXT, NOT A STYLE. They are typed in the
+   markup because a warranty disclaimer is conventionally set that way and the
+   words themselves carry it — `text-transform` would fake it and a copy-paste
+   of this page would come out lowercase. So this rule only loosens the tracking
+   that a long all-caps line needs to stay readable. */
+.legal-caps { letter-spacing: 0.01em; }
+/* The short version is the reader's reward for getting here. */
+.legal-short { border-top: 1px solid var(--rule); padding-top: var(--s4); }
+.legal-short h2 { font-size: 1.18rem; }
