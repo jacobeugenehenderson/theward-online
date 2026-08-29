@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="css/tokens.css?v=a48754fb40fc">
-<link rel="stylesheet" href="css/site.css?v=2e4be417ff7e">
+<link rel="stylesheet" href="css/site.css?v=658659f95596">
   <!-- ⭐ THE MARK'S 16px COUSIN, not the mark shrunk — the band mark's street
        grid turns to mud below about 20px. SVG only, deliberately: it is theme
        aware (a tab bar is dark as often as light) and one file beats a pile of
@@ -434,11 +434,16 @@
       <p class="lede">A Host is a partner rather than a customer, so every map starts with a conversation about the place, what it needs, and how we can work together to do right by it.</p>
       <div class="ask-foot">
         <a class="cta" href="mailto:jacob@theward.online?subject=Hosting%20a%20Ward">Ask about hosting a Ward</a>
-        <!-- Labelled, obvious, and not a plausible-looking fake: the real code
-             goes straight to a person, and this section is meant to be printable. -->
-        <figure class="placeholder">
-          <div class="placeholder-box" aria-hidden="true"></div>
-          <figcaption>Code goes here &mdash; scans through to a person</figcaption>
+        <!-- ⭐ THE REAL CODE. `sms:` — it opens the reader's own messages app with
+             the number filled in, so it reaches a person rather than a form, which
+             is what README §8 settled: a QR here scans through to a person and is
+             never a check-in route. ⛔ NOT a link: a scannable code on a screen is
+             for the phone in your hand, and wrapping it in an <a> only invites a
+             click that goes nowhere useful on the device already showing it. -->
+        <figure class="qr">
+          <img src="assets/message.png" width="104" height="104" decoding="async"
+               alt="A QR code that opens a text message to (877) 335-1917.">
+          <figcaption>Scan to text &mdash; it reaches a person</figcaption>
         </figure>
       </div>
     </div>

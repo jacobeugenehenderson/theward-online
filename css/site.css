@@ -457,7 +457,7 @@ a { color: inherit; }
    couriers are not open yet — the section's own note says so three lines down. */
 .sec--cary .cta { margin-top: var(--s4); }
 
-/* 8b ── the pill, the ticker, the placeholder ──────────────────────────── */
+/* 8b ── the pill, the ticker, the QR ───────────────────────────────────── */
 .pill {
   /* justify-self, because a grid stretches its children and the border would
      otherwise run the width of the column with nothing in it */
@@ -520,18 +520,13 @@ a { color: inherit; }
    one thing and no dead twin left behind. */
 .ask-foot { display: flex; flex-wrap: wrap; gap: var(--s5); align-items: flex-end; }
 /* ⚠️ It WRAPS here, and that is fine — but it was paying for the wrap twice.
-   The placeholder is a grid and stretches to the column (322px measured), so it
-   can never sit beside a 321px button in a 542px column; it then added its own
-   top margin on top of the flex gap. One gap, not two. */
-.ask-foot .placeholder { margin-top: 0; }
-.placeholder { margin: var(--s4) 0 0; display: grid; gap: var(--s1); justify-items: start; }
-.placeholder-box {
-  width: 104px; height: 104px;
-  border: 1px dashed var(--rule);
-  background: repeating-linear-gradient(
-    45deg, transparent 0 7px, var(--rule-soft) 7px 8px);
-}
-.placeholder figcaption {
+   The figure is a grid and stretches to the column (322px measured), so it can
+   never sit beside a 321px button in a 542px column; it then added its own top
+   margin on top of the flex gap. One gap, not two. */
+.ask-foot .qr { margin-top: 0; }
+.qr { margin: var(--s4) 0 0; display: grid; gap: var(--s1); justify-items: start; }
+.qr img { width: 104px; height: 104px; display: block; }
+.qr figcaption {
   font-family: var(--f-sys); font-size: 0.66rem;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint);
 }

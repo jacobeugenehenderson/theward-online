@@ -89,7 +89,7 @@ lines of `IntersectionObserver` and no product work at all. Copy from
 **`/host` as a standalone page.** Section 07 exists only inside the scroll. Sales
 happens in fragments — this is the page you send cold.
 
-**The QR that reaches Jacob**, replacing the hatched placeholder — now in the ask section at the foot of the page, not in `/host`.
+~~**The QR that reaches Jacob**, replacing the hatched placeholder~~ ✅ **done 2026-08-29** — `assets/message.png`, `sms:` to the installation's number, in the ask section at the foot of the page. ⚠️ Its payload carries `&body=` (the iOS separator; Android and RFC 5724 want `?body=`) and a hard-coded "Hello" — Jacob is rebuilding the generator in CodeDesk to author the body properly, and the file swaps at the same path with no markup change.
 ⛔ Never a scannable *check‑in* code: publishing one lets anyone anywhere earn a
 townie's standing without visiting, which empties the only credential the
 neighborhood has.
