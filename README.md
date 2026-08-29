@@ -337,8 +337,14 @@ and nothing more, and every other town name still fails everywhere.
 
 ## 7c. The link preview
 
-`assets/og.png` — what a forwarded text, Slack paste or DM shows. It is the FAVICON
-MARK at 1200×630 on the masthead band's ground.
+`assets/og.png` — what a forwarded text, Slack paste or DM shows. It is the BAND
+MARK at 1200×630 on the masthead band's ground — ring, street grid and notch.
+
+⭐ **The band mark, not the favicon.** §301 records that the favicon drops the street
+grid because it "turns to mud below about 20 px". A preview card is 1200 px wide, so
+the grid survives easily — and it is the half of the mark that says this is about
+STREETS. Using the tab icon here would ship a 16 px compromise into a frame that
+never needed it.
 
 ⛔ **It cannot be the SVG, and that is the whole reason this file exists.** The mark
 is `assets/favicon.svg`, which is right for a tab — theme-aware, one file. But every
