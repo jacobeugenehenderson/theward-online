@@ -540,11 +540,26 @@ a { color: inherit; }
 /* ⛔ Was `.host-foot`, when the ask lived mid-page inside the host section.
    Same layout, new owner — RENAMED rather than copied, so there is one rule for
    one thing and no dead twin left behind. */
+/* The two routes are a PAIR, so they are built the same: a figure, its control,
+   its label under it in the same micro-type. That parallel is what tells the
+   story — the shared line above says the rest. */
+.reach-say { margin: var(--s4) 0 0; color: var(--text-soft); }
+.reach { display: grid; gap: var(--s1); justify-items: start; margin: 0; }
+.reach figcaption {
+  font-family: var(--f-sys); font-size: 0.66rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint);
+}
+/* The button carries its own top margin for the case where it stands alone
+   elsewhere on the page; inside the pair the flex gap already spaces it. */
+.reach .cta { margin-top: 0; }
 .ask-foot { display: flex; flex-wrap: wrap; gap: var(--s5); align-items: flex-end; }
-/* ⚠️ It WRAPS here, and that is fine — but it was paying for the wrap twice.
-   The figure is a grid and stretches to the column (322px measured), so it can
-   never sit beside a 321px button in a 542px column; it then added its own top
-   margin on top of the flex gap. One gap, not two. */
+/* ⚠️ IT USED TO WRAP, and the note here said it "can never" sit beside the button
+   in a 542px column. That was true of a figure that stretched to the column. The
+   pair now sizes to its contents — 321px button + 36px gap + 104px code = 461 in
+   542 — so they sit side by side, which is the whole point of pairing them.
+   ⭐ WHAT BOUGHT THE ROOM WAS CUTTING WORDS, not CSS: the caption read "Text —
+   scan with your phone" (202px, 17px too wide). The line above already says
+   "email or text", and a QR does not need to be told it gets scanned. */
 .ask-foot .qr { margin-top: 0; }
 .qr { margin: var(--s4) 0 0; display: grid; gap: var(--s1); justify-items: start; }
 .qr img { width: 104px; height: 104px; display: block; }
