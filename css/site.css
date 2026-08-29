@@ -292,7 +292,17 @@ a { color: inherit; }
 .wayside-fig--shot { padding: 0; overflow: hidden; aspect-ratio: 16 / 9; }
 .wayside-fig--shot img {
   width: 100%; height: 100%; display: block;
-  object-fit: cover; object-position: center;
+  /* ⭐ 26%, NOT `center` — the crop is hung on PARK AVENUE (Jacob, 2026-08-29).
+     Centred, a 2.6:1 band off a 1.201:1 source shows the park's lawn and loses the
+     street the neighbourhood is organised around. Park Avenue runs DIAGONALLY here
+     — labelled twice, at 32% of the height on the left and 43% on the right — so
+     the value is taken where it crosses the image's centre line: 36.3%.
+     ⛔ That is not the object-position. `cover` shows only s = imgAspect/boxAspect
+     of the height, and the visible window's centre is Y(1−s) + s/2, so hitting
+     36.3% needs Y ≈ 24.5% at 2.6:1 and 28.2% at the 3.23:1 cap. 26% splits them and
+     lands on the road in both — checked by rendering the two crops and looking, not
+     by trusting the arithmetic. Re-derive if the image is ever re-shot. */
+  object-fit: cover; object-position: 50% 26%;
 }
 
 /* The diorama: one scene, three things to say about it. No padding, because
