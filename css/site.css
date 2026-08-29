@@ -269,6 +269,26 @@ a { color: inherit; }
    heading now, so the frame carries the whole width and needs no bottom rule
    dividing it from a caption that is not there. */
 .wayside--solo .wayside-fig { border-bottom: none; }
+/* ⭐ A STRIP, NOT A PICTURE (Jacob, 2026-08-29: "more like a header strip to
+   separate the sections — less literal, more vibes"). Full width at 16/9 it stood
+   607px tall and read as a photograph you were meant to study; the point is not
+   the photograph, it is that the directory underneath belongs to the place shown.
+   ⛔ So the ASPECT GIVES WAY TO A HEIGHT — `cover` crops to a band, and the search
+   bar lands immediately under it with no rule between, because the two are one
+   thought. Clamped rather than fixed: 350px is a strip on a desktop and a wall on
+   a phone, and the strip has to stay a strip at every width. */
+.wayside--solo .wayside-fig--shot {
+  /* ⛔ A RATIO WITH A CEILING, not a height with a floor. A clamped height read as
+     a strip on a desktop and a near-square on a phone — 270×210, 1.29:1 — because
+     `.wayside-fig`'s own 210px min-height outranked the clamp's low end. That is
+     the width Jacob was looking at when he asked for a strip, so it is the one
+     that has to hold. The ratio makes it a band at every width; the cap stops it
+     becoming a photograph again on a wide screen. */
+  aspect-ratio: 2.6 / 1;
+  min-height: 0;
+  height: auto;
+  max-height: 350px;
+}
 .wayside-fig--shot { padding: 0; overflow: hidden; aspect-ratio: 16 / 9; }
 .wayside-fig--shot img {
   width: 100%; height: 100%; display: block;
