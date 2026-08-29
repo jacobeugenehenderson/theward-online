@@ -164,6 +164,14 @@ a { color: inherit; }
   letter-spacing: 0.2em; text-transform: uppercase; color: var(--live);
   display: block; margin-bottom: var(--s2);
 }
+/* The sentence under an eyebrow. Sets up the run of blocks below it; sized
+   between the body serif and the eyebrow so it reads as a lede, not a stray
+   paragraph, and capped so it stays one or two lines at any width. */
+.sec-lede {
+  max-width: 46ch;
+  margin: calc(var(--s2) * -1) 0 var(--s3);
+  color: var(--text-soft);
+}
 
 
 /* 5 ── wayside ──────────────────────────────────────────────────────────── */
