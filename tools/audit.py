@@ -177,9 +177,20 @@ check('assets', not missing, f'{missing}')
 # legal page. Anything else, anywhere, still fails.
 TOWNS = r'Lafayette|St\.? ?Louis|Missouri|Łódź|Lodz|Altadena|Poland'
 JURISDICTION = {'missouri', 'st. louis', 'st louis'}
+# ⭐ AND ONE ELEMENT MAY NAME THE INSTANCE, anywhere, on any page. A reader
+# looking at a living map wants to know whose neighborhood it is, and refusing to
+# say reads as evasion rather than as discipline (Jacob, 2026-08-31). So the rule
+# is scoped a SECOND way: any element carrying `data-names-instance` has its text
+# removed before the scan, and the check runs at full strength on everything else.
+# ⛔ THE HOOK IS AN ATTRIBUTE, NOT A PAGE. Exempting index.html wholesale would
+# retire the rule on the one page it exists for; exempting a marked element keeps
+# every other sentence honest and makes the exception visible in the markup, where
+# the next person edits. Remove the attribute and the audit fails again.
+INSTANCE_NOTE = re.compile(r'<([a-zA-Z][\w-]*)\b[^>]*\bdata-names-instance\b.*?</\1\s*>', re.S)
 town_fails = {}
 for name, page in PAGES.items():
     body_ = page[page.find('<body'):] if '<body' in page else page
+    body_ = INSTANCE_NOTE.sub(' ', body_)
     words = re.findall(TOWNS, re.sub(r'<[^>]+>', ' ', body_), re.I)
     if name == 'legal.html':
         words = [w for w in words if w.lower() not in JURISDICTION]

@@ -131,9 +131,25 @@ Enforced by `tools/audit.py`, which fails rather than warns.
    the trust ladder without "three days". You can describe a neighborhood
    without counting its buildings. A rule is durable; a count is stale the day
    it is typed.
-7. **The site names no town.** The sources are named hard — a source you cannot
-   go and get is treacle — but no neighborhood, city or state appears. The
-   audit checks this.
+7. **The site names no town — except once, on purpose.** The sources are named
+   hard — a source you cannot go and get is treacle — but no neighborhood, city
+   or state appears. The audit checks this.
+   ⭐ **Two scoped exceptions, both in `tools/audit.py`, neither a switch-off.**
+   `legal.html` may use the two strings a forum-selection clause needs, because a
+   court sits somewhere. And **any element carrying `data-names-instance`** has
+   its text removed before the scan — currently one paragraph, under the hero,
+   saying whose neighborhood is running and linking to it (Jacob, 2026-08-31:
+   *"I don't think that rule is that important"*).
+   ⚠️ **Why the exception makes the rule better rather than weaker:** the rule
+   exists because naming a town collapses the KIT into one instance. But a reader
+   looking at a living map wants to know whose it is, and refusing to say reads as
+   evasion rather than discipline. Naming it *as an example* — "this one, for
+   now" — argues for the kit instead of against it.
+   ⛔ **The hook is an ATTRIBUTE, not a page.** Exempting `index.html` wholesale
+   would retire the rule on the one page it exists for. Marking the element keeps
+   every other sentence honest and puts the exception where the next person edits.
+   ▶ Verified both directions: the note passes, and a town name introduced
+   anywhere else on the page still fails the build.
 8. **Placeholders are labelled and obvious.** Never a plausible-looking fake.
 
 ---

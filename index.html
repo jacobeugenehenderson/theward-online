@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="css/tokens.css?v=a48754fb40fc">
-<link rel="stylesheet" href="css/site.css?v=0d40dee6a0f0">
+<link rel="stylesheet" href="css/site.css?v=677e091c5a9e">
   <!-- ⭐ THE MARK'S 16px COUSIN, not the mark shrunk — the band mark's street
        grid turns to mud below about 20px. SVG only, deliberately: it is theme
        aware (a tab bar is dark as often as light) and one file beats a pile of
@@ -77,6 +77,26 @@
     <button class="layer" type="button" data-layer="slab" aria-pressed="false">Place</button>
     <button class="layer" type="button" data-layer="player" aria-pressed="false">People</button>
   </div>
+
+  <!-- ⭐ THE ONE PLACE THIS PAGE NAMES A TOWN, and it is deliberate (Jacob,
+       2026-08-31). Rule 7 exists because naming a neighborhood collapses the
+       KIT into one instance — but a reader looking at a living map wants to know
+       whose it is, and refusing to say reads as evasion rather than as
+       discipline. Saying "this one, for now" makes the kit MORE legible, not
+       less: it is an example, and examples have names.
+       ⭐ It also answers a want this page created today. The framed hero holds
+       its shot now, so a reader can see the neighborhood and never move through
+       it. This is where that want appears, so this is where the way out goes.
+       ⛔ `data-names-instance` IS LOAD-BEARING, not decoration: `tools/audit.py`
+       exempts the text inside this element from the town check and enforces it
+       everywhere else on every page. The rule is SCOPED, not switched off —
+       the same treatment `legal.html`'s jurisdiction clause gets. Remove the
+       attribute and the audit fails, which is the intent. -->
+  <p class="instance-note" data-names-instance>
+    A Ward is built for a real neighborhood. The one running above is
+    <strong>Lafayette Square</strong> in St.&nbsp;Louis &mdash; ours, and far
+    enough along to show. <a href="https://lafayette-square.com">See it in its own environment &rarr;</a>
+  </p>
 </header>
 
 <main class="shell" id="main">

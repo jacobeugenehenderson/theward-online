@@ -520,6 +520,24 @@ a { color: inherit; }
   font-weight: 500;
 }
 
+/* ⭐ THE INSTANCE NOTE — the one place the page says whose neighborhood this is.
+   It hangs off the bottom of the layer strip and shares its ground, so it reads
+   as a caption on the frame rather than as the first sentence of the page. The
+   scroll proper still opens on the argument, not on an errand. */
+/* ⛔ NO `max-width` HERE. It had one, and the note came out narrower than the
+   layer strip it hangs from — two stacked panels with different right edges,
+   which reads as a mistake rather than as a caption. This block is CHROME, not
+   prose: it belongs to the frame above it and takes the frame's width. The note
+   is two sentences, so the long measure costs nothing. */
+.instance-note {
+  margin: 0; padding: var(--s2) var(--s3) var(--s3);
+  border: 1px solid var(--rule); border-top: none;
+  background: var(--ground-2);
+  font-size: 0.92rem; line-height: 1.5; color: var(--text-soft);
+}
+.instance-note strong { font-weight: 600; color: var(--text); }
+.instance-note a { white-space: nowrap; }
+
 /* 7b ── the scroll guard ───────────────────────────────────────────────── */
 /* ⛔ AN IFRAME EATS THE MOUSE WHEEL. With the cursor over the directory or the
    card, the wheel scrolls THAT — not the page — so a reader on their way down
