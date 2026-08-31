@@ -535,7 +535,6 @@ a { color: inherit; }
   background: var(--ground-2);
   font-size: 0.92rem; line-height: 1.5; color: var(--text-soft);
 }
-.instance-note strong { font-weight: 600; color: var(--text); }
 .instance-note a { white-space: nowrap; }
 
 /* 7b ── the scroll guard ───────────────────────────────────────────────── */
