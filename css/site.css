@@ -502,6 +502,24 @@ a { color: inherit; }
 }
 .village-role p { margin: 0; font-size: 0.97rem; line-height: 1.56; }
 
+/* ⭐ THE INSTRUMENTS ARE PROPER NOUNS. The Meteorologist and the Arborist are
+   named parts of the kit, and the page said so only by capitalising them — which
+   serif prose swallows, so they read as job descriptions. They are now set in the
+   SYSTEM face, the same one the Ward's own chrome wears, so a named tool looks
+   like a piece of the kit rather than a description of a duty.
+   ⛔ NOT `<em>` AND NOT `<strong>`. Italic is already doing two jobs here —
+   emphasis ("right now") and the qualifiers in the sources table ("— global") —
+   so a third meaning would make all three vaguer. And bold is STRESS: it makes
+   the reader lean on the word. A name does not want to be leaned on, it wants to
+   be recognised.
+   ⚠ 0.94em, not 1em: Archivo carries a taller x-height than Source Serif, so at
+   matching size the name outgrows the sentence holding it. */
+.instrument {
+  font-family: var(--f-sys);
+  font-size: 0.94em;
+  font-weight: 500;
+}
+
 /* 7b ── the scroll guard ───────────────────────────────────────────────── */
 /* ⛔ AN IFRAME EATS THE MOUSE WHEEL. With the cursor over the directory or the
    card, the wheel scrolls THAT — not the page — so a reader on their way down
