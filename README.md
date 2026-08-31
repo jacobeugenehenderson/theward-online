@@ -91,16 +91,25 @@ panel is designed around the view and never competes with it.
 
 ```
 index.html          the whole site
+legal.html          the terms (§7b) — the SITE, not a document beside it
 css/tokens.css      every colour, size, family and duration
 css/site.css        everything else, in numbered sections
-js/site.js          the clock, the layer switch, nothing else
+js/site.js          the clock, the layer switch, the scroll guards (§9)
+tools/build.mjs     ⭐ RUN THIS ONE. Drives every generator below, then
+                    re-stamps the `?v=` on each stylesheet. The audit fails
+                    with `generated: asset stamps are STALE` if you forget
 tools/build-sources.mjs   the sources block, generated from the product
 tools/build-sky.mjs       the sky strip, generated from the product
 tools/build-vignettes.mjs the badges' glyph geometry (NOT from the product)
+tools/build-og.py         assets/og.png, the link preview (§7c) — rendered
+                          from the same path data as assets/favicon.svg so
+                          the mark and its preview cannot drift
 tools/audit.py      conformance — run before committing
 data/sources.json   generated; the same data the block is built from
 data/vignette-glyphs.json    MEASURED; each badge emoji and its ink geometry
 ```
+
+▶ **The two commands, in order:** `node tools/build.mjs && python3 tools/audit.py`
 
 ---
 
@@ -229,6 +238,13 @@ Three things are load-bearing, all of them paid for elsewhere:
 - **Never hide a live canvas.** `display:none`, `visibility`, `opacity:0`, even
   a fully opaque cover, all make Chrome drop the WebGL surface, and restoring
   it lands as one blocked frame of many seconds. Leave it rendering.
+- ⛔ **A framed hero holds its shot, and that is the PRODUCT's job** *(2026-08-31)*.
+  Framed, a drag or a wheel no longer promotes hero→browse, and the hero's
+  OrbitControls are disabled — so the camera cannot be nudged by a reader on
+  their way down this page. ⭐ **This page therefore has no arm gate.** It used
+  to hold the frame at `pointer-events: none` behind a "Click to browse" pill;
+  that was a fork of the thing being embedded, and it is gone. See §9, and
+  `INTEGRATION.md §3` for the measurement.
 
 ### The page's half of the frame budget
 
@@ -291,12 +307,13 @@ decision, and it is one line.
 | The courier section | built; destination is `interest`. **Cary has its own room** — an inset panel with its own ground and a verdigris rule, marked with the courier badge from the ladder. ⭐ The hue is the product's own: `SocietyMasthead`'s Couriers stat. ⚠ NOT `--live` — amber is for what is running, and couriers are not open. Its four rules moved from two paragraphs into `.terms` (same words) |
 | The directory | **`?embed=society` — the product's own panel, mounted alone, and it paints.** Real accordion, real counts, real scrolling. ⚠ It boots in ~5s, so it is blank on arrival and fills in — that is what looked like a failure. ⛔ **The cause is boot time, not `loading="lazy"`.** This row named lazy as the reason until 2026-08-23, by which point nothing on the page was lazy and §1's rule was audited — a corrected rule left a stale explanation behind it, which is the more expensive half to leave lying around |
 | Every building opens | its own claim again, with a labelled gap awaiting an overhead of the neighborhood. It is NOT the directory's claim and the two were briefly collapsed |
-| The place card | **`?embed=card&place=<id>` — the card itself, running, in a drawn tablet.** Confirmed: photo, logo, rating, tabs, and no close button. **To swap the place: change `data-place` in index.html and nothing else** — and that is true again; `js/site.js` had grown a constant that quietly took over, leaving the attribute dead while two docs told you to edit it (restored 2026-08-23). It now seeds BOTH frames; the ids come from the directory above it |
+| The place card | **`?embed=card&place=<id>` — the card itself, running, in a drawn tablet.** Confirmed: photo, logo, rating, tabs, and no close button — `.embed-card [aria-label="Close"]` hides it, because mounted alone there is nothing to close back to. ⭐ **Its hero photo SCROLLS as of 2026-08-31**: it used to sit outside the scroll container as a fixed 112px band, which is half the card in a 4:3 frame on a phone and never moved. **To swap the place: change `data-place` in index.html and nothing else** — and that is true again; `js/site.js` had grown a constant that quietly took over, leaving the attribute dead while two docs told you to edit it (restored 2026-08-23). It now seeds BOTH frames; the ids come from the directory above it |
 | The joint | a 3px rule in the reserved colour under the band. The seam vanished at night when band and sky were both near-black; the rule says *below this line, everything is live* |
-| The sky band | a short divider between what the Ward holds and what is living in it, carrying the neighborhood's own authored sky (`tools/build-sky.mjs`). It reports; it does not ask |
-| The ask | **its own section, and the page's last word.** It sat mid-page inside §host with two sections after it, and the address was stranded again in the footer. One home now, at the end. The footer carries sources + `© 2026 Jacob Henderson LLC` The QR is **live as of 2026-08-29** — `sms:` to the installation's number, so it opens the reader's own messages app and reaches a person, never a check-in (§8). ⭐ **It is also a link**, so a desktop click does the same thing the camera does: macOS Messages declares the `sms` scheme, and where nothing claims it the click is simply inert. Its `href` carries no `body` even though the encoded image does — `&body=` is the iOS separator, and a handler reading it as part of the recipient would address a message to nothing. ⚠️ **This section is NOT printable** (Jacob, 2026-08-29); an earlier code comment said it was, and the code is sized and contrasted for a screen someone is holding a second phone up to |
-| `/host` as a standalone page | **not built.** Section 07 is in the scroll only; sales happens in fragments and it should also be a page you can send cold |
-| Privacy / terms pages | **not built** |
+| The sky band | a short divider between what the Ward holds and what is living in it, carrying the neighborhood's own authored sky (`tools/build-sky.mjs`). It reports; it does not ask. ⭐ **It is also the day slider, and it is ONE control** — the whole band drags, with a mark riding a track the diorama cannot cover. ⚠️ **A touch must declare an axis before it owns the day** (§9); a mouse still commits on press |
+| The ask | **its own section, and the page's last word.** It sat mid-page inside §host with two sections after it, and the address was stranded again in the footer. One home now, at the end. The footer carries sources + `© 2026 Jacob Henderson LLC` The QR is **live as of 2026-08-29** — `sms:` to the installation's number, so it opens the reader's own messages app and reaches a person, never a check-in (§8). ⭐ **It is also a link**, so a desktop click does the same thing the camera does: macOS Messages declares the `sms` scheme, and where nothing claims it the click is simply inert. Its `href` carries no `body` even though the encoded image does — `&body=` is the iOS separator, and a handler reading it as part of the recipient would address a message to nothing. ⚠️ **This section is NOT printable** (Jacob, 2026-08-29); an earlier code comment said it was, and the code is sized and contrasted for a screen someone is holding a second phone up to. ⭐ **It carries `id="host"`**, so the ask is linkable at `theward.online/#host` |
+| `/host` as a standalone page | ⛔ **CUT, 2026-08-31, and it was on this list for a year of drafts.** The section is a heading, ONE sentence and two controls — there is no "how to" to send, and the background that makes the ask land is the rest of the scroll, so a cold send would be the ask with its argument removed. It also cut against a decision already in the markup: the ask was moved out of mid-page to be the LAST thing. ⭐ What it actually needed was `id="host"` — an anchor, not a page, and one that cannot drift out of sync with the page around it |
+| The terms | **built** — `legal.html`, §7b. This row used to read "Privacy / terms pages: not built" while §7b of this same file described the legal page in detail: **two sections of one document disagreeing**, which is the failure mode this repo keeps paying for |
+| A privacy page | ⛔ **RULED OUT, 2026-08-31** (Jacob: *"this page doesn't get a privacy statement"*). One was written and reverted whole. **The PRODUCT already has one** — `PrivacyPage` in `src/pages/LegalPage.jsx` — and everything load-bearing in the draft described the thing in the FRAME, not this website, which collects nothing and needs about two sentences to say so. A second copy on a second domain drifts the first time either moves. ⚠️ It also promised on behalf of *every* Ward, when a Host's installation is not ours to speak for — which `legal.html §1` expressly disclaims. ▶ A mission-style statement about earning standing by presence is **parked, not pursued**; it is a copy decision. `BACKLOG.md` carries the full reasoning |
 | The five participant badges | **settled.** One authored master — cream field, deep rim, halo on the glyph — so every emoji reads and any emoji can be swapped in. ☕ 🏡 🛡️ 🔑 🚲 — the guardian is a shield, which is the only one of them that is itself a heraldic device, and so the only one already in the register the badge is borrowing. They are the ladder's step markers, replacing the numbers 1–4; the courier is not a rung and wears its badge in the Cary room. Size and centring are generated from each glyph's measured ink |
 | Favicon | **built** — `assets/favicon.svg`. The mark's 16 px cousin: thick ring, bright notch, and the band mark's street grid dropped because it turns to mud below ~20 px. Token colours, theme-aware. ⚠ SVG only — Safari shows nothing rather than something wrong |
 
@@ -373,3 +390,82 @@ So a QR here may only ever be **an illustration of the physical object** — the
 card a place puts in its window — and it must resolve to an explainer, never to
 a check-in route. Shown that way it does real work: it makes an abstract trust
 ladder into a thing you have seen.
+
+---
+
+## 9. Every control has to survive a thumb
+
+⛔ **On a phone, the scroll gesture and every drag gesture are the same gesture.**
+A finger going down the page and a finger dragging a control are indistinguishable
+at the moment they land — so any control that acts on *contact* steals the page
+from a reader who was only passing. This page is mostly full-bleed controls, so
+this is not an edge case; it is the main case.
+
+▶ **The test, and it is one finger:** put it on the control and swipe up. If the
+page does not move, the control is broken, however well it works with a mouse.
+
+Three surfaces, three answers. They are different because what is underneath them
+is different, and none of the three generalises to the others.
+
+### The sky band — intent, not sensitivity
+
+The whole band is the day slider (§7), which means it is a wide horizontal target
+sitting in the middle of a vertical read. It used to set the day on `pointerdown`,
+before a single pixel had said what the gesture was for.
+
+⭐ **The fix is that a pointer must DECLARE AN AXIS before it owns the day**:
+more horizontal than vertical, and past 8px. Vertical wins and we let go, so the
+page scrolls. A **mouse** still commits on press — a mouse has no competing
+gesture, and clicking the band has always meant *put the day here*.
+⚠️ `touch-action: pan-y` on `.skyband` is the other half: when the browser takes
+the gesture for scrolling it fires `pointercancel`, which releases us. The two
+together mean a scroll can never leave the day moved.
+
+⛔ **`.skyband-input` is `pointer-events: none`, and that is load-bearing.** It is
+a real `<input type="range">` at `opacity: 0` across the entire band, present for
+keyboard and assistive tech — and a native range **absorbs touch and commits its
+value on tap**, so it was setting the day before any of our code ran. Deaf to the
+pointer it still tabs, still takes arrow keys, and still rings the band through
+`:focus-within`. It competes with nothing.
+
+### The directory and the card — a guard
+
+An iframe eats the wheel, so a reader on their way down gets captured. Each DOM
+embed carries a `.scrollguard` that belongs to *this* document; a click dismisses
+it, and **leaving the frame re-arms it**.
+⛔ That second half is the load-bearing one: dismiss-once-forever just defers the
+trap to the second pass down the page.
+⛔ **No gutter instead.** Two rails down the sides was tried, on the theory that
+the outer thirds were dead space. They are not — the card's tabs run to the LEFT
+edge and the directory's chevrons to the RIGHT, so no margin is safe on both.
+
+### The hero — nothing here, everything upstream
+
+⛔ **The hero can take neither.** It is WebGL, so a cover idles the canvas and
+Chrome drops the surface (§5). And it used to carry the third option — an arm
+gate holding the frame at `pointer-events: none` behind a "Click to browse" pill.
+
+⭐ **That gate is gone, because it was a fork of the thing being embedded.** A
+framed hero now holds the shot it was given: the product refuses to promote
+hero→browse when framed, and disables the hero's OrbitControls. Nothing here
+guards it because there is nothing left to guard.
+▶ `INTEGRATION.md §3` · `Scene.jsx` → `CameraRig`, `onMove` / `onWheel`.
+
+### ⚠ The measurement that corrected a good guess
+
+This section nearly shipped a fourth answer. The reasoning was that
+`OrbitControls` sets `touchAction: 'none'` on its element in the constructor —
+which `three/examples/jsm/controls/OrbitControls` line 36 really does — and that
+the canvas was therefore swallowing every vertical swipe before any handler ran.
+A `touch-action: pan-y` write was added to undo it.
+
+⛔ **That is not the class drei mounts.** It bundles `three-stdlib`'s, which never
+touches the style. Walking the live canvas's ancestor chain in a framed hero found
+`touch-action` at its initial value on **every node**, and a wheel over the frame
+chained to the host page with the controls still enabled. There was nothing to
+undo. The write came out rather than staying in as a no-op with a false reason
+attached — ⚠️ **a no-op with a convincing comment is worse than no code**, because
+the next person budgets around a problem that was never there.
+
+⭐ **The general lesson, and it is why this section exists:** reading the library
+you *think* you have is not measurement. Walk the live DOM.

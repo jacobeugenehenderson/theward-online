@@ -45,58 +45,70 @@ exists not to make.
 
 ## Ready to do
 
-**The badges are settled; what is left is which emoji.** They are one authored
-master — cream field, deep rim, a halo on the glyph — so every emoji reads and
-any emoji can be swapped in. ⛔ **Do not re-derive the ground from the emoji.**
-That was tried and it guarantees the worst case: a blue bicycle got a blue ground
-and 16% of its ink cleared 3:1. Measured across a neutral sweep from black to
-white, **no single flat value serves them all** — mid-tones take the worst glyph
-to ~0% legible ink, white kills 🔑 and ☕, black kills 🚲. The halo is what
-removed the variable instead of tuning around it.
+One loose end. ⚠️ Everything else that stood here on
+2026-08-31 was already done, was cut, or pointed at copy that no longer exists —
+see the note at the foot of this section.
 
-⭐ Size and centring are generated per glyph from its measured ink, so a new
-emoji is corrected by its own geometry rather than by a hand fudge.
-
-⛔ **An outline on the glyph was built and cut — it read as a sticker.** Only a
-whisper of drop-shadow remains, for relief rather than legibility. ⚠️ **So
-checking a new emoji is a STEP now, not a guarantee:** a glyph with no dark
-contour of its own has nothing to read against a pale field — 🥚 ☁️ 🦢 clear 3:1
-on 0–1% of their ink. ⚠️ And do not rank candidates by that number: 🔑 scores 6%
-and looks perfectly clear, because its 6% is a continuous outline. It answers
-"is there a contour at all", nothing finer.
-
-**⚠️ An audit gap found while wiring the courier's rim:** `site.css` referenced
-`--vig-rim-accent` before `tokens.css` declared it, and **the audit passed.** It
-checks for tokens declared-but-unused, and for classes used-but-undefined — but
-not for a **token used but never declared**, which silently drops the whole
-declaration to its initial value. One more regex in `tools/audit.py`, and it is
-the same shape as the `undefined css` check already there.
-
-**Open:** 🚲 is still the least characterful of the five and 📦 / 🛵 were the
-better-measuring candidates — but that is now purely a choice of emoji, not of
-treatment, and it is Jacob's. No colour-blind simulation has been run.
-
-**`?embed=masthead` under "There is no account."** Built on the product side and
-unplaced here. The four live counts — Townies · Residents · Guardians · Couriers
-— are proof the roles are a working system rather than four paragraphs. ⭐ And
-couriers reading **0** is honest in a way worth keeping, not hiding.
-
-**The observer half of the throttle on jacobhenderson.studio.** That site frames
-the same build, so the Ward already answers `ward-perf`; it needs about fifteen
-lines of `IntersectionObserver` and no product work at all. Copy from
-`js/site.js`.
-
-**`/host` as a standalone page.** Section 07 exists only inside the scroll. Sales
-happens in fragments — this is the page you send cold.
-
-~~**The QR that reaches Jacob**, replacing the hatched placeholder~~ ✅ **done 2026-08-29** — `assets/message.png`, `sms:` to the installation's number, in the ask section at the foot of the page. ⚠️ Its payload carries `&body=` (the iOS separator; Android and RFC 5724 want `?body=`) and a hard-coded "Hello" — Jacob is rebuilding the generator in CodeDesk to author the body properly, and the file swaps at the same path with no markup change.
-⛔ Never a scannable *check‑in* code: publishing one lets anyone anywhere earn a
-townie's standing without visiting, which empties the only credential the
+⚠️ **Loose end on the QR** (shipped 2026-08-29, `assets/message.png`): its payload
+carries `&body=` — the iOS separator; Android and RFC 5724 want `?body=` — and a
+hard-coded "Hello". Jacob is rebuilding the generator in CodeDesk; the file swaps
+at the same path with no markup change.
+⛔ **Never a scannable *check-in* code.** Publishing one lets anyone anywhere earn
+a townie's standing without visiting, which empties the only credential the
 neighborhood has.
 
-**Privacy and terms pages.** Absent. Note that the product's own are hard‑wired
-in `LegalPage.jsx` and state the courier fee schedule — so this page would be a
-*fourth* place that number lives.
+---
+
+⛔ **WHAT LEFT THIS LIST, AND WHY — so it is not written back in.** Three of these
+read as open work and none of it was. **This section had drifted from the page it
+describes**, which is the failure the audit cannot catch and a reader cannot
+either.
+
+- **The badge emoji.** Chosen and shipped. The treatment was settled long before
+  and the remaining question was taste, which is answered.
+- **The `ward-perf` observer on jacobhenderson.studio.** Built and committed
+  there — `js/site.js:494-508`, commit `3b14d5b`. It is the throttle: the framed
+  Ward cannot see that it has been scrolled off a page it does not own, so the
+  host watches and tells it, and it drops its frame rate.
+- ⛔ **A PRIVACY PAGE. WRITTEN, THEN CUT — Jacob, 2026-08-31: "this page doesn't
+  get a privacy statement."** It was built (`privacy.html`, eight sections,
+  linked from the colophon) and reverted whole, and the reason is worth keeping
+  because the draft looked good and was still wrong. **⛔ THE PRODUCT ALREADY HAS
+  ONE** — `PrivacyPage` in `src/pages/LegalPage.jsx`, "Privacy & Safety", with
+  Data Philosophy, Identity & Anonymity, Cary data handling, SMS and credentials.
+  ⚠️ **So the page was restating the PRODUCT's behaviour on the SITE's domain**:
+  everything load-bearing in it — the random identifier, location staying on the
+  device, what you write being public — describes the thing in the frame, not
+  this website, which collects nothing and needs about two sentences to say so.
+  That is the **fourth-place-the-number-lives** failure this file already warns
+  about under *the courier rate*, in different clothes, and it would have drifted
+  from `LegalPage.jsx` the first time either moved.
+  ⚠️ It also promised on behalf of **every** Ward, when a Host's installation is
+  not ours to speak for — which `legal.html §1` explicitly disclaims.
+  ▶ **Parked, not pursued:** a mission-style statement about earning standing by
+  presence rather than by an account might belong somewhere on this page. Jacob
+  is not sold, and it is a copy decision, not a legal one. ⛔ Do not reopen it as
+  "write the privacy page".
+- **`/host` as a standalone page.** ⛔ **Cut by Jacob, 2026-08-31, and the
+  section is the argument:** it is a heading, ONE sentence, an email button and
+  the QR. There is no "how to" to send — the background that makes the ask land
+  is the rest of the scroll, so a cold send would be the ask with its argument
+  removed. ⚠️ It also cut against a decision already recorded in the markup: the
+  ask was moved out of mid-page to be the LAST thing, its own room. ⭐ What it
+  needed instead was one attribute — `id="host"`, so the ask is linkable at
+  `/#host` and can never drift out of sync with the page around it.
+- **`?embed=masthead` under "There is no account."** ⚠️ **The embed is real and
+  still unplaced — but its ANCHOR IS GONE.** That sentence is no longer on the
+  page; the only "no account" left is a cell in the data-sources table. The four
+  live counts (Townies · Residents · Guardians · Couriers) are still worth
+  showing, and `SocietyMasthead` still renders them — but where is now an open
+  question, not a placement. ⛔ Do not re-file this as "place the masthead" until
+  there is copy for it to sit under.
+
+⚠️ **One correction while checking:** the privacy entry used to warn that a legal
+page here would be "a fourth place the courier rate lives". `legal.html` carries
+no rate figure at all. The live 22 %-vs-25 % contradiction is real and is logged
+below, but this page is not one of its homes.
 
 ---
 
@@ -163,6 +175,19 @@ part that has been argued through.
   carries the measurement: covering a live canvas makes Chrome drop the surface
   and restoring it costs seconds. The directory and card are DOM-only, which is
   the whole reason a cover is safe on those two and nowhere else.
+- ⛔ **AND THE HERO GETS NO ARM GATE EITHER** (2026-08-31). The pill that held the
+  frame at `pointer-events: none` until you clicked it was guarding a *product*
+  behaviour from the wrong side of the line: a drag or a wheel promoting
+  hero→browse under a framing the page had authored. ⭐ **Fixed in the Ward**, so
+  every installation inherits it — a framed hero holds its shot and its
+  OrbitControls are disabled. An embed must never fork the thing it embeds, and a
+  gate here was exactly that.
+  ⚠️ **The scroll half of the fear measured false**, and that is worth knowing
+  before anyone re-adds a gate: `OrbitControls` was believed to set
+  `touch-action: none` on the canvas and eat a phone swipe. Drei bundles
+  `three-stdlib`'s, which does not — measured on the live frame, `touch-action` is
+  at its initial value on every node and a wheel over the hero already chained to
+  the host page. `INTEGRATION.md §3` has the detail.
 
 - **Nothing is `loading="lazy"`.** It cost three separate debugging rounds — two
   embeds and an image, each reported broken when it was merely not loaded.

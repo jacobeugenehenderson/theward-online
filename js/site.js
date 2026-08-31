@@ -323,20 +323,49 @@
 
     var band = document.querySelector('[data-sky-strip]')
     if (band) {
+      /* ⛔ A TOUCH IS NOT A CLICK, AND ON A PHONE IT IS THE SCROLL GESTURE.
+         This band is full-bleed, so a reader on their way down the page puts a
+         finger on it and drags — and the old handler set the day on
+         `pointerdown`, before a single pixel of movement had said what the
+         gesture was for. Jacob, 2026-08-31: "On a phone, that controller is
+         exactly the same as the scroll on the site itself."
+
+         ⭐ THE FIX IS INTENT, NOT SENSITIVITY. A pointer must declare an axis
+         before it owns the day: more horizontal than vertical, and past 8px.
+         Vertical wins → we let go and the page scrolls. A MOUSE still commits
+         on press, because a mouse has no competing gesture — clicking the band
+         has always meant "put the day here" and still does.
+         ⚠ `touch-action: pan-y` in site.css is the other half: when the browser
+         takes the gesture for scrolling it fires `pointercancel`, which releases
+         us. The two together mean a scroll can never leave the day moved. */
       var dragging = false
+      var pending = null   // a touch that has not declared its axis yet
       var minuteFromX = function (clientX) {
         var r = band.getBoundingClientRect()
         return ((clientX - r.left) / r.width) * 1439
       }
-      band.addEventListener('pointerdown', function (e) {
-        if (e.target.closest('[data-sky-now]')) return
+      var commit = function (e) {
         dragging = true
+        pending = null
         try { band.setPointerCapture(e.pointerId) } catch (err) { /* fine */ }
         moveDay(minuteFromX(e.clientX))
+      }
+      var release = function () { dragging = false; pending = null }
+
+      band.addEventListener('pointerdown', function (e) {
+        if (e.target.closest('[data-sky-now]')) return
+        if (e.pointerType === 'mouse') { commit(e); return }
+        pending = { x: e.clientX, y: e.clientY }
       })
-      band.addEventListener('pointermove', function (e) { if (dragging) moveDay(minuteFromX(e.clientX)) })
-      band.addEventListener('pointerup', function () { dragging = false })
-      band.addEventListener('pointercancel', function () { dragging = false })
+      band.addEventListener('pointermove', function (e) {
+        if (dragging) { moveDay(minuteFromX(e.clientX)); return }
+        if (!pending) return
+        var dx = e.clientX - pending.x, dy = e.clientY - pending.y
+        if (Math.abs(dy) > Math.abs(dx)) { pending = null; return }  // reading, not setting
+        if (Math.abs(dx) > 8) commit(e)
+      })
+      band.addEventListener('pointerup', release)
+      band.addEventListener('pointercancel', release)
 
       var range = band.querySelector('[data-sky-range]')
       if (range) range.addEventListener('input', function () { moveDay(Number(this.value)) })
@@ -476,18 +505,6 @@
         at = (at + 1) % lines.length
         lines[at].hidden = false
       }, 3200)
-    }
-
-    /* ── arming the hero ──────────────────────────────────────────────────
-       The hero cannot take a scrollguard (WebGL — see css/site.css). Instead
-       the frame stops hit-testing until the reader asks for it, so scrolling
-       past cannot nudge the camera. Leaving the view re-arms it, so the next
-       pass down the page is safe again — same contract as the guards below. */
-    var wardView = document.querySelector('[data-ward-view]')
-    var wardArm = document.querySelector('[data-ward-arm]')
-    if (wardView && wardArm) {
-      wardArm.addEventListener('click', function () { wardView.dataset.live = 'true' })
-      wardView.addEventListener('mouseleave', function () { wardView.dataset.live = 'false' })
     }
 
     /* ── the scroll guards ────────────────────────────────────────────────

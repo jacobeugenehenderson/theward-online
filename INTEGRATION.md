@@ -103,6 +103,49 @@ a browser drop the WebGL surface. Capability and reasoning: `ls/FEATURES.md
 Every item is committed in the lafayette‑square repo. This list exists so the
 next person can see the cost of the embedding surface in one place.
 
+**⛔ A FRAMED HERO HOLDS ITS SHOT** (2026-08-31) — `src/components/Scene.jsx`.
+`?shot=` already said a framing is something an embedding page *authors*, and a
+drag or a wheel promoting hero→browse underneath it meant the operator's framing
+was silently not what was on screen. `onMove` and `onWheel` now promote only when
+unframed; the double-tap into street was already gated on `viewMode === 'browse'`,
+so it cannot fire from a held hero.
+
+**And the other half:** `CameraRig` passes `enabled={false}` to the
+`OrbitControls` while a framed shot is held, so a drag cannot move the camera
+either. `update()` is unaffected — the hero keyframe path drives target and
+position directly and calls it itself.
+
+⚠️ **A GUESS THAT MEASURED FALSE, KEPT HERE SO IT IS NOT RE-DERIVED.** This
+change first also wrote `touch-action: pan-y` onto the canvas, reasoning that
+`OrbitControls` sets `touchAction: 'none'` in its constructor — which
+`three/examples/jsm/controls/OrbitControls` line 36 really does, and which would
+have meant a phone reader's vertical swipe was swallowed before any handler ran.
+⛔ **That is not the class drei mounts.** It bundles `three-stdlib`'s, which never
+touches the style. A walk of the live canvas's ancestor chain in a framed hero
+found `touch-action` at its initial value on every node, and a wheel over the
+frame chained to the host page *with the controls still enabled*. There was
+nothing to undo, so the write came out rather than staying in as a no-op with a
+false reason attached.
+
+⭐ **This is what let the site DELETE its arm gate.** `index.html` carried a
+"Click to browse" pill holding the frame at `pointer-events: none` — a guard for
+two product behaviours, built on the wrong side of the line. Jacob, 2026-08-31:
+*"a touch on the screen won't pan the camera to browse."* ⛔ Do not restore it:
+it is a fork of the thing being embedded, and the fix is upstream.
+⚠️ **The two scroll guards are NOT affected** — the directory and the card are
+DOM embeds that really do eat the wheel. The hero was always the special case.
+
+**⛔ THE PLACE CARD'S HERO PHOTO SCROLLS** (2026-08-31) — `PlaceCard.jsx`. It sat
+*outside* the scroll container as a fixed 112px band: fine on a desktop card,
+indefensible in a 4:3 frame on a phone, where it was half the card and never
+moved. It is now the first child of the scroller. ⚠️ **The close button did not
+come with it** — it was positioned against the hero, so it would have scrolled
+the only way out of the card off the top. It is now a direct child of the dialog
+and deliberately its **FIRST** child, because `.embed-card > [role="dialog"] >
+:last-child` in `index.css` hides the claim bar and would have hidden it.
+⭐ Not a small-screen fork: a photo that scrolls with its content is right on a
+desktop card too, and a media query here would be two cards to reason about.
+
 **New routes** — `src/App.jsx`, `parseRoute()` and the embed branch
 `?embed=society | masthead | card | sky`, plus `&place=`. Chrome‑only: no
 Scene, no controls, no ticker. `?embed=sky` is the exception — it mounts a
