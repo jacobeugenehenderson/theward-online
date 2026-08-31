@@ -52,7 +52,24 @@ see the note at the foot of this section.
 ⚠️ **Loose end on the QR** (shipped 2026-08-29, `assets/message.png`): its payload
 carries `&body=` — the iOS separator; Android and RFC 5724 want `?body=` — and a
 hard-coded "Hello". Jacob is rebuilding the generator in CodeDesk; the file swaps
-at the same path with no markup change.
+at the same path with no markup change. ⭐ **The body should now read "Let's talk
+about The Ward."**, matching the email button's subject (2026-08-31) — the two
+controls are one errand and the note that arrives should read the same either way.
+
+⛔ **THE NUMBER STAYS `INSTANCE.cary.smsNumber` FOR NOW — RULED, do not re-raise.**
+It is flagged in the product as the *Cary courier program* contact for ONE
+installation, and this page now asks Investors, Partners and Friends to use it, so
+it reads as a mismatch. **Jacob, 2026-08-31: Cary is not live, so there is no
+courier traffic to collide with; the number is his; and Lafayette Square is the
+neighborhood on the demo map, so the context a texter sees is coherent.** There is
+no Ward number yet.
+▶ **What would change it:** Cary going live in that installation — at which point
+a hosting enquiry and a delivery enquiry land in the same inbox and the page needs
+its own line. ⚠️ **Still unverified, and worth one minute:** nothing in the product
+handles inbound SMS (no webhook, no provider code in `backend/` or `apps-script/`).
+If the toll-free number is provisioned outbound-only, an inbound text vanishes with
+no error at either end — the sender sees "Delivered" and nobody receives it. Text
+it from a phone that never has.
 ⛔ **Never a scannable *check-in* code.** Publishing one lets anyone anywhere earn
 a townie's standing without visiting, which empties the only credential the
 neighborhood has.
