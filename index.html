@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="css/tokens.css?v=a48754fb40fc">
-<link rel="stylesheet" href="css/site.css?v=911ea2dec4fb">
+<link rel="stylesheet" href="css/site.css?v=470e63179149">
   <!-- ⭐ THE MARK'S 16px COUSIN, not the mark shrunk — the band mark's street
        grid turns to mud below about 20px. SVG only, deliberately: it is theme
        aware (a tab bar is dark as often as light) and one file beats a pile of
@@ -364,6 +364,13 @@
   <section class="sec">
     <div class="copy">
       <h2>Where a Ward Comes From</h2>
+      <!-- ⭐ THIS LINE CAME FROM THE ASK, and it belongs here (Jacob, 2026-08-31).
+           At the foot of the page it was a term of business. In front of the
+           sources it is the PREMISE of the whole table below: a Ward is not a
+           product poured onto a place, so the first thing it is assembled from
+           is a conversation. It also plants the word "Host" before the ask has
+           to define it. -->
+      <p class="lede">A Host is a partner rather than a customer, so every map starts with a conversation about the place, what it needs, and how we can work together to do right by it.</p>
       <p>A Ward is assembled from public data, local records, direct observation, and information supplied by the neighborhood itself.</p>
     </div>
 
@@ -480,8 +487,44 @@
        sync with the page the way a second copy would. -->
   <section class="sec sec--ask" id="host">
     <div class="copy">
-      <h2>Host Your Neighborhood&rsquo;s Map</h2>
-      <p class="lede">A Host is a partner rather than a customer, so every map starts with a conversation about the place, what it needs, and how we can work together to do right by it.</p>
+      <h2>It&rsquo;s going to take a village.</h2>
+      <p class="lede">The Ward is a working system, but no one person can take it everywhere it could go. We&rsquo;re looking for people who can help build the next part of it: people with neighborhoods, resources, expertise, relationships, or simply a strong instinct that this ought to exist.</p>
+    </div>
+
+    <!-- ⭐ THE ROLES BREAK THE MEASURE, and that is the whole visual argument.
+         Every other section on this page is one column of prose at `--measure`;
+         this one lets four columns out to the section's full width, so the last
+         thing a reader meets does not look like the eleventh paragraph of the
+         thing before it. The section's own 3px `--sign` rule and second ground
+         were already here — the grid is what makes them read as a room.
+         ⚠ Two columns, explicitly, never `auto-fit` — see the note in site.css:
+         four items orphan the moment a width resolves to three.
+         ⛔ NOT the `.steps` ladder from Belonging, deliberately. That block is
+         the five ways to stand in a NEIGHBORHOOD, it carries the generated role
+         badges, and a reader meeting a second badged four-up here would take
+         these for more of the same. These are ways to help build the KIT. Two
+         different registers, so two different objects. -->
+    <div class="village">
+      <div class="village-role">
+        <h3>Hosts</h3>
+        <p>Bring The Ward to a place you know. A host might be a neighborhood organization, local publication, business district, civic group, city, institution&mdash;or simply someone with enough connection to a place to get the right people around a table.</p>
+      </div>
+      <div class="village-role">
+        <h3>Investors</h3>
+        <p>Help turn a working system into durable infrastructure. We&rsquo;re interested in people who understand that the opportunity isn&rsquo;t one neighborhood or one website, but a platform that can be established place by place.</p>
+      </div>
+      <div class="village-role">
+        <h3>Partners</h3>
+        <p>There are parts of The Ward that should be built with people who already know the territory: technology, mapping, local media, transportation, insurance, commerce, public data, cultural institutions and city government. Some partnerships may be local. Others could become part of the kit everywhere it goes.</p>
+      </div>
+      <div class="village-role">
+        <h3>Friends</h3>
+        <p>Introductions matter. So does advice. So does knowing the person who knows the person. If The Ward reminds you of someone&mdash;a funder, mayor, engineer, publisher, neighborhood obsessive, foundation director, lawyer, operator, or unusually useful troublemaker&mdash;we would very much like to meet them.</p>
+      </div>
+    </div>
+
+    <div class="copy">
+      <p class="coda">You don&rsquo;t need to know exactly where you fit. If you can see a way to help The Ward become part of more real neighborhoods, get in touch.</p>
       <!-- ⭐ TWO ROUTES, ONE ERRAND, AND THE SHAPES SAY IT. The button and the code
            are the same ask by different means. A sentence explaining that was one
            line too many, and two controls of different heights read as two

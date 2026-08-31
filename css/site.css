@@ -468,6 +468,40 @@ a { color: inherit; }
   margin: 0;
 }
 
+/* ⭐ THE VILLAGE — four ways to help, and the only block on the page that is
+   allowed OUT of `--measure`. Everything above is one column of prose, so the
+   page's last word earns its distinction by CHANGING SHAPE rather than by
+   adding colour: the same ground and the same routed-sign rule the section
+   already had, in four columns instead of one.
+   ⛔ NOT `.steps` from Belonging, and not by accident. That ladder is the five
+   ways to stand in a neighborhood and it carries the generated role badges; a
+   second badged four-up here would read as more of the same list. These are
+   ways to help build the kit — a different register, so a different object.
+   ⛔ NOT `auto-fit`, and this is the record of why so nobody "simplifies" it
+   back. `repeat(auto-fit, minmax(15rem, 1fr))` was tried and it landed THREE
+   across on a 1092px viewport, orphaning Friends alone on a second row. Four
+   items tile cleanly at ONE, TWO or FOUR and at nothing else, so a column count
+   that follows the available width will find 3 and 5 on the way. The count is
+   therefore explicit and skips the widths that do not divide.
+   ⭐ Two is the resting state, not a fallback: at four the columns come in
+   around 230px and Partners — the longest of them — sets to a ragged shard. */
+.village {
+  display: grid; gap: var(--s4) var(--s5);
+  grid-template-columns: 1fr;
+  margin: var(--s5) 0;
+}
+@media (min-width: 34rem) {
+  .village { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+/* The rule rhymes with the section's own 3px top border — structural, marking
+   where a column starts, which is what `--sign` is for. */
+.village-role { border-top: 2px solid var(--sign); padding-top: var(--s2); }
+.village-role h3 {
+  font-family: var(--f-sys); font-weight: 600; font-size: 1.02rem;
+  line-height: 1.25; margin: 0 0 var(--s1);
+}
+.village-role p { margin: 0; font-size: 0.97rem; line-height: 1.56; }
+
 /* 7b ── the scroll guard ───────────────────────────────────────────────── */
 /* ⛔ AN IFRAME EATS THE MOUSE WHEEL. With the cursor over the directory or the
    card, the wheel scrolls THAT — not the page — so a reader on their way down
