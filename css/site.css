@@ -524,15 +524,18 @@ a { color: inherit; }
    It hangs off the bottom of the layer strip and shares its ground, so it reads
    as a caption on the frame rather than as the first sentence of the page. The
    scroll proper still opens on the argument, not on an errand. */
-/* ⛔ NO `max-width` HERE. It had one, and the note came out narrower than the
-   layer strip it hangs from — two stacked panels with different right edges,
-   which reads as a mistake rather than as a caption. This block is CHROME, not
-   prose: it belongs to the frame above it and takes the frame's width. The note
-   is two sentences, so the long measure costs nothing. */
+/* ⛔ NOT A THIRD PANEL. This had a border and the layer strip's ground, which
+   stacked frame → strip → note as three bordered bars in a row — the note
+   shouting at the same volume as the controls above it (Jacob, 2026-08-31:
+   "too much going on"). It is an aside, not chrome.
+   ⭐ Italic, right-aligned, no box. Italic is already this page's voice for the
+   quiet remark — see `.coda`, the sentence a section rests on — and setting it
+   to the frame's right edge hangs it off the picture like a credit line instead
+   of starting a new register under it. */
 .instance-note {
-  margin: 0; padding: var(--s2) var(--s3) var(--s3);
-  border: 1px solid var(--rule); border-top: none;
-  background: var(--ground-2);
+  margin: var(--s2) 0 0; padding: 0;
+  text-align: right;
+  font-family: var(--f-txt); font-style: italic;
   font-size: 0.92rem; line-height: 1.5; color: var(--text-soft);
 }
 .instance-note a { white-space: nowrap; }
