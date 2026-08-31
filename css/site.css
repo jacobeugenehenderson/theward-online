@@ -627,7 +627,16 @@ a { color: inherit; }
 /* The button carries its own top margin for the case where it stands alone
    elsewhere on the page; inside the pair the flex gap already spaces it. */
 .reach .cta { margin-top: 0; }
-.ask-foot { display: flex; flex-wrap: wrap; gap: var(--s5); align-items: stretch; }
+/* ⚠ THE PAIR NEEDS ROOM ABOVE IT, and it was inheriting a paragraph gap.
+   The coda is a `.copy p`, so the only thing between the section's last sentence
+   and its two controls was `--s3` (16px) — while the section's own bottom
+   padding gives them 56px underneath. Crowded against the prose and adrift from
+   the floor. `--s5` above is the mode change: this is where reading stops and
+   doing starts. */
+.ask-foot {
+  display: flex; flex-wrap: wrap; gap: var(--s5); align-items: stretch;
+  margin-top: var(--s5);
+}
 /* ⚠️ IT USED TO WRAP, and the note here said it "can never" sit beside the button
    in a 542px column. That was true of a figure that stretched to the column. The
    pair now sizes to its contents — 321px button + 36px gap + 104px code = 461 in
