@@ -30,10 +30,16 @@
   var COURIER_INTAKE = 'interest'
 
   /* Where the embedded product is served from. One line to move between the
-     staging build and production. `?layer=` is framed-only, and at the time of
-     writing it is on the trunk but NOT on production — check before flipping:
-       git show origin/main:src/App.jsx | grep -c 'layer=slab'   → 0 means no. */
-  var EMBED_URL       = 'https://jacobeugenehenderson.github.io/lafayette-square-staging/'
+     staging build and production.
+
+     ⭐ PRODUCTION SINCE 2026-08-31. It framed the staging build for a month
+     because `?layer=` lived on the trunk and prod was ~1,750 commits behind;
+     promoting the embed alone would have shipped an unrelated job. That work
+     was promoted, origin/main and the trunk are now the same commit, and the
+     gate this comment used to name passes:
+       git show origin/main:src/App.jsx | grep -c 'layer=slab'   → 2, not 0.
+     ⛔ Re-run that before ever pointing this back at staging. */
+  var EMBED_URL       = 'https://lafayette-square.com/'
   var EMBED_URL_LOCAL = 'http://localhost:5173/'
 
   var isLocal  = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
