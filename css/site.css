@@ -191,32 +191,25 @@ a { color: inherit; }
   font-family: var(--f-sys); font-size: 0.66rem; font-weight: 700;
   letter-spacing: 0.24em; text-transform: uppercase; color: var(--sign);
 }
-/* ⛔⛔ FIVE TILES, AND FIVE DOES NOT DIVIDE — so the tiles SPAN, and every row
-   comes out full. The hairlines here are the grid's own 1px gap over a `--rule`
-   ground, which is what makes a short row unacceptable rather than untidy: an
-   unfilled cell is not empty, it is a solid block of rule colour.
-   ⭐ So the track count is a multiple of the row counts and each tile claims its
-   share: six tracks wide, three tiles of two on the first row and two tiles of
-   three on the second; four tracks narrow, two tiles of two per row and the odd
-   one taking the whole width. Change the number of entries and BOTH `nth-child`
-   rules have to be re-derived — there is no arithmetic here that does it for
-   you, deliberately, because `auto-fit` is the thing that finds the counts that
-   do not divide.
-   ⛔ Never a single column: the whole job of this block is that every
-   destination is visible at once, and a one-up stack is a menu you scroll. */
+/* 3 × 2 on a desktop, 2 × 3 on a phone — six tiles divide by both, so this
+   needs no spans and has none.
+   ⛔ THE ROWS MUST COME OUT FULL, and that is a hard constraint rather than a
+   preference: the hairlines here are the grid's OWN 1px GAP over a `--rule`
+   ground, so an unfilled cell is not empty — it is a solid block of rule
+   colour. The guide was five for an hour and the tiles had to SPAN to cover the
+   rows (six tracks, three tiles of two then two of three). If the count ever
+   stops dividing again, that arithmetic is in `git show d8da945:css/site.css`.
+   ⛔ Never `auto-fit`, for the same reason: it is precisely the thing that finds
+   the counts that do not divide. And never a single column — the whole job of
+   this block is that every destination is visible at once, and a one-up stack
+   is a menu you scroll. */
 .fg-grid {
   list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px; background: var(--rule);
 }
-.fg-grid > li { display: grid; grid-column: span 2; }
-.fg-grid > li:nth-child(n+4) { grid-column: span 3; }
-@media (max-width: 860px) {
-  .fg-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .fg-grid > li,
-  .fg-grid > li:nth-child(n+4) { grid-column: span 2; }
-  .fg-grid > li:nth-child(n+5) { grid-column: span 4; }
-}
+.fg-grid > li { display: grid; }
+@media (max-width: 860px) { .fg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 /* A large, obvious target: the whole cell is the link, not the words in it. */
 .fg-item {
   display: grid; gap: var(--s0); align-content: start;

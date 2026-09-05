@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="css/tokens.css?v=a48754fb40fc">
-<link rel="stylesheet" href="css/site.css?v=39bbee8af88a">
+<link rel="stylesheet" href="css/site.css?v=0d725aa347dd">
   <!-- ⭐ THE MARK'S 16px COUSIN, not the mark shrunk — the band mark's street
        grid turns to mud below about 20px. SVG only, deliberately: it is theme
        aware (a tab bar is dark as often as light) and one file beats a pile of
@@ -108,11 +108,13 @@
        ⛔ IT IS NOT A MENU. It sits in the flow of the page exactly once, at the
        top, and does not follow the reader down; a sticky bar would make it
        chrome, and the whole point is that it is part of the survey.
-       ⚠️ FIVE, NOT SIX, since 2026-09-05 — The Slab stopped being a chapter and
-       became a paragraph inside 04. Five does not tile in a three-column grid,
-       so the tiles SPAN: three across the first row, two across the second, and
-       every row full. See `.fg-grid` in site.css; the hairlines are the grid's
-       own gap, and a short row would show as a hole in it.
+       ⚠️ SIX, AND IT WAS FIVE FOR AN HOUR — The Slab stopped being a chapter and
+       "How It Comes Together" became one, so the count went 6 → 5 → 6. Six
+       tiles in three columns, so `.fg-grid` needs no spans; five did, because
+       the hairlines are the grid's OWN GAP over a `--rule` ground and a short
+       row shows as a solid block of rule colour rather than as nothing. If the
+       count ever leaves a row short again, the span rules are in
+       `git show d8da945:css/site.css`.
        ⭐ 01 IS THE LIVE ONE, AND IT LEADS BECAUSE IT IS WHAT YOU LANDED ON.
        It was 02 for an afternoon, which put the running Ward second in a list
        that sits directly underneath it (Jacob: "if the ward comes first why
@@ -144,13 +146,18 @@
         <span class="fg-t">The Experience</span>
         <span class="fg-s">What people can do</span>
       </a></li>
-      <li><a class="fg-item" href="#host">
+      <li><a class="fg-item" href="#sources">
         <span class="fg-n">04</span>
+        <span class="fg-t">How It Comes Together</span>
+        <span class="fg-s">Data, records, and local knowledge</span>
+      </a></li>
+      <li><a class="fg-item" href="#host">
+        <span class="fg-n">05</span>
         <span class="fg-t">Bring It Somewhere</span>
         <span class="fg-s">Start with a neighborhood</span>
       </a></li>
       <li><a class="fg-item" href="#partner">
-        <span class="fg-n">05</span>
+        <span class="fg-n">06</span>
         <span class="fg-t">Partner</span>
         <span class="fg-s">Build with me</span>
       </a></li>
@@ -373,44 +380,27 @@
     </div>
   </section>
 
-  <!-- ═══ 04 · BRING IT SOMEWHERE ═══════════════════════════════════════
-       ⭐ A CHAPTER THAT DID NOT EXIST, and its absence was the page's largest
-       hole. "Host" appeared three times before it — as the premise of the
-       sources table, as one of four cards in the ask, and as a term in Cary's
-       rules — so a reader who wanted to know what bringing a Ward somewhere
-       MEANS had to assemble it from three rooms.
-       ⭐ AND IT ABSORBED THE SLAB (2026-09-05). The Slab stopped being a
-       chapter of its own; what a reader needs to know about it is exactly what
-       makes a Ward portable, so it is stated here as "Built to travel" and the
-       sources table came with it. That table was §03's second half, and this is
-       the only chapter that would have been left pointing at it.
-       ⛔ THE COPY IS MOSTLY MOVED, NOT WRITTEN. The lede is the line that used
-       to open "Where a Ward Comes From" (Jacob, 2026-08-31), the paragraph
-       under it is the Hosts card out of the ask, and "Built to travel" is
-       Jacob's. ⚠️ One paragraph WAS cut here — a transition I had written that
-       divided the work "the way the sources above do." The sources are no
-       longer above; they are in this section, so the bridge it built is a walk
-       of two lines and the sentence was doing nothing but taking them.
-       ⭐ AND IT TAKES `#host`, which is the URL that was already in the wild.
-       It used to land on the ask — a section that asks for three things, none
-       of which is hosting any more. Anyone who followed that link wanted this. -->
-  <section class="sec" id="host">
-    <p class="plate"><span class="plate-n">04</span><span class="plate-t">Bring It Somewhere</span><span class="plate-s">Start with a neighborhood</span></p>
+  <!-- ═══ 04 · HOW IT COMES TOGETHER ══════════════════════════════════════
+       ⭐ ITS OWN CHAPTER AGAIN (2026-09-05). This material has been three
+       things in a day: the second half of §The Slab, then a run of headings
+       inside §Bring It Somewhere when the Slab chapter was cut, and now a
+       chapter of its own — which is what the table was always big enough to be.
+       ⛔ NO <h2>. The plate says "How It Comes Together" and the heading this
+       section carried said "Where a Ward Comes From", which is the same
+       sentence twice in two type sizes. The plate names it; the lede opens it.
+       Same shape §03 uses. -->
+  <section class="sec" id="sources">
+    <p class="plate"><span class="plate-n">04</span><span class="plate-t">How It Comes Together</span><span class="plate-s">Data, records, and local knowledge</span></p>
     <div class="copy">
-      <p class="lede">A Host is a partner rather than a customer, so every map starts with a conversation about the place, what it needs, and how we can work together to do right by it.</p>
-      <p>A host might be a neighborhood organization, local publication, business district, civic group, city, institution&mdash;or simply someone with enough connection to a place to get the right people around a table.</p>
-
-      <h3>Built to travel</h3>
-      <p>The Ward was designed from the beginning to become more than one neighborhood. Each Ward is built for its particular place, while the underlying system is designed to be reused from neighborhood to neighborhood.</p>
-
-      <h3>Where a Ward Comes From</h3>
-      <p>A Ward is assembled from public data, local records, direct observation, and information supplied by the neighborhood itself.</p>
-      <!-- ⭐ THE ONLY PLACE THE INSTRUMENTS ARE NAMED, as of 2026-09-05. They
-           have moved twice — a tabbed explainer beside the diorama, then a
-           paragraph in §03 — and both of those rooms are gone. This is a
-           section about what builds a Ward, so all four belong in it.
+      <p class="lede">A Ward is assembled from public data, local records, direct observation, and information supplied by the neighborhood itself.</p>
+      <!-- ⭐ THE ONLY PLACE THE INSTRUMENTS ARE NAMED. They have moved twice —
+           a tabbed explainer beside the diorama, then a paragraph in the Slab
+           chapter — and both of those rooms are gone. This is the section about
+           what builds a Ward, so all four belong in it.
            ⚠️ This sentence is the page's whole remaining hold on that
-           vocabulary. Cut it and four named systems become anonymous. -->
+           vocabulary, and it is also the most technical thing left on the page.
+           Cut it and four named systems become anonymous; keep it and it is the
+           one paragraph a reader must take on trust. -->
       <p>The <span class="instrument">Surveyor</span> builds the ground from it &mdash; streets, blocks, parcels, elevation and buildings. The <span class="instrument">Arborist</span> reconstructs the living landscape, placing known trees literally and inferring the rest from canopy, species and local planting data. The <span class="instrument">Meteorologist</span> connects the Ward to local weather and atmospheric conditions. And the <span class="instrument">Designer</span> is where a place&rsquo;s own look is authored on top of it all.</p>
     </div>
 
@@ -510,6 +500,29 @@
     </div>
   </section>
 
+  <!-- ═══ 05 · BRING IT SOMEWHERE ═══════════════════════════════════════════
+       ⭐ A CHAPTER THAT DID NOT EXIST, and its absence was the page's largest
+       hole. "Host" appeared three times before it — as the premise of the
+       sources table, as one of four cards in the ask, and as a term in Cary's
+       rules — so a reader who wanted to know what bringing a Ward somewhere
+       MEANS had to assemble it from three rooms.
+       ⛔ THE COPY IS MOVED, NOT WRITTEN. The lede is the line that used to open
+       "Where a Ward Comes From" (Jacob, 2026-08-31) and the paragraph under it
+       is the Hosts card out of the ask. "Built to travel" is Jacob's.
+       ⭐ AND IT TAKES `#host`, which is the URL that was already in the wild.
+       It used to land on the ask — a section that asks for three things, none
+       of which is hosting any more. Anyone who followed that link wanted this. -->
+  <section class="sec" id="host">
+    <p class="plate"><span class="plate-n">05</span><span class="plate-t">Bring It Somewhere</span><span class="plate-s">Start with a neighborhood</span></p>
+    <div class="copy">
+      <p class="lede">A Host is a partner rather than a customer, so every map starts with a conversation about the place, what it needs, and how we can work together to do right by it.</p>
+      <p>A host might be a neighborhood organization, local publication, business district, civic group, city, institution&mdash;or simply someone with enough connection to a place to get the right people around a table.</p>
+
+      <h3>Built to travel</h3>
+      <p>The Ward was designed from the beginning to become more than one neighborhood. Each Ward is built for its particular place, while the underlying system is designed to be reused from neighborhood to neighborhood.</p>
+    </div>
+  </section>
+
   <!-- ⭐ THE ASK IS THE LAST THING, AND IT IS ITS OWN ROOM. It sat mid-page
        inside the host section with two more sections after it — the page made
        its request and then kept talking. And the address was stranded a second
@@ -526,7 +539,7 @@
        background.") The anchor does the whole job, and cannot drift out of
        sync with the page the way a second copy would. -->
   <section class="sec sec--ask" id="partner">
-    <p class="plate"><span class="plate-n">05</span><span class="plate-t">Partner</span><span class="plate-s">Build with me</span></p>
+    <p class="plate"><span class="plate-n">06</span><span class="plate-t">Partner</span><span class="plate-s">Build with me</span></p>
     <div class="copy">
       <h2>It&rsquo;s going to take a village.</h2>
       <p class="lede">The Ward is a working system, but no one person can take it everywhere it could go. We&rsquo;re looking for people who can help build the next part of it: people with neighborhoods, resources, expertise, relationships, or simply a strong instinct that this ought to exist.</p>
