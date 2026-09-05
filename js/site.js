@@ -233,6 +233,15 @@
        Set the attribute; verify against computed display.
        Archived: git show HEAD:js/site.js */
 
+    /* ⛔ THE /works RAIL IS GONE (2026-09-05). Six stages behind six tabs, with
+       every panel shipped visible and collapsed here so the page without
+       JavaScript was long rather than broken. The prospectus walks its reader
+       through the pipeline linearly now, so there is nothing to collapse.
+       ⭐ Keep the pattern in mind rather than the code: the markup ships in its
+       working state and the script REDUCES it. A stylesheet that hid the panels
+       by default would have hidden them for good the day this file failed to
+       run. Archived: git show HEAD:js/site.js */
+
     // ── the ticker, ticking. Slow enough to read; still if asked. ────────
     var slot = document.querySelector('[data-ticker]')
     if (slot && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

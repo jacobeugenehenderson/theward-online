@@ -18,7 +18,13 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 # than no lint, because the green line still prints.
 # ⭐ So the page list is the FILESYSTEM. A page added tomorrow is covered on the
 # day it lands, with nothing to remember.
-PAGES = {f.name: f.read_text() for f in sorted(ROOT.glob('*.html'))}
+# ⭐ AND EVERY DEPTH, not just the root. `works/index.html` is a page; a glob
+# that stops at the top level would have covered none of it — the same silent
+# failure this comment was written about, one directory down.
+PAGES = {str(f.relative_to(ROOT)): f.read_text()
+         for f in sorted(ROOT.glob('**/*.html'))
+         if not any(part.startswith('.') or part == 'node_modules'
+                    for part in f.relative_to(ROOT).parts)}
 html = '\n'.join(PAGES.values())            # the checks that are about the whole site
 index = PAGES['index.html']                  # the ones that are about the front page
 site = (ROOT / 'css/site.css').read_text()
@@ -164,8 +170,16 @@ check('unique ids', not dup_ids, f'{dup_ids}')
 check('anchor', not dead_anchors, f'{dead_anchors}')
 
 # ── every referenced local asset exists ─────────────────────────────────────
-missing = [src for src in re.findall(r'(?:src|href)="((?:assets|css|js)/[^"?]+)', html)
-           if not (ROOT / src).exists()]
+# ⚠️ RESOLVED AGAINST THE PAGE, NOT THE ROOT. A page in a subdirectory reaches
+# the assets relatively — `works/index.html` links `../css/site.css` — and the
+# old root-anchored pattern did not even MATCH those, so it reported ok by
+# looking at nothing. Same class of failure as a glob that stops at the top.
+missing = []
+for name, page in PAGES.items():
+    here = (ROOT / name).parent
+    for src in re.findall(r'(?:src|href)="((?:\.\./)*(?:assets|css|js)/[^"?]+)', page):
+        if not (here / src).resolve().exists():
+            missing.append(f'{name} → {src}')
 check('assets', not missing, f'{missing}')
 
 # ── the site names no town ──────────────────────────────────────────────────
@@ -186,9 +200,22 @@ JURISDICTION = {'missouri', 'st. louis', 'st louis'}
 # retire the rule on the one page it exists for; exempting a marked element keeps
 # every other sentence honest and makes the exception visible in the markup, where
 # the next person edits. Remove the attribute and the audit fails again.
+# ⚠️ AND ONE PAGE IS SCOPED WHOLE, PROVISIONALLY. `works/index.html` is a
+# technical prospectus whose central rhetorical move is arguing FROM the
+# instance — "One neighborhood is the proof" — so it names the town on nearly
+# every screen. Marking each mention would be noise pretending to be discipline.
+# ⛔ THIS IS THE WEAKEST EXEMPTION IN THIS FILE and it is deliberately the only
+# whole-page one: the front page's rule exists because naming a town collapses
+# the KIT into one instance, and that argument does not apply to a document
+# about how the instance was built. Jacob, 2026-09-05: "let's see how it
+# actually looks/works in situ" — revisit once it has been looked at, and prefer
+# `data-names-instance` on the handful of elements that really need it if the
+# count turns out to be small.
+TOWN_EXEMPT_PAGES = {'works/index.html'}
 INSTANCE_NOTE = re.compile(r'<([a-zA-Z][\w-]*)\b[^>]*\bdata-names-instance\b.*?</\1\s*>', re.S)
 town_fails = {}
 for name, page in PAGES.items():
+    if name in TOWN_EXEMPT_PAGES: continue
     body_ = page[page.find('<body'):] if '<body' in page else page
     body_ = INSTANCE_NOTE.sub(' ', body_)
     words = re.findall(TOWNS, re.sub(r'<[^>]+>', ' ', body_), re.I)

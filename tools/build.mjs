@@ -11,9 +11,9 @@
  *
  *   node tools/build.mjs [--check]
  */
-import { readFileSync, writeFileSync } from 'node:fs'
+import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
 import { createHash } from 'node:crypto'
-import { dirname, resolve } from 'node:path'
+import { dirname, relative, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { execFileSync } from 'node:child_process'
 
@@ -32,8 +32,20 @@ for (const tool of ['build-sources.mjs', 'build-vignettes.mjs']) {
   execFileSync('node', [resolve(ROOT, 'tools', tool), ...args], { stdio: 'inherit', cwd: ROOT })
 }
 
-const indexPath = resolve(ROOT, 'index.html')
-let html = readFileSync(indexPath, 'utf8')
+/* ⛔⛔ EVERY PAGE, NOT JUST THE FRONT ONE — and this was a live bug, not a
+   tidy-up. The stamper read `index.html` alone while `tools/audit.py` had long
+   since been generalised to the whole filesystem, so `legal.html` was shipping
+   `css/site.css?v=23e1c57863ac` — a hash from an older build. The stamp exists
+   to make a stale cached copy IMPOSSIBLE, and on that page it was doing the
+   exact opposite: pinning returning visitors to whatever CSS they had cached
+   under that URL, for ever, with the audit reporting green.
+   ⭐ The page list is the FILESYSTEM now, the same rule the audit already
+   follows, so the page added tomorrow is covered on the day it lands. */
+const pages = readdirSync(ROOT, { recursive: true, withFileTypes: true })
+  .filter(d => d.isFile() && d.name.endsWith('.html'))
+  .map(d => relative(ROOT, resolve(d.parentPath ?? d.path, d.name)))
+  .filter(p => !p.split(sep).some(seg => seg.startsWith('.') || seg === 'node_modules'))
+  .sort()
 
 /* ⛔ THE STAMP IS A CONTENT HASH, NOT AN MTIME, AND THAT IS THE WHOLE POINT.
    It was `?v=<mtimeMs>` until 2026-08-23, which is not a fact about the file's
@@ -47,16 +59,30 @@ let html = readFileSync(indexPath, 'utf8')
 const stamp = path => createHash('sha256')
   .update(readFileSync(resolve(ROOT, path))).digest('hex').slice(0, 12)
 
-const stamped = html.replace(
-  /(href|src)="((?:css|js)\/[a-z0-9._-]+)(?:\?v=[a-z0-9]+)?"/gi,
-  (_, attr, path) => `${attr}="${path}?v=${stamp(path)}"`
-)
+/* ⚠️ A PAGE IN A SUBDIRECTORY REACHES THE ASSETS RELATIVELY — `works/index.html`
+   links `../css/site.css`. The `../` prefix is captured and handed straight back,
+   while the hash is taken from the path RESOLVED against the page's own folder,
+   so one regex serves both depths and neither has to be special-cased. */
+let stale = 0, count = 0
+for (const page of pages) {
+  const file = resolve(ROOT, page)
+  const html = readFileSync(file, 'utf8')
+  const dir = dirname(file)
+  const next = html.replace(
+    /(href|src)="((?:\.\.\/)*)((?:css|js)\/[a-z0-9._-]+)(?:\?v=[a-z0-9]+)?"/gi,
+    (_, attr, up, path) => {
+      count++
+      return `${attr}="${up}${path}?v=${stamp(relative(ROOT, resolve(dir, up + path)))}"`
+    }
+  )
+  if (next === html) continue
+  stale++
+  if (!CHECK) writeFileSync(file, next)
+}
 
 if (CHECK) {
-  if (stamped !== html) { console.error('\n  asset stamps are STALE. Run: node tools/build.mjs\n'); process.exit(1) }
-  console.log('asset stamps: up to date')
+  if (stale) { console.error(`\n  asset stamps are STALE in ${stale} page(s). Run: node tools/build.mjs\n`); process.exit(1) }
+  console.log(`asset stamps: up to date (${pages.length} pages)`)
 } else {
-  writeFileSync(indexPath, stamped)
-  const n = (stamped.match(/\?v=[a-z0-9]+/g) || []).length
-  console.log(`asset stamps: ${n} local assets versioned`)
+  console.log(`asset stamps: ${count} links versioned across ${pages.length} pages`)
 }

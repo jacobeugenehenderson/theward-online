@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Works &mdash; The Ward</title>
+<meta name="description" content="A technical prospectus for The Ward: how a real neighborhood is constructed, staged, baked and served — and what it buys to begin with place rather than with people.">
+<!-- ⛔ NOINDEX, AND IT IS THE POINT. This is an unlisted URL, sent to a person
+     rather than published (Jacob, 2026-09-05). Nothing on theward.online links
+     here, and it stays out of the index until that changes.
+     ⭐ IT STILL CARRIES OG TAGS, and that is not a contradiction: the whole use
+     of an unlisted link is that someone forwards it, so the card a text message
+     shows is exactly the thing that has to be right. `noindex` governs crawlers;
+     it does not govern iMessage. -->
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Ward">
+<meta property="og:url" content="https://theward.online/works/">
+<meta property="og:title" content="The Ward — A Technical Prospectus">
+<meta property="og:description" content="What it takes to construct a real neighborhood: the pipeline, the instruments, and what begins with place rather than with people.">
+<meta property="og:image" content="https://theward.online/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Ward's mark: a heavy ring open at the top, a faint street grid across its centre, and an amber light in the gap.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="../css/tokens.css?v=a48754fb40fc">
+<link rel="stylesheet" href="../css/site.css?v=99ea2f8a9037">
+  <!-- Same mark, same stamped stylesheets as index.html — this page is the site,
+       not a document that happens to live next to it.
+       ⚠️ `../` because this page is a DIRECTORY, so the URL is /works with no
+       extension. tools/build.mjs stamps the prefix and resolves the hash against
+       this folder; tools/audit.py checks the asset exists the same way. Both
+       were root-only until this page arrived and both reported green on nothing. -->
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="shell">
+  <div class="band">
+    <svg class="band-mark" viewBox="0 0 120 120" role="img" aria-label="The Ward">
+      <defs><clipPath id="mark-clip"><circle cx="60" cy="60" r="40"/></clipPath></defs>
+      <path d="M76.8 14 A 49 49 0 1 1 43.2 14" fill="none" stroke="currentColor" stroke-width="11"/>
+      <g clip-path="url(#mark-clip)" stroke="currentColor" stroke-width="2.5" opacity="0.5">
+        <path d="M38 8 V112 M82 8 V112 M8 38 H112 M8 82 H112"/>
+      </g>
+      <circle cx="60" cy="14" r="9.5" fill="var(--live)"/>
+    </svg>
+    <span class="band-text">
+      <span class="band-name">The Ward</span>
+      <span class="band-meta"><a href="../">Digital presence for real neighborhoods</a></span>
+    </span>
+  </div>
+</header>
+
+<main class="shell" id="main">
+
+  <!-- ═══ THE TITLE AND THE THESIS ═══════════════════════════════════════
+       ⛔ NO DEVICES HERE, ON PURPOSE. This is the strongest writing in the
+       document and it arrives undecorated: no movement mark, no figure, no
+       number. The page makes its claim before it demonstrates anything. -->
+  <section class="sec pro-head">
+    <p class="pro-kicker">A Technical Prospectus</p>
+    <h1>A different kind of digital place</h1>
+    <div class="copy">
+      <p>Most digital systems begin with people: accounts, identities, profiles, relationships, permissions and activity. Place, when it appears, is usually context&mdash;a location attached to something else.</p>
+      <p>The Ward begins somewhere else.</p>
+      <p class="pull">Place is the primary object.</p>
+      <p>The Ward starts by constructing the place itself. Everything else&mdash;people, businesses, events, exchanges&mdash;belongs to that place.</p>
+      <p>That choice shapes the technology. The system can know a great deal about a neighborhood without needing to know a great deal about the people using it.</p>
+    </div>
+  </section>
+
+  <!-- ⭐ FOUR LINES, NOT TILES. The Field Guide idiom belongs to the front page
+       and the two should not compete: that one is a legend for a survey a
+       stranger is about to walk, this is a contents note for a document one
+       person was sent. It says how long the read is and in what order. -->
+  <nav class="pro-index" aria-label="Contents">
+    <a href="#made-from"><span class="pro-index-n">I</span><span class="pro-index-t">What it&rsquo;s made from</span></a>
+    <a href="#how"><span class="pro-index-n">II</span><span class="pro-index-t">How a place is made</span></a>
+    <a href="#buys"><span class="pro-index-n">III</span><span class="pro-index-t">What that buys</span></a>
+    <a href="#why-one"><span class="pro-index-n">IV</span><span class="pro-index-t">Where it goes</span></a>
+  </nav>
+
+  <!-- ═══ I ══════════════════════════════════════════════════════════════
+       ⭐ THE SOURCES TABLE LIVES HERE, moved off theward.online (Jacob,
+       2026-09-05: "I think it goes better in this milieu anyway"). On the front
+       page it was a fourteen-row provenance audit in the middle of a pitch —
+       the most technical object on a page written for someone deciding whether
+       to care. Here it is evidence in a document written for someone deciding
+       whether it is real, and it stands directly under the argument it proves.
+       ⛔ IT IS GENERATED, NOT WRITTEN. tools/build-sources.mjs reads GROUPS out
+       of the product's own SourcesPanel.jsx and writes between the markers
+       below. An unclassified source BREAKS THE BUILD rather than silently
+       publishing something unverified or silently dropping something real. -->
+  <section class="sec" id="made-from">
+    <p class="movement"><span class="movement-n">I</span><span class="movement-t">What it&rsquo;s made from</span></p>
+    <div class="copy">
+      <h2>We start with what&rsquo;s already there.</h2>
+      <p class="lede">A neighborhood does not have to be invented from scratch.</p>
+      <p>We begin with what we can learn about the place: public data and records, direct observation, and information from the neighborhood itself. Streets, parcels, buildings, elevation and trees give us a foundation; local knowledge fills in what the records cannot.</p>
+      <p>Cartograph brings those sources together and turns them into a working model of the neighborhood.</p>
+      <p class="pull">The source material is only the beginning.</p>
+      <p>The work is in making sense of it: reconciling different sources, filling gaps, correcting what needs correcting, and making the information agree with the place.</p>
+    </div>
+
+    <div class="tblock">
+          <!-- No title here: the section's own <h2> says it, and this sat four lines
+               under it saying the same words. The LEGEND is what this row is for. -->
+          <div class="tblock-head">
+            <span class="tblock-legend">
+              <span><span class="dot dot-on"></span>arrives on its own</span>
+              <span><span class="dot"></span>you go and get it</span>
+            </span>
+          </div>
+    <!-- SOURCES:BEGIN — generated by tools/build-sources.mjs. Do not edit by hand. -->
+        <div class="tier">
+          <span class="tier-name">Automatic</span>
+          <p class="tier-say">Some of the foundation is already there. Streets, buildings, elevation, land cover, and other large-scale geographic data can be drawn from open datasets.</p>
+          <div class="row">
+            <span class="r-name"><span class="dot dot-on"></span>Street &amp; building base</span>
+            <span class="r-src"><span>OpenStreetMap <em>— global</em></span></span>
+            <span class="r-terms">ODbL · free · no account</span>
+          </div>
+          <div class="row">
+            <span class="r-name"><span class="dot dot-on"></span>Building footprints</span>
+            <span class="r-src"><span>Microsoft Global ML Footprints</span></span>
+            <span class="r-terms">free · no account</span>
+          </div>
+        </div>
+        <div class="tier">
+          <span class="tier-name">Public records</span>
+          <p class="tier-say">Other information belongs to the place. Parcels, zoning, trees, historic designations, and similar records come from the agencies and institutions that maintain them.</p>
+          <div class="row">
+            <span class="r-name"><span class="dot dot-on"></span>Ground elevation</span>
+            <span class="r-src"><span>USGS 3DEP <em>— US</em></span><span>any GeoTIFF <em>— the reader is source-agnostic</em></span></span>
+            <span class="r-terms">public domain · free</span>
+          </div>
+          <div class="row">
+            <span class="r-name"><span class="dot"></span>Parcels, zoning, year built</span>
+            <span class="r-src"><span>the county assessor <em>— per jurisdiction</em></span></span>
+            <span class="r-terms">public record</span>
+          </div>
+          <div class="row">
+            <span class="r-name"><span class="dot"></span>Tree census</span>
+            <span class="r-src"><span>OpenStreetMap <em>— real trunk positions</em></span><span>city forestry inventory</span><span>authored park census <em>— hand-curated for a signature park</em></span><span>a public-records request <em>— when the contractor never published it</em></span></span>
+            <span class="r-terms">free · no key</span>
+          </div>
+          <div class="row">
+            <span class="r-name"><span class="dot dot-on"></span>Canopy raster</span>
+            <span class="r-src"><span>NLCD Tree Canopy (USDA) <em>— US</em></span><span>ESA WorldCover <em>— 10 m · global</em></span></span>
+            <span class="r-terms">public domain · CC BY</span>
+          </div>
+          <div class="row">
+            <span class="r-name"><span class="dot dot-on"></span>Historic designation</span>
+            <span class="r-src"><span>National Register (NPS)</span></span>
+            <span class="r-terms">public record · free</span>
+          </div>
+          <div class="row">
+            <span class="r-name"><span class="dot dot-on"></span>Street lamps</span>
+            <span class="r-src"><span>OpenStreetMap</span></span>
+            <span class="r-terms">free · no account</span>
+          </div>
+          <div class="row">
+            <span class="r-name"><span class="dot"></span>Facade imagery</span>
+            <span class="r-src"><span>Mapillary <em>— street-level</em></span></span>
+            <span class="r-terms">free account · API key</span>
+          </div>
+          <div class="row">
+            <span class="r-name"><span class="dot"></span>Species dossiers</span>
+            <span class="r-src"><span>USDA PLANTS</span><span>Silvics of North America <em>— USDA Forest Service</em></span><span>i-Tree Species <em>— USFS</em></span></span>
+            <span class="r-terms">free</span>
+          </div>
+          <div class="row">
+            <span class="r-name"><span class="dot"></span>Species routing</span>
+            <span class="r-src"><span>the city planting list <em>— with hardiness zone</em></span></span>
+            <span class="r-terms">free</span>
+          </div>
+        </div>
+        <div class="tier">
+          <span class="tier-name">Local knowledge</span>
+          <p class="tier-say">The rest comes from the neighborhood itself. Businesses, menus, photographs, landmarks, names, habits, and the details that distinguish one place from another.</p>
+          <div class="row">
+            <span class="r-name"><span class="dot"></span>Businesses &amp; hours</span>
+            <span class="r-src"><span>Overture Places</span><span>OpenStreetMap POIs</span></span>
+            <span class="r-terms">free</span>
+          </div>
+          <div class="row">
+            <span class="r-name"><span class="dot"></span>Menus</span>
+            <span class="r-src"><span>the restaurant <em>— no endpoint exists</em></span></span>
+            <span class="r-terms">—</span>
+          </div>
+          <div class="row">
+            <span class="r-name"><span class="dot"></span>Photographs &amp; logos</span>
+            <span class="r-src"><span>the business <em>— credit their domain · never hotlink</em></span><span>Wikimedia Commons <em>— for landmarks</em></span></span>
+            <span class="r-terms">free</span>
+          </div>
+        </div>
+        <!-- SOURCES:END -->
+        </div>
+  </section>
+
+  <!-- ═══ II ═════════════════════════════════════════════════════════════
+       ⛔⛔ THE PIPELINE RAIL IS GONE (2026-09-05), and it was mine rather than
+       Jacob's: Intake / Skeleton / Survey / Wall / Section / Stage / Slab as
+       seven tabs with an Answers-Produces-Limits spec apiece. It was a good
+       instrument for the wrong reader. Jacob: "they are not seven useful things
+       for this reader to operate." A prospectus reader is not learning to drive
+       Cartograph; they are being walked through it once.
+       ⭐ SO THE WALKTHROUGH IS LINEAR AND IT IS THREE VERBS: draw the place,
+       furnish it, paint it. Survey, Section, Stage — each with an image, each
+       arriving in the order the work actually happens.
+       ⛔ SKELETON AND THE DATA WALL ARE NO LONGER PUBLIC VOCABULARY. They are
+       load-bearing internal architecture and they stay that way; they simply do
+       not need to become concepts this document teaches. The capability is
+       still visible — "resolves and freezes the underlying street structure" —
+       without publishing the recipe.
+       ⭐ AND THE SUMMARY COMES LAST. The rail handed a reader seven nouns up
+       front and asked them to learn the vocabulary before seeing anything. The
+       one-line map at the foot of this movement says the same thing to someone
+       who has now watched it happen. -->
+  <section class="sec" id="how">
+    <p class="movement"><span class="movement-n">II</span><span class="movement-t">How a place is made</span></p>
+    <div class="copy">
+      <h2>Cartograph</h2>
+      <p class="lede">Cartograph is the environment used to construct a digital place.</p>
+      <p>It begins with geographic information and ends with an authored, real-time representation of a neighborhood.</p>
+      <p class="pull">First we build the place, then we light it.</p>
+      <p>The Ward spends complexity upstream so the experience downstream can remain simple. Each step inherits a result, not the complexity that produced it. By the time a place reaches the browser, the work of constructing it is finished.</p>
+    </div>
+
+    <!-- ⚠️ PRODUCTION NOTE — SURVEY AND SECTION MUST BE THE SAME VIEW. The whole
+         argument of these two figures is that the second is the first with the
+         pedestrian world added; two different corners of the neighborhood would
+         make it two unrelated screenshots of a tool. Same extent, same zoom. -->
+    <figure class="fig-slot"><figcaption>Cartograph &mdash; Survey. The street network resolved into blocks, curbs and corners.</figcaption></figure>
+    <div class="copy">
+      <h3>Survey &mdash; draw the place</h3>
+      <p>Most digital maps are made to help you find something or get somewhere. They can simplify, standardize and omit much of the physical character of a place because that character isn&rsquo;t necessary to the job.</p>
+      <p>Survey has a different job. It builds a map meant to be looked at: one where the shape of a block, the sweep of a curb and the particular geometry of a street are part of the picture.</p>
+    </div>
+
+    <figure class="fig-slot"><figcaption>Cartograph &mdash; Section. The same blocks, furnished inward from the curb.</figcaption></figure>
+    <div class="copy">
+      <h3>Section &mdash; build the ground</h3>
+      <p>With the street plan established, Section builds the ground around it: sidewalks, treelawns, accessible corners, setbacks, and the other elements that give each block its physical structure.</p>
+      <p>It begins with the best available information, then gives the operator the tools to make it agree with the place.</p>
+    </div>
+
+    <!-- ⭐ A THRESHOLD, NOT A SECTION. Everything above it is 2D and everything
+         below it is not, and that is the single most dramatic thing that happens
+         in the whole process — so it INTERRUPTS the page instead of being
+         explained by it. No prose, no heading, no figure. Jacob: "This should
+         interrupt the page." -->
+    <p class="threshold">
+      <span>2D construction</span>
+      <span class="threshold-act">Bake into 3D</span>
+      <span>3D authoring</span>
+    </p>
+
+    <!-- ⚠️ PRODUCTION NOTE — THE BEST VERSION OF THIS FIGURE IS NOT A UI
+         SCREENSHOT. One locked camera, the same neighborhood, several hours of
+         the day, side by side or in sequence. The claim is that the image is
+         part of the product, and a picture of a control panel argues the
+         opposite. Eventually an actual scrub. -->
+    <figure class="fig-slot fig-slot--big"><figcaption>Cartograph &mdash; Stage. One camera, one neighborhood, across the day.</figcaption></figure>
+    <div class="copy">
+      <h3>Stage &mdash; light the place</h3>
+      <p>The resolved place becomes a 3D environment. Its geometry is settled; now the operator authors materials, light, sky, atmosphere, cameras and the neighborhood&rsquo;s changing appearance across the day.</p>
+      <p>The tools are closer to cinema and real-time graphics than conventional cartography. A Look can change continuously from dawn through daylight, golden hour, dusk and night.</p>
+      <p class="pull">Form and function are finally friends.</p>
+      <p class="fig-note">Cinema-grade lighting, atmosphere, camera and post-production controls.</p>
+    </div>
+
+    <p class="threshold">
+      <span>Authoring</span>
+      <span class="threshold-act">Bake for runtime</span>
+      <span>The Slab</span>
+    </p>
+
+    <figure class="fig-slot"><figcaption>Preview &mdash; the Slab through the production renderer, with its costs exposed.</figcaption></figure>
+    <div class="copy">
+      <h3>Preview &mdash; prove the place</h3>
+      <p>Preview is Cartograph&rsquo;s own testing environment. Every Slab is different, but the things that need testing are predictable.</p>
+      <p>It brings those tests together in one place: GPU load, frame time, individual layers, camera states, different moments of the day, and the other conditions that determine how a Slab performs in production.</p>
+      <p class="pull">Aesthetics and performance are co-equal and non-negotiable.</p>
+
+      <h3>The Slab &mdash; what ships</h3>
+      <p>The Slab is the condensed result of that process. It contains what the runtime needs, rather than the systems and reasoning that produced it.</p>
+      <p>By the time a place reaches the browser, the work of constructing it is finished.</p>
+    </div>
+
+    <!-- ⭐ THE MAP ARRIVES AFTER THE JOURNEY, NOT BEFORE IT. This is the same
+         sequence the rail used to hand a reader up front as seven boxes to
+         learn. Read here it is a caption for something they have just watched,
+         which is why it can be one line and no explanation. -->
+    <p class="walk-coda">Inputs &rarr; Survey &rarr; Section &rarr; 3D &rarr; Stage &rarr; Preview &rarr; Slab</p>
+  </section>
+
+  <!-- ═══ III ════════════════════════════════════════════════════════════ -->
+  <section class="sec" id="buys">
+    <p class="movement"><span class="movement-n">III</span><span class="movement-t">What that buys</span></p>
+    <div class="copy">
+      <h2>More than one instrument</h2>
+      <p class="lede">Cartograph constructs the physical place, but the larger system is deliberately modular.</p>
+    </div>
+
+    <!-- ⭐ REDRAWN 2026-09-05. The first version had Stage standing beside
+         Cartograph as a peer producer, which is true of the code and false of
+         the story this document has just told: Movement II establishes Stage as
+         part of Cartograph's own authoring process, so promoting it here made
+         the estate look more fragmented than it is.
+         ⭐ Three instruments converge on THE PLACE; the Player carries it to a
+         browser; The Ward is what gets built on it. The convergence is the
+         argument — Arborist and Meteorologist publish INTO a place rather than
+         into each other, which is exactly why they can detach and serve
+         something that is not The Ward.
+         ⛔ Drawn flat, in currentColor and token values — a wayside diagram in
+         the page's own ink, never a product render. -->
+    <figure class="diagram">
+      <svg viewBox="0 0 640 300" role="img" aria-labelledby="dia-t">
+        <title id="dia-t">Cartograph, Arborist and Meteorologist converge on the place. The Universal Player carries the place to the browser, and The Ward is built on it.</title>
+        <g fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="4"   y="4" width="196" height="46"/>
+          <rect x="222" y="4" width="196" height="46"/>
+          <rect x="440" y="4" width="196" height="46"/>
+          <path d="M102 50 V78 M320 50 V78 M538 50 V78 M102 78 H538 M320 78 V100 M314 94 L320 100 L326 94"/>
+          <rect x="140" y="100" width="360" height="46"/>
+          <path d="M320 146 V174 M314 168 L320 174 L326 168"/>
+          <rect x="140" y="174" width="360" height="46"/>
+          <path d="M320 220 V248 M314 242 L320 248 L326 242"/>
+          <rect x="140" y="248" width="360" height="46"/>
+        </g>
+        <g class="dia-t" fill="currentColor" text-anchor="middle">
+          <text x="102" y="33">Cartograph</text>
+          <text x="320" y="33">Arborist</text>
+          <text x="538" y="33">Meteorologist</text>
+          <text x="320" y="129">The place</text>
+          <text x="320" y="203">Universal Player</text>
+          <text x="320" y="277">The Ward</text>
+        </g>
+      </svg>
+      <figcaption>Three instruments converge on a place. Nothing publishes sideways into another&rsquo;s editing environment.</figcaption>
+    </figure>
+
+    <div class="copy">
+      <!-- ⛔ NO INVENTORY. A paragraph naming what each instrument does sat here
+           and the diagram above says the same thing in one glance — Jacob,
+           2026-09-05: "(omitting inventory)". A picture and its own transcript
+           is one of them too many. -->
+      <p>Arborist and Meteorologist are being built as resources in their own right. The Ward is their first client, not necessarily their last.</p>
+
+      <h3>Place changes the data problem</h3>
+      <p>The Ward can know a great deal about a neighborhood without knowing very much about the people using it.</p>
+      <p>Person-level information can therefore be reserved for the functions that actually require it.</p>
+      <p class="pull">When place is the primary object, people do not have to become data merely to make the place useful.</p>
+
+    </div>
+  </section>
+
+  <!-- ═══ IV ═════════════════════════════════════════════════════════════
+       ⛔ THIS MOVEMENT WAS REPLACED WHOLE (2026-09-05). It ran "Scale without
+       sameness" → "Lafayette Square is the proof" → "What has been built" and
+       took three headings to say one thing.
+       ⚠️ TWO LINES WENT WITH IT that had been asked for by name an hour earlier:
+       "The architecture is the deliverable. Lafayette Square is the v1
+       instance." and "What if the internet could become better at being
+       somewhere?" Both were good and both are gone — recorded here rather than
+       quietly dropped, because they are the kind of line that gets asked after.
+       ⭐ AND THE ASK NOW FOLLOWS IMMEDIATELY. "Then immediately: Build with The
+       Ward" — no rule, no breath, no summary in between. The movement about
+       travelling somewhere else ends by asking where. -->
+  <section class="sec" id="why-one">
+    <p class="movement"><span class="movement-n">IV</span><span class="movement-t">Where it goes</span></p>
+    <div class="copy">
+      <h2>Built to travel</h2>
+      <p class="lede">Lafayette Square is the first Ward. Cartograph and the systems around it were built to be used again.</p>
+      <p>What travels is the machinery. What changes is the place: its geography, landscape, businesses, institutions, local knowledge and visual character.</p>
+      <p class="pull">Each Ward is built from the same system, not from the same neighborhood.</p>
+    </div>
+
+    <!-- ⚠️ PRODUCTION NOTE — TWO WARDS, SIDE BY SIDE, and eventually three very
+         different ones. This is the one figure in the document where the visual
+         proof is worth more than any paragraph could be: the argument is that
+         the system travels and the places do not resemble each other, and a
+         reader either sees that in one glance or does not believe it.
+         ⭐ Hi-Pointe–DeMun already has a baked Look in the product, so this is a
+         capture rather than a build. -->
+    <figure class="fig-slot fig-slot--big"><figcaption>Lafayette Square beside Hi-Pointe&ndash;DeMun. The same system; nothing else in common.</figcaption></figure>
+  </section>
+
+  <!-- ═══ THE ASK ════════════════════════════════════════════════════════
+       ⭐ THE SAME ROOM AS THE FRONT PAGE'S, wholesale (Jacob, 2026-09-05: "we
+       can steal the contact section", and later "keep the existing contact
+       treatment wholesale"). Same `.sec--ask` ground, same rule, same paired
+       controls at the same height with a label apiece — so a reader who has
+       seen both pages meets one address rather than two.
+       ⛔ The QR comes too. It looks redundant on a link somebody was SENT, but
+       the two controls are one form — a mail client and a phone — and dropping
+       either leaves an orphaned single button where a pair used to be. -->
+  <section class="sec sec--ask" id="build">
+    <div class="copy">
+      <h2>Build with The Ward</h2>
+      <p class="lede">The next step is more places.</p>
+      <p>That means partners who can help bring a Ward to a neighborhood, strengthen the underlying technology, develop the standalone instruments, or provide the infrastructure and capital to take the system further.</p>
+      <p class="ways">Places &middot; Technology &middot; Data &middot; Infrastructure &middot; Capital</p>
+      <div class="ask-foot">
+        <figure class="reach">
+          <a class="cta" href="mailto:jacob@theward.online?subject=Let%E2%80%99s%20talk%20about%20The%20Ward.">Start a conversation</a>
+          <figcaption>Email</figcaption>
+        </figure>
+        <figure class="qr reach">
+          <a href="sms:+18773351917">
+            <img src="../assets/message.png" width="104" height="104" decoding="async"
+                 alt="A QR code that opens a text message to (877) 335-1917.">
+          </a>
+          <figcaption>Text</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="shell">
+  <div class="colophon">
+    <div class="colophon-row">
+      <span class="colophon-k">Legal</span>
+      <span>What you may and may not rely on here, what belongs to whom, and what visiting or discussing The Ward does and does not establish. <a href="../legal.html">Read the terms &rarr;</a></span>
+    </div>
+    <div class="colophon-foot">
+      <span>&copy; 2026 <a href="https://jacobhenderson.studio">Jacob Henderson</a> LLC</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/site.js?v=74478acdabfa"></script>
+</body>
+</html>

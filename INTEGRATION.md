@@ -330,10 +330,18 @@ the smudge back.
 
 ## 4. Generated, never restated
 
-One block on this page is built from the product's own source, so it cannot
+One block on this site is built from the product's own source, so it cannot
 drift:
 
 - **the sources table** ← `src/cartograph/SourcesPanel.jsx`'s `GROUPS`
+
+⚠️ **It is no longer on the front page.** It moved to `/works` on 2026-09-05, as
+the Intake stop of the construction rail — a fourteen-row provenance audit is
+evidence in a technical prospectus and was the most technical object on a page
+written for someone deciding whether to care. The generator's target is a
+constant (`WARD_SOURCES_PAGE` overrides it) rather than a search for its own
+markers, because a generator that hunts for them will write into the wrong file
+the day a second page grows a copy.
 
 ⛔ **THERE WERE TWO.** `tools/build-sky.mjs` extracted
 `src/cartograph/skyGrid.js`'s `ANCHOR_CARDS_PROCEDURAL` — four seasons ×

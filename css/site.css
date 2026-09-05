@@ -816,6 +816,165 @@ a { color: inherit; }
 
 */
 
+/* 10d ── the prospectus (/works) ────────────────────────────────────────
+   A second register on the same paper. The front page is a survey panel you
+   walk; this is a document one person was sent, so it is quieter: no eyebrows,
+   no amber, longer measure, and the only ornament is the rail. Everything here
+   is prefixed `pro-`, `rail-`, `fig-` or `diagram` so it cannot leak onto
+   index.html by accident. */
+.pro-head { padding-bottom: var(--s4); }
+.pro-kicker {
+  font-family: var(--f-sys); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.24em; text-transform: uppercase; color: var(--sign);
+  margin: 0 0 var(--s2);
+}
+.pro-head h1 {
+  font-family: var(--f-sys); font-weight: 700;
+  font-size: clamp(1.9rem, 5vw, 3.1rem);
+  letter-spacing: -0.02em; line-height: 1.05;
+  margin: 0 0 var(--s4); max-width: 18ch; text-wrap: balance;
+}
+
+/* ⭐ FOUR LINES, NOT TILES. The `.fieldguide` idiom belongs to the front page
+   and the two must not compete: that one is a legend for a survey a stranger is
+   about to walk, this is a contents note saying how long the read is. */
+.pro-index {
+  display: grid; gap: 0; margin: 0 0 var(--s5);
+  border-top: 1px solid var(--rule); max-width: var(--measure);
+}
+.pro-index a {
+  display: grid; grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: var(--s2); align-items: baseline;
+  padding: var(--s2) 0; border-bottom: 1px solid var(--rule-soft);
+  color: inherit; text-decoration: none;
+}
+.pro-index a:hover { background: var(--ground-2); }
+.pro-index a:focus-visible { outline: 2px solid var(--live); outline-offset: -2px; }
+.pro-index-n {
+  font-family: var(--f-sys); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--sign-soft);
+}
+.pro-index-t { font-family: var(--f-sys); font-weight: 600; font-size: 1.02rem; }
+
+/* The movement mark. Quieter than the front page's `.plate` — a rule and two
+   words, because this document has four of them rather than six and they are
+   dividing a long read rather than naming destinations. */
+.movement {
+  display: flex; align-items: baseline; gap: var(--s2);
+  margin: 0 0 var(--s4); padding-bottom: var(--s1);
+  border-bottom: 2px solid var(--sign);
+}
+.movement-n {
+  font-family: var(--f-sys); font-weight: 700; font-size: 1.3rem;
+  line-height: 1; color: var(--sign);
+}
+.movement-t {
+  font-family: var(--f-sys); font-weight: 700; font-size: 0.95rem;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--text);
+}
+
+/* ⭐ THE DOCTRINE LINE. Set apart with air and weight rather than a box: these
+   are the sentences the document turns on, and they should read as the argument
+   landing, not as a callout someone pasted in. */
+.pull {
+  font-family: var(--f-sys); font-weight: 600;
+  font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+  line-height: 1.3; letter-spacing: -0.01em;
+  margin: var(--s4) 0; text-wrap: balance;
+}
+/* ⛔ `.state` IS GONE with the two passages it marked — the Wall's producer-side
+   debt and Preview's unfinished device measurement. Jacob: "this prospectus
+   doesn't need a release-note disclaimer about every unfinished component. We
+   simply shouldn't claim the unfinished capabilities." Which is the stronger
+   discipline: not marking the caveat, but not making the claim. */
+
+/* ⛔⛔ THE RAIL IS GONE (2026-09-05), and it was a good instrument for the
+   wrong reader: seven tabs — Intake / Skeleton / Survey / Wall / Section /
+   Stage / Slab — each with an Answers-Produces-Limits spec. Jacob: "they are
+   not seven useful things for this reader to operate." A prospectus reader is
+   not learning to drive Cartograph; they are being walked through it once, and
+   the walk is now linear. Archived: git show HEAD:css/site.css
+   ⭐ WHAT REPLACED IT IS TWO THRESHOLDS. Everything before the first is 2D and
+   everything after it is not, which is the most dramatic thing that happens in
+   the whole process — so it INTERRUPTS the page rather than being explained by
+   it. No prose, no heading, no figure. */
+.threshold {
+  margin: var(--s6) 0;
+  display: grid; justify-items: center; gap: var(--s2);
+  text-align: center;
+  font-family: var(--f-sys); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-faint);
+}
+/* The arrow belongs to the item BELOW it, so the first line has none and the
+   run cannot end on a dangling one. */
+.threshold span + span::before {
+  content: "\2193"; display: block; margin-bottom: var(--s2);
+  font-size: 1.4rem; letter-spacing: 0; color: var(--sign-soft);
+}
+.threshold-act {
+  font-size: 1.05rem; letter-spacing: 0.16em; color: var(--text);
+  border-bottom: 2px solid var(--sign); padding-bottom: var(--s1);
+}
+
+/* ⭐ THE MAP ARRIVES AFTER THE JOURNEY. The rail handed a reader seven nouns up
+   front and asked them to learn the vocabulary before seeing anything; this is
+   the same sequence read as a caption for something they have just watched,
+   which is why it can be one line with no explanation. */
+.walk-coda {
+  margin: var(--s5) 0 0; padding-top: var(--s3);
+  border-top: 1px solid var(--rule);
+  font-family: var(--f-sys); font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-soft);
+  text-wrap: balance;
+}
+
+/* The ways in, set as a legend rather than a sentence — five nouns a reader
+   scans for their own, which a paragraph would bury. */
+.ways {
+  font-family: var(--f-sys); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--sign);
+  margin: var(--s4) 0 0;
+}
+
+/* ⛔ A LABELLED GAP, NEVER A PLAUSIBLE-LOOKING STAND-IN — the same rule the
+   overhead figure was held to before its capture existed. It says what will be
+   here and does not pretend to be it. */
+.fig-slot {
+  margin: var(--s4) 0; min-height: 220px;
+  border: 1px dashed var(--rule); background: var(--ground-3);
+  display: grid; align-content: end; padding: var(--s3);
+}
+/* Stage and the finished neighborhood are the two figures that ARE the claim
+   rather than illustrating it, so they get the room. */
+.fig-slot--big { min-height: 420px; }
+/* A caption that belongs to the copy rather than to a figure — the one line
+   standing in for an inventory of lighting and post controls that was cut. */
+.fig-note {
+  font-family: var(--f-sys); font-size: 0.78rem; line-height: 1.4;
+  color: var(--text-soft);
+}
+.fig-slot figcaption,
+.diagram figcaption {
+  font-family: var(--f-sys); font-size: 0.74rem; line-height: 1.4;
+  color: var(--text-soft);
+}
+/* ⛔ A BOTTOM MARGIN, NOT JUST A TOP ONE. `.sec > .copy + *` gives this block
+   its air above; nothing was giving the prose BELOW it any, so the caption and
+   the next paragraph ran together into one grey line. */
+.diagram { margin: var(--s4) 0; display: grid; gap: var(--s2); }
+.diagram svg { width: 100%; height: auto; display: block; color: var(--text-soft); }
+/* Set here rather than as an SVG presentation attribute: `font-family="var(…)"`
+   does resolve in current browsers, but it is the one property in the drawing
+   worth not betting on. */
+/* ⛔ `.dia-a` IS GONE with the artifact labels it set. The first diagram named
+   what each producer publishes — SLAB, LOOK, LANDSCAPE, WEATHER — on the
+   connectors; the redraw drops Stage as a peer and converges the three
+   remaining instruments on THE PLACE, so the artifacts are the arrows now and
+   naming them would be teaching four more nouns to a reader who does not need
+   them. */
+.dia-t { font-family: var(--f-sys); font-size: 13px; font-weight: 600; }
+
+
 /* 11 ── colophon ────────────────────────────────────────────────────────── */
 .colophon {
   border-top: 1px solid var(--rule); margin-top: var(--s6);
