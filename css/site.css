@@ -848,6 +848,10 @@ a { color: inherit; }
   padding: var(--s2) 0; border-bottom: 1px solid var(--rule-soft);
   color: inherit; text-decoration: none;
 }
+/* ⚠️ The last row's rule and the next section's top border landed 24px apart
+   and read as a double rule. The list closes on air; the section supplies the
+   line. */
+.pro-index a:last-child { border-bottom: 0; }
 .pro-index a:hover { background: var(--ground-2); }
 .pro-index a:focus-visible { outline: 2px solid var(--live); outline-offset: -2px; }
 .pro-index-n {
@@ -898,8 +902,14 @@ a { color: inherit; }
    everything after it is not, which is the most dramatic thing that happens in
    the whole process — so it INTERRUPTS the page rather than being explained by
    it. No prose, no heading, no figure. */
-.threshold {
-  margin: var(--s6) 0;
+/* ⚠️ `.sec > .threshold`, NOT `.threshold` — measured, the plain class was
+   losing to `.sec > .copy + *` (two classes to one) and the interruption was
+   arriving with 24px above it, the same gap as an ordinary paragraph. A
+   threshold that does not interrupt is a caption.
+   ⭐ And it is ASYMMETRIC on purpose: more air above than below, so the break
+   reads as leaving what came before rather than introducing what follows. */
+.sec > .threshold {
+  margin: var(--s7) 0 var(--s6);
   display: grid; justify-items: center; gap: var(--s2);
   text-align: center;
   font-family: var(--f-sys); font-size: 0.7rem; font-weight: 700;
@@ -920,20 +930,41 @@ a { color: inherit; }
    front and asked them to learn the vocabulary before seeing anything; this is
    the same sequence read as a caption for something they have just watched,
    which is why it can be one line with no explanation. */
-.walk-coda {
-  margin: var(--s5) 0 0; padding-top: var(--s3);
+/* Same specificity trap as the threshold above: qualified so `.sec > .copy + *`
+   cannot flatten the space that separates the summary from the last step. */
+.sec > .walk-coda {
+  margin: var(--s6) 0 0; padding-top: var(--s3);
   border-top: 1px solid var(--rule);
   font-family: var(--f-sys); font-size: 0.74rem; font-weight: 700;
   letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-soft);
   text-wrap: balance;
 }
 
-/* The ways in, set as a legend rather than a sentence — five nouns a reader
-   scans for their own, which a paragraph would bury. */
-.ways {
-  font-family: var(--f-sys); font-size: 0.78rem; font-weight: 700;
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--sign);
-  margin: var(--s4) 0 0;
+/* ⛔ `.ways` IS GONE — "Places · Technology · Data · Infrastructure · Capital"
+   set as a legend under the ask. The paragraph above it already names all five
+   in a sentence a reader is going to read anyway, so the legend was the same
+   list twice in two type sizes. */
+
+/* ⭐ THE STEP HEADING LIVES OUTSIDE `.copy`, and that is a layout decision
+   rather than a tidiness one. The walkthrough runs heading → figure → prose,
+   which is the order Jacob laid out and the right one: the figure arrives
+   already named. But `.copy` is capped at `--measure`, so a figure inside it
+   would be 62 characters wide — and these figures are the argument, not
+   illustrations of it. Heading and figure therefore sit at section width and
+   only the prose is measured.
+   ⚠️ `.sec > .step` matches `.sec > .copy + *` on specificity, so this rule has
+   to come LATER in the file to win its top margin back. It does. */
+/* ⛔⛔ `.pro-step`, NOT `.step` — AND THAT IS WHY EVERYTHING ON THIS PAGE IS
+   PREFIXED. `.step` already exists: it is the Belonging ladder's row on the
+   front page, `display: grid` with a 62px badge column and a bottom rule. A
+   heading given that class inherited all of it and set itself FIVE WORDS DEEP
+   inside a 62px column, under a stray rule. One stylesheet serves three pages;
+   an unprefixed name is a collision waiting for the next page. */
+.sec > .pro-step {
+  font-family: var(--f-sys); font-weight: 600; font-size: 1.14rem;
+  letter-spacing: -0.005em; line-height: 1.25;
+  margin: var(--s6) 0 var(--s2);
+  max-width: var(--measure);
 }
 
 /* ⛔ A LABELLED GAP, NEVER A PLAUSIBLE-LOOKING STAND-IN — the same rule the
@@ -941,18 +972,32 @@ a { color: inherit; }
    here and does not pretend to be it. */
 .fig-slot {
   margin: var(--s4) 0; min-height: 220px;
+  /* ⚠️ Overridden below when the figure follows its step heading — there the
+     two are one unit and the gap between them must be small. */
   border: 1px dashed var(--rule); background: var(--ground-3);
   display: grid; align-content: end; padding: var(--s3);
 }
+/* A figure directly under its own heading is PART of that heading's block, so
+   it closes up; the air belongs above the heading, not between them. */
+.pro-step + .fig-slot { margin-top: 0; }
+/* And the prose under a figure sits closer to it than the next step does. */
+.fig-slot + .copy { margin-top: var(--s3); }
 /* Stage and the finished neighborhood are the two figures that ARE the claim
    rather than illustrating it, so they get the room. */
 .fig-slot--big { min-height: 420px; }
-/* A caption that belongs to the copy rather than to a figure — the one line
-   standing in for an inventory of lighting and post controls that was cut. */
-.fig-note {
-  font-family: var(--f-sys); font-size: 0.78rem; line-height: 1.4;
-  color: var(--text-soft);
+/* ⚠️ THESE ARE FLOORS UNDER A GAP, and a floor set for a desktop is a wall on a
+   phone: 420px of empty box under a 390px-wide screen is most of the viewport
+   spent on nothing. A wide capture at that width is about 220px tall anyway, so
+   the floor has to come down with the column or it outgrows its own picture. */
+@media (max-width: 620px) {
+  .fig-slot { min-height: 150px; }
+  .fig-slot--big { min-height: 230px; }
 }
+/* ⛔ `.fig-note` IS GONE. It set the one line standing in for the inventory of
+   lighting and post controls that was cut — "Cinema-grade lighting, atmosphere,
+   camera and post-production controls" — and it had ended up stranded after the
+   Stage pull, a flat spec line following the best sentence in the section. It
+   was always meant to be the figure's caption, so that is where it is. */
 .fig-slot figcaption,
 .diagram figcaption {
   font-family: var(--f-sys); font-size: 0.74rem; line-height: 1.4;
