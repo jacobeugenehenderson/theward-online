@@ -171,6 +171,100 @@ a { color: inherit; }
 .sec > .sec-lede + * { margin-top: var(--s4); }
 
 
+/* 4b ── the field guide, and the plates it points at ─────────────────────
+   ⭐ A LEGEND, NOT A NAV BAR — a key at the head of a survey sheet, drawn in
+   the page's own routed-sign brown. The border is `--sign` rather than `--rule`
+   because this block is STRUCTURE: it is the only thing on the page that
+   describes the page, so it should read as printed on the sheet rather than as
+   another panel of content.
+   ⛔ The hairlines between cells are the GRID'S OWN GAP over a `--rule` ground,
+   not six borders. Borders on cells double at every seam and leave the outer
+   edge fighting the container's; a 1px gap cannot. */
+.fieldguide {
+  margin: var(--s6) 0 0;
+  border: 1px solid var(--sign);
+  background: var(--ground-2);
+}
+.fg-head {
+  margin: 0; padding: var(--s2) var(--s3);
+  border-bottom: 1px solid var(--sign);
+  font-family: var(--f-sys); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.24em; text-transform: uppercase; color: var(--sign);
+}
+/* ⛔⛔ FIVE TILES, AND FIVE DOES NOT DIVIDE — so the tiles SPAN, and every row
+   comes out full. The hairlines here are the grid's own 1px gap over a `--rule`
+   ground, which is what makes a short row unacceptable rather than untidy: an
+   unfilled cell is not empty, it is a solid block of rule colour.
+   ⭐ So the track count is a multiple of the row counts and each tile claims its
+   share: six tracks wide, three tiles of two on the first row and two tiles of
+   three on the second; four tracks narrow, two tiles of two per row and the odd
+   one taking the whole width. Change the number of entries and BOTH `nth-child`
+   rules have to be re-derived — there is no arithmetic here that does it for
+   you, deliberately, because `auto-fit` is the thing that finds the counts that
+   do not divide.
+   ⛔ Never a single column: the whole job of this block is that every
+   destination is visible at once, and a one-up stack is a menu you scroll. */
+.fg-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1px; background: var(--rule);
+}
+.fg-grid > li { display: grid; grid-column: span 2; }
+.fg-grid > li:nth-child(n+4) { grid-column: span 3; }
+@media (max-width: 860px) {
+  .fg-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .fg-grid > li,
+  .fg-grid > li:nth-child(n+4) { grid-column: span 2; }
+  .fg-grid > li:nth-child(n+5) { grid-column: span 4; }
+}
+/* A large, obvious target: the whole cell is the link, not the words in it. */
+.fg-item {
+  display: grid; gap: var(--s0); align-content: start;
+  min-height: 116px; padding: var(--s3);
+  background: var(--ground-2); color: inherit; text-decoration: none;
+  transition: background var(--t-fast) linear;
+}
+.fg-item:hover { background: var(--ground-3); }
+.fg-item:focus-visible { outline: 2px solid var(--live); outline-offset: -3px; }
+.fg-n {
+  font-family: var(--f-sys); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--sign-soft);
+}
+.fg-t {
+  font-family: var(--f-sys); font-weight: 600; font-size: 1.16rem;
+  letter-spacing: -0.01em; line-height: 1.15; text-wrap: balance;
+}
+.fg-s { font-size: 0.93rem; line-height: 1.4; color: var(--text-soft); }
+/* ⭐ THE ONE ENTRY THAT LEAVES. Amber, because it is the only plate pointing at
+   something that is actually running — the same reservation `--live` carries
+   everywhere else on this page. */
+.fg-item--out .fg-t::after { content: " \2197"; color: var(--live); }
+
+/* The chapter plate. It repeats the Field Guide's words EXACTLY — number, name
+   and the same one-line promise — so arriving at a section confirms the map
+   rather than introducing a new vocabulary for the same room.
+   ⛔ NOT A HEADING. Every section here already has its own <h2> or eyebrow, and
+   the plate is a mile marker rather than a title; making it an <h2> would give
+   most of these sections two headings that say different things. */
+.plate {
+  display: flex; align-items: baseline; gap: var(--s2); flex-wrap: wrap;
+  margin: 0 0 var(--s4); padding-bottom: var(--s1);
+  border-bottom: 2px solid var(--sign);
+}
+.plate-n {
+  font-family: var(--f-sys); font-weight: 700; font-size: 1.5rem;
+  line-height: 1; letter-spacing: 0.02em; color: var(--sign);
+}
+.plate-t {
+  font-family: var(--f-sys); font-weight: 700; font-size: 1rem;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--text);
+}
+.plate-s {
+  font-family: var(--f-txt); font-style: italic;
+  font-size: 0.98rem; color: var(--text-soft); margin-left: auto;
+}
+
+
 /* 5 ── wayside ──────────────────────────────────────────────────────────── */
 /* ⭐ FIGURE, THEN CAPTION — not figure BESIDE column. This page is imitating a
    wayside panel at an overlook, and on a real one the picture is large and the
@@ -222,20 +316,12 @@ a { color: inherit; }
   padding: var(--s4); display: grid; gap: var(--s2); align-content: start;
   max-width: var(--measure);
 }
-/* ⛔ THE PANEL BOX MUST NOT RESIZE WHEN THE PILL CHANGES. Measured, the three
-   are 73px (Almanac), 98px (Sky) and 123px (Trees) — a 50px jump, so the whole
-   page below shifts under the reader's cursor every time they switch.
-   ⭐ ALL THREE OCCUPY THE SAME GRID CELL and the inactive ones are hidden with
-   `visibility`, not `display`. So they still take part in layout and the box is
-   always as tall as the tallest — automatically, with no magic number to go
-   stale the next time the copy is rewritten. A hardcoded min-height would have
-   been wrong within a day; this copy has changed twice today alone. */
-.inst-panels { display: grid; }
-.inst-panels > [data-inst-panel] { grid-area: 1 / 1; }
-.inst-panels > [data-inst-panel][hidden] {
-  display: block;          /* override the UA rule for [hidden] */
-  visibility: hidden;
-}
+/* ⛔ `.inst-panels` AND ITS SAME-CELL STACK ARE GONE with the pill they served.
+   Recorded because the technique was hard-won and will be wanted again: three
+   panels in ONE grid cell, the inactive ones hidden with `visibility` rather
+   than `display`, so the box is always as tall as the tallest and switching
+   cannot shift the page under the reader's cursor. A hardcoded min-height would
+   have gone stale within a day. Archived: git show HEAD:css/site.css */
 
 .wayside-txt h3 {
   font-family: var(--f-sys); font-weight: 600; font-size: 1.18rem;
@@ -290,15 +376,10 @@ a { color: inherit; }
   object-fit: cover; object-position: 50% 26%;
 }
 
-/* The diorama: one scene, three things to say about it. No padding, because
-   the sky reaches the edges of its frame. */
-.wayside-fig--diorama {
-  padding: 0;
-  /* Fixed, and the tallest of the three figures: the sun's arc needs the room
-     and the copy must never be what decides it. */
-  height: 420px;
-}
-@media (max-width: 780px) { .wayside-fig--diorama { height: 300px; } }
+/* ⛔ `.wayside-fig--diorama` IS GONE (2026-09-05) with the figure it framed.
+   One number in it is worth remembering: the height was FIXED and it was the
+   tallest of the figures, because a scene's framing must never be decided by
+   the length of the copy beside it. Archived: git show HEAD:css/site.css */
 
 /* A frame instead of a drawing: the product's own panel, mounted alone.
    `relative` so the scroll guard has something to pin to. */
@@ -475,23 +556,24 @@ a { color: inherit; }
    already had, in four columns instead of one.
    ⛔ NOT `.steps` from Belonging, and not by accident. That ladder is the five
    ways to stand in a neighborhood and it carries the generated role badges; a
-   second badged four-up here would read as more of the same list. These are
+   second badged three-up here would read as more of the same list. These are
    ways to help build the kit — a different register, so a different object.
    ⛔ NOT `auto-fit`, and this is the record of why so nobody "simplifies" it
-   back. `repeat(auto-fit, minmax(15rem, 1fr))` was tried and it landed THREE
-   across on a 1092px viewport, orphaning Friends alone on a second row. Four
-   items tile cleanly at ONE, TWO or FOUR and at nothing else, so a column count
-   that follows the available width will find 3 and 5 on the way. The count is
-   therefore explicit and skips the widths that do not divide.
-   ⭐ Two is the resting state, not a fallback: at four the columns come in
-   around 230px and Partners — the longest of them — sets to a ragged shard. */
+   back. `repeat(auto-fit, minmax(15rem, 1fr))` was tried on the four-item
+   version and landed THREE across on a 1092px viewport, orphaning Friends alone
+   on a second row. A column count that follows the available width finds the
+   counts that do not divide; an explicit one cannot.
+   ⚠ AND THE ITEM COUNT CHANGED — Hosts moved out to §05, which is a chapter
+   about hosting rather than a card asking for it. Three items tile cleanly at
+   ONE and at THREE and at nothing else, so the two-column step that served four
+   is gone: it would orphan one of three at every width it applied to. */
 .village {
   display: grid; gap: var(--s4) var(--s5);
   grid-template-columns: 1fr;
   margin: var(--s5) 0;
 }
-@media (min-width: 34rem) {
-  .village { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 48rem) {
+  .village { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 /* The rule rhymes with the section's own 3px top border — structural, marking
    where a column starts, which is what `--sign` is for. */
@@ -587,24 +669,13 @@ a { color: inherit; }
    couriers are not open yet — the section's own note says so three lines down. */
 .sec--cary .cta { margin-top: var(--s4); }
 
-/* 8b ── the pill, the ticker, the QR ───────────────────────────────────── */
-.pill {
-  /* justify-self, because a grid stretches its children and the border would
-     otherwise run the width of the column with nothing in it */
-  display: inline-flex; justify-self: start; gap: 0; margin-bottom: var(--s1);
-  border: 1px solid var(--rule);
-}
-.pill-btn {
-  font-family: var(--f-sys); font-size: 0.7rem; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  padding: var(--s1) var(--s2);
-  background: transparent; color: var(--text-soft);
-  border: 0; cursor: pointer;
-  transition: color var(--t-fast), background var(--t-fast);
-}
-.pill-btn + .pill-btn { border-left: 1px solid var(--rule); }
-.pill-btn:hover { color: var(--text); }
-.pill-btn[aria-selected="true"] { color: var(--band-text); background: var(--band-bg); }
+/* 8b ── the ticker, the QR ─────────────────────────────────────────────── */
+
+/* ⛔ `.pill` AND `.pill-btn` ARE GONE (2026-09-05) — the diorama's three tabs,
+   which captioned one picture three ways and asked a reader to operate a
+   control in order to be told what they were already looking at. §03 says it
+   once, in prose, in order, and the figure demonstrates it.
+   Archived: git show HEAD:css/site.css */
 
 /* The one place besides the map where something moves, and it moves because
    the subject IS motion — a ticker described in still type is a ticker that
@@ -733,130 +804,24 @@ a { color: inherit; }
   color: var(--text-soft); font-variant-numeric: tabular-nums;
 }
 
-/* 10 ── the clock ───────────────────────────────────────────────────────── */
+/* ⛔⛔ 10 — THE CLOCK, THE SKY BAND AND THE ALMANAC ARE ALL GONE (2026-09-05).
+   About 120 lines: `.skyband`'s gradient painted from the product's own authored
+   sky table, the live specimen standing in it at `?embed=tree`, and the real
+   Almanac pinned across the foot of the figure as its instrument panel. §03
+   describes the Slab now rather than demonstrating it.
 
-/* 10b ── the sky band ───────────────────────────────────────────────────
-   The one band of colour on the page, and it is not chosen: js/site.js sets
-   --sky-* from the extracted table for the neighborhood's own minute. It
-   divides the instruments from the index — what the Ward holds, from what is
-   living in it — and it is why day and night need no widget. */
-.skyband {
-  /* It lives in the shared figure area now, so it fills it — and a tall frame
-     is where the sun's arc finally has somewhere to go. */
-  width: 100%; height: 100%;
-  cursor: ew-resize;
-  touch-action: pan-y;
-  position: relative;
-  background: linear-gradient(
-    to bottom,
-    var(--sky-high, var(--ground-3)) 0%,
-    var(--sky-mid, var(--ground-3)) 34%,
-    var(--sky-low, var(--ground-2)) 70%,
-    var(--sky-horizon, var(--ground-2)) 100%);
-  transition: background var(--t-slow) linear;
-}
+   ⭐ THE ONE LESSON WORTH CARRYING OUT OF IT, because it was expensive and is
+   not obvious: an embed that measures ITSELF and asks the host to size its frame
+   will LOCK AT ITS FIRST READING unless the measured box is detached from the
+   frame's height. The host applies the height, the component's `h-full` starts
+   resolving against the frame, its inner `overflow-y-auto` hides whatever no
+   longer fits, and the box reports the same number for ever — so a first measure
+   taken before late-arriving content leaves that content clipped permanently,
+   with no error and nothing to observe. Absolute positioning with `bottom: auto`
+   plus `scrollHeight` plus a MutationObserver; any two of the three is not
+   enough. Archived: git show HEAD:css/site.css and INTEGRATION.md §2.
 
-/* The sun and moon ride the band at their real altitude, so dragging the sky
-   is watching them rise and set.
-   ⚠ Positioned in CSS percentages, NOT in an SVG viewBox: the band is wide and
-   short, so a viewBox scaled to fit turns every circle into an oval. */
-
-/* ⭐ THE LIVE TREE, standing on the bottom edge of the band.
-   ⚠ `background: transparent` on the IFRAME is load-bearing and easy to miss:
-   an iframe paints its own opaque base regardless of what the embedded document
-   does, so without this the alpha canvas inside buys nothing and you get a grey
-   rectangle over the sky. (The embed clears to alpha 0 and drops its own sky
-   dome; see `?embed=tree&alpha=1`.)
-   Deaf to the pointer so dragging the day still works straight through it. */
-.skyband-tree {
-  /* ⛔ Stops at the track — full-height is what buried the mark. And the height
-     is EXPLICIT, not top+bottom: an iframe is a REPLACED element, so it does not
-     stretch between offsets the way a div does. Setting only top/bottom silently
-     collapsed it to the iframe's intrinsic 150px default — measured, 472x150 in
-     a 420-tall band — which looks exactly like "the tree failed to load." */
-  position: absolute; left: 0; right: 0; top: 0;
-  width: 100%; height: calc(100% - var(--track-h));
-  border: 0; background: transparent;
-  pointer-events: none;
-}
-
-/* ⛔ THE BAND NO LONGER DRAWS THE SUN, THE MOON OR THE HORIZON WASH.
-   They were flat discs positioned in percentages, and the band now contains a
-   PERSPECTIVE RENDER (?embed=tree). Two projections cannot share a sky: the
-   screenshot that settled it had the moon sitting inside the canopy. The scene
-   draws its own bodies, correctly, so these are gone rather than hidden.
-   ⭐ Their CSS outlived their DOM by one commit and the AUDIT caught it —
-   `unused css` — which is the whole reason that check exists. Removed here,
-   with the tokens it stranded. Archived: git show ef50392^:css/site.css */
-
-/* ⚠ THE BAND NEEDS TO LOOK DRAGGABLE. A cursor change is not an affordance for
-   anyone who does not happen to hover it — Jacob asked where the slider was, and
-   the mark was the answer: it says both "you are here in the day" and "this is a
-   thing you can pull".
-   ⛔ THEN THE DIORAMA COVERED IT. The tree embed went opaque (it draws its own
-   sky, because flat CSS discs cannot share a projection with a perspective
-   render) and the mark spent its life behind an iframe. The control still
-   worked; nothing said so. Jacob, 2026-08-23: "we lost the actual visible on
-   screen time slider so the effect still works but you have to know it's there."
-   ⭐ THE FIX IS A TRACK THE TREE CANNOT REACH, not a second control. The frame
-   now stops short of the bottom edge and the mark rides the strip that leaves —
-   "an unmarked slider under the tree", which is what was asked for, and still
-   ONE control. A second visible slider would be the second slider this page
-   deliberately does not have. */
-.skyband { --track-h: 18px; }
-/* The track. A pseudo-element, so it costs no markup and no class. */
-.skyband::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0;
-  height: var(--track-h);
-  background: var(--band-bg); opacity: 0.9;
-  pointer-events: none;
-}
-.skyband-mark {
-  position: absolute; top: 0; bottom: 0; width: 1px; z-index: 2;
-  background: var(--live); opacity: 0.55;
-  transform: translateX(-50%); pointer-events: none;
-}
-/* The handle, sitting IN the track where nothing can paint over it. */
-.skyband-mark::after {
-  content: ""; position: absolute; left: 50%; bottom: 4px;
-  width: 17px; height: 10px; border-radius: 5px;
-  transform: translateX(-50%);
-  background: var(--live);
-}
-.skyband:hover .skyband-mark { opacity: 0.95; }
-
-.skyband:focus-within { outline: 2px solid var(--live); outline-offset: 2px; }
-
-/* Present for keyboard and assistive tech, invisible to everyone else — the
-   band itself is the visible control, and a second visible slider would be
-   the second slider we deliberately do not have. */
-/* ⛔ DEAF TO THE POINTER, ON PURPOSE. This is a real <input type="range"> at
-   opacity 0 across the WHOLE band, and a native range absorbs touch and commits
-   its value on tap — so on a phone it was setting the day before js/site.js's
-   handler ever saw the gesture. It exists for KEYBOARD and assistive tech; it
-   is still focusable (tab reaches it, arrows fire `input`, `:focus-within`
-   still rings the band) and now it competes with nothing. The band itself is
-   the pointer control, and it decides what a touch meant. */
-.skyband-input {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  margin: 0; opacity: 0; pointer-events: none;
-}
-
-/* Appears only once the day has been moved: without it a visitor can strand
-   the neighborhood at 3am with no way back. A conditional control, not a
-   caption. */
-/* ⭐ Appears ONLY when the day is held off live — js/site.js sets
-   `nowBtn.hidden = (held === null)`. So the control announces itself exactly
-   when there is something to undo, and never before. */
-.skyband-now {
-  position: absolute; right: var(--s1); bottom: 0; z-index: 3;
-  height: var(--track-h); line-height: var(--track-h); padding: 0 var(--s1);
-  font-family: var(--f-sys); font-size: 0.64rem; font-weight: 600;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  background: var(--band-bg); color: var(--band-text);
-  border: 0; padding: 3px var(--s1); cursor: pointer;
-}
-.skyband-now[hidden] { display: none; }
+*/
 
 /* 11 ── colophon ────────────────────────────────────────────────────────── */
 .colophon {

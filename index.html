@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="css/tokens.css?v=a48754fb40fc">
-<link rel="stylesheet" href="css/site.css?v=2624b9a5c5c2">
+<link rel="stylesheet" href="css/site.css?v=39bbee8af88a">
   <!-- ⭐ THE MARK'S 16px COUSIN, not the mark shrunk — the band mark's street
        grid turns to mud below about 20px. SVG only, deliberately: it is theme
        aware (a tab bar is dark as often as light) and one file beats a pile of
@@ -99,98 +99,77 @@
 </header>
 
 <main class="shell" id="main">
+  <!-- ═══ THE FIELD GUIDE ════════════════════════════════════════════════
+       ⭐ A LEGEND, NOT A NAV BAR. This page had every one of its six answers
+       in it and no way to see that from the top — a reader met a live map, a
+       diorama, a directory and a delivery service in that order and had to
+       infer the argument. So the argument is stated FIRST, as a key: six
+       plates, numbered, each naming a destination and what is there.
+       ⛔ IT IS NOT A MENU. It sits in the flow of the page exactly once, at the
+       top, and does not follow the reader down; a sticky bar would make it
+       chrome, and the whole point is that it is part of the survey.
+       ⚠️ FIVE, NOT SIX, since 2026-09-05 — The Slab stopped being a chapter and
+       became a paragraph inside 04. Five does not tile in a three-column grid,
+       so the tiles SPAN: three across the first row, two across the second, and
+       every row full. See `.fg-grid` in site.css; the hairlines are the grid's
+       own gap, and a short row would show as a hole in it.
+       ⭐ 01 IS THE LIVE ONE, AND IT LEADS BECAUSE IT IS WHAT YOU LANDED ON.
+       It was 02 for an afternoon, which put the running Ward second in a list
+       that sits directly underneath it (Jacob: "if the ward comes first why
+       would it be #2") — and it left a 01 → 03 gap down the page, because it is
+       the one plate that does not go to a section. Numbered first, the guide
+       reads in scroll order and every number below it is where you will meet it.
+       ⭐ It is also the entry that does the most work: every other plate says
+       "read on", and this one says "the thing being described is running, and
+       you can stand in it." The arrow is drawn in CSS so the label stays plain
+       text.
+       ⛔ `data-names-instance` on 01 is LOAD-BEARING — tools/audit.py enforces
+       the no-town rule everywhere else on every page. Same treatment the
+       masthead's instance note gets, for the same reason. -->
+  <nav class="fieldguide" aria-label="Field guide">
+    <p class="fg-head">Field Guide</p>
+    <ol class="fg-grid">
+      <li data-names-instance><a class="fg-item fg-item--out" href="https://lafayette-square.com">
+        <span class="fg-n">01</span>
+        <span class="fg-t">See a Ward</span>
+        <span class="fg-s">Lafayette Square</span>
+      </a></li>
+      <li><a class="fg-item" href="#idea">
+        <span class="fg-n">02</span>
+        <span class="fg-t">The Idea</span>
+        <span class="fg-s">A different model for neighborhood life</span>
+      </a></li>
+      <li><a class="fg-item" href="#experience">
+        <span class="fg-n">03</span>
+        <span class="fg-t">The Experience</span>
+        <span class="fg-s">What people can do</span>
+      </a></li>
+      <li><a class="fg-item" href="#host">
+        <span class="fg-n">04</span>
+        <span class="fg-t">Bring It Somewhere</span>
+        <span class="fg-s">Start with a neighborhood</span>
+      </a></li>
+      <li><a class="fg-item" href="#partner">
+        <span class="fg-n">05</span>
+        <span class="fg-t">Partner</span>
+        <span class="fg-s">Build with me</span>
+      </a></li>
+    </ol>
+  </nav>
 
-  <!-- ═══ WHAT A WARD IS ═════════════════════════════════════════════════ -->
-  <section class="sec">
+  <!-- ═══ 02 · THE IDEA ══════════════════════════════════════════════════ -->
+  <section class="sec" id="idea">
+    <p class="plate"><span class="plate-n">02</span><span class="plate-t">The Idea</span><span class="plate-s">A different model for neighborhood life</span></p>
     <div class="copy">
         <h2>A community-building and neighborhood-fortification tool</h2>
+        <p class="lede">The internet is very good at reaching everywhere. Neighborhoods matter because they are somewhere.</p>
+        <p>Most digital platforms are built for distribution and growth: more people, more reach, more engagement. Those systems are extraordinarily effective at moving information, but their basic incentives work against some of the things neighborhoods are good at producing&mdash;community, discovery, familiarity and fellowship.</p>
+        <p>The Ward starts with the opposite premise: place is the organizing principle.</p>
         <p>The Ward gives a neighborhood a place of its own online. It brings together the people, places, businesses, events, exchanges, and local knowledge that already make it a community and makes those connections easier to see and use. The goal is not to create another social network; it’s to strengthen the network that’s already there.</p>
     </div>
   </section>
 
-  <!-- ═══ THE INSTRUMENTS ════════════════════════════════════════════════
-       One figure area with a pill over it, because the living landscape and
-       the living sky are the same picture seen twice — and because that is
-       where the diorama goes: one scene, lit by the sky itself, with the pill
-       saying what it is demonstrating rather than which image is showing.
-       ⭐ It is a LIVE EMBED (?embed=tree), never a capture — sky and tree in a
-       single Canvas, one clock, lit by the sun that is in the picture. -->
-  <section class="sec">
-    <span class="eyebrow">A Day in the Life</span>
-    <!-- ⭐ THE LEDE EARNS THE AMBER ABOVE IT. `.eyebrow` is `--live`, and amber is
-         reserved for things that actually are (README §117) — "Instruments of the
-         Ward" named the machinery and did not cash that cheque. This does, and it
-         is literally true: the band is `?embed=tree`, one Canvas, one clock.
-         ⛔ Not "swaying" — wind is authored by the meteorologist, almost no
-         directive carries a wind block, and uWindIntensity sits at 0. Owed. -->
-    <p class="sec-lede">The Ward keeps time with the neighborhood. Light changes through the day, weather moves in and out, and trees change with the seasons. What you see on screen reflects the place as it is <em>right now</em>.</p>
-
-    <div class="wayside">
-      <!-- ⭐ ONE FIGURE FOR ALL THREE. The sky, the trees and the Almanac are
-           the same scene described three ways, so the pill changes only the
-           words. This IS the diorama, and it is live: ?embed=tree mounts the
-           sky and the specimen in ONE Canvas, so the slider that moves the day
-           moves the actual light across the actual leaves.
-           ⛔ Do not describe it as swaying. Wind is authored by the
-           meteorologist and almost no directive carries a wind block, so
-           uWindIntensity sits at 0. It is OWED, not shipped. -->
-      <div class="wayside-fig wayside-fig--diorama">
-        <div class="skyband" data-sky-strip>
-      <!-- ⛔ THE CSS SUN AND MOON ARE GONE, and this is the reason.
-           They rode the band by CSS PERCENTAGE OF ALTITUDE — flat discs on a
-           2D strip. The tree beside them is a PERSPECTIVE 3D render. Two
-           projections cannot agree, so a low moon drew at the trunk's base,
-           INSIDE the canopy, at a size that belonged to nothing. Jacob, on
-           sight: "this perspective is off."
-           ⭐ The scene has real ones — actually placed, actually occluded by
-           the leaves, in the same camera as the tree. So the band stops drawing
-           a sky and shows the one the Ward is already under. -->
-      <span class="skyband-mark" data-sky-mark aria-hidden="true"></span>
-      <!-- ⭐ THE TREE, LIVE, STANDING IN THIS BAND — not a picture of one.
-           `?embed=tree&alpha=1` renders the specimen with NO sky of its own, so
-           this band's gradient, sun and moon show through the canopy. Its light
-           is the scene's: bright at noon, dark at midnight, moving with the
-           slider below. ⛔ Do not describe it as swaying (wind is owed).
-           Deaf to the pointer so dragging the day still works straight through. -->
-      <iframe class="skyband-tree" data-tree-frame title="A linden, live, at this hour"
-              loading="eager" aria-hidden="true" tabindex="-1"></iframe>
-      <input class="skyband-input" type="range" min="0" max="1439" step="5" value="720"
-             data-sky-range aria-label="The hour of the day in the neighborhood">
-      <button class="skyband-now" type="button" data-sky-now hidden>now</button>
-        </div>
-      </div>
-
-      <div class="wayside-txt">
-        <div class="pill" role="tablist" aria-label="Which instrument">
-          <button class="pill-btn" type="button" role="tab" data-inst="weather" aria-selected="true">The Sky</button>
-          <button class="pill-btn" type="button" role="tab" data-inst="trees" aria-selected="false">The Trees</button>
-          <button class="pill-btn" type="button" role="tab" data-inst="almanac" aria-selected="false">The Almanac</button>
-        </div>
-
-        <div class="inst-panels">
-
-        <div data-inst-panel="weather">
-          <h3>The Sky</h3>
-          <p>The <span class="instrument">Meteorologist</span> connects the Ward to the weather overhead. Clouds, light, rain, snow and changing conditions become part of the neighborhood as they happen.</p>
-        </div>
-
-        <div data-inst-panel="almanac" hidden>
-          <h3>The Almanac</h3>
-          <p>The Ward keeps the neighborhood&rsquo;s own time and conditions: time, temperature, daylight, sunset and the moon.</p>
-        </div>
-
-        <div data-inst-panel="trees" hidden>
-          <h3>The Trees</h3>
-          <p>The <span class="instrument">Arborist</span> reconstructs the neighborhood&rsquo;s living landscape from public data. Where individual trees are known, it places them literally; where they aren&rsquo;t, it uses canopy, species, and local planting data to determine what is likely to grow there.</p>
-        </div>
-
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- ═══ WHAT IS IN IT ══════════════════════════════════════════════════
+  <!-- ═══ 03 · THE EXPERIENCE ═══════════════════════════════════════════
        ⛔ ITS OWN SECTION, from 2026-08-29. The day/night argument and the
        directory argument ran together in one section, and on a phone — where
        the eyebrow has long since scrolled off by the time the Society Pages
@@ -200,7 +179,9 @@
        ⭐ So the claim that was an <h3> beside the overhead is now the SECTION's
        own heading: every structure has a card, and the three things under it —
        the overhead, the directory, the card — all argue that one point. -->
-  <section class="sec">
+  <section class="sec" id="experience">
+    <p class="plate"><span class="plate-n">03</span><span class="plate-t">The Experience</span><span class="plate-s">What people can do</span></p>
+
     <span class="eyebrow">The Whole Neighborhood is There</span>
     <p class="sec-lede">If it&rsquo;s in the source data, it&rsquo;s in the Ward. Homes, businesses, landmarks, and everything in between.</p>
 
@@ -226,6 +207,16 @@
       <div class="wayside-txt">
         <h3>The Society Pages</h3>
         <p>An old-school neighborhood directory: businesses, institutions, public spaces, and other places, together and searchable.</p>
+        <!-- ⭐ THE ONLY INSTRUCTION IN §03, and it earns its place: this is the
+             one figure on the page a reader is meant to OPERATE, and the thing
+             it does — driving the card below it — is invisible until they do.
+             ⛔ `data-names-instance` IS LOAD-BEARING, not decoration:
+             tools/audit.py exempts the text inside this element from the town
+             check and enforces it everywhere else on every page. It earns the
+             exception the same way the masthead's note does — the claim IS that
+             the data is real and belongs to somewhere, which is exactly the
+             sentence the rule would otherwise forbid. -->
+        <p data-names-instance>This is live Lafayette Square data. Click through the categories to explore the neighborhood, then choose a place to see its Place Card below.</p>
       </div>
     </div>
 
@@ -365,12 +356,16 @@
       <h3>Cary for your neighborhood</h3>
         <!-- ⛔ RULES, NOT PROSE — the pattern the host section uses. And rules
              keep their numbers: 16 and 21 are eligibility gates, not statistics.
+             ⛔ "Who can Cary" IS THE PRODUCT'S NAME, NOT A TYPO FOR "carry", and
+             it is the ONE place on this site where wordplay is sanctioned
+             (Jacob, 2026-09-05). Do not "fix" the capital; do not repeat the
+             joke anywhere else.
              ⚠️ The 18+ driving gate was REMOVED on Jacob's ruling (2026-08-23): it
              was written anticipating a ride-share, not delivery. cary/legal/
              courier-agreement.md still carries it and is therefore STALE — logged
              in BACKLOG, not silently reconciled here. -->
       <div class="terms">
-          <div class="term"><span class="term-k">Who can carry</span><span class="term-v">Sixteen and over. Alcohol deliveries are 21+.</span></div>
+          <div class="term"><span class="term-k">Who can Cary</span><span class="term-v">Sixteen and over. Alcohol deliveries are 21+.</span></div>
           <div class="term"><span class="term-k">For businesses</span><span class="term-v">No commission. Keep the full price of the order.</span></div>
           <div class="term"><span class="term-k">For couriers</span><span class="term-v">Choose when you&rsquo;re available and what you accept. Most of the delivery charge goes to you.</span></div>
           <div class="term"><span class="term-k">For Hosts</span><span class="term-v">Cary is a module, not a requirement. Turn it on if delivery belongs in your Ward; build your local economy differently if it doesn&rsquo;t.</span></div>
@@ -378,19 +373,45 @@
     </div>
   </section>
 
-
-  <!-- ═══ HOW A WARD IS MADE ═════════════════════════════════════════════ -->
-  <section class="sec">
+  <!-- ═══ 04 · BRING IT SOMEWHERE ═══════════════════════════════════════
+       ⭐ A CHAPTER THAT DID NOT EXIST, and its absence was the page's largest
+       hole. "Host" appeared three times before it — as the premise of the
+       sources table, as one of four cards in the ask, and as a term in Cary's
+       rules — so a reader who wanted to know what bringing a Ward somewhere
+       MEANS had to assemble it from three rooms.
+       ⭐ AND IT ABSORBED THE SLAB (2026-09-05). The Slab stopped being a
+       chapter of its own; what a reader needs to know about it is exactly what
+       makes a Ward portable, so it is stated here as "Built to travel" and the
+       sources table came with it. That table was §03's second half, and this is
+       the only chapter that would have been left pointing at it.
+       ⛔ THE COPY IS MOSTLY MOVED, NOT WRITTEN. The lede is the line that used
+       to open "Where a Ward Comes From" (Jacob, 2026-08-31), the paragraph
+       under it is the Hosts card out of the ask, and "Built to travel" is
+       Jacob's. ⚠️ One paragraph WAS cut here — a transition I had written that
+       divided the work "the way the sources above do." The sources are no
+       longer above; they are in this section, so the bridge it built is a walk
+       of two lines and the sentence was doing nothing but taking them.
+       ⭐ AND IT TAKES `#host`, which is the URL that was already in the wild.
+       It used to land on the ask — a section that asks for three things, none
+       of which is hosting any more. Anyone who followed that link wanted this. -->
+  <section class="sec" id="host">
+    <p class="plate"><span class="plate-n">04</span><span class="plate-t">Bring It Somewhere</span><span class="plate-s">Start with a neighborhood</span></p>
     <div class="copy">
-      <h2>Where a Ward Comes From</h2>
-      <!-- ⭐ THIS LINE CAME FROM THE ASK, and it belongs here (Jacob, 2026-08-31).
-           At the foot of the page it was a term of business. In front of the
-           sources it is the PREMISE of the whole table below: a Ward is not a
-           product poured onto a place, so the first thing it is assembled from
-           is a conversation. It also plants the word "Host" before the ask has
-           to define it. -->
       <p class="lede">A Host is a partner rather than a customer, so every map starts with a conversation about the place, what it needs, and how we can work together to do right by it.</p>
+      <p>A host might be a neighborhood organization, local publication, business district, civic group, city, institution&mdash;or simply someone with enough connection to a place to get the right people around a table.</p>
+
+      <h3>Built to travel</h3>
+      <p>Each Ward begins with a custom model of its neighborhood&mdash;the Slab&#8288;&mdash;presented through a common <span class="instrument">Universal Player</span>. Keeping the two separate means the underlying place can be built and maintained independently while the same presentation system works from neighborhood to neighborhood.</p>
+
+      <h3>Where a Ward Comes From</h3>
       <p>A Ward is assembled from public data, local records, direct observation, and information supplied by the neighborhood itself.</p>
+      <!-- ⭐ THE ONLY PLACE THE INSTRUMENTS ARE NAMED, as of 2026-09-05. They
+           have moved twice — a tabbed explainer beside the diorama, then a
+           paragraph in §03 — and both of those rooms are gone. This is a
+           section about what builds a Ward, so all four belong in it.
+           ⚠️ This sentence is the page's whole remaining hold on that
+           vocabulary. Cut it and four named systems become anonymous. -->
+      <p>The <span class="instrument">Surveyor</span> builds the ground from it &mdash; streets, blocks, parcels, elevation and buildings. The <span class="instrument">Arborist</span> reconstructs the living landscape, placing known trees literally and inferring the rest from canopy, species and local planting data. The <span class="instrument">Meteorologist</span> connects the Ward to local weather and atmospheric conditions. And the <span class="instrument">Designer</span> is where a place&rsquo;s own look is authored on top of it all.</p>
     </div>
 
     <div class="tblock">
@@ -496,7 +517,7 @@
        belonging to nothing (Jacob, 2026-08-23: "doesn't really make sense as a
        standalone footer"). One place, at the end, where a reader who has gone
        all the way down arrives at the thing to do next. -->
-  <!-- ⭐ AND IT IS LINKABLE &mdash; theward.online/#host. ⛔ NOT A PAGE. A
+  <!-- ⭐ AND IT IS LINKABLE &mdash; theward.online/#partner. ⛔ NOT A PAGE. A
        standalone /host sat on the backlog and was cut: this section is a
        heading, one sentence and two controls, so there is no "how to" to send,
        and the background that makes the ask land is the rest of this scroll.
@@ -504,7 +525,8 @@
        2026-08-31: "I can't imagine sending the 'how to' without any
        background.") The anchor does the whole job, and cannot drift out of
        sync with the page the way a second copy would. -->
-  <section class="sec sec--ask" id="host">
+  <section class="sec sec--ask" id="partner">
+    <p class="plate"><span class="plate-n">05</span><span class="plate-t">Partner</span><span class="plate-s">Build with me</span></p>
     <div class="copy">
       <h2>It&rsquo;s going to take a village.</h2>
       <p class="lede">The Ward is a working system, but no one person can take it everywhere it could go. We&rsquo;re looking for people who can help build the next part of it: people with neighborhoods, resources, expertise, relationships, or simply a strong instinct that this ought to exist.</p>
@@ -516,18 +538,20 @@
          thing a reader meets does not look like the eleventh paragraph of the
          thing before it. The section's own 3px `--sign` rule and second ground
          were already here — the grid is what makes them read as a room.
-         ⚠ Two columns, explicitly, never `auto-fit` — see the note in site.css:
-         four items orphan the moment a width resolves to three.
+         ⚠ Explicit column counts, never `auto-fit` — see the note in site.css.
          ⛔ NOT the `.steps` ladder from Belonging, deliberately. That block is
          the five ways to stand in a NEIGHBORHOOD, it carries the generated role
-         badges, and a reader meeting a second badged four-up here would take
+         badges, and a reader meeting a second badged three-up here would take
          these for more of the same. These are ways to help build the KIT. Two
          different registers, so two different objects. -->
     <div class="village">
-      <div class="village-role">
-        <h3>Hosts</h3>
-        <p>Bring The Ward to a place you know. A host might be a neighborhood organization, local publication, business district, civic group, city, institution&mdash;or simply someone with enough connection to a place to get the right people around a table.</p>
-      </div>
+      <!-- ⛔ THE HOSTS CARD IS GONE FROM HERE, and its copy is not lost: it
+           opens §05, which is a whole chapter about the thing this card had
+           four lines for. Leaving a card behind would have made the page ask
+           twice for the same thing in two registers.
+           ⚠ THREE ROLES, SO THE GRID IS THREE — see the note in site.css. Four
+           in two columns was the shape that worked; three in two columns
+           orphans one, which is the exact failure the old note warned about. -->
       <div class="village-role">
         <h3>Investors</h3>
         <p>Help turn a working system into durable infrastructure. We&rsquo;re interested in people who understand that the opportunity isn&rsquo;t one neighborhood or one website, but a platform that can be established place by place.</p>
@@ -615,9 +639,14 @@
   </div>
 </footer>
 
-<!-- SKY:BEGIN — generated by tools/build-sky.mjs. Do not edit by hand. -->
-<script type="application/json" id="sky-table">{"doy":{"spring":79,"summer":172,"autumn":265,"winter":355},"bands":["horizon","low","mid","high","sunGlow"],"cards":{"winter":[["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#2a222e","#222032","#141725","#0a0c11","#5b231a"],["#cb9a7b","#a2868f","#737ba8","#344b69","#ffc386"],["#b6b2a3","#96a2ad","#79a0bd","#5589af","#ffe6cc"],["#a0c3d0","#8bbad0","#6facd0","#64a5d0","#ffeedd"],["#a0c3d0","#8bbad0","#6facd0","#64a5d0","#ffeedd"],["#a0c3d0","#8bbad0","#6facd0","#64a5d0","#ffeedd"],["#a0c3d0","#8bbad0","#6facd0","#64a5d0","#ffeedd"],["#a0c3d0","#8bbad0","#6facd0","#64a5d0","#ffeedd"],["#b5a895","#98979c","#759db8","#5386ac","#ffe2c4"],["#cb8662","#ab7574","#696c9a","#2c405f","#ffb367"],["#4a2a2d","#281e2a","#121322","#090c10","#5a1a0c"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"],["#191722","#101116","#090a0f","#050607","#000000"]],"spring":[["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#372836","#302545","#151534","#0a0b19","#9d4532"],["#d8bc83","#ae999f","#7d87be","#385393","#ffd0a2"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#a4c5e4","#87b3e4","#6398e4","#538be4","#ffeedd"],["#ccb881","#a99a94","#7490c2","#4368b0","#ffd9b3"],["#cf7339","#a25557","#513971","#161736","#ff8a3f"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"],["#1c1626","#101018","#090910","#050508","#000000"]],"summer":[["#1a1525","#0f0f18","#080810","#050508","#000000"],["#1a1525","#0f0f18","#080810","#050508","#000000"],["#1a1525","#0f0f18","#080810","#050508","#000000"],["#1a1525","#0f0f18","#080810","#050508","#000000"],["#1b1525","#100f19","#080811","#050508","#000000"],["#ce875a","#9b6a80","#5c4f93","#1b244b","#faa56c"],["#c8ba97","#a1a3b1","#7396c5","#3d70b3","#ffe0c2"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#9dc5e0","#80b5e0","#5a9ce0","#4a90e0","#ffeedd"],["#bdb293","#9d9ca3","#6994c7","#3f74b9","#ffe2c5"],["#da813d","#b76b63","#635298","#192350","#ffa552"],["#2b1b26","#18131e","#0b0a17","#06060b","#000000"],["#1a1525","#0f0f18","#080810","#050508","#000000"],["#1a1525","#0f0f18","#080810","#050508","#000000"],["#1a1525","#0f0f18","#080810","#050508","#000000"]],"autumn":[["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#ac4d3a","#7a4572","#33296d","#0c1533","#f38c5f"],["#c6a87d","#9f9ba6","#6692bc","#266aa8","#ffddbc"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#8dc2d9","#6bb3d9","#409bd9","#2e8fd9","#ffeedd"],["#ca884f","#a97873","#5d7caf","#20558f","#ffcb96"],["#782218","#40203b","#101034","#070b1a","#cf5625"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"],["#151224","#0d0e17","#060710","#040508","#000000"]]}}</script>
-<!-- SKY:END -->
-<script src="js/site.js?v=711e26648382"></script>
+<!-- ⛔ THE SKY TABLE IS GONE (2026-09-05) — four seasons × twenty-four hours ×
+     five bands of authored hex, extracted from the product's own `skyGrid.js` by
+     `tools/build-sky.mjs` so the page's sky could never be a designer's guess at
+     the map's. It was read by exactly one thing, `.skyband`'s gradient, and that
+     band went with the diorama. The generator and `data/sky.json` were deleted
+     with it rather than left running against nothing.
+     ⭐ To bring it back: git show HEAD:tools/build-sky.mjs — and re-add it to the
+     loop in tools/build.mjs, which is the line that makes it run. -->
+<script src="js/site.js?v=53585da21193"></script>
 </body>
 </html>

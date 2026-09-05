@@ -21,7 +21,14 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const CHECK = process.argv.includes('--check')
 const args = CHECK ? ['--check'] : []
 
-for (const tool of ['build-sources.mjs', 'build-sky.mjs', 'build-vignettes.mjs']) {
+/* ⛔ `build-sky.mjs` LEFT THIS LIST on 2026-09-05, and the tool went with it.
+   It extracted the product's authored sky table into index.html; the only thing
+   that ever read it was the diorama's gradient band, which was removed with the
+   whole day/time apparatus. A generator that writes a block nothing reads is the
+   exact drift `--check` exists to catch, so it is deleted rather than disabled.
+   ⭐ To restore: git show HEAD:tools/build-sky.mjs, put the SKY markers back in
+   index.html, and add it to this array again. */
+for (const tool of ['build-sources.mjs', 'build-vignettes.mjs']) {
   execFileSync('node', [resolve(ROOT, 'tools', tool), ...args], { stdio: 'inherit', cwd: ROOT })
 }
 

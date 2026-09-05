@@ -212,22 +212,44 @@ per-role **scale and nudge** — a flex box centres the line box, not the glyph,
 and 🚲's ink is 0.48 of its box where 🌳's is 0.70. ⛔ A role with no measured ink
 throws.
 
-⚠️ **So the product-generated blocks are the sources table and the sky strip,
-those two only.** Do not re-add the badges to that claim.
+⚠️ **So the product-generated block is the sources table, that one only.** It was
+two: `tools/build-sky.mjs` extracted the authored sky table so this page's sky
+could never be a designer's guess at the map's. One thing read it — the diorama
+band's gradient — and that band came off the page on 2026-09-05, so the generator
+and `data/sky.json` were **deleted rather than left running against nothing**.
+⛔ Do not re-add the badges to this claim either; they are generated from a file
+in THIS repo, not from the product.
 
-⭐ **There is no time control on this page, deliberately, and there are two
-reasons.** First: a three-button strip and then a horizon disc both had to be
-explained; a band of sky does not. Second: **the Almanac inside the product
-already owns the day slider, and two sliders that do not drive each other is
-worse than one.** If the page should ever move with the hour, the right shape is
-the product posting its time outward and this page following — one slider, two
-surfaces. ⛔ Never a second slider here.
+⛔⛔ **THERE IS NO TIME CONTROL ON THIS PAGE, AND NOW THERE IS NO DAY EITHER
+(2026-09-05).** This passage has been rewritten three times and the round trip is
+worth keeping, because each turn was right at the time:
 
-⚠ Consequence, recorded rather than hidden: the page follows the neighborhood's
-clock even for a viewer whose system asks for light. Contrast holds in both
-grounds, so this is a preference override rather than a legibility failure — but
-it is an override, and if it ever needs an escape hatch, the product-posts-time
-route above is the one that earns it.
+1. **No control, on purpose.** A three-button strip and then a horizon disc both
+   had to be explained; a band of sky did not. And *the Almanac inside the product
+   already owns the day slider, so two sliders that do not drive each other is
+   worse than one.* It predicted its own answer: *"the right shape is the product
+   posting its time outward and this page following."*
+2. **That shipped, one step further.** `?embed=almanac` mounted the **product's**
+   Almanac here — same clock, same live temperature, same `TodStrip` — so the page
+   had no slider of its own to keep in step. The sky band's drag came out with it.
+3. **Then the whole apparatus came out** (Jacob: *"get rid of the diorama, time
+   slider, light/dark maker, everything. The section is now just about the slab,
+   and what it does"*). §03 describes the Slab instead of demonstrating it, and a
+   section that describes needs no instrument.
+
+⭐ **THE RULE THAT SURVIVED ALL THREE: never a second slider here.** It is now
+true by having no first one.
+
+⭐ **AND THE PAGE'S GROUND IS THE READER'S.** `js/site.js` used to stamp
+`data-theme` from the sun over the installation, which meant a viewer whose system
+asked for light got a dark page all evening — recorded here at the time as a
+deliberate preference override rather than a legibility failure, with the note
+that *"if it ever needs an escape hatch, the product-posts-time route is the one
+that earns it."* There is no day to override with now, so `tokens.css` decides:
+bare `:root`, the guarded `prefers-color-scheme` block, and `[data-theme]` for an
+explicit choice. All three were already declared and audited; nothing was added.
+⚠️ `ward-layer` still carries `ground: 'paper'|'plate'` because the product cannot
+see across the frame — it is read from `prefers-color-scheme` instead of the sun.
 
 Point it elsewhere with `WARD_SOURCES_PANEL=/path/to/SourcesPanel.jsx`.
 
@@ -325,9 +347,11 @@ decision, and it is one line.
 | Every building opens | its own claim again, with a labelled gap awaiting an overhead of the neighborhood. It is NOT the directory's claim and the two were briefly collapsed |
 | The place card | **`?embed=card&place=<id>` — the card itself, running, in a drawn tablet.** Confirmed: photo, logo, rating, tabs, and no close button — `.embed-card [aria-label="Close"]` hides it, because mounted alone there is nothing to close back to. ⭐ **Its hero photo SCROLLS as of 2026-08-31**: it used to sit outside the scroll container as a fixed 112px band, which is half the card in a 4:3 frame on a phone and never moved. **To swap the place: change `data-place` in index.html and nothing else** — and that is true again; `js/site.js` had grown a constant that quietly took over, leaving the attribute dead while two docs told you to edit it (restored 2026-08-23). It now seeds BOTH frames; the ids come from the directory above it |
 | The joint | a 3px rule in the reserved colour under the band. The seam vanished at night when band and sky were both near-black; the rule says *below this line, everything is live* |
-| The sky band | a short divider between what the Ward holds and what is living in it, carrying the neighborhood's own authored sky (`tools/build-sky.mjs`). It reports; it does not ask. ⭐ **It is also the day slider, and it is ONE control** — the whole band drags, with a mark riding a track the diorama cannot cover. ⚠️ **A touch must declare an axis before it owns the day** (§9); a mouse still commits on press |
-| The ask | **its own section, and the page's last word — "It's going to take a village" (2026-08-31).** Four ways to help build the KIT — Hosts · Investors · Partners · Friends — and the contact pair belongs to it. ⛔ **NOT the `.steps` ladder from Belonging**, deliberately: that block is the five ways to stand in a NEIGHBORHOOD and it carries the generated role badges, so a second badged four-up here would read as more of the same list. Different register, different object. ⭐ **`.village` is the only block on the page allowed OUT of `--measure`** — the page's last word earns its distinction by changing SHAPE, not by adding colour. ⛔ Two columns explicitly, never `auto-fit`: four items tile cleanly at one, two or four and at nothing else, and a width-driven count finds three on the way — measured, it orphaned Friends on a 1092px viewport. ⚠️ The old "A Host is a partner rather than a customer" lede moved UP to §Where a Ward Comes From, where it is the premise of the sources table rather than a term of business, and plants the word *Host* before the ask has to define it. It sat mid-page inside §host with two sections after it, and the address was stranded again in the footer. One home now, at the end. The footer carries sources + `© 2026 Jacob Henderson LLC`. The QR is **live as of 2026-08-29** — `sms:` to the installation's number, so it opens the reader's own messages app and reaches a person, never a check-in (§8). ⭐ **It is also a link**, so a desktop click does the same thing the camera does: macOS Messages declares the `sms` scheme, and where nothing claims it the click is simply inert. Its `href` carries no `body` even though the encoded image does — `&body=` is the iOS separator, and a handler reading it as part of the recipient would address a message to nothing. ⭐ **Regenerated 2026-08-31 on `#EFE8D8`**, the value of `--ground` and `--band-text`, so the code sits on the page's own paper rather than a white tile. Decode before publishing a new one — a QR cannot be reviewed by looking at it; Chrome's `BarcodeDetector` is enough. ⚠️ **This section is NOT printable** (Jacob, 2026-08-29); an earlier code comment said it was, and the code is sized and contrasted for a screen someone is holding a second phone up to. ⭐ **It carries `id="host"`**, so the ask is linkable at `theward.online/#host` |
-| `/host` as a standalone page | ⛔ **CUT, 2026-08-31, and it was on this list for a year of drafts.** The section is a heading, ONE sentence and two controls — there is no "how to" to send, and the background that makes the ask land is the rest of the scroll, so a cold send would be the ask with its argument removed. It also cut against a decision already in the markup: the ask was moved out of mid-page to be the LAST thing. ⭐ What it actually needed was `id="host"` — an anchor, not a page, and one that cannot drift out of sync with the page around it |
+| The Slab | ⛔ **NO LONGER A CHAPTER, 2026-09-05.** It had one for a day, between The Idea and The Experience. What a reader actually needs to know about a Slab is the thing that makes a Ward portable, so it is a paragraph — *Built to travel* — inside §04 Bring It Somewhere, and the sources table went with it as that section's second half. ⭐ **That merge is why §04 holds together**: who a Host is, what travels, what it is assembled from, and the table. It also left the four instruments with exactly one home |
+| The diorama and the Almanac | ⛔ **BOTH OFF THE PAGE, 2026-09-05.** `?embed=tree` put a live specimen under the real sky in one Canvas, and `?embed=almanac` pinned the product's own Almanac across the foot of that frame as its instrument panel. §03 is prose about what a Slab is now. ⚠️ **The routes still work** — they are unplaced, not retired, and `INTEGRATION.md` keeps the whole record. Two things from it that will be wanted again: **pin the species** (bare `?embed=tree` resolves through the Meteorologist's canary and frames whatever specimen an operator last parked that tool on — this page was showing `maple_sugar` at 39,633 tris, which is what "the tree is sparse" turned out to be), and **an embed that measures itself locks at its first reading** unless the measured box is detached from the frame's height |
+| The Field Guide | **the map of the argument, and the reason this pass happened.** **FIVE** numbered plates at the top of `<main>` — The Slab stopped being a chapter on 2026-09-05 and became a paragraph inside 04. ⛔ **Five does not divide, so the tiles SPAN**: six tracks wide with three tiles of two on the first row and two of three on the second; four tracks narrow with two per row and the odd one taking the width. That is not tidiness — the hairlines are the grid's own 1px gap over a `--rule` ground, so an unfilled cell is not empty, it is a solid block of rule colour. ⚠️ Change the number of entries and BOTH `nth-child` rules must be re-derived by hand; there is deliberately no arithmetic doing it, because `auto-fit` is precisely the thing that finds counts that do not divide. All five destinations visible at once, never a one-up stack. Each repeats its chapter's `.plate` word for word, so arriving confirms the map. ⭐ **01 IS THE LIVE WARD, and it leads because it is what you landed on.** It was 02 for an afternoon, which put the running Ward second in a list sitting directly underneath it (Jacob: *"if the ward comes first why would it be #2"*) and left a **01 → 03 gap** down the page, because it is the one plate that does not go to a section. Numbered first, the guide reads in scroll order and every number below it is where you will meet it. ⭐ It is also the plate doing the most work: every other says *read on*, and that one says *the thing being described is running, and you can stand in it*. Its arrow is `--live`, the same reservation amber carries everywhere else. ⛔ **It is not a menu** — it appears once, in the flow, and does not follow the reader down. ⛔ `data-names-instance` on 02 is load-bearing (§Rule 7) |
+| The ask | **its own section, and the page's last word — "It's going to take a village" (2026-08-31).** **THREE** ways to help build the KIT — Investors · Partners · Friends — and the contact pair belongs to it. ⚠️ **Hosts left this grid on 2026-09-04** and became §05, a chapter about what hosting a Ward MEANS rather than a card asking for it; the grid went from two columns to three with it, because three items orphan one at every width two columns applies to. ⛔ **NOT the `.steps` ladder from Belonging**, deliberately: that block is the five ways to stand in a NEIGHBORHOOD and it carries the generated role badges, so a second badged three-up here would read as more of the same list. Different register, different object. ⭐ **`.village` is the only block on the page allowed OUT of `--measure`** — the page's last word earns its distinction by changing SHAPE, not by adding colour. ⛔ An explicit column count, never `auto-fit`: measured on the four-item version, `auto-fit` orphaned Friends on a 1092px viewport. ⚠️ The "A Host is a partner rather than a customer" lede has moved twice: out of here to §Where a Ward Comes From (2026-08-31), where it was the premise of the sources table, and out of THERE to open §04 Bring It Somewhere (2026-09-04), which is the chapter it was always describing and which did not exist until then. ⭐ On 2026-09-05 the sources table followed it into that section, so the lede and its table are back in one room — this time with the table underneath the argument rather than the argument stranded on top of it. It sat mid-page inside §host with two sections after it, and the address was stranded again in the footer. One home now, at the end. The footer carries sources + `© 2026 Jacob Henderson LLC`. The QR is **live as of 2026-08-29** — `sms:` to the installation's number, so it opens the reader's own messages app and reaches a person, never a check-in (§8). ⭐ **It is also a link**, so a desktop click does the same thing the camera does: macOS Messages declares the `sms` scheme, and where nothing claims it the click is simply inert. Its `href` carries no `body` even though the encoded image does — `&body=` is the iOS separator, and a handler reading it as part of the recipient would address a message to nothing. ⭐ **Regenerated 2026-08-31 on `#EFE8D8`**, the value of `--ground` and `--band-text`, so the code sits on the page's own paper rather than a white tile. Decode before publishing a new one — a QR cannot be reviewed by looking at it; Chrome's `BarcodeDetector` is enough. ⚠️ **This section is NOT printable** (Jacob, 2026-08-29); an earlier code comment said it was, and the code is sized and contrasted for a screen someone is holding a second phone up to. ⭐ **It carries `id="partner"` as of 2026-09-04, and `#host` moved to §05.** The ask is linkable at `theward.online/#partner`; anyone who was sent the older `theward.online/#host` wanted what it means to bring a Ward somewhere, not a three-way ask in which hosting is not even one of the options any more, so that URL now lands on a better answer than it used to |
+| `/host` as a standalone page | ⛔ **CUT, 2026-08-31, and it was on this list for a year of drafts.** The section is a heading, ONE sentence and two controls — there is no "how to" to send, and the background that makes the ask land is the rest of the scroll, so a cold send would be the ask with its argument removed. It also cut against a decision already in the markup: the ask was moved out of mid-page to be the LAST thing. ⭐ What it actually needed was an anchor, not a page — one that cannot drift out of sync with the page around it. ⚠️ And `id="host"` now names §05, *Host a Ward*, which is the chapter that anchor was always reaching for |
 | The terms | **built** — `legal.html`, §7b. This row used to read "Privacy / terms pages: not built" while §7b of this same file described the legal page in detail: **two sections of one document disagreeing**, which is the failure mode this repo keeps paying for |
 | A privacy page | ⛔ **RULED OUT, 2026-08-31** (Jacob: *"this page doesn't get a privacy statement"*). One was written and reverted whole. **The PRODUCT already has one** — `PrivacyPage` in `src/pages/LegalPage.jsx` — and everything load-bearing in the draft described the thing in the FRAME, not this website, which collects nothing and needs about two sentences to say so. A second copy on a second domain drifts the first time either moves. ⚠️ It also promised on behalf of *every* Ward, when a Host's installation is not ours to speak for — which `legal.html §1` expressly disclaims. ▶ A mission-style statement about earning standing by presence is **parked, not pursued**; it is a copy decision. `BACKLOG.md` carries the full reasoning |
 | The five participant badges | **settled.** One authored master — cream field, deep rim, halo on the glyph — so every emoji reads and any emoji can be swapped in. ☕ 🏡 🛡️ 🔑 🚲 — the guardian is a shield, which is the only one of them that is itself a heraldic device, and so the only one already in the register the badge is borrowing. They are the ladder's step markers, replacing the numbers 1–4; the courier is not a rung and wears its badge in the Cary room. Size and centring are generated from each glyph's measured ink |
@@ -423,26 +447,38 @@ page does not move, the control is broken, however well it works with a mouse.
 Three surfaces, three answers. They are different because what is underneath them
 is different, and none of the three generalises to the others.
 
-### The sky band — intent, not sensitivity
+### The sky band — the case that was solved by deleting the control
 
-The whole band is the day slider (§7), which means it is a wide horizontal target
-sitting in the middle of a vertical read. It used to set the day on `pointerdown`,
-before a single pixel had said what the gesture was for.
+⛔ **RESOLVED BY REMOVAL, 2026-09-04, and kept here because the reasoning is the
+transferable part.** The whole band used to be the day slider: a wide horizontal
+target sitting in the middle of a vertical read, on a page a reader scrolls with
+one thumb. It set the day on `pointerdown`, before a single pixel had said what
+the gesture was for.
 
-⭐ **The fix is that a pointer must DECLARE AN AXIS before it owns the day**:
-more horizontal than vertical, and past 8px. Vertical wins and we let go, so the
-page scrolls. A **mouse** still commits on press — a mouse has no competing
-gesture, and clicking the band has always meant *put the day here*.
-⚠️ `touch-action: pan-y` on `.skyband` is the other half: when the browser takes
-the gesture for scrolling it fires `pointercancel`, which releases us. The two
-together mean a scroll can never leave the day moved.
+The fix at the time was **intent, not sensitivity** — a pointer had to declare an
+axis before it owned the day (more horizontal than vertical, past 8px); vertical
+won and we let go so the page scrolled; a **mouse** still committed on press,
+having no competing gesture. `touch-action: pan-y` was the other half: when the
+browser takes the gesture for scrolling it fires `pointercancel`, which released
+us. That is still the right answer for a full-bleed horizontal control, and it is
+written down here for the next one.
 
-⛔ **`.skyband-input` is `pointer-events: none`, and that is load-bearing.** It is
-a real `<input type="range">` at `opacity: 0` across the entire band, present for
-keyboard and assistive tech — and a native range **absorbs touch and commits its
-value on tap**, so it was setting the day before any of our code ran. Deaf to the
-pointer it still tabs, still takes arrow keys, and still rings the band through
-`:focus-within`. It competes with nothing.
+⭐ **But the better answer was that the control should not have been there.** The
+band was invisible as a control, needed a 1px mark on an 18px strip the diorama
+was held back from just to say it existed, and the page had to apologise for it
+in three separate comments. `?embed=almanac` is a real slider, with a clock next
+to it, and it is the product's. All of the above came out with the drag.
+
+⭐ **What survived, and why**: `.almanac-input`, a real `<input type="range">` at
+`opacity: 0`, present for keyboard and assistive tech because the Almanac's own
+strip is divs and pointer capture with nothing focusable in it. It is still
+`pointer-events: none` and that is still load-bearing — a native range **absorbs
+touch and commits its value on tap**, and there is now a real control inside the
+frame it would be competing with. Deaf to the pointer it still tabs, still takes
+arrow keys, and still rings the frame through `:focus-within`. ⚠️ Its
+`aria-valuetext` is set from the minute, because a range announces its NUMBER —
+"720 of 1439" is not a time of day to anybody, and the visible clock is inside a
+frame a screen reader on this page cannot reach.
 
 ### The directory and the card — a guard
 

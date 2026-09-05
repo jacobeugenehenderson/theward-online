@@ -3,9 +3,9 @@
 
    Four jobs, no framework:
      1  the day       — the neighborhood's clock, shared with the product
-     2  the sky band  — the neighborhood's own sky, and the control for the day
+     2  the sky band  — the neighborhood's own sky; the ALMANAC is the control
      3  the layers    — the running product swaps payload BY MESSAGE
-     4  the pill, the ticker
+     4  the ticker
 
    ⚠ Traps this file exists to avoid, every one already paid for:
      · Changing an embed's `src` rebuilds the product's WebGL context and
@@ -47,8 +47,6 @@
   /* postMessage wants an ORIGIN, never a URL with a path on it. */
   var embedOrigin = new URL(embedUrl, location.href).origin
 
-  var GEO = { lat: 38.6, lon: -90.2 }
-
   /* ⭐ ONE PLACE, TWO FRAMES. The directory opens on it and the card shows it,
      so the pair reads as one instrument rather than two things that happen to
      be near each other.
@@ -61,185 +59,27 @@
      read the attribute, and both frames boot on the same id. */
   var FEATURED_PLACE = 'lmk-028'
 
-  /* ═══ 1. THE DAY ═══════════════════════════════════════════════════════
-     `held` is the scrubbed minute, or null for the neighborhood's own.
+  /* ⛔⛔ §1 THE DAY AND §2 THE SKY ARE GONE (2026-09-05), and with them every
+     line of astronomy this file used to carry: `solarElevation`, `moonAt`, the
+     dawn-window arithmetic, the four-season × twenty-four-hour × five-band sky
+     table extracted from the product, `paintSky`, `applyDay`, `moveDay`, the
+     `ward-time` relay between three frames, the keyboard range and the `now`
+     button. The Slab section no longer demonstrates a day, so the page no
+     longer keeps one. Jacob, 2026-09-05: "get rid of the diorama, time slider,
+     light/dark maker, everything."
 
-     ⭐ ONE DAY, TWO SURFACES. The page and the product share it: dragging the
-     sky posts `ward-time` in, and the Almanac's own slider posts `ward-time`
-     back out. Both sides compare before acting, so adopt → announce → adopt
-     cannot loop. Two controls are fine; two clocks are not. */
-  var held = null
-  var isNight = false
+     ⛔ THE PAGE'S GROUND IS THE READER'S NOW, NOT THE NEIGHBORHOOD'S. This file
+     used to stamp `data-theme` from the sun over the installation, which meant a
+     viewer whose system asked for light got a dark page all evening — recorded
+     at the time as a deliberate override rather than a bug. With the day gone
+     there is nothing to override with, so `tokens.css` decides: bare `:root`,
+     the guarded `prefers-color-scheme` block, and `[data-theme]` for an explicit
+     choice. All three were already declared and audited.
 
-  function solarElevation(date, lat, lon) {
-    var rad = Math.PI / 180
-    var start = Date.UTC(date.getUTCFullYear(), 0, 0)
-    var doy = (Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()) - start) / 86400000
-    var frac = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600
-    var g = (357.529 + 0.98560028 * (doy + frac / 24)) * rad
-    var decl = 23.44 * rad * Math.sin((280.46 + 0.9856474 * doy) * rad + 0.0334 * Math.sin(g))
-    var eqt = 4 * (-1.9148 * Math.sin(g))
-    var solarTime = frac + lon / 15 + eqt / 60
-    var H = (solarTime - 12) * 15 * rad
-    var s = Math.sin(lat * rad) * Math.sin(decl) + Math.cos(lat * rad) * Math.cos(decl) * Math.cos(H)
-    return Math.asin(Math.max(-1, Math.min(1, s))) / rad
-  }
-
-  /* ⚠ Low-precision astronomy, deliberately: the abridged lunar series is good
-     to a fraction of a degree, which is invisible on a band this size. The
-     PRODUCT computes the real thing with SunCalc for the sky it renders; this
-     is the page's echo of it and must never be quoted as the authority. */
-  var RAD = Math.PI / 180
-  var OBLIQ = 23.4397 * RAD
-
-  function moonAt(date, lat, lon) {
-    var d = date.valueOf() / 86400000 - 10957.5
-    var L = (218.316 + 13.176396 * d) * RAD
-    var M = (134.963 + 13.064993 * d) * RAD
-    var F = (93.272 + 13.229350 * d) * RAD
-    var lam = L + 6.289 * RAD * Math.sin(M)
-    var bet = 5.128 * RAD * Math.sin(F)
-    var ra = Math.atan2(Math.sin(lam) * Math.cos(OBLIQ) - Math.tan(bet) * Math.sin(OBLIQ), Math.cos(lam))
-    var dec = Math.asin(Math.sin(bet) * Math.cos(OBLIQ) + Math.cos(bet) * Math.sin(OBLIQ) * Math.sin(lam))
-    var lst = (280.16 + 360.9856235 * d) * RAD + lon * RAD
-    var alt = Math.asin(Math.sin(lat * RAD) * Math.sin(dec) +
-                        Math.cos(lat * RAD) * Math.cos(dec) * Math.cos(lst - ra)) / RAD
-    var age = (((date.valueOf() - 947182440000) / 86400000) % 29.530588853 + 29.530588853) % 29.530588853
-    var phase = age / 29.530588853
-    return { alt: alt, phase: phase, lit: (1 - Math.cos(2 * Math.PI * phase)) / 2 }
-  }
-
-  function dayOfYear(d) {
-    return Math.floor((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) -
-                       Date.UTC(d.getFullYear(), 0, 0)) / 86400000)
-  }
-
-  function localMinuteNow() {
-    var d = new Date()
-    return (d.getUTCHours() * 60 + d.getUTCMinutes() + Math.round(GEO.lon / 15 * 60) + 1440) % 1440
-  }
-
-  /* A real Date at the shown minute, in the neighborhood's own time. */
-  function dateAt(minute) {
-    var d = new Date()
-    d.setUTCHours(0, 0, 0, 0)
-    d.setUTCMinutes(minute - Math.round(GEO.lon / 15 * 60))
-    return d
-  }
-
-  /* ═══ 2. THE SKY ═══════════════════════════════════════════════════════
-     Four season anchors × 24 hours × five bands of the neighborhood's OWN
-     authored sky, extracted from the product by tools/build-sky.mjs. */
-  var SKY = null
-  try {
-    var tableEl = document.getElementById('sky-table')
-    if (!tableEl) throw new Error('no #sky-table — run: node tools/build.mjs')
-    SKY = JSON.parse(tableEl.textContent)
-    if (!SKY || !SKY.bands || !SKY.cards) throw new Error('parsed, but not a sky table')
-  } catch (e) {
-    console.error('[ward] the sky band has no data:', e.message)
-    SKY = null
-  }
-
-  function hexRGB(h) {
-    return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]
-  }
-  function mix(a, b, t) {
-    return a.map(function (v, i) { return Math.round(v + (b[i] - v) * t) })
-  }
-  function css(c) { return 'rgb(' + c.join(',') + ')' }
-
-  /* Between the two flanking season anchors and the two flanking hours — the
-     same interpolation the product does, rather than snapping to a slot. */
-  function skyAt(minute, doy) {
-    if (!SKY) return null
-    var names = Object.keys(SKY.doy).sort(function (a, b) { return SKY.doy[a] - SKY.doy[b] })
-    var lo = names[names.length - 1], hi = names[0], t = 0
-    for (var i = 0; i < names.length; i++) {
-      var d0 = SKY.doy[names[i]], d1 = SKY.doy[names[(i + 1) % names.length]]
-      var span = (d1 - d0 + 365) % 365
-      var into = (doy - d0 + 365) % 365
-      if (into <= span) { lo = names[i]; hi = names[(i + 1) % names.length]; t = span ? into / span : 0; break }
-    }
-    var h = minute / 60, h0 = Math.floor(h) % 24, h1 = (h0 + 1) % 24, ht = h - Math.floor(h)
-    return SKY.bands.map(function (_, band) {
-      var a = mix(hexRGB(SKY.cards[lo][h0][band]), hexRGB(SKY.cards[lo][h1][band]), ht)
-      var b = mix(hexRGB(SKY.cards[hi][h0][band]), hexRGB(SKY.cards[hi][h1][band]), ht)
-      return t === 0 ? a : mix(a, b, t)
-    })
-  }
-
-  /* ⭐ PORTED FROM THE SKY BUILDER'S OWN "now" PREVIEW
-     (cartograph/SkyGradientGrid.jsx). Three things it does that my version did
-     not, and each is better:
-
-       · a body BELOW about -3° is simply not drawn, rather than faded
-       · the moon's opacity AND glow radius scale with its illuminated
-         fraction, and under 5% lit it is not drawn at all — that is how the
-         preview shows a phase without drawing a terminator
-       · sunGlow is a HORIZON WASH peaking as the sun crosses the horizon,
-         not a halo on the sun
-
-     The x axis is this band's own idea — a whole day laid flat — so only the
-     vertical mapping and the treatment come across. */
-  var HIDE_BELOW = -2.9   // degrees; the Sky Builder's -0.05 rad
-
-  function altToTopPct(altDeg) {
-    if (altDeg < HIDE_BELOW) return null
-    var t = Math.max(0, Math.min(1, altDeg / 90))
-    return (1 - t) * 100
-  }
-
-  function placeBody(el, altDeg, xPct) {
-    if (!el) return null
-    var top = altToTopPct(altDeg)
-    if (top === null) { el.style.opacity = '0'; return null }
-    el.style.left = xPct + '%'
-    el.style.top = top + '%'
-    return top
-  }
-
-  function paintSky(minute, at) {
-    var band = document.querySelector('[data-sky-strip]')
-    if (!band) return
-    var stops = skyAt(minute, dayOfYear(at))
-    if (!stops) { console.error('[ward] no sky for minute', minute); return }
-
-    var names = ['horizon', 'low', 'mid', 'high', 'sunGlow']
-    for (var i = 0; i < stops.length; i++) band.style.setProperty('--sky-' + names[i], css(stops[i]))
-
-    var xPct = (minute / 1439) * 100
-    var sunAlt = solarElevation(at, GEO.lat, GEO.lon)
-
-    /* ⛔ THE SUN, MOON AND WASH USED TO BE PAINTED HERE, and their DOM is gone
-       (index.html says why): flat CSS discs placed by percentage cannot share a
-       projection with the perspective render standing next to them. The scene
-       draws its own, correctly placed and occluded by the canopy.
-       ⚠ What remains below still earns its keep: the MARK and the RANGE are
-       page chrome, not sky — they sit ON the figure rather than in it. */
-    var mark = band.querySelector('[data-sky-mark]')
-    if (mark) mark.style.left = xPct + '%'
-
-    var range = band.querySelector('[data-sky-range]')
-    if (range && document.activeElement !== range) range.value = String(minute)
-    var nowBtn = band.querySelector('[data-sky-now]')
-    if (nowBtn) nowBtn.hidden = (held === null)
-  }
-
-  function applyDay() {
-    var minute = held === null ? localMinuteNow() : held
-    var at = dateAt(minute)
-    isNight = solarElevation(at, GEO.lat, GEO.lon) < -6
-    document.documentElement.setAttribute('data-theme', isNight ? 'dark' : 'light')
-    postLayer()   // the product cannot read our ground across the frame
-    paintSky(minute, at)
-  }
-
-  function moveDay(minute) {
-    held = minute === null ? null : Math.max(0, Math.min(1439, Math.round(minute)))
-    applyDay()
-    postTime()
-  }
+     ⚠ ONE THING STILL NEEDS TO KNOW WHICH GROUND WE ARE ON: `ward-layer` carries
+     `ground: 'paper'|'plate'` because the product cannot see across the frame.
+     It is read from `prefers-color-scheme` below instead of from the sun.
+     Archived: git show HEAD:js/site.js */
 
   /* ═══ 3. THE LAYERS ════════════════════════════════════════════════════
      The product's own address is the API: no param is the composite,
@@ -252,6 +92,14 @@
      Those two words are its wire protocol; do not "correct" them to this
      site's vocabulary. */
   var layer = null
+
+  /* ⚠️ `paper` / `plate` are the PRODUCT'S wire protocol — retired words in this
+     site's own vocabulary. Do not "correct" them. */
+  function ground() {
+    try {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'plate' : 'paper'
+    } catch (e) { return 'paper' }
+  }
 
   function frameWin() {
     var f = document.querySelector('[data-ward-frame]')
@@ -267,7 +115,7 @@
       var w = frameWin()
       if (!w) return
       try {
-        w.postMessage({ type: 'ward-layer', layer: layer, ground: isNight ? 'plate' : 'paper' }, embedOrigin)
+        w.postMessage({ type: 'ward-layer', layer: layer, ground: ground() }, embedOrigin)
       } catch (e) { /* not ready; the next post catches up */ }
     })
   }
@@ -276,7 +124,6 @@
      post re-times the product's whole scene; sending them raw froze the
      renderer during testing. The page repaints at full rate — that is local
      and cheap — and the product hears at most one message per frame. */
-  var timePending = false
   /* ⭐ THE PAGE'S HALF OF THE BARGAIN. The Ward cannot see where it sits in
      this page — a framed document's IntersectionObserver measures against its
      OWN viewport, and cross-origin it can see nothing of ours. So we watch,
@@ -293,24 +140,6 @@
     try { w.postMessage({ type: 'ward-perf', presence: next }, embedOrigin) } catch (e) { /* not ready */ }
   }
 
-  function postTime() {
-    if (timePending) return
-    timePending = true
-    requestAnimationFrame(function () {
-      timePending = false
-      /* ⭐ EVERY frame on this page is on the SAME clock — the map AND the
-         tree standing in the sky band. Posting to only one was how the day
-         could disagree with itself across two pictures of the same minute. */
-      var msg = { type: 'ward-time', minute: held }
-      var w = frameWin()
-      if (w) { try { w.postMessage(msg, embedOrigin) } catch (e) { /* not ready */ } }
-      var tf = document.querySelector('[data-tree-frame]')
-      if (tf && tf.contentWindow) {
-        try { tf.contentWindow.postMessage(msg, embedOrigin) } catch (e) { /* not ready */ }
-      }
-    })
-  }
-
   function setLayer(next) {
     layer = next || null
     postLayer()
@@ -324,70 +153,13 @@
   /* ═══ boot ═════════════════════════════════════════════════════════════ */
   document.addEventListener('DOMContentLoaded', function () {
 
-    // ── the day, and the band that controls it ──────────────────────────
-    applyDay()
-
-    var band = document.querySelector('[data-sky-strip]')
-    if (band) {
-      /* ⛔ A TOUCH IS NOT A CLICK, AND ON A PHONE IT IS THE SCROLL GESTURE.
-         This band is full-bleed, so a reader on their way down the page puts a
-         finger on it and drags — and the old handler set the day on
-         `pointerdown`, before a single pixel of movement had said what the
-         gesture was for. Jacob, 2026-08-31: "On a phone, that controller is
-         exactly the same as the scroll on the site itself."
-
-         ⭐ THE FIX IS INTENT, NOT SENSITIVITY. A pointer must declare an axis
-         before it owns the day: more horizontal than vertical, and past 8px.
-         Vertical wins → we let go and the page scrolls. A MOUSE still commits
-         on press, because a mouse has no competing gesture — clicking the band
-         has always meant "put the day here" and still does.
-         ⚠ `touch-action: pan-y` in site.css is the other half: when the browser
-         takes the gesture for scrolling it fires `pointercancel`, which releases
-         us. The two together mean a scroll can never leave the day moved. */
-      var dragging = false
-      var pending = null   // a touch that has not declared its axis yet
-      var minuteFromX = function (clientX) {
-        var r = band.getBoundingClientRect()
-        return ((clientX - r.left) / r.width) * 1439
-      }
-      var commit = function (e) {
-        dragging = true
-        pending = null
-        try { band.setPointerCapture(e.pointerId) } catch (err) { /* fine */ }
-        moveDay(minuteFromX(e.clientX))
-      }
-      var release = function () { dragging = false; pending = null }
-
-      band.addEventListener('pointerdown', function (e) {
-        if (e.target.closest('[data-sky-now]')) return
-        if (e.pointerType === 'mouse') { commit(e); return }
-        pending = { x: e.clientX, y: e.clientY }
-      })
-      band.addEventListener('pointermove', function (e) {
-        if (dragging) { moveDay(minuteFromX(e.clientX)); return }
-        if (!pending) return
-        var dx = e.clientX - pending.x, dy = e.clientY - pending.y
-        if (Math.abs(dy) > Math.abs(dx)) { pending = null; return }  // reading, not setting
-        if (Math.abs(dx) > 8) commit(e)
-      })
-      band.addEventListener('pointerup', release)
-      band.addEventListener('pointercancel', release)
-
-      var range = band.querySelector('[data-sky-range]')
-      if (range) range.addEventListener('input', function () { moveDay(Number(this.value)) })
-      var nowBtn = band.querySelector('[data-sky-now]')
-      if (nowBtn) nowBtn.addEventListener('click', function () { moveDay(null) })
-    }
-
-    setInterval(function () { if (held === null) applyDay() }, 60000)
-
     // ── the view ────────────────────────────────────────────────────────
     var f = document.querySelector('[data-ward-frame]')
     if (f) {
       f.src = embedUrl
       // the product mounts before it can listen; sync once it is up
       f.addEventListener('load', function () {
-        setTimeout(function () { postLayer(); postTime(); presence = null; postPresence('active') }, 400)
+        setTimeout(function () { postLayer(); presence = null; postPresence('active') }, 400)
       })
       if ('IntersectionObserver' in window) {
         new IntersectionObserver(function (entries) {
@@ -401,18 +173,6 @@
       }
     }
 
-    /* The Almanac's slider, coming back the other way. */
-    window.addEventListener('message', function (e) {
-      if (e.origin !== embedOrigin) return
-      var m = e.data
-      if (!m || m.type !== 'ward-time') return
-      var next = m.isLive ? null : m.minute
-      if (next === held) return
-      if (next !== null && held !== null && Math.abs(next - held) < 1) return
-      held = next
-      applyDay()
-    })
-
     // ── which place both frames start on ─────────────────────────────────
     var cardFrame = document.querySelector('[data-card-frame]')
     var shownPlace = (cardFrame && cardFrame.getAttribute('data-place')) || FEATURED_PLACE
@@ -424,18 +184,16 @@
         '&place=' + encodeURIComponent(shownPlace)
     }
 
-    // ── the tree, standing in the sky band ───────────────────────────────
-    // `alpha=1` → no sky of its own, so the band behind shows through the
-    // canopy and the tree takes its light from the scene at this minute.
-    var treeFrame = document.querySelector('[data-tree-frame]')
-    if (treeFrame) {
-      /* ⛔ NOT alpha any more. The scene draws its OWN sky, because its sun
-         and moon are in the SAME projection as the tree — see index.html. */
-      treeFrame.src = embedUrl + '?embed=tree'
-      treeFrame.addEventListener('load', function () {
-        setTimeout(postTime, 400)   // it mounts before it can listen
-      })
-    }
+    /* ⛔ THE TREE AND THE ALMANAC FRAMES ARE GONE (2026-09-05) — `?embed=tree`
+       and `?embed=almanac`, the diorama and the product's own time control that
+       sat across the foot of it. §03 is prose about what a Slab is now, and it
+       demonstrates nothing, so there is nothing here to mount.
+       ⚠️ BOTH ROUTES STILL EXIST IN THE PRODUCT and are worth knowing about:
+       `?embed=almanac` mounts the real `AlmanacTab` and speaks `ward-size` and
+       `ward-cue`; `?embed=tree` takes `&species=` and MUST be given one, because
+       bare it resolves through the Meteorologist's canary and frames whatever
+       specimen an operator last parked that tool on. See INTEGRATION.md §1.
+       Archived: git show HEAD:js/site.js */
 
     // ── the card in the tablet ───────────────────────────────────────────
     if (cardFrame) {
@@ -465,32 +223,15 @@
       }
     })
 
-    // ── the instruments pill: one figure area, two things to say about it ─
-    var pills = document.querySelectorAll('[data-inst]')
-    for (var pi = 0; pi < pills.length; pi++) {
-      pills[pi].addEventListener('click', function () {
-        var want = this.getAttribute('data-inst')
-        var all = document.querySelectorAll('[data-inst]')
-        for (var k = 0; k < all.length; k++) {
-          all[k].setAttribute('aria-selected', String(all[k].getAttribute('data-inst') === want))
-        }
-        /* ⚠ setAttribute, NOT `.hidden`. `hidden` is a property of HTMLElement
-           and NOT of SVGElement, so `svg.hidden = true` silently sets a plain
-           JS property and the figure keeps rendering. Two figures were showing
-           at once and my own check missed it, because I read back the same
-           property I had just written. Set the ATTRIBUTE and verify against
-           COMPUTED DISPLAY. */
-        var figs = document.querySelectorAll('[data-fig]')
-        for (var q = 0; q < figs.length; q++) {
-          if (figs[q].getAttribute('data-fig') === want) figs[q].removeAttribute('hidden')
-          else figs[q].setAttribute('hidden', '')
-        }
-        var panels = document.querySelectorAll('[data-inst-panel]')
-        for (var p2 = 0; p2 < panels.length; p2++) {
-          panels[p2].hidden = panels[p2].getAttribute('data-inst-panel') !== want
-        }
-      })
-    }
+    /* ⛔ THE INSTRUMENTS PILL IS GONE (2026-09-05) — three tabs captioning one
+       picture three ways. One thing from its handler is worth keeping if
+       anything like it returns: it set `hidden` as an ATTRIBUTE on the figures,
+       never as a property, because `hidden` is a property of HTMLElement and
+       NOT of SVGElement — `svg.hidden = true` silently sets a plain JS property
+       and the figure keeps rendering. Two figures showed at once and the check
+       missed it, because it read back the same property it had just written.
+       Set the attribute; verify against computed display.
+       Archived: git show HEAD:js/site.js */
 
     // ── the ticker, ticking. Slow enough to read; still if asked. ────────
     var slot = document.querySelector('[data-ticker]')
