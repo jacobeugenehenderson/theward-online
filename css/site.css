@@ -191,25 +191,32 @@ a { color: inherit; }
   font-family: var(--f-sys); font-size: 0.66rem; font-weight: 700;
   letter-spacing: 0.24em; text-transform: uppercase; color: var(--sign);
 }
-/* 3 × 2 on a desktop, 2 × 3 on a phone — six tiles divide by both, so this
-   needs no spans and has none.
-   ⛔ THE ROWS MUST COME OUT FULL, and that is a hard constraint rather than a
-   preference: the hairlines here are the grid's OWN 1px GAP over a `--rule`
-   ground, so an unfilled cell is not empty — it is a solid block of rule
-   colour. The guide was five for an hour and the tiles had to SPAN to cover the
-   rows (six tracks, three tiles of two then two of three). If the count ever
-   stops dividing again, that arithmetic is in `git show d8da945:css/site.css`.
-   ⛔ Never `auto-fit`, for the same reason: it is precisely the thing that finds
-   the counts that do not divide. And never a single column — the whole job of
-   this block is that every destination is visible at once, and a one-up stack
-   is a menu you scroll. */
+/* ⛔⛔ FIVE TILES, AND FIVE DIVIDES BY NOTHING — so the tiles SPAN, and every
+   row still comes out full. That is a hard constraint rather than a preference:
+   the hairlines are the grid's OWN 1px GAP over a `--rule` ground, so an
+   unfilled cell is not empty, it is a solid block of rule colour.
+   ⭐ THE TRACK COUNT IS A MULTIPLE OF THE ROW COUNTS and each tile claims its
+   share — six tracks wide with three tiles of two then two of three; four
+   tracks narrow with two of two per row and the odd one taking the width.
+   ⛔ THIS ARITHMETIC IS BY HAND AND MUST BE RE-DERIVED IF THE COUNT MOVES. It
+   has been 6 → 5 → 6 → 5 in one day, so it will move again. There is
+   deliberately nothing computing it, because `auto-fit` is precisely the thing
+   that finds the counts that do not divide.
+   ⛔ Never a single column: the whole job of this block is that every
+   destination is visible at once, and a one-up stack is a menu you scroll. */
 .fg-grid {
   list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 1px; background: var(--rule);
 }
-.fg-grid > li { display: grid; }
-@media (max-width: 860px) { .fg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.fg-grid > li { display: grid; grid-column: span 2; }
+.fg-grid > li:nth-child(n+4) { grid-column: span 3; }
+@media (max-width: 860px) {
+  .fg-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .fg-grid > li,
+  .fg-grid > li:nth-child(n+4) { grid-column: span 2; }
+  .fg-grid > li:nth-child(n+5) { grid-column: span 4; }
+}
 /* A large, obvious target: the whole cell is the link, not the words in it. */
 .fg-item {
   display: grid; gap: var(--s0); align-content: start;
@@ -577,23 +584,13 @@ a { color: inherit; }
 }
 .village-role p { margin: 0; font-size: 0.97rem; line-height: 1.56; }
 
-/* ⭐ THE INSTRUMENTS ARE PROPER NOUNS. The Meteorologist and the Arborist are
-   named parts of the kit, and the page said so only by capitalising them — which
-   serif prose swallows, so they read as job descriptions. They are now set in the
-   SYSTEM face, the same one the Ward's own chrome wears, so a named tool looks
-   like a piece of the kit rather than a description of a duty.
-   ⛔ NOT `<em>` AND NOT `<strong>`. Italic is already doing two jobs here —
-   emphasis ("right now") and the qualifiers in the sources table ("— global") —
-   so a third meaning would make all three vaguer. And bold is STRESS: it makes
-   the reader lean on the word. A name does not want to be leaned on, it wants to
-   be recognised.
-   ⚠ 0.94em, not 1em: Archivo carries a taller x-height than Source Serif, so at
-   matching size the name outgrows the sentence holding it. */
-.instrument {
-  font-family: var(--f-sys);
-  font-size: 0.94em;
-  font-weight: 500;
-}
+/* ⛔ `.instrument` IS GONE. It gave the named systems — Surveyor, Arborist,
+   Meteorologist, Designer — a thin underline wherever the front page introduced
+   one. Every mention of them lived in §04, and §04 went to /works, where the
+   prospectus names them in plain text because that page's register is plainer.
+   The treatment is worth having back if the front page ever names a system
+   again. Archived: git show HEAD:css/site.css */
+
 
 /* ⭐ THE INSTANCE NOTE — the one place the page says whose neighborhood this is.
    It hangs off the bottom of the layer strip and shares its ground, so it reads
