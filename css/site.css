@@ -926,19 +926,13 @@ a { color: inherit; }
   border-bottom: 2px solid var(--sign); padding-bottom: var(--s1);
 }
 
-/* ⭐ THE MAP ARRIVES AFTER THE JOURNEY. The rail handed a reader seven nouns up
-   front and asked them to learn the vocabulary before seeing anything; this is
-   the same sequence read as a caption for something they have just watched,
-   which is why it can be one line with no explanation. */
-/* Same specificity trap as the threshold above: qualified so `.sec > .copy + *`
-   cannot flatten the space that separates the summary from the last step. */
-.sec > .walk-coda {
-  margin: var(--s6) 0 0; padding-top: var(--s3);
-  border-top: 1px solid var(--rule);
-  font-family: var(--f-sys); font-size: 0.74rem; font-weight: 700;
-  letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-soft);
-  text-wrap: balance;
-}
+/* ⛔ `.walk-coda` IS GONE with the line it set — "Inputs → Survey → Section →
+   3D → Stage → Preview → Slab" at the foot of Movement II. It was there to
+   arrive AFTER the journey rather than before it, as a caption for something
+   the reader had just watched instead of seven nouns to learn up front. That
+   was a real improvement on the rail it replaced, and it was still a summary of
+   a walk two screens long. The walk says it.
+   Archived: git show HEAD:css/site.css */
 
 /* ⛔ `.ways` IS GONE — "Places · Technology · Data · Infrastructure · Capital"
    set as a legend under the ask. The paragraph above it already names all five
@@ -1008,6 +1002,19 @@ a { color: inherit; }
    the next paragraph ran together into one grey line. */
 .diagram { margin: var(--s4) 0; display: grid; gap: var(--s2); }
 .diagram svg { width: 100%; height: auto; display: block; color: var(--text-soft); }
+/* ⛔⛔ A DIAGRAM THAT SCALES TO THE COLUMN SCALES ITS TYPE WITH IT, and that is
+   how an SVG becomes unreadable without ever looking broken. Measured on a
+   390px screen: the 640-unit viewBox came in at 338px, a scale of 0.53, so
+   11px labels rendered at 5.8px and 13px at 6.9px. Nothing overflowed, nothing
+   errored, and nobody could read a word of it.
+   ⭐ SO IT KEEPS ITS SIZE AND SCROLLS INSTEAD. The box is what scrolls, never
+   the page — and the caption is OUTSIDE it, so the one thing that must stay
+   readable at a glance does not slide away with the drawing. */
+.dia-box { min-width: 0; }
+@media (max-width: 700px) {
+  .dia-box { overflow-x: auto; }
+  .dia-box svg { min-width: 600px; }
+}
 /* Set here rather than as an SVG presentation attribute: `font-family="var(…)"`
    does resolve in current browsers, but it is the one property in the drawing
    worth not betting on. */
@@ -1018,6 +1025,15 @@ a { color: inherit; }
    naming them would be teaching four more nouns to a reader who does not need
    them. */
 .dia-t { font-family: var(--f-sys); font-size: 13px; font-weight: 600; }
+/* The frame labels — the name of a box you are looking INTO rather than a node
+   in the flow, so tracked caps rather than the node weight. */
+.dia-k {
+  font-family: var(--f-sys); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.75;
+}
+/* Everything written on an arrow. Smaller than a node, because a label on a
+   line is a condition of the line, not another thing in the picture. */
+.dia-s { font-family: var(--f-sys); font-size: 11px; }
 
 
 /* 11 ── colophon ────────────────────────────────────────────────────────── */
