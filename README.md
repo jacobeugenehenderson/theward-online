@@ -104,9 +104,13 @@ tools/build-vignettes.mjs the badges' glyph geometry (NOT from the product)
 tools/build-og.py         assets/og.png, the link preview (§7c) — rendered
                           from the same path data as assets/favicon.svg so
                           the mark and its preview cannot drift
+tools/build-figures.py    assets/works/*.webp, the prospectus captures —
+                          reads _source/shots/, which is GITIGNORED, so it is
+                          run by hand and is NOT part of build.mjs
 tools/audit.py      conformance — run before committing
 data/sources.json   generated; the same data the block is built from
 data/vignette-glyphs.json    MEASURED; each badge emoji and its ink geometry
+assets/works/       the works page's captures; the raw grabs live in _source/
 ```
 
 ▶ **The two commands, in order:** `node tools/build.mjs && python3 tools/audit.py`

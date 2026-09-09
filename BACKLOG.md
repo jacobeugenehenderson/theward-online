@@ -45,6 +45,23 @@ exists not to make.
 
 ## Ready to do
 
+⚠️ **TWO CAPTURES THE WORKS PAGE IS STILL OWED** (2026-09-09). Four of its five
+figures now carry the real thing — `assets/works/`, built from `_source/shots/`
+by `tools/build-figures.py` — and the two that are missing are the two the
+production notes in `works/index.html` call the strongest.
+- **Stage across the day.** What ships is one lit afternoon; the figure wants one
+  locked camera at dawn, noon, golden hour, dusk and night. ⭐ The mechanism is
+  already built and running on the page: Section's build is the same stacked
+  dissolve, so five grabs off the time-of-day control drop straight into it.
+- **Lafayette Square beside Hi-Pointe–DeMun.** Still a labelled gap, and the one
+  figure on the page where the picture outruns any paragraph. Hi-Pointe already
+  has a baked Look, so this is a capture rather than a build.
+
+⛔ **AND THE OVERHEAD'S TOWN-NAMING PROBLEM DOES NOT REACH THESE.** Every grab in
+`assets/works/` shows the neighborhood picker reading the town, but
+`works/index.html` is exempt from rule 7 whole (`TOWN_EXEMPT_PAGES`) and always
+was — the entry below is about `index.html`, which is not.
+
 One loose end. ⚠️ Everything else that stood here on
 2026-08-31 was already done, was cut, or pointed at copy that no longer exists —
 see the note at the foot of this section.

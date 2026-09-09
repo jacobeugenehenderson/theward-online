@@ -984,12 +984,71 @@ a { color: inherit; }
   .fig-slot { min-height: 150px; }
   .fig-slot--big { min-height: 230px; }
 }
+
+/* ── A FIGURE THAT HAS ITS CAPTURE ─────────────────────────────────────────
+   `.fig-slot` above is the labelled gap; this is what replaces one when the
+   picture exists. Same rhythm against the heading and the prose — the figure
+   belongs to the heading above it and holds the paragraph below it close — so
+   those two margins are stated for both and stay in step.
+   ⚠️ NO min-height HERE, and that is the point of a separate class. The floors
+   on `.fig-slot` exist to stop an empty box collapsing; an image sets its own
+   height from its own aspect ratio, and a floor under it can only ever be
+   wrong at some width. */
+.fig-shot { margin: var(--s4) 0; display: grid; gap: var(--s2); }
+.fig-shot img {
+  width: 100%; height: auto; display: block;
+  /* The grabs are dark UI on a dark ground and the page is a warm light one, so
+     without a rule the capture bleeds into the margin at its edges. The ground
+     behind it is the same one the empty slot used, so a slow image is a figure
+     arriving rather than a hole. */
+  border: 1px solid var(--rule); background: var(--ground-3);
+}
+.pro-step + .fig-shot { margin-top: 0; }
+.fig-shot + .copy { margin-top: var(--s3); }
+
+/* ── THE SECTION BUILD ─────────────────────────────────────────────────────
+   Six captures of one locked camera in a single grid cell, so DOM order is
+   z-order: the finished frame is written FIRST and sits at the bottom, and the
+   five earlier ones stack on top of it in reverse. The build is those five
+   dissolving away in turn to uncover it.
+   ⭐ THE OVERLAYS ARE TRANSPARENT UNTIL AN ANIMATION SAYS OTHERWISE. Only the
+   keyframes ever make them opaque, so every way this can fail — the
+   reduced-motion reset below cutting every animation to 1ms and one iteration,
+   an animation that never starts, CSS animation switched off — lands on the
+   finished neighborhood. A build that fails to a full picture is a build that
+   cannot fail to an empty one.
+   ⛔ NOT A GIF, AND NOT A VIDEO. Six flat-colour WebPs total less than one
+   frame of either at this width, the reader's motion setting is honoured for
+   free, and the finished frame is a real image a browser can show on its own. */
+.fig-stack { display: grid; min-width: 0; }
+.fig-stack > img { grid-area: 1 / 1; }
+.fig-step-1, .fig-step-2, .fig-step-3, .fig-step-4, .fig-step-5 {
+  opacity: 0;
+  animation-duration: var(--t-build);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+/* Each frame holds, dissolves, and stays gone until the loop comes round. The
+   steps are 14% apart; the last one clears at 72%, which leaves a fifth of the
+   turn resting on the finished place before all five fade back together. That
+   rest is the figure's point — the eye needs somewhere to land. */
+.fig-step-1 { animation-name: fig-step-1; }
+.fig-step-2 { animation-name: fig-step-2; }
+.fig-step-3 { animation-name: fig-step-3; }
+.fig-step-4 { animation-name: fig-step-4; }
+.fig-step-5 { animation-name: fig-step-5; }
+@keyframes fig-step-1 { 0%, 12% { opacity: 1 } 16%, 92% { opacity: 0 } 100% { opacity: 1 } }
+@keyframes fig-step-2 { 0%, 26% { opacity: 1 } 30%, 92% { opacity: 0 } 100% { opacity: 1 } }
+@keyframes fig-step-3 { 0%, 40% { opacity: 1 } 44%, 92% { opacity: 0 } 100% { opacity: 1 } }
+@keyframes fig-step-4 { 0%, 54% { opacity: 1 } 58%, 92% { opacity: 0 } 100% { opacity: 1 } }
+@keyframes fig-step-5 { 0%, 68% { opacity: 1 } 72%, 92% { opacity: 0 } 100% { opacity: 1 } }
 /* ⛔ `.fig-note` IS GONE. It set the one line standing in for the inventory of
    lighting and post controls that was cut — "Cinema-grade lighting, atmosphere,
    camera and post-production controls" — and it had ended up stranded after the
    Stage pull, a flat spec line following the best sentence in the section. It
    was always meant to be the figure's caption, so that is where it is. */
 .fig-slot figcaption,
+.fig-shot figcaption,
 .diagram figcaption {
   font-family: var(--f-sys); font-size: 0.74rem; line-height: 1.4;
   color: var(--text-soft);

@@ -72,6 +72,10 @@
 
   --t-fast: 140ms;
   --t-slow: 420ms;
+  /* One turn of the works page's Section build — six frames, a hold on the
+     finished one, and a dissolve back. A duration, so it lives here; the
+     percentages that divide it are structure and live with the keyframes. */
+  --t-build: 12s;
 
 
   /* ── THE BADGE MASTER ──────────────────────────────────────────────────
