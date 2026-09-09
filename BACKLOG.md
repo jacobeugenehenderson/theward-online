@@ -45,17 +45,29 @@ exists not to make.
 
 ## Ready to do
 
-⚠️ **TWO CAPTURES THE WORKS PAGE IS STILL OWED** (2026-09-09). Four of its five
-figures now carry the real thing — `assets/works/`, built from `_source/shots/`
-by `tools/build-figures.py` — and the two that are missing are the two the
-production notes in `works/index.html` call the strongest.
-- **Stage across the day.** What ships is one lit afternoon; the figure wants one
-  locked camera at dawn, noon, golden hour, dusk and night. ⭐ The mechanism is
-  already built and running on the page: Section's build is the same stacked
-  dissolve, so five grabs off the time-of-day control drop straight into it.
-- **Lafayette Square beside Hi-Pointe–DeMun.** Still a labelled gap, and the one
-  figure on the page where the picture outruns any paragraph. Hi-Pointe already
-  has a baked Look, so this is a capture rather than a build.
+⚠️ **EVERY FIGURE ON THE WORKS PAGE IS NOW REAL** (2026-09-09) — `assets/works/`,
+built from `_source/shots/` by `tools/build-figures.py`. Two things are still
+open behind that.
+
+**Stage is one lit afternoon, and the figure wants a day.** One locked camera at
+dawn, noon, golden hour, dusk and night. ⭐ The mechanism is already built and
+running: Section's build is the same stacked dissolve, so five grabs off the
+time-of-day control drop straight into it with no new code.
+
+⛔ **MOVEMENT IV WAS CUT RATHER THAN WAITED ON** (Jacob, 2026-09-09). "Where it
+goes" was four sentences and a labelled gap where Lafayette Square was to stand
+beside Hi-Pointe–DeMun, and its own production note had already conceded the
+picture outranked the paragraphs — so the movement was asserting that the system
+travels and then showing the reader an IOU.
+⚠️ **THE CLAIM IS UNPLACED, NOT SETTLED.** *"What travels is the machinery; what
+changes is the place"* is still true and is now nowhere on the page, and the ask
+opens *"The next step is more places"* without it. ▶ **Two ways, needs a
+ruling:** get the Hi-Pointe capture and bring the movement back whole — it has a
+baked Look already, so it is a capture rather than a build — or fold that one
+sentence into the ask and let the movement stay gone.
+⭐ **`.fig-slot` went with it**, the whole labelled-gap idiom. Bring it back from
+`git show b49b838:css/site.css` the next time a figure is promised before it
+exists; do not keep it warm meanwhile.
 
 ⛔ **AND THE OVERHEAD'S TOWN-NAMING PROBLEM DOES NOT REACH THESE.** Every grab in
 `assets/works/` shows the neighborhood picker reading the town, but

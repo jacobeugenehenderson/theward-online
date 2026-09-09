@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="../css/tokens.css?v=094f85225a15">
-<link rel="stylesheet" href="../css/site.css?v=96281805d323">
+<link rel="stylesheet" href="../css/site.css?v=41c1c73a1fd9">
   <!-- Same mark, same stamped stylesheets as index.html — this page is the site,
        not a document that happens to live next to it.
        ⚠️ `../` because this page is a DIRECTORY, so the URL is /works with no
@@ -83,7 +83,6 @@
     <a href="#made-from"><span class="pro-index-n">I</span><span class="pro-index-t">What it&rsquo;s made from</span></a>
     <a href="#how"><span class="pro-index-n">II</span><span class="pro-index-t">How a place is made</span></a>
     <a href="#buys"><span class="pro-index-n">III</span><span class="pro-index-t">What that buys</span></a>
-    <a href="#where"><span class="pro-index-n">IV</span><span class="pro-index-t">Where it goes</span></a>
   </nav>
 
   <!-- ═══ I ══════════════════════════════════════════════════════════════
@@ -482,37 +481,22 @@
     </div>
   </section>
 
-  <!-- ═══ IV ═════════════════════════════════════════════════════════════
-       ⛔ THIS MOVEMENT WAS REPLACED WHOLE (2026-09-05). It ran "Scale without
-       sameness" → "Lafayette Square is the proof" → "What has been built" and
-       took three headings to say one thing.
-       ⚠️ TWO LINES WENT WITH IT that had been asked for by name an hour earlier:
-       "The architecture is the deliverable. Lafayette Square is the v1
-       instance." and "What if the internet could become better at being
-       somewhere?" Both were good and both are gone — recorded here rather than
-       quietly dropped, because they are the kind of line that gets asked after.
-       ⭐ AND THE ASK NOW FOLLOWS IMMEDIATELY. "Then immediately: Build with The
-       Ward" — no rule, no breath, no summary in between. The movement about
-       travelling somewhere else ends by asking where. -->
-  <section class="sec" id="where">
-    <p class="movement"><span class="movement-n">IV</span><span class="movement-t">Where it goes</span></p>
-    <div class="copy">
-      <h2>Built to travel</h2>
-      <p class="lede">Lafayette Square is the first Ward. Cartograph and the systems around it were built to be used again.</p>
-      <p>What travels is the machinery. What changes is the place: its geography, landscape, businesses, institutions, local knowledge and visual character.</p>
-      <p class="pull">Each Ward is built from the same system, not from the same neighborhood.</p>
-    </div>
-
-    <!-- ⚠️ PRODUCTION NOTE — TWO WARDS, SIDE BY SIDE, and eventually three very
-         different ones. This is the one figure in the document where the visual
-         proof is worth more than any paragraph could be: the argument is that
-         the system travels and the places do not resemble each other, and a
-         reader either sees that in one glance or does not believe it.
-         ⭐ Hi-Pointe–DeMun already has a baked Look in the product, so this is a
-         capture rather than a build. -->
-    <figure class="fig-slot fig-slot--big"><figcaption>Lafayette Square beside Hi-Pointe&ndash;DeMun. The same system; nothing else in common.</figcaption></figure>
-  </section>
-
+  <!-- ⛔ MOVEMENT IV, "WHERE IT GOES", IS GONE (2026-09-09) — and it is the
+       FIGURE that took it, not the prose. It ran "Built to travel" over four
+       sentences and then a labelled gap where Lafayette Square was to stand
+       beside Hi-Pointe–DeMun. Its own production note had already said the
+       picture outranked any paragraph there, which is another way of saying the
+       paragraphs were never going to carry it alone: the movement asserted that
+       the system travels and then showed a reader an IOU.
+       ⚠️ SO THE CLAIM IS UNPLACED, not settled. "What travels is the machinery;
+       what changes is the place" is still true and is now nowhere on the page,
+       and the ask below opens "The next step is more places" without it. If the
+       Hi-Pointe capture happens the movement comes back whole; if it does not,
+       that sentence belongs in the ask. Recorded in BACKLOG.md.
+       ⭐ AND `.fig-slot` WENT WITH IT. This was the last labelled gap on the
+       page, so the class, its height floors and its caption rule are deleted
+       rather than left to fail the audit as unused CSS.
+       ▶ git show b49b838:works/index.html -->
   <!-- ═══ THE ASK ════════════════════════════════════════════════════════
        ⭐ THE SAME ROOM AS THE FRONT PAGE'S, wholesale (Jacob, 2026-09-05: "we
        can steal the contact section", and later "keep the existing contact

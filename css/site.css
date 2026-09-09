@@ -958,42 +958,17 @@ a { color: inherit; }
   max-width: var(--measure);
 }
 
-/* ⛔ A LABELLED GAP, NEVER A PLAUSIBLE-LOOKING STAND-IN — the same rule the
-   overhead figure was held to before its capture existed. It says what will be
-   here and does not pretend to be it. */
-.fig-slot {
-  margin: var(--s4) 0; min-height: 220px;
-  /* ⚠️ Overridden below when the figure follows its step heading — there the
-     two are one unit and the gap between them must be small. */
-  border: 1px dashed var(--rule); background: var(--ground-3);
-  display: grid; align-content: end; padding: var(--s3);
-}
-/* A figure directly under its own heading is PART of that heading's block, so
-   it closes up; the air belongs above the heading, not between them. */
-.pro-step + .fig-slot { margin-top: 0; }
-/* And the prose under a figure sits closer to it than the next step does. */
-.fig-slot + .copy { margin-top: var(--s3); }
-/* Stage and the finished neighborhood are the two figures that ARE the claim
-   rather than illustrating it, so they get the room. */
-.fig-slot--big { min-height: 420px; }
-/* ⚠️ THESE ARE FLOORS UNDER A GAP, and a floor set for a desktop is a wall on a
-   phone: 420px of empty box under a 390px-wide screen is most of the viewport
-   spent on nothing. A wide capture at that width is about 220px tall anyway, so
-   the floor has to come down with the column or it outgrows its own picture. */
-@media (max-width: 620px) {
-  .fig-slot { min-height: 150px; }
-  .fig-slot--big { min-height: 230px; }
-}
-
 /* ── A FIGURE THAT HAS ITS CAPTURE ─────────────────────────────────────────
-   `.fig-slot` above is the labelled gap; this is what replaces one when the
-   picture exists. Same rhythm against the heading and the prose — the figure
-   belongs to the heading above it and holds the paragraph below it close — so
-   those two margins are stated for both and stay in step.
-   ⚠️ NO min-height HERE, and that is the point of a separate class. The floors
-   on `.fig-slot` exist to stop an empty box collapsing; an image sets its own
-   height from its own aspect ratio, and a floor under it can only ever be
-   wrong at some width. */
+   Every figure on this page has one now, so this is the only kind left. The
+   figure belongs to the heading above it and holds the paragraph below it
+   close, which is why both of those margins are stated here.
+   ⛔ `.fig-slot` IS GONE — the dashed labelled gap, its height floors and its
+   caption rule — because the last unbuilt figure went with Movement IV
+   (2026-09-09). It is the right thing to bring back the next time a figure is
+   promised before it exists; it is not a thing to keep warm meanwhile.
+   ⚠️ AND NOTHING HERE SETS A min-height. Those floors existed to stop an empty
+   box collapsing; an image sets its own height from its own aspect ratio, and a
+   floor under one can only ever be wrong at some width. */
 .fig-shot { margin: var(--s4) 0; display: grid; gap: var(--s2); }
 .fig-shot img {
   width: 100%; height: auto; display: block;
@@ -1047,7 +1022,6 @@ a { color: inherit; }
    camera and post-production controls" — and it had ended up stranded after the
    Stage pull, a flat spec line following the best sentence in the section. It
    was always meant to be the figure's caption, so that is where it is. */
-.fig-slot figcaption,
 .fig-shot figcaption,
 .diagram figcaption {
   font-family: var(--f-sys); font-size: 0.74rem; line-height: 1.4;
