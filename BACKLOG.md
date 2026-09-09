@@ -45,14 +45,13 @@ exists not to make.
 
 ## Ready to do
 
-⚠️ **EVERY FIGURE ON THE WORKS PAGE IS NOW REAL** (2026-09-09) — `assets/works/`,
-built from `_source/shots/` by `tools/build-figures.py`. Two things are still
-open behind that.
-
-**Stage is one lit afternoon, and the figure wants a day.** One locked camera at
-dawn, noon, golden hour, dusk and night. ⭐ The mechanism is already built and
-running: Section's build is the same stacked dissolve, so five grabs off the
-time-of-day control drop straight into it with no new code.
+✅ **EVERY FIGURE ON THE WORKS PAGE IS REAL, AND NO MORE ARE OWED** (2026-09-09)
+— `assets/works/`, built from `_source/shots/` by `tools/build-figures.py`.
+⛔ **THE STAGE DAY SCRUB WAS PROPOSED AND RULED OUT**, not forgotten: it would
+have been a capture of the one thing the product does live, a second identical
+dissolve turning Section's build from an event into a house style, and a
+corroboration of a control the Look panel already shows. The reasoning is in the
+note above that figure so it is where the next person edits.
 
 ⛔ **MOVEMENT IV WAS CUT RATHER THAN WAITED ON** (Jacob, 2026-09-09). "Where it
 goes" was four sentences and a labelled gap where Lafayette Square was to stand
