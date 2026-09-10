@@ -107,9 +107,16 @@ a { color: inherit; }
    (Rule 5; the mark's dot two elements away is that rule's definition) and
    verdigris is Cary's, taken from the product's own courier stat. A document
    link may not spend either.
-   ⚠️ FRONT PAGE ONLY — `.band-cta` is applied in index.html and nowhere else.
-   Every other page keeps the plain link: a stranger lands here, and a reader
-   already inside the guide does not need shouting at. */
+   ⚠️ TWO PAGES, AND THEY ARE A CHAIN (Jacob, 2026-09-09). `index.html` carries
+   it reading *Trail Guide*; `guide/index.html` carries it reading *Host
+   Handbook*. Each publication's front door names the next one along, and the
+   chain climbs in depth of involvement: looking at a Ward, using one, running
+   one. ⛔ This line used to read "FRONT PAGE ONLY … a reader already inside the
+   guide does not need shouting at", which the chain overrules — but the half of
+   it that survives is why the button is on the guide's INDEX and not on its
+   seven chapters: a reader mid-manual, most likely at a wall with a phone, is
+   not between things. ⛔ The handbook ends the chain and carries none: the next
+   document is the prospectus, which is `noindex` and sent to a person. */
 .band-links .band-cta {
   background: var(--band-text); color: var(--band-bg);
   text-decoration: none;
