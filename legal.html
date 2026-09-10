@@ -51,11 +51,24 @@
     </svg>
     <span class="band-text">
       <span class="band-name">The Ward</span>
-      <span class="band-meta">Digital presence for real neighborhoods</span>
+      <!-- ⚠️ THIS WAS DEAD TEXT UNTIL 2026-09-09, and clearing the band link is
+           what exposed it. Every other page's `.band-meta` links home; this one
+           did not, because it was copied from index.html, where the masthead IS
+           home and a self-link would be pointless. So the terms page had no
+           route back to the site at all once the band link went — and even
+           before that, no route to the FRONT PAGE, only sideways to the guide.
+           ⭐ It is the load-bearing half of Jacob's own argument for cutting
+           "See the Ward": the masthead already takes the user there. That is
+           only true where the masthead is a link. -->
+      <span class="band-meta"><a href="./">Digital presence for real neighborhoods</a></span>
     </span>
-    <span class="band-links">
-      <a href="guide/">Trail Guide</a>
-    </span>
+    <!-- ⛔ NO BAND LINK HERE EITHER (Jacob, 2026-09-09: "do the same for
+         legal.html"), and for /works' reason. The band link marks a network of
+         MANUALS — front page → Trail Guide → Host Handbook, each written for
+         somebody living with a Ward. The terms are not a manual and not a
+         register anybody browses sideways into; they are read when a reader
+         wants them, from the colophon of the page that sent them.
+         ⭐ The colophon still carries Trail Guide, Host Handbook and Works. -->
   </div>
 
 </header>
