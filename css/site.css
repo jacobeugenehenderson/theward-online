@@ -118,8 +118,9 @@ a { color: inherit; }
    not between things. ⛔ THREE PAGES AS OF THE SAME DAY: the handbook carries one
    too, reading *Trail Guide*, so the two manuals face each other and the front
    page points into them. This line said the handbook "ends the chain and carries
-   none" for about an hour. ⛔ /works keeps the plain link — the prospectus is
-   `noindex` and sent to a person, not advertised in a masthead. */
+   none" for about an hour. ⛔ /works CARRIES NO BAND LINK AT ALL — a
+   technical prospectus is not in this network of manuals, so its band is empty
+   and its colophon does the reaching. The chapters keep the plain link. */
 .band-links .band-cta {
   background: var(--band-text); color: var(--band-bg);
   text-decoration: none;
