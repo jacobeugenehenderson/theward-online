@@ -45,6 +45,34 @@ exists not to make.
 
 ## Ready to do
 
+**The module-gating convention is UNBUILT, and its three marks are cut.**
+`/guide` carried a "Your Ward may differ" section whose body was a `.todo` box
+saying what the copy should say, plus a `.module-note` reading *"This is the
+mark. Placeholder text — replace with the real explanation."* Two chapters —
+getting-around and guardian — carried placeholder notes of their own. All three
+were **live and public** from the first push until 2026-09-10.
+
+⛔ **CUT, NOT WRITTEN, AND THE DIFFERENCE MATTERS.** The seam is real: some of
+what the guide describes is switched on per installation, and a manual that does
+not say which is which promises a reader something their own neighborhood may
+not run. That is the one place on this site where the kit claim has consequences
+for the READER rather than for the pitch. ⭐ So this is an ASPIRATION filed as
+done — intent that was never built — and the rule is to surface it as work
+rather than evict it. It is written here instead of sitting on the page as an
+apology for itself.
+
+▶ **What it needs, and it is a copy decision, not a CSS one:** two sentences
+stating the convention once, and then a real note on every module-gated claim
+in all seven chapters — which requires knowing which claims those are. ⛔ Do not
+re-add `.module-note` or `.todo` to site.css until the copy exists; they were
+removed with the markup because `audit.py:122` fails on unused CSS, and that is
+the gate doing its job.
+
+⚠️ Same ruling as the handbook's, one day apart: *"get rid of inline notes;
+neither pressing now"* (Jacob, 2026-09-09). A placeholder on a published page is
+worse than a gap, because a gap does not claim to be a feature.
+
+
 ✅ **EVERY FIGURE ON THE WORKS PAGE IS REAL, AND NO MORE ARE OWED** (2026-09-09)
 — `assets/works/`, built from `_source/shots/` by `tools/build-figures.py`.
 ⛔ **THE STAGE DAY SCRUB WAS PROPOSED AND RULED OUT**, not forgotten: it would
