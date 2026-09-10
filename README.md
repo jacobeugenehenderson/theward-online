@@ -92,6 +92,13 @@ panel is designed around the view and never competes with it.
 ```
 index.html          the whole site
 legal.html          the terms (§7b) — the SITE, not a document beside it
+guide/              the Trail Guide — the manual, for somebody using a Ward.
+                    Indexed; seven chapters, one page each
+works/              the prospectus — for the next builder. `noindex`, sent
+handbook/           the Host Handbook — for whoever brings a Ward somewhere.
+                    Indexed, and it carries NO RATE (§7d)
+                    ⚠️ These three were missing from this block until
+                    2026-09-09, which is how a page gets built twice
 css/tokens.css      every colour, size, family and duration
 css/site.css        everything else, in numbered sections
 js/site.js          the clock, the layer switch, the scroll guards (§9)
@@ -356,7 +363,7 @@ decision, and it is one line.
 | The diorama and the Almanac | ⛔ **BOTH OFF THE PAGE, 2026-09-05.** `?embed=tree` put a live specimen under the real sky in one Canvas, and `?embed=almanac` pinned the product's own Almanac across the foot of that frame as its instrument panel. §03 is prose about what a Slab is now. ⚠️ **The routes still work** — they are unplaced, not retired, and `INTEGRATION.md` keeps the whole record. Two things from it that will be wanted again: **pin the species** (bare `?embed=tree` resolves through the Meteorologist's canary and frames whatever specimen an operator last parked that tool on — this page was showing `maple_sugar` at 39,633 tris, which is what "the tree is sparse" turned out to be), and **an embed that measures itself locks at its first reading** unless the measured box is detached from the frame's height |
 | The Field Guide | **the map of the argument, and the reason this pass happened.** Six numbered plates at the top of `<main>`, 3 × 2 on a desktop and 2 × 3 on a phone — every destination visible at once, never a one-up stack. ⛔ **THE ROWS MUST COME OUT FULL, and it is a hard constraint**: the hairlines are the grid's own 1px gap over a `--rule` ground, so an unfilled cell is not empty — it is a solid block of rule colour. Six divides by both counts, so `.fg-grid` needs no spans. It was FIVE for an hour on 2026-09-05 (The Slab stopped being a chapter) and the tiles had to span to cover the rows — six tracks, three tiles of two then two of three. That arithmetic is in `git show d8da945:css/site.css` if the count ever stops dividing again. ⛔ Never `auto-fit`, for exactly that reason: it is the thing that finds the counts that do not divide. Each repeats its chapter's `.plate` word for word, so arriving confirms the map. ⭐ **01 IS THE LIVE WARD, and it leads because it is what you landed on.** It was 02 for an afternoon, which put the running Ward second in a list sitting directly underneath it (Jacob: *"if the ward comes first why would it be #2"*) and left a **01 → 03 gap** down the page, because it is the one plate that does not go to a section. Numbered first, the guide reads in scroll order and every number below it is where you will meet it. ⭐ It is also the plate doing the most work: every other says *read on*, and that one says *the thing being described is running, and you can stand in it*. Its arrow is `--live`, the same reservation amber carries everywhere else. ⛔ **It is not a menu** — it appears once, in the flow, and does not follow the reader down. ⛔ `data-names-instance` on 02 is load-bearing (§Rule 7) |
 | The ask | **its own section, and the page's last word — "It's going to take a village" (2026-08-31).** **THREE** ways to help build the KIT — Investors · Partners · Friends — and the contact pair belongs to it. ⚠️ **Hosts left this grid on 2026-09-04** and became §05, a chapter about what hosting a Ward MEANS rather than a card asking for it; the grid went from two columns to three with it, because three items orphan one at every width two columns applies to. ⛔ **NOT the `.steps` ladder from Belonging**, deliberately: that block is the five ways to stand in a NEIGHBORHOOD and it carries the generated role badges, so a second badged three-up here would read as more of the same list. Different register, different object. ⭐ **`.village` is the only block on the page allowed OUT of `--measure`** — the page's last word earns its distinction by changing SHAPE, not by adding colour. ⛔ An explicit column count, never `auto-fit`: measured on the four-item version, `auto-fit` orphaned Friends on a 1092px viewport. ⚠️ The "A Host is a partner rather than a customer" lede has moved twice: out of here to §Where a Ward Comes From (2026-08-31), where it was the premise of the sources table, and out of THERE to open §04 Bring It Somewhere (2026-09-04), which is the chapter it was always describing and which did not exist until then. ⭐ On 2026-09-05 the sources table followed it into that section, so the lede and its table are back in one room — this time with the table underneath the argument rather than the argument stranded on top of it. It sat mid-page inside §host with two sections after it, and the address was stranded again in the footer. One home now, at the end. The footer carries sources + `© 2026 Jacob Henderson LLC`. The QR is **live as of 2026-08-29** — `sms:` to the installation's number, so it opens the reader's own messages app and reaches a person, never a check-in (§8). ⭐ **It is also a link**, so a desktop click does the same thing the camera does: macOS Messages declares the `sms` scheme, and where nothing claims it the click is simply inert. Its `href` carries no `body` even though the encoded image does — `&body=` is the iOS separator, and a handler reading it as part of the recipient would address a message to nothing. ⭐ **Regenerated 2026-08-31 on `#EFE8D8`**, the value of `--ground` and `--band-text`, so the code sits on the page's own paper rather than a white tile. Decode before publishing a new one — a QR cannot be reviewed by looking at it; Chrome's `BarcodeDetector` is enough. ⚠️ **This section is NOT printable** (Jacob, 2026-08-29); an earlier code comment said it was, and the code is sized and contrasted for a screen someone is holding a second phone up to. ⭐ **It carries `id="partner"` as of 2026-09-04, and `#host` moved to §05.** The ask is linkable at `theward.online/#partner`; anyone who was sent the older `theward.online/#host` wanted what it means to bring a Ward somewhere, not a three-way ask in which hosting is not even one of the options any more, so that URL now lands on a better answer than it used to |
-| `/host` as a standalone page | ⛔ **CUT, 2026-08-31, and it was on this list for a year of drafts.** The section is a heading, ONE sentence and two controls — there is no "how to" to send, and the background that makes the ask land is the rest of the scroll, so a cold send would be the ask with its argument removed. It also cut against a decision already in the markup: the ask was moved out of mid-page to be the LAST thing. ⭐ What it actually needed was an anchor, not a page — one that cannot drift out of sync with the page around it. ⚠️ And `id="host"` now names §05, *Host a Ward*, which is the chapter that anchor was always reaching for |
+| `/host` as a standalone page | ⛔ **STILL CUT, AND THE HOST HANDBOOK IS NOT IT.** The 2026-08-31 ruling was about sending *the ask* — a heading, one sentence and two controls, whose argument is the rest of the scroll — and it stands. ⭐ **Its stated reason was that there is no "how to" to send. `/handbook/` is the how-to** (2026-09-09): what a Host looks after, what a Ward shows you, moderation, and where the responsibilities divide. Four movements from ten drafted sections — the draft stated the split, the aggregate picture and the stewardship line twice each. ⛔ **It carries NO FIGURE** (§7d). ⭐ Its strong door is the last line of §04 Bring It Somewhere, which is the chapter this file flagged as thin; the colophon row is the second one. ⛔ **No new CSS** — it reuses the prospectus's `.pro-*` and `.movement`, and site.css §10d now names both documents |
 | The terms | **built** — `legal.html`, §7b. This row used to read "Privacy / terms pages: not built" while §7b of this same file described the legal page in detail: **two sections of one document disagreeing**, which is the failure mode this repo keeps paying for |
 | A privacy page | ⛔ **RULED OUT, 2026-08-31** (Jacob: *"this page doesn't get a privacy statement"*). One was written and reverted whole. **The PRODUCT already has one** — `PrivacyPage` in `src/pages/LegalPage.jsx` — and everything load-bearing in the draft described the thing in the FRAME, not this website, which collects nothing and needs about two sentences to say so. A second copy on a second domain drifts the first time either moves. ⚠️ It also promised on behalf of *every* Ward, when a Host's installation is not ours to speak for — which `legal.html §1` expressly disclaims. ▶ A mission-style statement about earning standing by presence is **parked, not pursued**; it is a copy decision. `BACKLOG.md` carries the full reasoning |
 | The five participant badges | **settled.** One authored master — cream field, deep rim, halo on the glyph — so every emoji reads and any emoji can be swapped in. ☕ 🏡 🛡️ 🔑 🚲 — the guardian is a shield, which is the only one of them that is itself a heraldic device, and so the only one already in the register the badge is borrowing. They are the ladder's step markers, replacing the numbers 1–4; the courier is not a rung and wears its badge in the Cary room. Size and centring are generated from each glyph's measured ink |
@@ -396,6 +403,37 @@ the page sells the kit and naming one town collapses it into one instance — an
 argument about the PITCH. A governing-law clause is not the pitch; a court sits
 somewhere. So `legal.html` may use the two strings a forum-selection clause needs
 and nothing more, and every other town name still fails everywhere.
+
+## 7d. ⛔ The Host Handbook carries no rate
+
+`handbook/` — indexed, linked from §04 and the colophon.
+
+⛔ **THE SHARE IS DESCRIBED BY ITS SHAPE AND NO PERCENTAGE APPEARS**, which is
+§3's standing rule rather than caution about one page: *"we don't have a price or
+cost structure set up so it's question begging in the wrong direction"* (Jacob,
+2026-08-23). Checked before writing: **no percentage appears anywhere on this
+site** — `index.html`, `/works`, `/guide` and `legal.html`. The draft's 3 % / 1.5 %
+/ 97 % would have been the first, and Jacob ruled them out for now (2026-09-09).
+
+⭐ **That ruling is what makes the page safe to INDEX**, and the two decisions
+travel together. A findable document is right — the front page recruits Hosts in
+public, so the document saying what hosting involves should be reachable — but a
+published revenue split that has not been ruled on is the version of this page
+that costs something. ⚠️ **If the figures go in, revisit the robots tag in the
+same breath.**
+
+⛔ **THE PAGE CARRIES NO PLACEHOLDER SAYING SO** (Jacob, 2026-09-09: *"get rid of
+inline notes; neither pressing now"*). Two `.todo` boxes — the rate, and the owed
+agreements sentence — were written and removed: a labelled gap is for a reader who
+can act on it, and this document's reader is a prospective Host. ⚠️ **So this
+section is the only place the question is recorded. It is not closed by the box
+being gone**, and the copy may not grow a figure without the ruling above.
+
+⚠️ **AND ONE FACT IS STILL OWED** — the front page says a Cary order pays *"no
+commission, keep the full price of the order"* while the handbook says commerce
+through the Ward keeps a small share. Those are two paths and may both be true;
+nobody has written down whether a delivery order also carries the commerce share.
+`BACKLOG.md`.
 
 ## 7c. The link preview
 

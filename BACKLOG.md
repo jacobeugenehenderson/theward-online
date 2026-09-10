@@ -142,6 +142,9 @@ either.
   ask was moved out of mid-page to be the LAST thing, its own room. ⭐ What it
   needed instead was one attribute — `id="host"`, so the ask is linkable at
   `/#host` and can never drift out of sync with the page around it.
+  ⭐ **AND THE HANDBOOK IS NOT A RE-OPENING OF THIS** (2026-09-09). The cut's own
+  reason was that there is *no "how to" to send*; `/handbook/` is the how-to, and
+  it is a different object from the ask, which stays where it is and stays cut.
 - **`?embed=masthead` under "There is no account."** ⚠️ **The embed is real and
   still unplaced — but its ANCHOR IS GONE.** That sentence is no longer on the
   page; the only "no account" left is a cell in the data-sources table. The four
@@ -173,6 +176,26 @@ page quietly matched to it.
 product says 22 % (cart math, the public legal page, and the Cary brief all
 agree) and Jacob said 25 %. Whichever is right, it must move in all four places
 at once, and the legal page is the canonical public statement.
+
+**The Host's share, and whether a Cary order pays it.** The Host Handbook
+(`/handbook/`, 2026-09-09) describes the share by its SHAPE and prints no
+figure — Jacob's ruling, and §7d of the README carries the reasoning. Two things
+are owed before a figure can go anywhere:
+
+- ⛔ **The rate itself.** The draft said the business keeps 97 %, of which 3 %
+  splits evenly between The Ward and the Host. No percentage appears anywhere on
+  this site today, so these would be the first — and this page is INDEXED, which
+  is the whole reason the ruling matters here more than it did on the front page.
+- ⚠️ **The two commerce paths have never been reconciled in writing.** The front
+  page's Cary terms say *"No commission. Keep the full price of the order,"* and
+  the handbook says commerce through a Ward keeps a small share. Both may be
+  true — a delivery charge is not a sale — but **nobody has written down whether
+  a Cary order also carries the commerce share**, and a Host reading both pages
+  is entitled to ask. ⛔ Do not answer it by editing either page's copy; the
+  answer is a fact about the product.
+
+⭐ Same discipline as the courier rate above, one row up, for the same reason:
+when a number lands it has to land everywhere at once.
 
 ⛔ **THE OVERHEAD CAPTURE NOW NAMES THE TOWN LEGIBLY, and that is a live rule
 break.** This entry used to end *"illegible at the size it renders"* — that was

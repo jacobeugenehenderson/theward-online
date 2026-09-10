@@ -63,6 +63,77 @@ a { color: inherit; }
   letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7;
 }
 
+/* ⭐ TWO PLAIN LINKS, ON EVERY PAGE, SAYING WHAT THEY ARE (Jacob: "extremely
+   easy and visible and not arty or convoluted"). No icons, no chrome, no
+   conditional rendering — the same markup on all eleven pages.
+   ⭐ AND "TRAIL GUIDE" IS NOT A SELF-LINK ON A GUIDE PAGE: from a chapter it
+   means BACK TO CONTENTS, which is the thing you want there anyway. That is
+   what lets it be identical everywhere instead of clever.
+   ⛔ NOT `.cta` — that treatment is the page's closing ask and shouting it in a
+   header on every page would spend it. A header link is a signpost. */
+.band-links {
+  margin-left: auto;
+  display: flex; gap: var(--s4); flex-shrink: 0;
+  font-family: var(--f-sys); font-weight: 700; font-size: 0.78rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+/* ⛔ THE WRAPPER MAY NOT BE A BOX, AND THIS IS NOT A TIDY-UP. `See the Ward`
+   carries `data-names-instance` — the attribute that scopes the no-town rule —
+   so it is wrapped in a span while its neighbour is a bare <a>. That made two
+   UNLIKE flex items: the wrapped link laid out as an inline box inside a
+   stretched span, the bare one as a stretched flex item with its own padding,
+   so the two labels and their underlines sat on different lines (observed by
+   Jacob, 2026-09-09).
+   ⭐ `display: contents` removes the wrapper's box while leaving the attribute
+   in the markup, so both anchors become direct flex items under one rule and
+   cannot drift again. The audit reads the HTML source, not the rendered box
+   tree, so scoping is untouched. ⛔ Do not "fix" this by aligning the items —
+   that treats the symptom and leaves the two links structurally different. */
+.band-links > span { display: contents; }
+
+/* ⭐⭐ THE TRAIL GUIDE IS A BUTTON IN THE HEADER (Jacob, 2026-09-09: "I want a
+   button in the header"). It was an underlined band link like its neighbour,
+   which is the treatment for a place you might go; this is the one door the
+   page wants a stranger to take, so it is filled.
+   ⛔ WHAT THIS REPLACED, so it is not re-proposed: a `.trailhead` block under
+   the Field Guide, then a full-bleed `.violator` under the hero. Both were
+   rejected — the ask was a control in the masthead, not a banner in the page.
+   ⭐ IT TAKES THE BAND'S OWN PAIR, SWAPPED. Filling with `--band-text` on
+   `--band-bg` text is the masthead's two colours in reverse, so the button is
+   guaranteed to read against the band it sits on in BOTH grounds — dark on
+   cream by night, cream on dark by day — with no second declaration. A hand-
+   picked fill is exactly what Rule 4 catches.
+   ⛔ NOT AMBER, NOT VERDIGRIS. `--live` means something is actually running
+   (Rule 5; the mark's dot two elements away is that rule's definition) and
+   verdigris is Cary's, taken from the product's own courier stat. A document
+   link may not spend either.
+   ⚠️ FRONT PAGE ONLY — `.band-cta` is applied in index.html and nowhere else.
+   Every other page keeps the plain link: a stranger lands here, and a reader
+   already inside the guide does not need shouting at. */
+.band-links .band-cta {
+  background: var(--band-text); color: var(--band-bg);
+  text-decoration: none;
+  padding: var(--s2) var(--s3);
+  transition: opacity var(--t-fast);
+}
+.band-links .band-cta:hover { opacity: 0.86; }
+.band-links .band-cta::after { content: " \2192"; letter-spacing: 0; }
+.band-links a {
+  color: var(--band-text);
+  text-decoration: underline; text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
+  padding: var(--s1) 0;
+}
+.band-links a:hover { opacity: 0.7; }
+
+/* ⚠️ THE BAND MUST WRAP BEFORE IT CROWDS. At phone width the mark, the title
+   and two links do not fit on one line; the links drop to their own row rather
+   than squeezing the name. */
+@media (max-width: 620px) {
+  .band { flex-wrap: wrap; }
+  .band-links { margin-left: 0; width: 100%; gap: var(--s4); }
+}
+
 /* 3 ── the view ─────────────────────────────────────────────────────────── */
 /* ⚠ A live canvas must keep costing what it costs. Never hide the frame with
    display:none / visibility / opacity:0 / an opaque cover — Chrome drops the
@@ -458,11 +529,26 @@ a { color: inherit; }
    ⛔ EVERY COLOUR ARRIVES AS A TOKEN. Rule 1 forbids a literal in this file, so
    a badge whose tokens went stale shows as a FLAT, EMPTY disc rather than a
    wrong one. If that is what you see, run `node tools/build-vignettes.mjs`. */
+/* ⛔ THE OUTER RING IS A BORDER, NOT AN INSET SHADOW, AND THAT IS THE FIX FOR
+   THE JAGGED EDGE (Jacob, on sight: "very rough raster-y edges"). It was
+   `inset 0 0 0 3px <solid>` on a border-radius:50% box, and Chrome rasterises an
+   inset shadow's rounded edge on a coarser path than it does a background or a
+   border — so the ring stair-stepped while everything else on the page was
+   smooth. A real border is antialiased by the same path as the background clip.
+   ⭐ THE DRAWN RESULT IS UNCHANGED: the pale line behind it moved 5px→2px in
+   tokens.css because an inset shadow measures from the PADDING box once a
+   border exists, and `background-clip: padding-box` keeps the field from
+   painting under the border's own antialiased edge — which would re-introduce a
+   hard seam one pixel further in.
+   ⚠️ border-box sizing means 62px is still 62px; only where the ring is drawn
+   from has changed. */
 .role-vig {
   width: 62px; height: 62px; border-radius: 50%;
+  border: 3px solid var(--vig-ring);
   display: flex; align-items: center; justify-content: center;
   font-size: 31px; line-height: 1;
   background: var(--vig-field);
+  background-clip: padding-box;
   box-shadow: var(--vig-rim);
   flex-shrink: 0;
 }
@@ -496,7 +582,7 @@ a { color: inherit; }
 /* ⭐ The one override, and it earns it: the courier is the deliberate exception,
    and this is the Cary room's verdigris, so the badge points at the section that
    explains it. Field, halo and geometry are untouched. */
-.role-vig--courier   { --vig-emoji: var(--vig-courier-emoji);   --vig-scale: var(--vig-courier-scale);   --vig-nudge: var(--vig-courier-nudge); box-shadow: var(--vig-rim-accent); }
+.role-vig--courier   { --vig-emoji: var(--vig-courier-emoji);   --vig-scale: var(--vig-courier-scale);   --vig-nudge: var(--vig-courier-nudge); box-shadow: var(--vig-rim-accent); border-color: var(--vig-ring-accent); }
 
 .steps { display: grid; margin: var(--s4) 0 0; border-top: 1px solid var(--rule-soft); }
 .step {
@@ -523,6 +609,25 @@ a { color: inherit; }
 }
 .cta:hover { opacity: 0.86; }
 .cta::after { content: "→"; letter-spacing: 0; }
+
+/* ⛔ THE WAITING STATE OF A CALL TO ACTION, AND IT IS NOT A DISABLED BUTTON.
+   Rule 8 forbids a plausible-looking fake, and a greyed control that does
+   nothing is the most plausible fake there is: a reader taps it, nothing
+   happens, and they conclude the site is broken rather than that the door is
+   not open yet. So the LABEL carries the state, it takes no arrow (an arrow
+   promises it goes somewhere), and it takes no pointer.
+   ⭐ AND IT IS THE SAME ELEMENT THE LIVE BUTTON WILL BE. js/site.js already
+   holds the switch: flipping COURIER_INTAKE to 'live' gives this an href, the
+   real label, and removes this class. One line moves, in one file.
+   ⚠️ NOT --live, and worth saying out loud: amber means something is
+   actually running, and this means precisely the opposite. */
+.cta--waiting {
+  background: none; color: var(--text-soft);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  cursor: default;
+}
+.cta--waiting:hover { opacity: 1; }
+.cta--waiting::after { content: none; }
 
 .terms { display: grid; gap: var(--s2); margin-top: var(--s4); max-width: var(--measure); }
 .term { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: var(--s3); align-items: baseline; }
@@ -813,12 +918,18 @@ a { color: inherit; }
 
 */
 
-/* 10d ── the prospectus (/works) ────────────────────────────────────────
+/* 10d ── the long-read register (/works and /handbook) ──────────────────
    A second register on the same paper. The front page is a survey panel you
-   walk; this is a document one person was sent, so it is quieter: no eyebrows,
-   no amber, longer measure, and the only ornament is the rail. Everything here
-   is prefixed `pro-`, `rail-`, `fig-` or `diagram` so it cannot leak onto
-   index.html by accident. */
+   walk; these are documents read once, in order, by one reader — so they are
+   quieter: no eyebrows, no amber, longer measure, and the only ornament is the
+   rail. Everything here is prefixed `pro-`, `rail-`, `fig-` or `diagram` so it
+   cannot leak onto index.html by accident.
+   ⭐ TWO DOCUMENTS USE IT, NOT ONE (2026-09-09). The Host Handbook is the same
+   KIND of object as the prospectus and reuses `.pro-head`, `.pro-kicker`,
+   `.pro-index`, `.movement` and `.pull` unchanged. ⛔ The `pro-` prefix is
+   therefore about the REGISTER, not about /works — do not rename it per page,
+   and do not add a parallel set of classes doing these jobs under a second
+   name. Anything genuinely particular to one document gets its own selector. */
 .pro-head { padding-bottom: var(--s4); }
 .pro-kicker {
   font-family: var(--f-sys); font-size: 0.66rem; font-weight: 700;
@@ -970,13 +1081,30 @@ a { color: inherit; }
    box collapsing; an image sets its own height from its own aspect ratio, and a
    floor under one can only ever be wrong at some width. */
 .fig-shot { margin: var(--s4) 0; display: grid; gap: var(--s2); }
-.fig-shot img {
-  width: 100%; height: auto; display: block;
-  /* The grabs are dark UI on a dark ground and the page is a warm light one, so
-     without a rule the capture bleeds into the margin at its edges. The ground
-     behind it is the same one the empty slot used, so a slow image is a figure
-     arriving rather than a hole. */
-  border: 1px solid var(--rule); background: var(--ground-3);
+.fig-shot img { width: 100%; height: auto; display: block; }
+/* ⭐⭐ THE FIGURES TAKE THE PORTRAIT'S FRAME (§14), and it replaces a 1px rule.
+   The hairline was there because the grabs are dark UI on a dark ground and the
+   page is a warm light one, so a capture bled into the margin at its edges. It
+   solved that and nothing else: a capture with a hairline round it is still a
+   screenshot with a border, while the same capture in a photographic frame is
+   an object ON the page — which is what §14 means by a little framed picture
+   whose frame holds still while what is inside it changes. These figures do
+   exactly that; two of them literally change inside the frame.
+   ⛔ --pt-frame IS LIGHT ON BOTH GROUNDS ON PURPOSE and that is the whole
+   reason this works here: a photographic border is white in any light, so one
+   treatment carries a dark capture in day and in night. --pt-shade moves with
+   the ground instead, exactly as --vig-drop does.
+   ⚠️ `> img` AND `.fig-stack`, NOT `img`. The stack's frames live in one grid
+   cell; framing each of them would draw six frames in a pile and dissolve
+   between them. The frame belongs to the figure, so it goes on whatever the
+   figure's single picture-box is — the lone image, or the stack that holds
+   several. The background stays underneath so a slow image is a figure
+   arriving rather than a hole. */
+.fig-shot > img, .fig-stack {
+  border: 10px solid var(--pt-frame);
+  border-radius: 2px;
+  box-shadow: 0 2px 4px var(--pt-shade), 0 14px 34px var(--pt-shade);
+  background: var(--ground-3);
 }
 .pro-step + .fig-shot { margin-top: 0; }
 .fig-shot + .copy { margin-top: var(--s3); }
@@ -1017,6 +1145,30 @@ a { color: inherit; }
 @keyframes fig-step-3 { 0%, 40% { opacity: 1 } 44%, 92% { opacity: 0 } 100% { opacity: 1 } }
 @keyframes fig-step-4 { 0%, 54% { opacity: 1 } 58%, 92% { opacity: 0 } 100% { opacity: 1 } }
 @keyframes fig-step-5 { 0%, 68% { opacity: 1 } 72%, 92% { opacity: 0 } 100% { opacity: 1 } }
+/* ── THE SURVEY TURN ───────────────────────────────────────────────────────
+   Two states of one view, alternating in the same grid cell the build uses, so
+   DOM order is z-order and nothing reflows as they change.
+   ⛔ NOT A BUILD, WHICH IS WHY IT IS NOT THE BUILD'S ANIMATION. Section runs
+   one way through a sequence and rests on the finished frame; Survey has no
+   finished frame — it is one survey read two ways, the street named and the
+   blocks it leaves — so it holds equally on each and turns back.
+   ⭐ THE OVERLAY IS TRANSPARENT UNTIL THE KEYFRAMES SAY OTHERWISE, exactly as
+   the build's frames are, and it buys the same guarantee: reduced motion, a
+   stalled animation, or CSS animation switched off each land on the named
+   street rather than on nothing. */
+.fig-turn {
+  opacity: 0;
+  animation: fig-turn var(--t-turn) ease-in-out infinite;
+}
+/* Even holds, even dissolves — 42% resting on each state, 8% turning between.
+   A comparison figure that lingered on one side would read as that side being
+   the answer and the other being a footnote. */
+@keyframes fig-turn {
+  0%, 42% { opacity: 0 }
+  50%, 92% { opacity: 1 }
+  100% { opacity: 0 }
+}
+
 /* ⛔ `.fig-note` IS GONE. It set the one line standing in for the inventory of
    lighting and post controls that was cut — "Cinema-grade lighting, atmosphere,
    camera and post-production controls" — and it had ended up stranded after the
@@ -1113,3 +1265,294 @@ a { color: inherit; }
 /* The short version is the reader's reward for getting here. */
 .legal-short { border-top: 1px solid var(--rule); padding-top: var(--s4); }
 .legal-short h2 { font-size: 1.18rem; }
+
+
+/* 13 ── the Trail Guide (/guide) ─────────────────────────────────────────────
+   A third register. The front page ARGUES, the prospectus EXPLAINS, this one
+   INSTRUCTS — so it takes the site's ground, type and rules wholesale and adds
+   only the four things instruction needs that argument does not: a way back, a
+   contents list, a way onward, and two marks.
+
+   ⛔ RULE 7 IS AT ITS SHARPEST HERE, not at its most relaxed. A manual that
+   names one town becomes that town's manual, and the whole claim is that a
+   reader in the next neighborhood reads this same page. Every mention goes
+   through `data-names-instance` or it does not go in.
+
+   ⛔ AND IT STAYS IN THIS FILE (ruled 2026-09-09). tools/audit.py reads
+   `css/site.css` BY NAME, so every rule that keeps this site honest — no
+   literals, no forced overrides, and both halves of the class check — runs
+   against that one string. A `css/guide.css` would link, stamp and serve perfectly
+   while sitting outside all of them, with the audit still printing green: the
+   same silent-coverage failure this file's own comments record twice already.
+   ▶ Splittable only if audit.py learns the new file IN THE SAME COMMIT, and
+   only when the guide needs rules the rest of the site should not inherit —
+   not merely when this section gets long.
+
+   ⛔ AND RULE 6: a manual is where the temptation to type a count is strongest.
+   Three days, two weeks, one year, five permissions are RULES and keep their
+   numbers. Anything that would be true of one installation and not the next is
+   not a fact about a Ward and does not belong on these pages. */
+
+/* ⭐ THE TITLE BLOCK IS THE GUIDE'S OWN, and it is NOT `.pro-head`. Everything
+   on /works is prefixed `pro-` precisely so it cannot leak onto another page,
+   and borrowing it here to save nine lines would have retired that discipline
+   the first time a third register turned up. Three registers, three prefixes. */
+/* ⛔ THE GUIDE STACKS HEADINGS; THE REST OF THE SITE DOES NOT. `.copy h2` sets
+   margin-top: 0 and leans entirely on the previous element's margin-bottom,
+   which is right when an h2 OPENS its block — the only way index.html and
+   /works ever use one. A manual page runs six or eight of them down a single
+   .copy, and every one after the first landed a bare 1rem under the paragraph
+   above it.
+   ⚠️ IT DID NOT SHOW UNTIL THE COPY LANDED, because a .todo box carries its own
+   margins and was holding the headings apart. The skeleton looked right and the
+   finished page would not have been.
+   ⛔ SCOPED, NOT GLOBAL, AND THAT IS MEASURED: index.html has exactly one .copy
+   whose h2 is not its first element (§02, the Idea), so a bare `.copy > * + h2`
+   would have moved the front page to fix the guide. `.trail` is the guide's own
+   hook, the same discipline `pro-` keeps on /works.
+   ⭐ It also subsumes the .cta-before-a-heading case, which had its own rule for
+   one day. */
+.trail .copy > * + h2 { margin-top: var(--s6); }
+
+.trail-head { padding-bottom: var(--s4); }
+.trail-head h1 {
+  font-family: var(--f-sys); font-weight: 700;
+  font-size: clamp(1.8rem, 4.6vw, 2.9rem);
+  letter-spacing: -0.02em; line-height: 1.06;
+  margin: 0 0 var(--s4); max-width: 20ch; text-wrap: balance;
+}
+
+/* ⭐ THE EYEBROW AND THE WAY BACK ARE ONE ELEMENT. They were two — a crumb
+   above the title block and a kicker inside it — which printed "Trail Guide ·
+   02" twice, four lines apart, and left the crumb butting into the band with
+   no padding of its own. One line does both jobs and sits inside the section
+   that already has the spacing. */
+.trail-crumb {
+  font-family: var(--f-sys); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--sign);
+  margin: 0 0 var(--s2);
+}
+.trail-crumb a { color: var(--sign); }
+
+/* The contents. ⭐ A LIST, NOT THE FRONT PAGE'S PLATE GRID, and the difference
+   is the job rather than the styling: the Field Guide is a legend for a survey
+   a stranger walks in order, and this is a table of contents for something
+   consulted one entry at a time — usually reached sideways, from a printed
+   card, with no interest in the other five. */
+.trail-index {
+  display: grid;
+  margin: var(--s5) 0 0;
+  border-top: 1px solid var(--rule);
+}
+.trail-item {
+  display: grid; grid-template-columns: 4ch minmax(0, 1fr);
+  gap: var(--s3); align-items: baseline;
+  padding: var(--s3) var(--s2);
+  margin: 0 calc(var(--s2) * -1);
+  border-bottom: 1px solid var(--rule-soft);
+  color: var(--text); text-decoration: none;
+  transition: background var(--t-fast);
+}
+.trail-item:hover,
+.trail-item:focus-visible { background: var(--ground-2); }
+.trail-n {
+  font-family: var(--f-sys); font-weight: 700; font-size: 0.76rem;
+  letter-spacing: 0.1em; color: var(--text-faint);
+}
+.trail-t {
+  display: block;
+  font-family: var(--f-sys); font-weight: 600; font-size: 1.02rem;
+}
+.trail-s {
+  display: block; margin-top: 1px;
+  color: var(--text-soft); font-size: 0.95rem; line-height: 1.45;
+}
+
+/* Onward and back. ⭐ EVERY PAGE IN A MANUAL IS SOMEBODY'S FIRST PAGE — a
+   reader lands on /guide/guardian from a card stuck to a door, never from the
+   contents — so each one has to say where it sits without having been read in
+   order. That is also why the crumb above is on every page and not only on the
+   ones reached by clicking. */
+.trail-foot {
+  display: flex; flex-wrap: wrap; gap: var(--s4);
+  justify-content: space-between;
+  border-top: 1px solid var(--rule);
+  margin-top: var(--s6); padding-top: var(--s4);
+  font-family: var(--f-sys); font-weight: 600; font-size: 0.95rem;
+}
+.trail-foot-k {
+  display: block;
+  font-family: var(--f-sys); font-weight: 700; font-size: 0.66rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-faint); margin-bottom: 1px;
+}
+
+/* ⭐⭐ THE MODULE SEAM, MADE VISIBLE, and it is the one thing this manual has
+   that the rest of the site does not need. Some of what these pages describe is
+   true of every Ward and some is switched on installation by installation. A
+   manual that does not say which is which promises a reader something their own
+   neighborhood may not run — which is the kit claim failing in the one place it
+   costs somebody something rather than merely weakening a pitch.
+   ⚠️ DELIBERATELY NOT `--live`. Amber means something is actually running, and
+   this mark means very nearly the opposite: that it may not be. Rule 5 holds. */
+.module-note {
+  border-left: 2px solid var(--rule);
+  padding: var(--s1) 0 var(--s1) var(--s3);
+  margin: var(--s4) 0 0;
+  max-width: var(--measure);
+  font-family: var(--f-sys); font-size: 0.88rem; line-height: 1.5;
+  color: var(--text-soft);
+}
+
+/* ⛔ RULE 8, ON THE PAGE THAT NEEDS IT MOST. A skeleton is entirely placeholder,
+   so every gap says so out loud, in the page's own ink, in a dashed box nobody
+   could mistake for copy — never lorem, and never a plausible sentence somebody
+   might ship by accident.
+   ⭐ AND IT REMOVES ITSELF. When the last placeholder is written over, these
+   three rules report as unused CSS and the audit fails until they are deleted.
+   That is the forcing function, and it is the reason to prefer a dedicated
+   class here over a comment. */
+.todo {
+  border: 1px dashed var(--sign-soft);
+  padding: var(--s2) var(--s3);
+  margin: var(--s3) 0;
+  max-width: var(--measure);
+  font-family: var(--f-sys); font-size: 0.86rem; line-height: 1.5;
+  color: var(--text-soft);
+}
+.todo p { margin: 0; font-size: inherit; line-height: inherit; }
+.todo-k {
+  display: block;
+  font-weight: 700; font-size: 0.65rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--sign-soft); margin-bottom: var(--s0);
+}
+
+
+/* 14 ── the square portraits ─────────────────────────────────────────────────
+   ⭐⭐ ROUND IS WHO YOU ARE. SQUARE IS SOMETHING IN THE WARD. §7's badges stand
+   for people and Standing; a portrait stands for a thing, place, function or
+   idea. Keeping the two shapes apart is what lets a Resident badge sit beside a
+   Home portrait and have the relationship read before the copy does.
+
+   ⛔ THE FRAME NEVER MOVES. No rotation, no simulated snapshot, no per-subject
+   art direction, no crop. The variation happens INSIDE: one native emoji at a
+   time, crossfading through a small measured vocabulary. Everything that makes
+   one portrait different from another is a token — its field, and its frames.
+
+   ⛔ EMOJI STAY NATIVE. They are not artwork and are not normalised across
+   platforms; an iPhone, an Android and a Windows machine show somewhat
+   different pictures, and that is the charm.
+   ⚠️ THE COST, STATED: the scale and nudge that centre each glyph were measured
+   against Apple Color Emoji. Elsewhere the correction is approximate, and a
+   crossfade in place shows drift a static badge would hide.
+
+   ⭐ MOTION IS BENEATH NOTICE — a crossfade, nothing else, and §1's global
+   reduced-motion reset already flattens it. js/site.js additionally stops
+   CYCLING under that preference, because a jump-cut every few seconds is still
+   motion; one emoji is a complete state. */
+
+.vignette {
+  display: inline-block;
+  padding: 9px;
+  background: var(--pt-frame);
+  box-shadow: 0 1px 2px var(--pt-shade), 0 6px 16px var(--pt-shade);
+  /* A hair of radius: enough to be a printed object, not enough to be a chip. */
+  border-radius: 2px;
+}
+
+/* The coloured field. ⛔ ITS COLOUR IS A MEASUREMENT, NOT A PREFERENCE — it has
+   to clear every glyph in its own vocabulary, and the sweep that chose it is
+   recorded in data/vignette-glyphs.json. The fallback is the band, so a portrait
+   whose subject has no field yet is legible rather than invisible. */
+.vignette-field {
+  display: grid;
+  width: 112px; height: 112px;
+  background: var(--pt-field, var(--band-bg));
+}
+
+/* Two stacked pictures in one grid cell — the crossfade is opacity between
+   them, so nothing reflows and the frame cannot twitch. */
+.vignette-pic {
+  grid-area: 1 / 1;
+  align-self: center; justify-self: center;
+  font-size: 62px; line-height: 1;
+  transition: opacity var(--t-slow) ease-in-out;
+}
+.vignette-pic--out { opacity: 0; }
+
+/* As a chapter mark it wants air under it, and nothing else. */
+.trail-head .vignette { margin-bottom: var(--s3); }
+
+/* ⭐ A PORTRAIT INSIDE THE PROSE SITS IN THE TEXT BLOCK, NOT ON TOP OF IT
+   (Jacob, on seeing it stacked above the heading: "it just feels like the image
+   is outside the text block"). It did. Stacked, a 130px card above a heading is
+   neither in the column nor beside it — too small to be its own event the way
+   the hero is, too big to be a bullet. Floated, the heading and its opening
+   lines wrap around it and the pair reads as one thing: a plate in a book.
+   ⛔ A MARGIN VERSION WAS TRIED AND PUT ASIDE. Hung in the empty column to the
+   right of the 62ch measure it looked clean and used space that is already
+   doing nothing — but it answers the complaint by leaning INTO the detachment
+   rather than fixing it, and it needs absolute positioning with its own
+   narrow-width fallback. Kept in mind for a diagrammatic register (the
+   prospectus), where a marginal figure is the right idiom.
+   ⛔ It borrows the chapter size; it does not invent a third. */
+.trail .copy .vignette { float: left; margin: var(--s5) var(--s4) var(--s2) 0; }
+.trail .copy .vignette + h2 { margin-top: 26px; }
+
+/* ⛔ AND NO PARAGRAPH MAY BE SPLIT BY THE CARD'S BOTTOM EDGE. A paragraph that
+   STRADDLES it starts indented beside the card and then steps out to full width
+   halfway through — the ragged wrap Jacob caught on Bulletin. Giving each
+   following paragraph its own block formatting context means it is either
+   wholly beside the card or wholly below it, never both.
+   ⭐ GENERIC, NOT A PATCH FOR ONE SECTION: it depends on how tall the card is
+   against how long the paragraph is, so it will recur at every heading whose
+   copy happens to run to the wrong length. Society Pages already drops its
+   second paragraph below the card correctly, and this leaves that alone.
+   ⚠️ A no-op wherever there is no float — below the card, and at phone width
+   where the float is off entirely. */
+.trail .copy .vignette ~ p { display: flow-root; }
+
+/* ⚠️ AND THE FLOAT DROPS ON A NARROW SCREEN, because it has to: at phone width
+   the copy is the whole column, and a 130px card beside it leaves about thirty
+   characters — a measure nobody can read. Stacked is the correct answer there,
+   and the same 700px breakpoint the rest of the site already turns on. */
+@media (max-width: 700px) {
+  .trail .copy .vignette { float: none; margin: var(--s5) 0 var(--s2); }
+  .trail .copy .vignette + h2 { margin-top: 0; }
+}
+
+/* ⭐⭐ TWO SIZES, AND THE SECOND ONE IS NOT A SHRUNK FIRST (Jacob: "that's the
+   size I was thinking for them all; but maybe it's nice that we have a true
+   hero/child dynamic"). It is, and the arithmetic is what settles it rather
+   than taste: chapter 01 runs ELEVEN headings over twenty-seven paragraphs, and
+   the spec names eight of them as portrait candidates. Eight heroes is 1,664px
+   of frame — nearly two full screens of picture in one chapter of prose. The
+   child exists so 01 can have the portraits it was promised.
+   ⭐ SO THE CHILD IS AS BIG AS IT CAN BE, not as small as it can get: 112px,
+   two-thirds of the hero and unmistakably the same object.
+
+   ⭐⭐ THE HERO IS A DIFFERENT JOB FROM THE CHAPTER MARK. At the top of
+   the guide the portrait is not a signpost beside a heading — it IS the opening
+   image, the way a plate faces the title page of a book. So it is sized to be
+   looked at rather than noticed, and the changing picture becomes the first
+   thing the guide says about itself: the frame stays put, the neighborhood
+   changes inside it.
+   ⛔ TWO SIZES, AND THAT IS THE WHOLE SET. A hero at the front of a
+   publication, a mark at the head of a chapter. A third would be a habit
+   rather than a system — and a portrait dropped into running prose should
+   borrow one of these, never invent a size for itself. */
+.vignette--hero { padding: 12px; box-shadow: 0 2px 4px var(--pt-shade), 0 14px 34px var(--pt-shade); }
+.vignette--hero .vignette-field { width: 160px; height: 160px; }
+.vignette--hero .vignette-pic { font-size: 88px; }
+.trail-head .vignette--hero { margin-bottom: var(--s4); }
+
+
+/* ⛔ THE EMOJI IS CONTENT, NOT MARKUP — one source, and it cannot drift out of
+   step with the measurement that sizes it. Same rule the badges follow. */
+.vignette-pic::before {
+  content: var(--pt-emoji, "");
+  display: block;
+  transform: scale(var(--pt-scale, 1)) translateY(var(--pt-nudge, 0em));
+}

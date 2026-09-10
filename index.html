@@ -29,8 +29,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
-<link rel="stylesheet" href="css/tokens.css?v=094f85225a15">
-<link rel="stylesheet" href="css/site.css?v=41c1c73a1fd9">
+<link rel="stylesheet" href="css/tokens.css?v=7ce1d022c15e">
+<link rel="stylesheet" href="css/site.css?v=083925821e8e">
   <!-- ⭐ THE MARK'S 16px COUSIN, not the mark shrunk — the band mark's street
        grid turns to mud below about 20px. SVG only, deliberately: it is theme
        aware (a tab bar is dark as often as light) and one file beats a pile of
@@ -56,6 +56,20 @@
     <span class="band-text">
       <span class="band-name">The Ward</span>
       <span class="band-meta">Digital presence for real neighborhoods</span>
+    </span>
+    <!-- ⛔ "SEE THE WARD" IS NOT IN THIS BAND, AND THAT IS A CUT (Jacob,
+         2026-09-09: "there are 3 see a ward buttons in the same screen").
+         The live Ward was linked three times inside the first screen — here, in
+         the instance note under the hero, and as Field Guide plate 01 — and the
+         plate is the one that earns it: it leads the key, it is the entry that
+         says the thing being described is RUNNING, and the note beneath the
+         hero names whose it is. A fourth-of-three in the masthead was the one
+         with the least to say.
+         ⚠️ IT STAYS ON EVERY OTHER PAGE. /works, /guide, /handbook and the
+         chapters have no hero and no Field Guide, so there the band link is the
+         only route to the running product rather than the third of three. -->
+    <span class="band-links">
+      <a class="band-cta" href="guide/">Trail Guide</a>
     </span>
   </div>
 
@@ -319,7 +333,13 @@
           </div>
           <div class="step">
             <span class="role-vig role-vig--courier" aria-hidden="true"></span>
-            <p><span class="step-t">Courier &mdash; you carry</span>Couriers are Townies who carry for Cary. Because they handle orders and come to people&rsquo;s doors, Couriers are identity-verified and background-checked.</p>
+            <!-- ⛔ "AND BACKGROUND-CHECKED" WAS CUT, AND IT WAS FALSE (Jacob's ruling,
+                 2026-09-09). We verify ID for deliveries. The licence, background
+                 check, insurance and vehicle belong to DRIVING IN A RIDESHARE —
+                 a different service, and not what a courier does.
+                 ⚠️ This rung says what a courier IS, so it carries the courier
+                 gate only. The fuller answer, both tiers, is /guide/cary. -->
+            <p><span class="step-t">Courier &mdash; you carry</span>Couriers are Townies who carry for Cary. Because they handle orders and come to people&rsquo;s doors, Couriers are identity-verified.</p>
           </div>
         </div>
 
@@ -328,6 +348,20 @@
            box: a rule, a little air, and italics. It should read as the section
            exhaling, not as a warning label. -->
         <p class="coda">The Ward can&rsquo;t produce a list of residents because it never collects the information needed to make one.</p>
+
+        <!-- ⭐⭐ THE TRAIL GUIDE'S STRONG DOOR, AND IT IS A CTA RATHER THAN A LINK
+             (Jacob, 2026-09-09: "very visibly"). It had two placements and both
+             were quiet — an uppercase band link and a colophon row — which is
+             the treatment for a document a reader finds when they go looking.
+             ⛔ THIS SECTION IS THE GUIDE'S SUBJECT. §03 is what people can do
+             here and the ladder above is its five standings; the Trail Guide is
+             the same five explained at length. So the link belongs at the end of
+             the chapter that raises the question, exactly as the Host Handbook
+             sits at the end of §04 — same argument, same shape.
+             ⚠️ It follows the coda rather than preceding it: the coda is the
+             ladder exhaling, and a button before it would step on the line the
+             whole section is built to land. -->
+        <p><a class="cta" href="guide/">Read the Trail Guide</a></p>
       </div>
   </section>
 
@@ -401,6 +435,17 @@
 
       <h3>Built to travel</h3>
       <p>The Ward was designed from the beginning to become more than one neighborhood. Each Ward is built for its particular place, while the underlying system is designed to be reused from neighborhood to neighborhood.</p>
+
+      <!-- ⭐⭐ THE HANDBOOK'S STRONG PLACEMENT, AND IT IS NOT THE COLOPHON. The
+           Trail Guide sits in the footer and this file already says out loud that
+           that is the weaker of the two placements — the guide's real reader never
+           sees a footer. The Host Handbook's reader is the person who has just
+           read THIS section, so the link belongs at the end of it. The colophon
+           row below is the second door, for somebody who finished the page.
+           ⚠️ It is also what this chapter was short of: README flagged §04 as two
+           paragraphs, thin for a chapter the Field Guide promises. The depth now
+           exists; it is one scroll away rather than inline. -->
+      <p><a href="handbook/">Read the Host Handbook &rarr;</a></p>
     </div>
   </section>
 
@@ -533,6 +578,24 @@
          published — crawlers follow it and honour the tag, which is the
          behaviour we want: findable by anyone reading the site, absent from
          search. -->
+    <!-- ⛔ NO TRAIL GUIDE ROW ON THIS PAGE (Jacob, 2026-09-09: "then we don't
+         need it in the colophon"). The guide is the one publication with a
+         BUTTON IN THE MASTHEAD and a call to action at the end of §03, so a
+         third mention down here is the fourth of four — and the colophon's job
+         is to name what a reader has NOT already been offered.
+         ⚠️ IT STAYS IN EVERY OTHER COLOPHON. On /works, /handbook, /legal and
+         the chapters there is no button and no CTA, so the row is that page's
+         only door to the guide rather than a repetition. -->
+    <!-- ⭐ THE HANDBOOK, AND ITS REAL DOOR IS IN §04 rather than here. This row
+         is the second one, for a reader who finished the page instead of
+         stopping at the chapter. ⛔ NOT `noindex` — unlike /works, and for the
+         Trail Guide's reason: the front page recruits Hosts in public, so the
+         document saying what hosting involves must be findable. That is only
+         safe because it carries no rate; see the handbook's §IV. -->
+    <div class="colophon-row">
+      <span class="colophon-k">Host Handbook</span>
+      <span>What it means to host a Ward &mdash; what a Host looks after, what a Ward shows you about a neighborhood, and where the responsibilities divide. <a href="handbook/">Read the handbook &rarr;</a></span>
+    </div>
     <div class="colophon-row">
       <span class="colophon-k">Works</span>
       <span>How a neighborhood is actually constructed &mdash; the sources, the pipeline, and the instruments that build a Ward. <a href="works/">See the works &rarr;</a></span>
@@ -555,6 +618,6 @@
      with it rather than left running against nothing.
      ⭐ To bring it back: git show HEAD:tools/build-sky.mjs — and re-add it to the
      loop in tools/build.mjs, which is the line that makes it run. -->
-<script src="js/site.js?v=74478acdabfa"></script>
+<script src="js/site.js?v=0f3be1550239"></script>
 </body>
 </html>

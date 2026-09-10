@@ -80,6 +80,68 @@ const roles = capture.order.map(key => {
   return { key, emoji: r.emoji, scale, nudgeY: ink.nudgeY }
 })
 
+/* ═══ SQUARE PORTRAITS ═══════════════════════════════════════════════════════
+   The second shape. Round is who you are; square is something in the Ward.
+
+   ⛔ THE SAME RULE APPLIES, ONE LEVEL UP: a portrait is a SUBJECT whose picture
+   cycles, so EVERY frame needs its own measured scale and nudge. A portrait is
+   only as good as its least well-centred glyph, and an unmeasured one throws
+   here exactly as an unmeasured role does.
+   ⭐ WHAT IS NEW IS THE FIELD. The badges share one authored master because any
+   emoji may be dropped in. A portrait cannot: its field must clear EVERY glyph
+   in its own vocabulary, which is a per-subject measurement and lives beside
+   the frames in data/vignette-glyphs.json. */
+const portraits = (() => {
+  const P = capture.portraits
+  if (!P) return []
+  if (!Array.isArray(P.order)) die('`portraits.order` is missing.')
+  return P.order.map(key => {
+    const sub = P.subjects && P.subjects[key]
+    if (!sub) die(`portrait "${key}" is in \`portraits.order\` but has no entry in \`subjects\`.`)
+    if (!/^#[0-9a-fA-F]{6}$/.test(sub.field || ''))
+      die(`portrait "${key}" has no 6-digit hex \`field\`. The field is a MEASUREMENT for a\n` +
+          `  cycling portrait, not a preference — it has to clear every glyph in the family.`)
+    if (!Array.isArray(sub.frames) || !sub.frames.length)
+      die(`portrait "${key}" has no frames.`)
+    const frames = sub.frames.map((f, i) => {
+      const ink = f.ink
+      if (!f.emoji) die(`portrait "${key}" frame ${i} has no emoji.`)
+      for (const k of ['inkH', 'inkW', 'nudgeY'])
+        if (!ink || typeof ink[k] !== 'number')
+          die(`portrait "${key}" frame ${i} (${f.emoji}) has no measured \`${k}\`.\n` +
+              `  ⛔ A cycling portrait is only as good as its least well-centred frame.\n` +
+              `  Measure it the way the _comment in data/vignette-glyphs.json describes —\n` +
+              `  from the BASELINE, never from a 'middle' anchor.`)
+      if (!(ink.inkH > 0.05) || !(ink.inkW > 0.05))
+        die(`portrait "${key}" frame ${i} (${f.emoji}) measured ${ink.inkW}×${ink.inkH} em,\n` +
+            `  which is not a glyph — it did not render when it was captured.`)
+      const scale = Math.min(1.8, Math.max(0.6, inkTarget / ink.inkH))
+      const scaledW = ink.inkW * scale
+      if (scaledW > 1.45)
+        console.warn(`  ⚠ ${key} frame ${i} (${f.emoji}) scales to ${scaledW.toFixed(2)}em wide.`)
+      /* ⚠️ NARROW GLYPHS ARE THE CYCLING-ONLY HAZARD, and the badges never met it:
+         height drives the scale, so a tall thin picture matches its neighbours in
+         height and still reads as half the MASS when it fades in beside them. */
+      if (scaledW < 0.62)
+        console.warn(`  ⚠ ${key} frame ${i} (${f.emoji}) scales to ${scaledW.toFixed(2)}em wide against` +
+                     ` ${(ink.inkH * scale).toFixed(2)}em tall.\n    Tall and narrow — it will read as` +
+                     ` lighter than the rest of the sequence even though it is the same height.`)
+      return { emoji: f.emoji, scale, nudgeY: ink.nudgeY }
+    })
+    return { key, field: sub.field, frames }
+  })
+})()
+
+const portraitLines = portraits.flatMap(p => [
+  `  --pt-${p.key}-field: ${p.field};`,
+  `  --pt-${p.key}-n: ${p.frames.length};`,
+  ...p.frames.flatMap((f, i) => [
+    `  --pt-${p.key}-${i}-emoji: "${f.emoji}";`,
+    `  --pt-${p.key}-${i}-scale: ${f.scale.toFixed(3)};`,
+    `  --pt-${p.key}-${i}-nudge: ${f.nudgeY.toFixed(4)}em;`,
+  ]),
+])
+
 const tokenLines = roles.flatMap(r => [
   `  --vig-${r.key}-emoji: "${r.emoji}";`,
   `  --vig-${r.key}-scale: ${r.scale.toFixed(3)};`,
@@ -96,6 +158,14 @@ const block = [
   '     puts its baseline at 0.84em, not 0.5em. See data/vignette-glyphs.json.',
   `     Measured ${capture.capturedOn} on ${capture.capturedWith}. */`,
   ...tokenLines,
+  ...(portraits.length ? [
+    '',
+    `  /* ${portraits.length} square portrait(s) — round is who you are, square is something`,
+    '     in the Ward. Same measured scale and nudge per frame; the FIELD is the new part,',
+    '     and it is per-subject because a cycling picture has to stay legible on every turn.',
+    '     See the portraits._comment in data/vignette-glyphs.json for the sweep. */',
+    ...portraitLines,
+  ] : []),
   '',
 ].join('\n')
 
@@ -110,8 +180,9 @@ const next = cur.slice(0, a + BEGIN.length) + block + cur.slice(b)
 
 if (CHECK) {
   if (next !== cur) { console.error('\n  the vignette block is STALE. Run: node tools/build-vignettes.mjs\n'); process.exit(1) }
-  console.log(`vignettes: up to date (${roles.length} glyphs)`)
+  console.log(`vignettes: up to date (${roles.length} badge glyphs, ${portraits.length} portrait(s))`)
 } else {
   if (next !== cur) writeFileSync(path, next)
-  console.log(`vignettes: ${roles.length} glyphs → ${tokenLines.length} tokens (one master field)`)
+  console.log(`vignettes: ${roles.length} badge glyphs → ${tokenLines.length} tokens (one master field)` +
+    (portraits.length ? ` · ${portraits.length} portrait(s), ${portraits.reduce((n,p)=>n+p.frames.length,0)} frames → ${portraitLines.length} tokens` : ''))
 }

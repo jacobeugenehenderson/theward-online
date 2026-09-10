@@ -71,5 +71,435 @@
     "guardian",
     "keyholder",
     "courier"
-  ]
+  ],
+  "portraits": {
+    "_comment": [
+      "SQUARE PORTRAITS — the second shape. ⭐ ROUND IS WHO YOU ARE; SQUARE IS SOMETHING IN THE WARD. The `roles` above are people and Standing; these are things, places, functions and ideas. The distinction is the whole point and must stay firm.",
+      "",
+      "⛔ A PORTRAIT IS A SUBJECT, NOT AN EMOJI. Its frame and field hold still while the picture inside cycles through a small vocabulary. So every glyph in the sequence needs its own measured scale and nudge — a portrait is only as good as its least well-centred frame — and the field must serve ALL of them, not the first one.",
+      "",
+      "⭐⭐ AND THAT IS WHY THESE FIELDS ARE DARK. The badges learned that no single PALE value serves every emoji; a cycling portrait makes it worse, because one bad member goes blank for four seconds on a rotation nobody is watching when it happens. Measured on this family: 🥡 clears 3:1 on 1% of its ink against the cream ground and 100% against a deep field. Sweeping Cary's own verdigris by lightness, the worst glyph goes 3% at L=34% to 45% at L=20% and plateaus near 63% below L=14%. L=17% is the knee.",
+      "⛔ SO KEEP THE HUE, MOVE THE LIGHTNESS. Cary's authored verdigris is hsl(162,45%) — the same hue and saturation as --cary-rule, which came from the product's own courier stat. Only its lightness changes here. The colour is the identity; the luminance is a legibility budget.",
+      "⭐ A deep field also happens to be the brief: a bright emoji on a dark ground is what a backlit transparency looks like.",
+      "",
+      "⚠️ RE-MEASURE ON A FONT UPDATE. Calibrating against the five recorded roles, four reproduced exactly and ☕ came back 0.875 where 0.865 is on file — 2px at 200px. Small, and NOT corrected here: re-measuring the badges would move shipped artwork nobody asked to move.",
+      "",
+      "⛔ 🚶 WAS MEASURED AND CUT from the trail family: 0.465em inked width, which scales to 0.48em wide against 0.97em tall — narrower than 🥤, and 🥤 already earns the narrow warning. A walking figure is the obvious picture for a guide and it is the wrong SHAPE for this object; the frame is square and a sliver reads as an accident inside it. 🪧 replaced it, and measured better than anything else tried: 100% of its ink clears 3:1 on this field. Also measured and rejected: 🥾 23% (a brown boot on a brown field), 🎒 43%, 🗻 and 🛤️ both over 1.45em wide with large negative nudges. Held in reserve: 🏞️ 0.97em square, 81% · 🚏 0.69em, 72%.",
+      "",
+      "⛔⛔ SOME EMOJI ARE ALREADY FRAMED PICTURES, AND THEY CANNOT GO IN A FRAME. The first Almanac vocabulary tried was 🌅 ☀️ 🌤️ 🌇 🌙 🌌 — times of day. Rendered, THREE of the six (🌅 🌇 🌌) are drawn by Apple as a small photograph with its own white border, so inside this object they land as a frame within a frame: a picture of a picture. ⭐ NO NUMBER FOUND THIS. Their contrast scores were fine and a border-detector written to catch them returned 0% on all three — it was discarded rather than trusted, because an instrument that reports nothing where something plainly is is worse than no instrument. The eye found it in one look. ▶ So the check is: RENDER THE FAMILY AND LOOK, before recording it.",
+      "⭐ AND THE REPLACEMENT IS BETTER FOR A SECOND REASON. The family is now what the Almanac actually SHOWS — a clock, the day, the weather, the temperature, the moon — rather than a procession of times of day, which the panel's own slider already does. Also measured and rejected: 🌛 at 0.60em wide (narrow), ☁️ at 1.43em (a hair inside the wide flag, and it is weather rather than almanac).",
+      "",
+      "⛔⛔ A PERSON MAY NOT GO IN A SQUARE. 🙋 was measured, rendered and cut from the bulletin family: it clears 94% and is perfectly legible, and it is a HUMAN FIGURE. Round is who you are; square is something in the Ward. Putting a person inside a square breaks the one distinction the whole system rests on, on the very page that teaches it. ⭐ No measurement can catch this — it is a grammar rule, and it belongs in the eye pass beside the frame-in-a-frame check.",
+      "⛔ AND A GLYPH BELONGS TO ONE PORTRAIT. 🪧 was in the proposed bulletin vocabulary and is already the trail family's fourth frame — the one that replaced 🚶 and clears 100%. Vocabularies may overlap where the subjects genuinely do, but a family's most distinctive member is its signature and sharing it dilutes both. Left with trail. Same call on ☕ for society: it reads well on plum, and it is the TOWNIE BADGE. Same picture as a round badge and inside a square portrait is a collision, not a demonstration — the family is complete without it.",
+      "",
+      "⛔⛔ A FLAT UI SYMBOL IS NOT A LITTLE PHOTOGRAPH. Found measuring check-in: ✅ clears 98% and 🆔 47%, both are perfectly legible, and both read as INTERFACE inside a frame that is pretending to be a print. The system is portraits of things; a green tick and a purple chip are controls. ▶ Third rule for the eye pass, after no-frames-within-frames and no-people: the glyph has to be an OBJECT.",
+      "⚠️ AND CHECK-IN IS THE HARDEST SUBJECT SO FAR, because it is an ACTION and emoji are mostly objects or symbols. Measured and rejected on SHAPE: 🎫 1.69em · 🪪 1.46em · 🏷️ 1.50em · 📱 0.53em — the phone especially, which is the obvious picture. On CONTRAST: 🗝️ 16% and 🚪 7%, both murky browns on teal. On CLUTTER (legible but mush at 62px): 📇 · 🧾 · 📰. On GRAMMAR: ✅ · 🆔 above, and 🏵️ because a rosette is badge-shaped and the round badges already mean that.",
+      "",
+      "⭐⭐ TWO SUBJECTS MAY SHARE A FIELD WHEN THEY ARE THE SAME PLACE. Home and Lobby both take hsl(120,26%,14%): one is the outside of a dwelling, the other the inside of its shared entrance. Sharing says that, and it stops the palette fragmenting — six hues was already most of the wheel at this lightness, and eight would have been indistinguishable. ⛔ It is not a licence to reuse a field for convenience; the two subjects have to actually be one place.",
+      "⛔ 🖼️ IS A SECOND FRAME-IN-A-FRAME — a gold-framed painting inside the white frame. Cut on sight, as 🌅 🌇 🌌 were. The rule generalises and is now worth stating as a class: any glyph Apple draws WITH ITS OWN BORDER is disqualified. ⛔ 🛗 broke two rules at once: a flat blue pictogram (interface, not object) containing three human figures. Also rejected: 🪞 0.58em narrow · 🚪 7% on this field, a brown door on green · 📋 and 🗄️ legible but reading as office rather than home · 📪 the same mailbox as 📬 · 🗳️ reads as voting.",
+      "⚠️ 🏠 MOVED FROM SOCIETY PAGES TO HOME. It was in both, and it belongs to the one that is ABOUT dwellings. Society Pages keeps 🏪 🍽️ 🎭 🏛️ — four public places, which is what a directory of places is for.",
+      "",
+      "⚠️⚠️ CHAPTER 05 HAS NO HONEST HEAD SUBJECT, and that is a finding rather than a gap to fill. Everything obvious is already spoken for: PLACE is Society Pages once 🏠 moved to Home; 🔑 and 🛡️ are the Keyholder and Guardian ROUND badges, so a square about keys or protection would collide with the grammar; 🪧 is trail's. What is left for 'claiming and tending a place' is office stationery — 🔖 🗂️ 📑 🧾 📎 📇 🔏 all measure and render cleanly and all read as FILING, not as looking after somewhere. ⭐ 05 is the one chapter that is genuinely about PEOPLE (two round badges), so a bare head is the right answer, not a forced family.",
+      "⭐⭐ ⚜️ IS PRODUCT-TRUE, which is why Reviews works where Claim did not: the fleur-de-lis is the mark the app actually rates with (ls/FEATURES, 'reviews with a fleur-de-lis rating'). Also measured and rejected: 💯 and 📊 read as interface rather than object · 🥇 as competition · 🔍 as search · 🗨️ clears 1%, a dark bubble that vanishes · 🏅 0.51em and 🎗️ 0.59em narrow · 🖼️ frame-in-a-frame again.",
+      "",
+      "⚠️ IDENTITY SHARES CHECK-IN'S TEAL, AND IT IS A WEAKER PAIRING THAN HOME/LOBBY — recorded rather than glossed. Home and Lobby are literally one place seen twice; check-in and identity are only cousins (the Ward recognising you turn up, and who it knows you as). It shares anyway because the alternative was a NINTH hue at this lightness, and the only gap left is ~260°, wedged between indigo 232 and plum 288 — three violets in a row that nobody could tell apart. ⛔ Nothing may go near amber. ▶ The palette is the constraint now, not the vocabulary: from here a new subject either shares or displaces.",
+      "⚠️ 🔒 HERE AND 🔓 IN CHECK-IN ARE THE SAME OBJECT IN OPPOSITE STATES, deliberately: turning up UNLOCKS, and what you keep stays LOCKED. ⛔ Not the ☕ case — that was one picture worn by a round badge AND a square portrait, which breaks the shape grammar. These are two squares in different fields, and the reversal is legible. Also measured and rejected: 🙂 and 👤 are people (👤 is a flat silhouette as well) · 📵 is prohibition signage, and says no-phones-allowed · 📱 0.53em and 🕶️ 1.78em · 🪪 1.46em · 🗝️ 16% · 🎭 belongs to Society Pages."
+    ],
+    "order": [
+      "cary",
+      "trail",
+      "almanac",
+      "bulletin",
+      "society",
+      "checkin",
+      "home",
+      "lobby",
+      "reviews",
+      "identity"
+    ],
+    "subjects": {
+      "cary": {
+        "label": "Cary",
+        "field": "#183f33",
+        "fieldNote": "hsl(162,45%,17%) — --cary-rule verdigris, lightness dropped to the knee of the sweep",
+        "frames": [
+          {
+            "emoji": "🛍️",
+            "ink": {
+              "inkH": 1.0,
+              "inkW": 1.0,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "📦",
+            "ink": {
+              "inkH": 1.0,
+              "inkW": 1.0,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "🥡",
+            "ink": {
+              "inkH": 0.99,
+              "inkW": 0.995,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "🍜",
+            "ink": {
+              "inkH": 0.92,
+              "inkW": 0.97,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "🥤",
+            "ink": {
+              "inkH": 0.975,
+              "inkW": 0.515,
+              "nudgeY": 0.03
+            }
+          },
+          {
+            "emoji": "💐",
+            "ink": {
+              "inkH": 0.995,
+              "inkW": 0.98,
+              "nudgeY": 0.035
+            }
+          }
+        ]
+      },
+      "trail": {
+        "label": "Trail Guide",
+        "field": "#33271a",
+        "fieldNote": "hsl(32,32%,15%) — --sign, the routed-sign brown, at the knee of its sweep. The site calls that colour STRUCTURAL rather than decorative, and a trail marker is a routed sign; the hue is the argument, the lightness is the legibility budget.",
+        "frames": [
+          {
+            "emoji": "🗺️",
+            "ink": {
+              "inkH": 1.0,
+              "inkW": 1.0,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "📍",
+            "ink": {
+              "inkH": 1.0,
+              "inkW": 1.0,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "🧭",
+            "ink": {
+              "inkH": 0.985,
+              "inkW": 0.99,
+              "nudgeY": 0.035
+            }
+          },
+          {
+            "emoji": "🪧",
+            "ink": {
+              "inkH": 0.97,
+              "inkW": 0.82,
+              "nudgeY": 0.0325
+            }
+          }
+        ]
+      },
+      "almanac": {
+        "label": "Almanac",
+        "field": "#181c35",
+        "fieldNote": "hsl(232,38%,15%) — the night end of the sky the map is lit by. Swept against indigo, violet and slate at five lightnesses; all three behaved identically because the limiting glyph was the same, so the hue was chosen on meaning rather than on the number. Every member of the final family clears 85% or better here.",
+        "frames": [
+          {
+            "emoji": "🕐",
+            "ink": {
+              "inkH": 0.97,
+              "inkW": 0.97,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "☀️",
+            "ink": {
+              "inkH": 0.97,
+              "inkW": 0.97,
+              "nudgeY": 0.02
+            }
+          },
+          {
+            "emoji": "🌤️",
+            "ink": {
+              "inkH": 0.97,
+              "inkW": 0.98,
+              "nudgeY": 0.02
+            }
+          },
+          {
+            "emoji": "🌡️",
+            "ink": {
+              "inkH": 0.97,
+              "inkW": 0.97,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "🌙",
+            "ink": {
+              "inkH": 0.97,
+              "inkW": 0.97,
+              "nudgeY": 0.0325
+            }
+          }
+        ]
+      },
+      "bulletin": {
+        "label": "Bulletin",
+        "field": "#281516",
+        "fieldNote": "hsl(355,32%,12%) — oxblood, the felt of a noticeboard. Swept against oxblood, plum, teal and slate; the limiting glyph is 📌 throughout, so the hue was chosen on meaning. ⚠️ 📌 scores 53% here and is the doctrine’s own warning made flesh: a red pin on a red ground reads perfectly, because its contour and highlight carry it. Do not rank on that number.",
+        "frames": [
+          {
+            "emoji": "📌",
+            "ink": {
+              "inkH": 1.0,
+              "inkW": 1.0,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "💬",
+            "ink": {
+              "inkH": 0.98,
+              "inkW": 0.98,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "📣",
+            "ink": {
+              "inkH": 0.86,
+              "inkW": 0.995,
+              "nudgeY": 0.0475
+            }
+          },
+          {
+            "emoji": "🗒️",
+            "ink": {
+              "inkH": 1.0,
+              "inkW": 1.0,
+              "nudgeY": 0.0325
+            }
+          }
+        ]
+      },
+      "society": {
+        "label": "Society Pages",
+        "field": "#2d1c31",
+        "fieldNote": "hsl(288,28%,15%) — plum, a bound directory. Worst glyph 62%, and the family is places rather than a single kind of place, which is what the directory is.",
+        "frames": [
+          {
+            "emoji": "🏪",
+            "ink": {
+              "inkH": 0.98,
+              "inkW": 0.965,
+              "nudgeY": 0.0275
+            }
+          },
+          {
+            "emoji": "🍽️",
+            "ink": {
+              "inkH": 0.875,
+              "inkW": 0.99,
+              "nudgeY": 0.035
+            }
+          },
+          {
+            "emoji": "🎭",
+            "ink": {
+              "inkH": 0.975,
+              "inkW": 0.97,
+              "nudgeY": 0.03
+            }
+          },
+          {
+            "emoji": "🏛️",
+            "ink": {
+              "inkH": 1.0,
+              "inkW": 0.995,
+              "nudgeY": 0.0325
+            }
+          }
+        ]
+      },
+      "checkin": {
+        "label": "Check-in",
+        "field": "#182d34",
+        "fieldNote": "hsl(196,36%,15%) — teal, the last clear gap in the palette (verdigris 162, brown 32, indigo 232, oxblood 355, plum 288). ⛔ Nothing was tried near amber: --live is reserved and a gold field would read as something running.",
+        "frames": [
+          {
+            "emoji": "🗓️",
+            "ink": {
+              "inkH": 1.0,
+              "inkW": 1.0,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "🪙",
+            "ink": {
+              "inkH": 1.0,
+              "inkW": 1.0,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "🔓",
+            "ink": {
+              "inkH": 1.0,
+              "inkW": 1.0,
+              "nudgeY": 0.0325
+            }
+          }
+        ]
+      },
+      "home": {
+        "label": "Home",
+        "field": "#1a2d1a",
+        "fieldNote": "hsl(120,26%,14%) — forest, shared with the other half of this chapter. Home is the outside of a dwelling and Lobby the inside of its shared entrance; one place, so one field.",
+        "frames": [
+          {
+            "emoji": "🏠",
+            "ink": {
+              "inkH": 0.97,
+              "inkW": 0.95,
+              "nudgeY": 0.0225
+            }
+          },
+          {
+            "emoji": "🏘️",
+            "ink": {
+              "inkH": 0.985,
+              "inkW": 0.995,
+              "nudgeY": 0.025
+            }
+          },
+          {
+            "emoji": "🏢",
+            "ink": {
+              "inkH": 0.94,
+              "inkW": 0.975,
+              "nudgeY": 0.0075
+            }
+          },
+          {
+            "emoji": "🪴",
+            "ink": {
+              "inkH": 0.995,
+              "inkW": 0.885,
+              "nudgeY": 0.03
+            }
+          }
+        ]
+      },
+      "lobby": {
+        "label": "Lobby",
+        "field": "#1a2d1a",
+        "fieldNote": "hsl(120,26%,14%) — forest, shared with the other half of this chapter. Home is the outside of a dwelling and Lobby the inside of its shared entrance; one place, so one field.",
+        "frames": [
+          {
+            "emoji": "🛋️",
+            "ink": {
+              "inkH": 1.0,
+              "inkW": 1.0,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "📬",
+            "ink": {
+              "inkH": 0.91,
+              "inkW": 0.92,
+              "nudgeY": -0.0125
+            }
+          },
+          {
+            "emoji": "🔔",
+            "ink": {
+              "inkH": 0.985,
+              "inkW": 0.995,
+              "nudgeY": 0.035
+            }
+          }
+        ]
+      },
+      "reviews": {
+        "label": "Reviews",
+        "field": "#301e18",
+        "fieldNote": "hsl(15,34%,14%) — rust. ⚠️ The palette is now effectively FULL: eight subjects across 162 · 32 · 232 · 355 · 288 · 196 · 120 · 15, all at the same lightness band. The next subject should share a field with a relative, the way Home and Lobby do, rather than squeeze a ninth hue in — and nothing may go near amber, which is reserved.",
+        "frames": [
+          {
+            "emoji": "⭐",
+            "ink": {
+              "inkH": 0.94,
+              "inkW": 0.995,
+              "nudgeY": 0.0375
+            }
+          },
+          {
+            "emoji": "⚜️",
+            "ink": {
+              "inkH": 0.93,
+              "inkW": 0.88,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "📝",
+            "ink": {
+              "inkH": 1.0,
+              "inkW": 1.0,
+              "nudgeY": 0.0325
+            }
+          }
+        ]
+      },
+      "identity": {
+        "label": "Identity",
+        "field": "#182d34",
+        "fieldNote": "hsl(196,36%,15%) — check-in's teal, shared. See the palette note above.",
+        "frames": [
+          {
+            "emoji": "🔗",
+            "ink": {
+              "inkH": 1.0,
+              "inkW": 1.0,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "💻",
+            "ink": {
+              "inkH": 1.0,
+              "inkW": 1.0,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "🔒",
+            "ink": {
+              "inkH": 1.0,
+              "inkW": 1.0,
+              "nudgeY": 0.0325
+            }
+          }
+        ]
+      }
+    }
+  }
 }

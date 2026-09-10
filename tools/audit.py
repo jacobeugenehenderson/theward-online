@@ -69,6 +69,45 @@ check('!important', not re.search(r'!important', re.sub(r'@media \(prefers-reduc
 check('themes', all(s in toks for s in
       (':root {', '@media (prefers-color-scheme: dark)', ':root:not([data-theme="light"])', ':root[data-theme="dark"]')),
       'tokens.css must declare bare :root, the guarded media query, and the [data-theme] stamp')
+# ── the two dark paths must agree, and neither may say a thing twice ────────
+# ⛔ THE THEME-PARITY CHECK BELOW DOES NOT COVER THIS, and the gap was live.
+# It asks only whether a token declared in a dark block also exists in :root.
+# It never compared the TWO dark blocks to each other — so `@media
+# (prefers-color-scheme: dark)` carried the badge palette, `:root[data-theme=
+# "dark"]` carried none of it, and this file printed green while a reader who
+# explicitly chose dark got DAY badges on a night page.
+# ⚠️ It also missed a duplicated paste inside the media block: the whole badge
+# group declared twice, second copy misindented. A later edit that anchored on
+# one of the doubled tokens quietly doubled four more.
+# ⭐ Plain CSS cannot share a selector list between a media query and an
+# unconditional rule, so the night palette HAS to be written twice. That makes
+# drift a certainty and the check the only defence.
+def _decls(css, start_pat):
+    i = css.find(start_pat)
+    if i < 0: return None
+    depth, j, out = 0, i, []
+    while j < len(css):
+        if css[j] == '{': depth += 1
+        elif css[j] == '}':
+            depth -= 1
+            if depth == 0: break
+        j += 1
+    return re.findall(r'(--[a-z0-9-]+)\s*:', css[i:j])
+
+_md = _decls(toks, ':root:not([data-theme="light"])')
+_td = _decls(toks, ':root[data-theme="dark"]')
+_problems = []
+if _md is None or _td is None:
+    _problems.append('could not find both dark blocks')
+else:
+    for name, d in (('@media dark', _md), ('[data-theme=dark]', _td)):
+        dup = sorted({t for t in d if d.count(t) > 1})
+        if dup: _problems.append(f'{name} declares {dup} more than once')
+    only_m, only_t = sorted(set(_md) - set(_td)), sorted(set(_td) - set(_md))
+    if only_m: _problems.append(f'in @media dark but not [data-theme=dark]: {only_m}')
+    if only_t: _problems.append(f'in [data-theme=dark] but not @media dark: {only_t}')
+check('dark parity', not _problems, ' · '.join(_problems))
+
 declared = set(re.findall(r'^\s*(--[a-z0-9-]+):', toks, re.M))
 dark_only = set(re.findall(r'--[a-z0-9-]+', toks.split('prefers-color-scheme')[1])) if 'prefers-color-scheme' in toks else set()
 check('theme parity', not (dark_only - declared), f'defined only in a theme block: {sorted(dark_only - declared)[:4]}')

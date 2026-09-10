@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your name, and what the Ward knows &mdash; The Ward</title>
+<meta name="description" content="Choosing a handle, carrying it between devices, signing out, and what a Ward does and does not collect about you.">
+<!-- ⭐ INDEXED, UNLIKE /works, AND DELIBERATELY SO. The prospectus is an unlisted
+     document sent to a person. This is a MANUAL, and its most likely reader is
+     standing at a wall with a phone having just scanned a code — someone who
+     will search for it rather than be handed it. A manual nobody can find is
+     the same as no manual, so there is no robots tag here. -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Ward">
+<meta property="og:url" content="https://theward.online/guide/privacy/">
+<meta property="og:title" content="Your name, and what the Ward knows &mdash; The Ward">
+<meta property="og:description" content="Choosing a handle, carrying it between devices, signing out, and what a Ward does and does not collect about you.">
+<meta property="og:image" content="https://theward.online/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Ward's mark: a heavy ring open at the top, a faint street grid across its centre, and an amber light in the gap.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="../../css/tokens.css?v=7ce1d022c15e">
+<link rel="stylesheet" href="../../css/site.css?v=083925821e8e">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="shell">
+  <div class="band">
+    <svg class="band-mark" viewBox="0 0 120 120" role="img" aria-label="The Ward">
+      <defs><clipPath id="mark-clip"><circle cx="60" cy="60" r="40"/></clipPath></defs>
+      <path d="M76.8 14 A 49 49 0 1 1 43.2 14" fill="none" stroke="currentColor" stroke-width="11"/>
+      <g clip-path="url(#mark-clip)" stroke="currentColor" stroke-width="2.5" opacity="0.5">
+        <path d="M38 8 V112 M82 8 V112 M8 38 H112 M8 82 H112"/>
+      </g>
+      <circle cx="60" cy="14" r="9.5" fill="var(--live)"/>
+    </svg>
+    <span class="band-text">
+      <span class="band-name">The Ward</span>
+      <span class="band-meta"><a href="../../">Digital presence for real neighborhoods</a></span>
+    </span>
+    <span class="band-links">
+      <span data-names-instance><a href="https://lafayette-square.com">See the Ward</a></span>
+      <a href="../../guide/">Trail Guide</a>
+    </span>
+  </div>
+</header>
+<main class="shell trail" id="main">
+
+  <!-- ⭐ ONE CARD FOR THE WHOLE CHAPTER, which is what the spec asked for: 07
+       should stay spare, and a changing Identity portrait is enough. The sections
+       under it get none — this is the closing chapter and it should read quietly.
+       ⛔ NOT A PERSON. The obvious pictures for identity are faces (🙂 👤) and
+       both are cut: round is who you are, square is a thing, and this chapter is
+       the last place to blur that.
+       ⭐ 🔗 💻 🔒 — linking two devices, one of them, and what stays shut. -->
+  <section class="sec trail-head">
+    <span class="vignette" data-portrait="identity" aria-hidden="true">
+      <span class="vignette-field">
+        <span class="vignette-pic"></span>
+        <span class="vignette-pic vignette-pic--out"></span>
+      </span>
+    </span>
+    <p class="trail-crumb"><a href="../">Trail Guide</a> &nbsp;&middot;&nbsp; 07</p>
+    <h1>Your name, and what the Ward knows</h1>
+    <div class="copy">
+      <p class="lede">There is no Ward account. No email address, password or real name is required to look around or take part.</p>
+      <p>The Ward remembers only what it needs to remember for the things you choose to do.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="copy">
+      <h2>Your handle</h2>
+      <p>When you want to post, review or message someone, choose a handle. It can be 3&ndash;20 letters, numbers or underscores, and it must be unique.</p>
+      <p>Your handle is how other people know you in the Ward. It doesn&rsquo;t have to be your name, but choose one you like: once you set it, it stays with you.</p>
+      <p>You can also choose an avatar: an emoji on a colored background. Your avatar can change whenever you like.</p>
+
+      <h2>Your devices</h2>
+      <p>By default, your phone and your computer look like two different neighbors to the Ward.</p>
+      <!-- ⭐ THIS SENTENCE IS TRUE AS OF 2026-09-10 AND WAS NOT BEFORE. Townie
+           standing used to stop at the device that earned it — the one standing
+           most people hold — while guardian, keyholder and residence all
+           travelled. Three check-in readers in Code.js now resolve linked
+           devices the way their five siblings always did.
+           ⚠️ IT RIDES A GAS DEPLOY, not a site push. Until that lands, the page
+           is ahead of the backend. -->
+      <p>You can link them if you want the Ward to recognize both as you. Your handle and Standing will travel between them.</p>
+      <p>Signing out removes the Ward&rsquo;s memory from that device. It doesn&rsquo;t erase what you&rsquo;ve posted.</p>
+
+      <h2>What other people see</h2>
+      <p>What accompanies you depends on where you are.</p>
+      <p>A review carries your handle. A Lobby post carries nothing. Bulletin can let you choose, and some kinds of posts are anonymous by default.</p>
+      <p>When someone replies to a review on behalf of a Place, you see the Place&mdash;not the individual Guardian or Keyholder who wrote it.</p>
+
+      <h2>What the Ward knows</h2>
+      <p>The Ward can recognize a device, that it has been around the neighborhood, that it belongs to a Resident, or that it has been entrusted with a Place.</p>
+      <p>It doesn&rsquo;t need your real name to know any of those things.</p>
+      <p>The Ward can&rsquo;t produce a list of its residents because it never collects the information it would need to make one. Identity is collected only when something genuinely requires it.</p>
+    </div>
+  </section>
+
+  <nav class="trail-foot" aria-label="Trail Guide">
+    <a href="../cary/"><span class="trail-foot-k">Back</span>Cary</a>
+    <a href="../"><span class="trail-foot-k">Next</span>All of the Trail Guide</a>
+  </nav>
+
+</main>
+
+<footer class="shell">
+  <div class="colophon">
+    <!-- ⭐ THE PUBLICATIONS REACH EACH OTHER. This colophon carried the Legal
+         row alone, so every document was a cul-de-sac: /works in particular had
+         exactly one door in the whole site, the front page footer. The rows are
+         the front page's, in the front page's order, minus this page's own.
+         ⛔ FULL SENTENCES, NOT SHORT FORMS (Jacob, 2026-09-09). A colophon is
+         the one object where repetition is the job — a reader who arrives here
+         sideways has not read the front page and gets the same account of what
+         each document is as someone who has. -->
+    <div class="colophon-row">
+      <span class="colophon-k">Host Handbook</span>
+      <span>What it means to host a Ward &mdash; what a Host looks after, what a Ward shows you about a neighborhood, and where the responsibilities divide. <a href="../../handbook/">Read the handbook &rarr;</a></span>
+    </div>
+    <div class="colophon-row">
+      <span class="colophon-k">Works</span>
+      <span>How a neighborhood is actually constructed &mdash; the sources, the pipeline, and the instruments that build a Ward. <a href="../../works/">See the works &rarr;</a></span>
+    </div>
+    <div class="colophon-row">
+      <span class="colophon-k">Legal</span>
+      <span>What you may and may not rely on here, what belongs to whom, and what visiting or discussing The Ward does and does not establish. <a href="../../legal.html">Read the terms &rarr;</a></span>
+    </div>
+    <div class="colophon-foot">
+      <span>&copy; 2026 <a href="https://jacobhenderson.studio">Jacob Henderson</a> LLC</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../js/site.js?v=0f3be1550239"></script>
+</body>
+</html>

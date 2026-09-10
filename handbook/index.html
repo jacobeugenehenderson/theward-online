@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Host Handbook &mdash; The Ward</title>
+<meta name="description" content="What it means to host a Ward: what a Host looks after, what a Ward shows you about a neighborhood, how the place is kept in good order, and where the responsibilities divide.">
+<!-- ⭐ INDEXED, AND IT IS THE COUNTERPART OF THE TRAIL GUIDE, NOT OF /works.
+     Three publications, three readers. The prospectus is `noindex` because it is
+     an unlisted document sent to a person. This one is findable (Jacob,
+     2026-09-09): the front page recruits Hosts in public, so the document that
+     says what hosting actually involves should be reachable by anyone who went
+     looking after reading it.
+     ⚠️ THE REASON THAT IS SAFE IS THE SAME REASON IT CARRIES NO FIGURES. See
+     §IV — the share is described by its SHAPE, and the rate is not printed. A
+     published revenue split that has not been ruled on would be the worst
+     version of this page, and it is the one decision here that governs the
+     other. -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Ward">
+<meta property="og:url" content="https://theward.online/handbook/">
+<meta property="og:title" content="Host Handbook &mdash; The Ward">
+<meta property="og:description" content="A Ward needs a Host. What a Host looks after, what a Ward shows you about a neighborhood, and where the responsibilities divide.">
+<meta property="og:image" content="https://theward.online/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Ward's mark: a heavy ring open at the top, a faint street grid across its centre, and an amber light in the gap.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="../css/tokens.css?v=7ce1d022c15e">
+<link rel="stylesheet" href="../css/site.css?v=083925821e8e">
+  <!-- Same mark, same stamped stylesheets, same tokens as every other page here.
+       ⭐ AND NO CSS OF ITS OWN, DELIBERATELY. This document reuses the
+       prospectus's furniture — `.pro-head`, `.pro-kicker`, `.pro-index`,
+       `.movement`, `.pull` — because it is the same KIND of object: a long read
+       in one scroll, for one reader, quieter than the front page. A second set
+       of classes doing the prospectus's job under different names is how two
+       registers become four. §10d of site.css names both documents now. -->
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="shell">
+  <div class="band">
+    <svg class="band-mark" viewBox="0 0 120 120" role="img" aria-label="The Ward">
+      <defs><clipPath id="mark-clip"><circle cx="60" cy="60" r="40"/></clipPath></defs>
+      <path d="M76.8 14 A 49 49 0 1 1 43.2 14" fill="none" stroke="currentColor" stroke-width="11"/>
+      <g clip-path="url(#mark-clip)" stroke="currentColor" stroke-width="2.5" opacity="0.5">
+        <path d="M38 8 V112 M82 8 V112 M8 38 H112 M8 82 H112"/>
+      </g>
+      <circle cx="60" cy="14" r="9.5" fill="var(--live)"/>
+    </svg>
+    <span class="band-text">
+      <span class="band-name">The Ward</span>
+      <span class="band-meta"><a href="../">Digital presence for real neighborhoods</a></span>
+    </span>
+    <span class="band-links">
+      <!-- ⭐ data-names-instance: the no-town rule is scoped by ATTRIBUTE, and this is
+           the sanctioned case — the Field Guide's 01 plate and the masthead note name
+           the instance the same way, because refusing to say whose Ward is running
+           reads as evasion rather than discipline. -->
+      <span data-names-instance><a href="https://lafayette-square.com">See the Ward</a></span>
+      <a href="../guide/">Trail Guide</a>
+    </span>
+  </div>
+</header>
+<main class="shell" id="main">
+
+  <!-- ═══ THE TITLE AND THE CLAIM ═════════════════════════════════════════
+       ⛔ NO PORTRAIT HERE, UNLIKE THE TRAIL GUIDE. The guide's square vignettes
+       are generated from MEASURED glyph ink (data/vignette-glyphs.json) and the
+       generator throws on an unmeasured one — so a portrait for this document is
+       a measurement step, not a choice, and it can be added later without
+       touching the copy. A document that opens undecorated is also the
+       prospectus's own move, and this page is in that drawer.
+       ⛔ WHO A HOST MIGHT BE IS NOT RESTATED HERE. The front page's §04 already
+       lists it — "a neighborhood organization, local publication, business
+       district, civic group, city, institution" — and a reader arrives here
+       having read it or not needing it. Say each thing once, across documents
+       too: this page starts at what hosting INVOLVES. -->
+  <section class="sec pro-head">
+    <p class="pro-kicker">A Host Handbook</p>
+    <h1>A Ward needs a Host</h1>
+    <div class="copy">
+      <p>The Host brings the Ward to a neighborhood and looks after its life there.</p>
+      <p class="pull">The Ward handles the machinery; the Host looks after the place.</p>
+    </div>
+  </section>
+
+  <!-- ⭐ FOUR MOVEMENTS, FROM TEN DRAFTED SECTIONS, and the consolidation is the
+       design. The draft said three things twice: the revenue split appeared in
+       both "The Host's share" and "Commerce", in nearly the same words; "What
+       you get" and "What you can know" are one subject — the picture and its
+       limit; and "Hosting" and "The Host's place" opened and closed with the
+       same sentence and the same Residents/Guardians/Couriers triad.
+       ▶ The bookend is SPLIT rather than doubled: the triad opens (it is the
+       sharpest statement of what a Host is spared), and "stewardship, not
+       ownership" is the page's last word and appears once. -->
+  <nav class="pro-index" aria-label="Contents">
+    <a href="#hosting"><span class="pro-index-n">I</span><span class="pro-index-t">Hosting</span></a>
+    <a href="#shows"><span class="pro-index-n">II</span><span class="pro-index-t">What a Ward shows you</span></a>
+    <a href="#order"><span class="pro-index-n">III</span><span class="pro-index-t">Keeping it in good order</span></a>
+    <a href="#arrangement"><span class="pro-index-n">IV</span><span class="pro-index-t">The arrangement</span></a>
+  </nav>
+
+  <!-- ═══ I ══════════════════════════════════════════════════════════════
+       ⭐ THE TRIAD IS THE CHAPTER'S EVIDENCE, not a list of features. "Most of a
+       Ward runs without intervention" is a claim a prospective Host will not
+       take on trust, and the three sentences under it are the proof: each names
+       somebody else already doing the work. -->
+  <section class="sec" id="hosting">
+    <p class="movement"><span class="movement-n">I</span><span class="movement-t">Hosting</span></p>
+    <div class="copy">
+      <h2>Most of a Ward runs without intervention.</h2>
+      <p>Residents speak for themselves. Guardians look after their Places. Couriers choose their work.</p>
+      <p>The Host steps in when something needs judgment: a disputed claim, a report, a local source that needs correcting, or a question the system cannot settle on its own.</p>
+    </div>
+  </section>
+
+  <!-- ═══ II ═════════════════════════════════════════════════════════════
+       ⭐⭐ THE PROMISE AND ITS LIMIT SHARE ONE ROOM, and that fusion is the
+       document's most consequential edit. Drafted apart, "what you get" reads as
+       a pitch for surveillance and "what you can know" reads as the legal
+       department walking it back two screens later. Together they are one claim,
+       and it is the product's claim.
+       ⛔ THE PULL IS THE PROSPECTUS'S OWN SENTENCE, WORD FOR WORD. /works §III
+       already carries it. The draft had a near-miss paraphrase — "the Ward can
+       learn a great deal about a neighborhood without needing to know very much
+       about the people in it" — and a near-miss is how two documents drift
+       apart: each gets edited once and they stop agreeing. Same sentence, or a
+       visibly different claim; never almost. -->
+  <section class="sec" id="shows">
+    <p class="movement"><span class="movement-n">II</span><span class="movement-t">What a Ward shows you</span></p>
+    <div class="copy">
+      <h2>A Ward gives its Host a view of the neighborhood that is difficult to get anywhere else.</h2>
+      <p>The place itself is already known: its streets, buildings, trees, businesses, institutions and public spaces.</p>
+      <p>As people use the Ward, another picture develops&mdash;when the neighborhood is active, who it serves, where people gather, and how those patterns change through the day, week and year.</p>
+
+      <h3>What a Host can know</h3>
+      <p>A Host can see patterns in aggregate: Residents and regulars alongside visitors; daytime activity against evening activity; local commerce, events and other neighborhood rhythms.</p>
+      <p>That information is about the place, not a dossier on the people who make it.</p>
+      <p class="pull">When place is the primary object, people do not have to become data merely to make the place useful.</p>
+      <p>Anonymous participation remains anonymous. Private messages remain private. Information collected for a particular purpose does not become general-purpose Host data.</p>
+      <p>Administrative access is a responsibility, not a backstage pass.</p>
+    </div>
+  </section>
+
+  <!-- ═══ III ════════════════════════════════════════════════════════════
+       ⭐ ACCURACY AND MODERATION ARE ONE CHAPTER because they are one job seen
+       twice: a Ward that people correct, and a Ward people can be removed from,
+       are both "somebody has to decide". The draft's §05 and §06 were already
+       written in the same voice.
+       ⛔ THE WORDS HERE ARE LOAD-BEARING AND THEY ARE THE PRODUCT'S, not
+       paraphrase. A Guardian looks after a PLACE CARD; a claim is DISPUTED; what
+       is happening right now is the TICKER. /guide/guardian carries the same
+       vocabulary from the app itself, and this page is the other end of that
+       wire — if either drifts, a Host and a Guardian stop describing the same
+       thing. -->
+  <section class="sec" id="order">
+    <p class="movement"><span class="movement-n">III</span><span class="movement-t">Keeping it in good order</span></p>
+    <div class="copy">
+      <h2>A Ward should become more accurate as people live with it.</h2>
+      <p>Public records provide some of what a Ward knows. Guardians and neighbors provide more.</p>
+      <p>Businesses close. Hours change. Trees come down. Records can be wrong.</p>
+      <p>Guardians look after their own Places. The Host looks after the larger picture, helps resolve disputed claims, and keeps the Ward&rsquo;s shared information in good order.</p>
+
+      <h3>Moderation</h3>
+      <p>The Host moderates the Ward. That means responding to reports and, when necessary, removing content, limiting someone&rsquo;s ability to participate, or removing them from the Ward.</p>
+      <p>The system can help. Serious or repeated reports can temporarily pause activity and gather what happened for review. But the decision belongs to the Host.</p>
+      <p class="pull">A report is not proof of wrongdoing, and a temporary pause is not a verdict.</p>
+      <p>The Host decides what happens next.</p>
+    </div>
+  </section>
+
+  <!-- ═══ IV ═════════════════════════════════════════════════════════════
+       ⛔⛔ THE SHARE IS DESCRIBED BY ITS SHAPE AND CARRIES NO FIGURE, and this is
+       the site's standing rule rather than caution about this page. BACKLOG.md,
+       Jacob, 2026-08-23: "we don't have a price or cost structure set up so it's
+       question begging in the wrong direction." No percentage appears anywhere on
+       theward.online today — index.html, /works, /guide and legal.html were all
+       checked — and the courier rate is logged there as a live 22 %-vs-25 %
+       contradiction across three places in the product.
+       ⭐ NO PLACEHOLDER MARKS IT EITHER (Jacob, 2026-09-09: "get rid of inline
+       notes; neither pressing now"). A `.todo` box said the rate was unruled and a
+       second said the agreements sentence was owed; both were editorial notes
+       shown to a reader who is not the person who can act on them. ⛔ THE COPY
+       STILL MAY NOT GROW A FIGURE ON ITS OWN — the reasoning and the two owed
+       facts live in README §7d and BACKLOG.md, which is where the next editor
+       looks. Removing the mark is not the same as closing the question.
+       ⛔ AND DELIVERY STAYS FIGURE-FREE EVEN ONCE THE SHARE IS RULED. Those are
+       two different numbers with two different owners.
+       ⚠️ NO `.module-note` ON THIS PAGE, though commerce and delivery are exactly
+       the module-gated things that mark exists for. The convention belongs to the
+       Trail Guide, which explains it once at its top; borrowing the mark here
+       would put an unexplained margin note in front of a reader who has never
+       seen the guide. The gating is said in a sentence instead. -->
+  <section class="sec" id="arrangement">
+    <p class="movement"><span class="movement-n">IV</span><span class="movement-t">The arrangement</span></p>
+    <div class="copy">
+      <h2>The Host&rsquo;s share</h2>
+      <p>Hosting a Ward can create a continuing source of revenue for the organization that looks after it.</p>
+      <p>When commerce runs through the Ward, the business keeps nearly all of what it sells. A small share supports the system, and it is divided evenly between The Ward and the Host.</p>
+      <p>Customer charges cover the transaction and platform costs associated with the purchase. Delivery charges go principally to the neighbor doing the carrying.</p>
+      <p>Commerce and delivery are not switched on in every Ward; a Host decides whether the neighborhood wants them.</p>
+      <p class="pull">Money should stay as close as possible to the people and places doing the work.</p>
+      <p>The Host benefits when neighborhood commerce succeeds, without needing to sell advertising or access to the people who use it.</p>
+
+      <h3>Local partners</h3>
+      <p>A Host can bring more than a neighborhood to the Ward.</p>
+      <p>Banks and payment providers, transportation systems, local institutions, cultural organizations and other partners can supply infrastructure or services that make a particular Ward more useful.</p>
+      <p>The system stays the same. The relationships around it can belong to the place.</p>
+
+      <h3>What The Ward handles</h3>
+      <p>A Host should not have to become a software company, payment processor, privacy engineer or emergency-response system.</p>
+      <p>The Ward maintains the common technology and establishes the boundaries that apply everywhere. Partners handle the regulated functions entrusted to them. The Host handles the local judgments that genuinely belong to the neighborhood.</p>
+    </div>
+  </section>
+
+  <!-- ═══ THE CLOSE ══════════════════════════════════════════════════════
+       ⭐ THE SAME CONTACT TREATMENT AS THE FRONT PAGE AND THE PROSPECTUS: one
+       `.sec--ask` ground, the paired controls at the same height with a label
+       apiece, so a reader who has seen two of these pages meets one address
+       rather than three.
+       ⛔ THE TRIAD DOES NOT COME BACK HERE. It said its piece in §I. What is left
+       for the last word is the sentence the whole document is an argument for. -->
+  <section class="sec sec--ask" id="talk">
+    <div class="copy">
+      <h2>The Host&rsquo;s place</h2>
+      <p class="pull">Hosting is stewardship, not ownership.</p>
+      <p>The Host looks after the common ground between the people who use a Ward&mdash;and every map starts with a conversation about the place, what it needs, and how we can work together to do right by it.</p>
+      <p>The Ward provides the place. The Host keeps it in good order.</p>
+      <div class="ask-foot">
+        <figure class="reach">
+          <a class="cta" href="mailto:jacob@theward.online?subject=Hosting%20a%20Ward">Start a conversation</a>
+          <figcaption>Email</figcaption>
+        </figure>
+        <figure class="qr reach">
+          <a href="sms:+18773351917">
+            <img src="../assets/message.png" width="104" height="104" decoding="async"
+                 alt="A QR code that opens a text message to (877) 335-1917.">
+          </a>
+          <figcaption>Text</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="shell">
+  <div class="colophon">
+    <!-- ⭐ THE PUBLICATIONS REACH EACH OTHER. This colophon carried the Legal
+         row alone, so every document was a cul-de-sac: /works in particular had
+         exactly one door in the whole site, the front page footer. The rows are
+         the front page's, in the front page's order, minus this page's own.
+         ⛔ FULL SENTENCES, NOT SHORT FORMS (Jacob, 2026-09-09). A colophon is
+         the one object where repetition is the job — a reader who arrives here
+         sideways has not read the front page and gets the same account of what
+         each document is as someone who has. -->
+    <div class="colophon-row">
+      <span class="colophon-k">Trail Guide</span>
+      <span>How to use a Ward &mdash; getting around, what you can be here, and what a Ward does and does not know about you. <a href="../guide/">Read the guide &rarr;</a></span>
+    </div>
+    <div class="colophon-row">
+      <span class="colophon-k">Works</span>
+      <span>How a neighborhood is actually constructed &mdash; the sources, the pipeline, and the instruments that build a Ward. <a href="../works/">See the works &rarr;</a></span>
+    </div>
+    <div class="colophon-row">
+      <span class="colophon-k">Legal</span>
+      <span>What you may and may not rely on here, what belongs to whom, and what visiting or discussing The Ward does and does not establish. <a href="../legal.html">Read the terms &rarr;</a></span>
+    </div>
+    <div class="colophon-foot">
+      <span>&copy; 2026 <a href="https://jacobhenderson.studio">Jacob Henderson</a> LLC</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/site.js?v=0f3be1550239"></script>
+</body>
+</html>

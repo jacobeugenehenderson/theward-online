@@ -26,8 +26,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
-<link rel="stylesheet" href="../css/tokens.css?v=094f85225a15">
-<link rel="stylesheet" href="../css/site.css?v=41c1c73a1fd9">
+<link rel="stylesheet" href="../css/tokens.css?v=7ce1d022c15e">
+<link rel="stylesheet" href="../css/site.css?v=083925821e8e">
   <!-- Same mark, same stamped stylesheets as index.html — this page is the site,
        not a document that happens to live next to it.
        ⚠️ `../` because this page is a DIRECTORY, so the URL is /works with no
@@ -53,6 +53,14 @@
     <span class="band-text">
       <span class="band-name">The Ward</span>
       <span class="band-meta"><a href="../">Digital presence for real neighborhoods</a></span>
+    </span>
+    <span class="band-links">
+      <!-- ⭐ data-names-instance: the no-town rule is scoped by ATTRIBUTE, and this is
+           the sanctioned case — the Field Guide's 01 plate and the masthead note name
+           the instance the same way, because refusing to say whose Ward is running
+           reads as evasion rather than discipline. -->
+      <span data-names-instance><a href="https://lafayette-square.com">See the Ward</a></span>
+      <a href="../guide/">Trail Guide</a>
     </span>
   </div>
 </header>
@@ -239,10 +247,22 @@
          would make them two unrelated screenshots of a tool. Re-capture both or
          neither. -->
     <h3 class="pro-step">Survey &mdash; draw the place</h3>
+    <!-- ⭐ ONE FIGURE, TWO STATES, TURNING BETWEEN THEM. These were two
+         stacked images and read as two screenshots of the same thing (Jacob,
+         2026-09-09: "there should only be one image"). They are not two things
+         — they are one survey read two ways, the street named and the blocks
+         it leaves, so the figure alternates instead of listing them.
+         ⛔ THE NAMED STREET IS THE BASE, written FIRST and never animated, so
+         reduced motion or no animation at all lands on the frame this step is
+         about. The overlay carries alt="" because the base alt describes the
+         whole figure; see §10d for why the turn is not the Section build. -->
     <figure class="fig-shot">
-      <img src="../assets/works/survey.webp" width="2000" height="1060" decoding="async"
-           alt="Survey over an aerial photograph of the neighborhood: every street drawn as a centre line across the real blocks, one avenue picked out in amber with its vertices showing, and a panel giving that street its name, its type and the shape of its ribbon.">
-      <figcaption>Cartograph &mdash; Survey. The neighborhood drawn as blocks, curbs and corners.</figcaption>
+      <div class="fig-stack">
+        <img src="../assets/works/survey.webp" width="2000" height="1060" decoding="async"
+             alt="Survey over an aerial photograph of the neighborhood: every street drawn as a centre line across the real blocks, one avenue picked out in amber with its vertices showing, and a panel giving that street its name, its type and the shape of its ribbon. The view turns between that and the same survey with the blocks themselves outlined between the streets.">
+        <img class="fig-turn" src="../assets/works/survey-blocks.webp" width="2000" height="1060" decoding="async" alt="">
+      </div>
+      <figcaption>Cartograph &mdash; Survey. One street picked out and given its name, its type and its shape; and the blocks the streets leave between them.</figcaption>
     </figure>
     <div class="copy">
       <p>Most digital maps are made to help you find something or get somewhere. They can simplify, standardize and omit much of the physical character of a place because that character isn&rsquo;t necessary to the job.</p>
@@ -370,26 +390,66 @@
          the page's own ink, never a product render. -->
     <figure class="diagram">
       <div class="dia-box">
-      <svg viewBox="0 0 640 300" role="img" aria-labelledby="dia-t">
+      <!-- ⭐⭐ DRAWN ON RULED GROUND, and the ruling is not decoration: the
+           mark carries a street grid inside its ring, and the same grid is the
+           recurring motif across the studio's other sites. A drafting sheet is
+           what this drawing has always been; it just wasn't on one.
+           ⛔ THE RULE DOES NOT REGISTER WITH THE BOXES AND IS NOT MEANT TO.
+           Graph paper never agrees with what is drawn on it.
+           ⭐⭐ BUT ITS EDGE IS EXACT, AND THAT TOOK THREE THINGS (Jacob, on the
+           first cut: "the graph paper needs a reliable edge"). It did: a line
+           sat ON each far boundary and was half-clipped by it, the near
+           boundaries had no line at all, and the second diagram's 322 height
+           was not a whole number of cells, so its bottom row was a 2px sliver.
+           So: (1) the pattern draws its lines at the CELL CENTRE — `M10 0`, not
+           `M20 0` — so no line can ever coincide with an edge and be cut in
+           half; (2) each viewBox is grown one full cell on every side and given
+           whole-cell dimensions, 680x340 and 680x360, so the sheet is an exact
+           34x17 and 34x18 and the drawing sits ON it with room to spare rather
+           than running off it; (3) the pattern origin is pinned to the new
+           viewBox origin, so the half-cell margin is identical on all four
+           sides. The edge is now the ruling ending cleanly, which is why it
+           needs no border drawn around it — that would be a second rectangle
+           competing with the drawing's own.
+           ⭐ WEIGHT NOW CARRIES THE ARGUMENT, so the drawing says its piece
+           before the labels do. Every box used to be one hairline, which threw
+           away the whole shape: three producers CONVERGE on one artifact, which
+           then DESCENDS. The producers take the soft rule because they are
+           inputs; the spine takes the structural one; and the Slab takes the
+           heaviest, because it is the pivot everything arrives at and departs
+           from — the one box on the page that is both a destination and a
+           source. -->
+      <svg viewBox="-20 -20 680 340" role="img" aria-labelledby="dia-t">
         <title id="dia-t">Cartograph, Arborist and Meteorologist converge on the Slab. The Universal Player carries the Slab to the browser, and The Ward is built on it.</title>
-        <g fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="4"   y="4" width="196" height="46"/>
-          <rect x="222" y="4" width="196" height="46"/>
-          <rect x="440" y="4" width="196" height="46"/>
-          <path d="M102 50 V78 M320 50 V78 M538 50 V78 M102 78 H538 M320 78 V100 M314 94 L320 100 L326 94"/>
-          <rect x="140" y="100" width="360" height="46"/>
-          <path d="M320 146 V174 M314 168 L320 174 L326 168"/>
-          <rect x="140" y="174" width="360" height="46"/>
-          <path d="M320 220 V248 M314 242 L320 248 L326 242"/>
-          <rect x="140" y="248" width="360" height="46"/>
+        <defs>
+          <pattern id="dia-rule-a" x="-20" y="-20" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M10 0 V20 M0 10 H20" fill="none" stroke="var(--rule-soft)" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect x="-20" y="-20" width="680" height="340" fill="url(#dia-rule-a)"/>
+        <g fill="var(--ground-2)" stroke="var(--sign-soft)" stroke-width="1.5">
+          <rect x="4"   y="4" width="196" height="46" rx="2"/>
+          <rect x="222" y="4" width="196" height="46" rx="2"/>
+          <rect x="440" y="4" width="196" height="46" rx="2"/>
         </g>
-        <g class="dia-t" fill="currentColor" text-anchor="middle">
-          <text x="102" y="33">Cartograph</text>
-          <text x="320" y="33">Arborist</text>
-          <text x="538" y="33">Meteorologist</text>
-          <text x="320" y="129">The Slab</text>
-          <text x="320" y="203">Universal Player</text>
-          <text x="320" y="277">The Ward</text>
+        <g fill="none" stroke="var(--sign-soft)" stroke-width="1.5">
+          <path d="M102 50 V78 M320 50 V78 M538 50 V78 M102 78 H538 M320 78 V100 M314 94 L320 100 L326 94"/>
+          <path d="M320 146 V174 M314 168 L320 174 L326 168"/>
+          <path d="M320 220 V248 M314 242 L320 248 L326 242"/>
+        </g>
+        <rect x="140" y="100" width="360" height="46" rx="2"
+              fill="var(--ground-3)" stroke="var(--sign)" stroke-width="2.5"/>
+        <g fill="var(--ground-2)" stroke="var(--sign)" stroke-width="1.5">
+          <rect x="140" y="174" width="360" height="46" rx="2"/>
+          <rect x="140" y="248" width="360" height="46" rx="2"/>
+        </g>
+        <g class="dia-t" text-anchor="middle">
+          <text x="102" y="33" fill="currentColor">Cartograph</text>
+          <text x="320" y="33" fill="currentColor">Arborist</text>
+          <text x="538" y="33" fill="currentColor">Meteorologist</text>
+          <text x="320" y="129" fill="var(--text)">The Slab</text>
+          <text x="320" y="203" fill="var(--text)">Universal Player</text>
+          <text x="320" y="277" fill="var(--text)">The Ward</text>
         </g>
       </svg>
       </div>
@@ -447,21 +507,46 @@
          cannot yet keep. -->
     <figure class="diagram">
       <div class="dia-box">
-      <svg viewBox="0 0 640 322" role="img" aria-labelledby="dia-c">
+      <svg viewBox="-20 -20 680 360" role="img" aria-labelledby="dia-c">
         <title id="dia-c">Local businesses and the community are already on The Ward. Cary runs inside it: an order and a delivery fee come in, and the full price of the order goes to the business, most of the fee to the courier, and a small amount to The Ward. Payments pass in and out at the end of the day.</title>
-        <g fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="4" y="4" width="632" height="262"/>
-          <rect x="24" y="44" width="228" height="48"/>
-          <rect x="388" y="44" width="228" height="48"/>
-          <path d="M252 68 H388"/>
-          <rect x="24" y="116" width="592" height="134"/>
+        <defs>
+          <pattern id="dia-rule-b" x="-20" y="-20" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M10 0 V20 M0 10 H20" fill="none" stroke="var(--rule-soft)" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect x="-20" y="-20" width="680" height="360" fill="url(#dia-rule-b)"/>
+        <!-- ⛔ THE WARD'S ROOM IS UNFILLED AND CARY'S IS NOT, and that is the
+             drawing's whole claim rather than a shading choice. The Ward is the
+             ground — the businesses and the community are ALREADY on it — so the
+             ruling shows straight through it. Cary is a thing placed in that
+             room, so it sits ON the sheet and covers the rule beneath it. -->
+        <rect x="4" y="4" width="632" height="262" rx="2"
+              fill="none" stroke="var(--sign)" stroke-width="1.5"/>
+        <g fill="var(--ground-2)" stroke="var(--sign)" stroke-width="1.5">
+          <rect x="24" y="44" width="228" height="48" rx="2"/>
+          <rect x="388" y="44" width="228" height="48" rx="2"/>
+        </g>
+        <path d="M252 68 H388" fill="none" stroke="var(--sign-soft)" stroke-width="1.5"/>
+        <!-- ⭐⭐ CARY IS DRAWN IN CARY'S OWN COLOUR, and it was not before. The
+             page already owns an authored verdigris for this product — taken
+             from the Ward's own courier colour, and deliberately NOT the
+             reserved amber because couriers are not open yet (tokens.css). The
+             Cary room on the front page uses it; the diagram OF Cary was drawn
+             in neutral rule. Now the picture says which product this is before
+             the label under it does.
+             ⛔ The money arrows take the same hue: they are Cary's mechanism,
+             not the Ward's, and the one thing leaving the room — the bank line
+             below — drops back to the structural rule because it is not. -->
+        <rect x="24" y="116" width="592" height="134" rx="2"
+              fill="var(--cary-ground)" stroke="var(--cary-rule)" stroke-width="1.5"/>
+        <g fill="none" stroke="var(--cary-rule)" stroke-width="1.5">
           <path d="M140 190 H190 M184 184 L190 190 L184 196"/>
           <path d="M190 158 V222"/>
           <path d="M190 158 H236 M230 152 L236 158 L230 164"/>
           <path d="M190 190 H236 M230 184 L236 190 L230 196"/>
           <path d="M190 222 H236 M230 216 L236 222 L230 228"/>
-          <path d="M320 266 V286"/>
         </g>
+        <path d="M320 266 V286" fill="none" stroke="var(--sign-soft)" stroke-width="1.5"/>
         <g class="dia-k" fill="currentColor">
           <text x="20" y="26">The Ward</text>
           <text x="40" y="138">Cary</text>
@@ -542,6 +627,22 @@
 
 <footer class="shell">
   <div class="colophon">
+    <!-- ⭐ THE PUBLICATIONS REACH EACH OTHER. This colophon carried the Legal
+         row alone, so every document was a cul-de-sac: /works in particular had
+         exactly one door in the whole site, the front page footer. The rows are
+         the front page's, in the front page's order, minus this page's own.
+         ⛔ FULL SENTENCES, NOT SHORT FORMS (Jacob, 2026-09-09). A colophon is
+         the one object where repetition is the job — a reader who arrives here
+         sideways has not read the front page and gets the same account of what
+         each document is as someone who has. -->
+    <div class="colophon-row">
+      <span class="colophon-k">Trail Guide</span>
+      <span>How to use a Ward &mdash; getting around, what you can be here, and what a Ward does and does not know about you. <a href="../guide/">Read the guide &rarr;</a></span>
+    </div>
+    <div class="colophon-row">
+      <span class="colophon-k">Host Handbook</span>
+      <span>What it means to host a Ward &mdash; what a Host looks after, what a Ward shows you about a neighborhood, and where the responsibilities divide. <a href="../handbook/">Read the handbook &rarr;</a></span>
+    </div>
     <div class="colophon-row">
       <span class="colophon-k">Legal</span>
       <span>What you may and may not rely on here, what belongs to whom, and what visiting or discussing The Ward does and does not establish. <a href="../legal.html">Read the terms &rarr;</a></span>
@@ -552,6 +653,6 @@
   </div>
 </footer>
 
-<script src="../js/site.js?v=74478acdabfa"></script>
+<script src="../js/site.js?v=0f3be1550239"></script>
 </body>
 </html>

@@ -279,11 +279,67 @@
       })(guards[gi])
     }
 
+    /* ── square portraits: the frame holds, the picture changes ───────────
+       ⭐ ROUND IS WHO YOU ARE; SQUARE IS SOMETHING IN THE WARD. A portrait is a
+       SUBJECT, not an emoji, so its frames arrive as generated tokens
+       (--pt-<key>-<i>-emoji/scale/nudge) and this only ever moves between them.
+       ⛔ NOTHING HERE MAY BE TYPED. The scale and nudge that centre each glyph
+       are measurements — read them, never guess them. An unmeasured frame does
+       not reach this file: tools/build-vignettes.mjs refuses to build it.
+       ⛔ NO CONTROLS, NO DOTS, NO ARROWS. Nothing asks to be operated; a reader
+       who stays on the page simply notices the picture has changed.
+       ⭐ AND THEY DO NOT SYNCHRONISE. Each portrait takes its own start offset,
+       so a page holding several feels quietly alive rather than mechanical. */
+    var portraits = document.querySelectorAll('[data-portrait]')
+    var stillness = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)')
+    for (var pi = 0; pi < portraits.length; pi++) (function (el) {
+      var key = el.getAttribute('data-portrait')
+      var root = getComputedStyle(document.documentElement)
+      var read = function (suffix) { return root.getPropertyValue('--pt-' + key + suffix).trim() }
+      var n = parseInt(read('-n'), 10)
+      /* ⛔ NO SILENT BAIL. A portrait whose tokens are missing is a build that
+         did not run, and an empty white square looks like a design choice. */
+      if (!n) { console.warn('[ward] portrait "' + key + '" has no generated tokens — run tools/build-vignettes.mjs'); return }
+      var field = read('-field')
+      if (field) el.style.setProperty('--pt-field', field)
+
+      var pics = el.querySelectorAll('.vignette-pic')
+      if (pics.length < 2) return
+      var show = function (pic, i) {
+        pic.style.setProperty('--pt-emoji', read('-' + i + '-emoji'))
+        pic.style.setProperty('--pt-scale', read('-' + i + '-scale'))
+        pic.style.setProperty('--pt-nudge', read('-' + i + '-nudge'))
+      }
+      var at = 0, front = 0
+      show(pics[0], 0)
+      /* pics[1] is hidden in the markup, not here — see the page comment. */
+      /* One emoji is a complete state. Under a stillness preference the picture
+         is simply the first frame, for ever, and that is not a degraded mode. */
+      if (stillness && stillness.matches) return
+
+      setTimeout(function () {
+        setInterval(function () {
+          at = (at + 1) % n
+          var back = 1 - front
+          show(pics[back], at)
+          pics[back].classList.remove('vignette-pic--out')
+          pics[front].classList.add('vignette-pic--out')
+          front = back
+        }, 5200)
+      }, 1500 + Math.random() * 2600)
+    })(portraits[pi])
+
     // ── courier intake: the button is real; where it goes is a decision ──
     var courier = document.querySelector('[data-courier]')
     if (courier && COURIER_INTAKE === 'live') {
       courier.setAttribute('href', embedUrl + 'cary/apply')
       courier.textContent = 'Sign up to cary'
+      /* ⛔ AND IT STOPS LOOKING LIKE A CLOSED DOOR. The waiting state is a
+         class and an aria flag, not only a label — so a flip that changed just
+         the words would ship a live sign-up button still greyed out and still
+         announced to a screen reader as disabled. One switch moves all four. */
+      courier.classList.remove('cta--waiting')
+      courier.removeAttribute('aria-disabled')
     }
   })
 })()

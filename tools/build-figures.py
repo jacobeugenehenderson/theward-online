@@ -27,19 +27,23 @@ SRC  = ROOT / '_source/shots'
 OUT  = ROOT / 'assets/works'
 
 # name → (source grab, output width, quality)
-# The two stills carry panel text a reader may want to look at, so they get the
+# The stills carry panel text a reader may want to look at, so they get the
 # extra width. The build frames are read as motion, never studied, and there are
 # six of them — width costs six times as much here as it does anywhere else.
+# ⚠️ 01 AND 02 ARE A PAIR and the figure shows both: one street selected and
+# open in the panel, then the same camera with the block shapes on. Same rule as
+# Section's six — re-capture the pair together or not at all.
 FIGURES = [
-    ('survey',    '02', 2000, 80),
-    ('section-1', '04', 1600, 80),
-    ('section-2', '05', 1600, 80),
-    ('section-3', '06', 1600, 80),
-    ('section-4', '07', 1600, 80),
-    ('section-5', '08', 1600, 80),
-    ('section-6', '09', 1600, 80),
-    ('stage',     '10', 2000, 80),
-    ('preview',   '12', 2000, 80),
+    ('survey',        '02', 2000, 80),
+    ('survey-blocks', '01', 2000, 80),
+    ('section-1',     '04', 1600, 80),
+    ('section-2',     '05', 1600, 80),
+    ('section-3',     '06', 1600, 80),
+    ('section-4',     '07', 1600, 80),
+    ('section-5',     '08', 1600, 80),
+    ('section-6',     '09', 1600, 80),
+    ('stage',         '10', 2000, 80),
+    ('preview',       '12', 2000, 80),
 ]
 
 def main():
