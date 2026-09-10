@@ -313,16 +313,28 @@ keeps a fixed aspect — 16:10, and 4:3 on a phone so the horizon survives.
 
 ### ⚠ Which build it points at
 
-`js/site.js` → `EMBED_URL`. It points at the **staging** build, because
-`?layer=` is on the product's trunk but **not on production**. Check before
-flipping:
+`js/site.js` → `EMBED_URL`. **Production since 2026-08-31**:
+`https://lafayette-square.com/`, with `EMBED_URL_LOCAL` swapping in a dev server
+when the site itself is served from localhost. ⛔ The reasoning is in the code
+comment at `js/site.js:32` and is not restated here.
+
+The gate is still a check rather than a claim — it now guards the other
+direction. Re-run it before ever pointing this back at staging:
 
 ```
 git -C ../../lafayette-square.nosync show origin/main:src/App.jsx | grep -c 'layer=slab'
 ```
 
-`0` means production still cannot do this and the site must keep pointing at
-staging. Flip `EMBED_URL` when that returns non-zero — one line, the only one.
+Non-zero means production can serve `?layer=`. `0` would mean it cannot, and the
+embed would have to go back.
+
+⚠️ **This paragraph said "it points at the staging build" for nine days after the
+code stopped doing so** (corrected 2026-09-09, found by looking at the live page
+rather than at this file). **ROT, not regression** — the code was right, the code
+comment carried the dated reasoning the whole time, and only the doc described a
+world that had moved. ⭐ It is the cheap half of the failure this file keeps
+naming: a stale sentence outlives its correction because it is shorter and
+reached first.
 
 ---
 
