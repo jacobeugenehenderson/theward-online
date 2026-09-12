@@ -1,0 +1,23 @@
+/* The handful of one-off placements the artifacts carried as style attributes.
+   ⛔ They are named rather than inline because tools/audit.py fails on a style
+   attribute anywhere: all CSS lives in css/. */
+.tool--split .fignote,.tool--ask .fignote{max-width:none; margin-top:6px}
+.tool--split .fig-svg,.tool--ask .fig-svg{max-width:100%; height:auto}
+.tool--split .figbox,.tool--ask .figbox{margin:14px 0 4px}
+.tool--split .dial--open,.tool--ask .dial--open{border-bottom:none}
+.tool--split .dial--tight,.tool--ask .dial--tight{padding-top:4px}
+.tool--split .mt-1,.tool--ask .mt-1{margin-top:2px}
+.tool--split .mt-3,.tool--ask .mt-3{margin-top:18px}
+.tool--split .mt-4,.tool--ask .mt-4{margin-top:30px}
+.tool--ask .soft{color:var(--text-soft)}
+.tool--ask .sources{margin:10px 0 2px; font-size:12.5px; color:var(--text-soft)}
+.tool--ask .sources-sum{cursor:pointer; font-family:var(--f-sys); font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--text-faint)}
+.tool--ask .sources-body{padding-top:9px; line-height:1.5}
+.tool--ask .sources-list{margin:8px 0 0; padding-left:16px}
+.tool--ask .railnote{max-width:68ch; margin-top:-12px}
+.tool--ask .railfoot{font-size:13px; color:var(--text-faint); max-width:70ch; margin-top:4px}
+.tool--ask .toponote{font-size:13px; color:var(--text-soft); max-width:70ch; margin:4px 0 0}
+.tool--ask .topobar{margin:20px 0 6px}
+.tool--ask .tag{font-family:var(--f-sys); font-size:10px; letter-spacing:.08em; text-transform:uppercase}
+.tool--ask .tag-upside{color:var(--sign)}
+.tool--ask .tag-ward{color:var(--cary-rule)}

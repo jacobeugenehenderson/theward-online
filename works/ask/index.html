@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Ask &mdash; The Ward</title>
+<meta name="description" content="A roster, a set of revenue assumptions, and the number that has to be raised — under a nonprofit, inside an institution, or on earned revenue alone.">
+<!-- ⛔ NOINDEX, on the same grounds as /works itself: an unlisted URL sent to a
+     person rather than published. The OG tags stay, because the whole use of an
+     unlisted link is that somebody forwards it. -->
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Ward">
+<meta property="og:url" content="https://theward.online/works/ask/">
+<meta property="og:title" content="The Ask &mdash; what it costs to build this properly">
+<meta property="og:description" content="A roster, a set of revenue assumptions, and the number that has to be raised — under a nonprofit, inside an institution, or on earned revenue alone.">
+<meta property="og:image" content="https://theward.online/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Ward's mark: a heavy ring open at the top, a faint street grid across its centre, and an amber light in the gap.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="../../css/tokens.css?v=7ce1d022c15e">
+<link rel="stylesheet" href="../../css/site.css?v=423dd3cb76d4">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+
+<!-- ⛔ THIS PAGE DECLARES NO CSS OF ITS OWN AND CARRIES NO PLACEMENT
+     ATTRIBUTES: tools/audit.py fails on either, because all CSS lives in css/.
+     The dials, the bar and the figures are a section of css/site.css scoped
+     under .tool--ask, like every other component on this site.
+     ── The Ask ──────────────────────────────────────────────────────────
+   ⭐ COLOUR COMES ENTIRELY FROM tokens.css. Nothing here names a hex value; the
+   dials, the bar and the figures are drawn in the site's own palette, so the
+   page changes with the ground the way every other page does.
+   ⛔ --live IS DELIBERATELY ABSENT. Amber is reserved for what is actually
+   running and delivery is not open yet — the same refusal the Cary room makes
+   on the front page. Its jobs here are done by --sign, the routed brown.
+   ⭐ THE COURIER SLICE IS --cary-rule, and that is not decoration: tokens.css
+   records verdigris as the product's OWN authored courier colour, lifted from
+   SocietyMasthead's Couriers stat. The bar paints a courier the colour the app
+   paints a courier. */
+     -->
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="shell">
+  <div class="band">
+    <svg class="band-mark" viewBox="0 0 120 120" role="img" aria-label="The Ward">
+      <defs><clipPath id="mark-clip"><circle cx="60" cy="60" r="40"/></clipPath></defs>
+      <path d="M76.8 14 A 49 49 0 1 1 43.2 14" fill="none" stroke="currentColor" stroke-width="11"/>
+      <g clip-path="url(#mark-clip)" stroke="currentColor" stroke-width="2.5" opacity="0.5">
+        <path d="M38 8 V112 M82 8 V112 M8 38 H112 M8 82 H112"/>
+      </g>
+      <circle cx="60" cy="14" r="9.5" fill="var(--live)"/>
+    </svg>
+    <span class="band-text">
+      <span class="band-name">The Ward</span>
+      <span class="band-meta"><a href="../../">Digital presence for real neighborhoods</a></span>
+    </span>
+    <!-- ⭐⭐ THE TWO TOOLS FACE EACH OTHER, exactly as the two manuals do
+         (Jacob, 2026-09-12: "buttons in the header that match the way we did the
+         buttons for the guides"). `guide/index.html` and `handbook/index.html`
+         each carry ONE filled `.band-cta` naming the other; these carry the same,
+         because The Ask and The Split are two halves of one argument — what it
+         costs to run, and where an order's money goes — and a reader holding one
+         is exactly the reader who wants the other.
+         ⛔ STILL NO TRAIL GUIDE LINK. The rule that /works is not in the network
+         of manuals is untouched: this is a lateral move between two documents in
+         the SAME set, not an advertisement for a different one. The colophon
+         still does the reaching to /works, the guide and the terms. -->
+    <span class="band-links">
+      <a class="band-cta" href="../split/">The Split</a>
+    </span>
+  </div>
+</header>
+
+<main class="shell tool--ask" id="main">
+
+  <section class="sec pro-head">
+    <p class="pro-kicker">What it costs to build this properly</p>
+    <h1>The Ask</h1>
+    <p class="lede"><b>The neighborhood never pays</b> and participation stays free. &#9888;&#65039; These are not exclusive; the likeliest outcome is a blend.</p>
+  </section>
+
+  <section class="sec">
+<div class="modes topobar" id="topo" role="group" aria-label="Who pays for it">
+    <button type="button" data-t="np" aria-pressed="true">A nonprofit raises it</button>
+    <button type="button" data-t="inst">An institution absorbs it</button>
+    <button type="button" data-t="own">We operate it ourselves</button>
+  </div>
+
+  <div class="flow" id="flow"></div>
+  <p id="topo-note" class="toponote"></p>
+
+  </section>
+
+  <section class="sec">
+
+
+
+<div class="sheet">
+  <div>
+    <div class="group">
+      <h3>The roster</h3>
+      <p class="grouphint"><b>~136,000 lines</b> across eight surfaces, six app entrypoints, 65 files carrying shader code.</p>
+      <p class="grouphint soft" id="roster-why"></p>
+      <details class="sources">
+        <summary class="sources-sum">Where these salaries come from </summary>
+        <div class="sources-body">
+          <b>Aggregator medians, September 2026 — not offers.</b> US, base pay.
+          <ul class="sources-list">
+            <li><b>Computational geometry SWE</b> — avg ~$180k, quartiles ~$149k–$222k</li>
+            <li><b>Computer graphics / shader engineer</b> — avg ~$162k, quartiles ~$140k–$173k</li>
+            <li><b>Technical artist</b> — avg ~$71k, typical ~$65k–$77k</li>
+            <li data-names-instance><b>Senior SWE, St. Louis</b> — ~$135k–$173k; general SWE ~$95k–$138k</li>
+            <li data-names-instance><b>Nonprofit ED</b> — St. Louis avg ~$111k; <b>$45k–$70k under $1M revenue</b></li>
+            <li data-names-instance><b>Market spread</b> — NYC ~$200k–$290k · SF Bay ~$149k–$236k · Chicago ~$155k–$220k · Denver ~$150k–$215k · Austin ~$160k–$230k · St. Louis ~$100k</li>
+          </ul>
+        </div>
+      </details>
+
+      <div class="dial dial--open dial--tight">
+        <div class="dial-head">
+          <label class="dial-label" for="market"><span>Pay market</span></label>
+          <span class="dial-val" id="market-v">1.00×</span>
+        </div>
+        <input type="range" id="market" min="85" max="160" step="5" value="100">
+        <div id="market-legend" class="legend"></div>
+        </div>
+      <div class="modes" id="modes" role="group" aria-label="Roster mode">
+        <button type="button" data-m="custodial">Custodial — keep it alive</button>
+        <button type="button" data-m="product" aria-pressed="true">Product — actually develop it</button>
+        <button type="button" data-m="full">Full — pour in parallel</button>
+      </div>
+      <div id="roles"></div>
+    </div>
+
+    <div class="group">
+      <h3>Revenue assumptions</h3>
+
+      <div class="dial">
+        <div class="dial-head">
+          <label class="dial-label" for="hoods"><span>Neighborhoods on the rails</span></label>
+          <span class="dial-val" id="hoods-v">3</span>
+        </div>
+        <input type="range" id="hoods" min="0" max="100" step="1" value="16">
+      </div>
+
+      <div class="dial">
+        <div class="dial-head">
+          <label class="dial-label" for="rests"><span>Restaurants per neighborhood</span></label>
+          <span class="dial-val" id="rests-v">5</span>
+        </div>
+        <input type="range" id="rests" min="0" max="25" step="1" value="5">
+      </div>
+
+      <div class="dial">
+        <div class="dial-head">
+          <label class="dial-label" for="perrest"><span>Food sold per restaurant, per month</span></label>
+          <span class="dial-val" id="perrest-v">$2k</span>
+        </div>
+        <input type="range" id="perrest" min="0" max="20000" step="500" value="2000">
+      </div>
+
+      <div class="dial">
+        <div class="dial-head">
+          <label class="dial-label" for="localflow"><span>Other local commerce, per neighborhood / mo <span class="tag tag-upside">UPSIDE</span></span></label>
+          <span class="dial-val" id="localflow-v">$0</span>
+        </div>
+        <input type="range" id="localflow" min="0" max="1000000" step="10000" value="0">
+        <p class="note">Retail · services · tickets · events · memberships</p>
+      </div>
+
+      <div class="dial">
+        <div class="dial-head">
+          <label class="dial-label" for="pours"><span id="pours-dial-label">Pours commissioned / yr</span></label>
+          <span class="dial-val" id="pours-v">3 <span class="ceil">&middot; ceiling 10</span></span>
+        </div>
+        <input type="range" id="pours" min="0" max="40" step="1" value="3">
+      </div>
+
+      <div class="dial">
+        <div class="dial-head">
+          <label class="dial-label" for="tier"><span id="tier-dial-label">Rate per pour</span></label>
+          <span class="dial-val" id="tier-v">$105k</span>
+        </div>
+        <div class="seg" id="tier" role="group" aria-label="Rate per pour">
+          <button type="button" data-v="105000" aria-pressed="true">Market · $60–150k</button>
+          <button type="button" data-v="55000">Market · $35–75k</button>
+          <button type="button" data-v="50000">Cost recovery · $50k</button>
+        </div>
+        <p class="note" id="tier-note"></p>
+      </div>
+
+      <div class="dial" id="pourpayer-row">
+        <div class="dial-head">
+          <span class="dial-label"><span>Who pays for a pour?</span></span>
+        </div>
+        <div class="seg" id="pourpayer" role="group" aria-label="Who pays for a pour">
+          <button type="button" data-v="internal" aria-pressed="true">The institution itself</button>
+          <button type="button" data-v="external">An outside nonprofit</button>
+        </div>
+        <p class="note">Internally funded pours are a transfer, not revenue.</p>
+      </div>
+
+      <div class="dial">
+        <div class="dial-head">
+          <label class="dial-label" for="pfee"><span>Platform fee, on money crossing</span></label>
+          <span class="dial-val" id="pfee-v">5.0%</span>
+        </div>
+        <input type="range" id="pfee" min="0" max="150" step="5" value="50">
+      </div>
+
+      <div class="dial">
+        <div class="dial-head">
+          <label class="dial-label" for="ctake"><span>Cary's take, of food</span></label>
+          <span class="dial-val" id="ctake-v">5.5%</span>
+        </div>
+        <input type="range" id="ctake" min="0" max="150" step="5" value="55">
+        <p class="note">A quarter of the 22% service charge. ▶ <a id="split-link-2" href="../split/" class="tag-ward">The Split</a></p>
+      </div>
+
+      <div class="dial dial--open">
+        <div class="dial-head">
+          <label class="dial-label" for="annual"><span>Annual support, of install</span></label>
+          <span class="dial-val" id="annual-v">18%</span>
+        </div>
+        <input type="range" id="annual" min="0" max="40" step="1" value="18">
+      </div>
+    </div>
+
+    <div class="group">
+      <h3>On top of salary</h3>
+      <div class="dial">
+        <div class="dial-head">
+          <label class="dial-label" for="load"><span>Payroll tax &amp; benefits</span></label>
+          <span class="dial-val" id="load-v">28%</span>
+        </div>
+        <input type="range" id="load" min="0" max="45" step="1" value="28">
+      </div>
+      <div class="dial" id="sponsor-row">
+        <div class="dial-head">
+          <label class="dial-label" for="sponsor"><span>Fiscal sponsor fee</span></label>
+          <span class="dial-val" id="sponsor-v">10%</span>
+        </div>
+        <input type="range" id="sponsor" min="0" max="15" step="1" value="10">
+      </div>
+      <div class="dial">
+        <div class="dial-head">
+          <label class="dial-label" for="setup"><span id="setup-dial-label">Setup &amp; overhead</span></label>
+          <span class="dial-val" id="setup-v">$60k</span>
+        </div>
+        <input type="range" id="setup" min="0" max="200000" step="10000" value="60000">
+        <p class="note" id="setup-note"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="reading">
+    <h3>The reading · one year</h3>
+    <h4>Cost of the roster</h4>
+    <dl>
+      <div class="line"><dt>Headcount</dt><dd id="o-head">—</dd></div>
+      <div class="line"><dt>Salaries</dt><dd id="o-sal">—</dd></div>
+      <div class="line"><dt>Payroll tax &amp; benefits</dt><dd id="o-load">—</dd></div>
+      <div class="line"><dt>Setup &amp; overhead</dt><dd id="o-setup">—</dd></div>
+    </dl>
+    <h4>Earned by the studio</h4>
+    <dl>
+      <div class="line"><dt id="pours-label">Pours commissioned</dt><dd id="o-pours">—</dd></div>
+      <div class="line sub2" id="pours-cap-row"><dt id="pours-cap">—</dt><dd></dd></div>
+      <div class="line"><dt id="ann-label">Support on the installed base</dt><dd id="o-ann">—</dd></div>
+      <div class="line"><dt>Delivery, Cary's operator take</dt><dd id="o-del">—</dd></div>
+      <div class="line"><dt>Money crossing the rails</dt><dd id="o-rails">—</dd></div>
+      <div class="line"><dt>Earned total</dt><dd id="o-earn">—</dd></div>
+    </dl>
+    <h4 id="raise-head">What must be raised</h4>
+    <dl>
+      <div class="line"><dt id="gap-label">Gap before sponsor fee</dt><dd id="o-gap">—</dd></div>
+      <div class="line" id="spon-line"><dt>Fiscal sponsor fee</dt><dd id="o-spon">—</dd></div>
+      <div class="line total"><dt id="ask-label">The ask</dt><dd id="o-ask">—</dd></div>
+    </dl>
+    <div class="sentence" id="sentence"></div>
+    <div class="curve">
+      <h4 class="mt-3">Net, against neighborhoods</h4>
+      <svg id="chart" viewBox="0 0 300 104" width="100%" height="104" role="img" aria-label="Net result plotted against number of neighborhoods"></svg>
+      <p class="note mt-1" id="breakeven"></p>
+    </div>
+  </div>
+</div>
+
+<details class="fold">
+  <summary>What crosses the rails</summary>
+
+  <p><b>The platform is free</b> — a fee on money crossing the rails, not a charge to participate. So revenue scales with <b>how much crosses</b>, not with what anyone is charged.</p>
+  <p class="railnote">A townie has checked in on three distinct days in a rolling fourteen, in the neighborhood, server-side; every delivery resolves to a building inside the boundary. <b>Participation is structural, not acquired.</b></p>
+
+  <div class="rails">
+    <div class="rail">
+      <h4>Delivery only</h4>
+      <div class="amt" id="r1">—</div>
+      <div class="mult">where we are</div>
+      <p>One module, in the neighborhoods we run.</p>
+      <ul>
+        <li>5% of money crossing the rails</li>
+        <li>Cary's 5.5% of food is separate — a different entity, not yet drawn</li>
+        <li>Processing is pass-through at cost. Never revenue</li>
+      </ul>
+    </div>
+    <div class="rail">
+      <h4>The ward's commerce</h4>
+      <div class="amt" id="r2">—</div>
+      <div class="mult" id="m2">—</div>
+      <p>⛔ Nothing is built for this yet.</p>
+      <ul>
+        <li>Retail, services, tickets, events — in-boundary by construction</li>
+        <li>No acquisition cost: a module switched on inherits every townie already here</li>
+        <li>Nothing charged to a merchant to participate</li>
+      </ul>
+    </div>
+    <div class="rail lead">
+      <h4>Many wards</h4>
+      <div class="amt" id="r3">—</div>
+      <div class="mult" id="m3">—</div>
+      <p>The same rails under every neighborhood poured.</p>
+      <ul>
+        <li>Each pour is paid for once, by a nonprofit, at a market rate</li>
+        <li>The unit is a <b>bounded economy with verified-by-presence participants</b> — a place, not a market</li>
+        <li>⛔ To a payments institution the 5% understates it: behind the flow sit the merchant relationships, the deposits, and a channel to residents verified by presence</li>
+        <li>⛔ It survives only while the platform is free. Monetise the relationship directly and there is nothing left but a map — which is why the commitments belong in the licence</li>
+      </ul>
+    </div>
+  </div>
+  <p class="railfoot">The 5% and 5.5% are sourced; <b>every volume figure above is invented.</b> The entity split is open — <code>org-structure.md</code> says decide it before <code>place-order</code> ships.</p>
+
+</details>
+
+
+<details class="fold">
+  <summary>The eight surfaces — why five engineers</summary>
+
+  <p>Counted from the repository, excluding dependencies, archives and scratch. No two rows are the same hire.</p>
+  <div class="tblwrap">
+    <table class="surf">
+      <thead><tr><th>Surface</th><th>Scale</th><th>What it is</th><th>Who owns it</th></tr></thead>
+      <tbody>
+        <tr><td>Pour engine</td><td class="num">~30k</td><td>Skeleton, derive, ribbons, <code>tileGround</code> at 8,184 lines alone. Polygon partitioning, offsetting, corner solving</td><td>Computational geometry</td></tr>
+        <tr><td>Player / runtime</td><td class="num">~20k</td><td>Scene, slab rendering, street view, camera, post-processing — plus 65 files carrying GLSL</td><td>Real-time 3D &amp; shaders</td></tr>
+        <tr><td>Tree &amp; asset pipeline</td><td class="num">~32k</td><td>Species, atlases, impostors, GLB processing, the salon</td><td>Technical artist / pipeline</td></tr>
+        <tr><td>Authoring portal</td><td class="num">~19k</td><td>Extent, Surveyor, the stores behind them — the operator's tools</td><td>Tools front-end</td></tr>
+        <tr><td>The Ward app</td><td class="num">~15k</td><td>Place cards (4,478 lines in one file), roles, bulletin, QR, menus</td><td>Product front-end</td></tr>
+        <tr><td>Backend — social</td><td class="num">2.6k</td><td>Apps Script over Sheets, ~54 actions. Holds identity and guardianship</td><td>Backend; and it needs migrating</td></tr>
+        <tr><td>Backend — commerce</td><td class="num">~3k</td><td>Supabase, Postgres, RLS, Stripe, Twilio, dispatch, edge functions</td><td>Platform; payments and PII</td></tr>
+        <tr><td>Bake &amp; deploy</td><td class="num">~6k</td><td>Slab bake, R2 offload, the worker, release</td><td>Build &amp; release</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</details>
+
+
+<details class="fold">
+  <summary>What is true today</summary>
+
+  <div class="truth">
+    <div class="truth-col">
+      <h4>Built and standing</h4>
+      <ul>
+        <li><b>~136,000 lines</b> across eight surfaces, six app entrypoints</li>
+        <li data-names-instance><b>Lafayette Square fully installed</b> — 1,729 buildings with facades, years, architects, historic status</li>
+        <li>A second under way at Hi-Pointe / DeMun</li>
+        <li data-names-instance>Live at <b>lafayette-square.com</b>; handbook and seven role guides at <b>theward.online</b></li>
+        <li>Couriers, dispatch, live map, phone verification — <b>running</b></li>
+        <li>Commerce built: item identity, price of record, 86, the guardian write path, the order contract</li>
+      </ul>
+    </div>
+    <div class="truth-col">
+      <h4>Not yet true</h4>
+      <ul>
+        <li><b>No revenue has ever come in</b></li>
+        <li>The commerce layer is written but <b>has never run</b> — four deploy steps outstanding</li>
+        <li>Two lawyer items open: the sales-tax ruling, the alcohol permit</li>
+        <li>Insurance unpriced, and a condition of switching delivery on</li>
+        <li>The entity split — infrastructure vs. operator — <b>undecided</b></li>
+        <li>No fiscal sponsor chosen; no board recruited</li>
+        <li><b>Identity and guardianship live in a spreadsheet.</b> It works, and it is not where they should stay</li>
+      </ul>
+    </div>
+    <div class="truth-col">
+      <h4>What the roster means</h4>
+      <ul>
+        <li>A studio at full strength is a <b>seven-figure annual budget</b> — a different class of funder than a first community grant</li>
+        <li>Which is why <b>absorption is not the fallback path</b>: an established organisation already employs these five engineers</li>
+        <li>Custodial staffing keeps it alive and pours towns. It does not develop the product</li>
+        <li>Assembling this team from grants alone is a multi-year fundraising project before a line is written</li>
+        <li>Software got cheaper to write. <b>The pour, and the specialisms above, did not</b></li>
+      </ul>
+    </div>
+  </div>
+
+</details>
+
+
+<footer>
+  Line counts measured from the repository. Salary figures are September 2026 aggregator medians. Every volume and rate on this page is an assumption. Not legal, tax, or financial advice.
+</footer>
+
+
+  </section>
+
+</main>
+
+<footer class="shell">
+  <div class="colophon">
+    <div class="colophon-row">
+      <span class="colophon-k">The Split</span>
+      <span>Where a single delivery order&rsquo;s money goes, and what the same order costs on the incumbents. <a href="../split/">Open the tool &rarr;</a></span>
+    </div>
+    <div class="colophon-row">
+      <span class="colophon-k">Works</span>
+      <span>How a neighborhood is actually constructed &mdash; the sources, the pipeline, and the instruments that build a Ward. <a href="../">See the works &rarr;</a></span>
+    </div>
+    <div class="colophon-row">
+      <span class="colophon-k">Legal</span>
+      <span>What you may and may not rely on here, what belongs to whom, and what visiting or discussing The Ward does and does not establish. <a href="../../legal.html">Read the terms &rarr;</a></span>
+    </div>
+    <div class="colophon-foot">
+      <span>&copy; 2026 <a href="https://jacobhenderson.studio">Jacob Henderson</a> LLC</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../js/site.js?v=0f3be1550239"></script>
+<script src="../../js/ask.js?v=a3dabc24943a"></script>
+</body>
+</html>

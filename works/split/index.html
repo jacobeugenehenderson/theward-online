@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Split &mdash; The Ward</title>
+<meta name="description" content="Every dollar of a delivery order, and who is owed it: the business, the courier, the Host, the Ward and the processor — against what the same order costs on DoorDash, Uber Eats and Grubhub.">
+<!-- ⛔ NOINDEX, on the same grounds as /works itself: an unlisted URL sent to a
+     person rather than published. The OG tags stay, because the whole use of an
+     unlisted link is that somebody forwards it. -->
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Ward">
+<meta property="og:url" content="https://theward.online/works/split/">
+<meta property="og:title" content="The Split &mdash; where a delivery order&rsquo;s money goes">
+<meta property="og:description" content="Every dollar of a delivery order, and who is owed it: the business, the courier, the Host, the Ward and the processor — against what the same order costs on DoorDash, Uber Eats and Grubhub.">
+<meta property="og:image" content="https://theward.online/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Ward's mark: a heavy ring open at the top, a faint street grid across its centre, and an amber light in the gap.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="../../css/tokens.css?v=7ce1d022c15e">
+<link rel="stylesheet" href="../../css/site.css?v=423dd3cb76d4">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+
+<!-- ⛔ THIS PAGE DECLARES NO CSS OF ITS OWN AND CARRIES NO PLACEMENT
+     ATTRIBUTES: tools/audit.py fails on either, because all CSS lives in css/.
+     The dials, the bar and the figures are a section of css/site.css scoped
+     under .tool--split, like every other component on this site.
+     ── The Split ──────────────────────────────────────────────────────────
+   ⭐ COLOUR COMES ENTIRELY FROM tokens.css. Nothing here names a hex value; the
+   dials, the bar and the figures are drawn in the site's own palette, so the
+   page changes with the ground the way every other page does.
+   ⛔ --live IS DELIBERATELY ABSENT. Amber is reserved for what is actually
+   running and delivery is not open yet — the same refusal the Cary room makes
+   on the front page. Its jobs here are done by --sign, the routed brown.
+   ⭐ THE COURIER SLICE IS --cary-rule, and that is not decoration: tokens.css
+   records verdigris as the product's OWN authored courier colour, lifted from
+   SocietyMasthead's Couriers stat. The bar paints a courier the colour the app
+   paints a courier. */
+     -->
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="shell">
+  <div class="band">
+    <svg class="band-mark" viewBox="0 0 120 120" role="img" aria-label="The Ward">
+      <defs><clipPath id="mark-clip"><circle cx="60" cy="60" r="40"/></clipPath></defs>
+      <path d="M76.8 14 A 49 49 0 1 1 43.2 14" fill="none" stroke="currentColor" stroke-width="11"/>
+      <g clip-path="url(#mark-clip)" stroke="currentColor" stroke-width="2.5" opacity="0.5">
+        <path d="M38 8 V112 M82 8 V112 M8 38 H112 M8 82 H112"/>
+      </g>
+      <circle cx="60" cy="14" r="9.5" fill="var(--live)"/>
+    </svg>
+    <span class="band-text">
+      <span class="band-name">The Ward</span>
+      <span class="band-meta"><a href="../../">Digital presence for real neighborhoods</a></span>
+    </span>
+    <!-- ⭐⭐ THE TWO TOOLS FACE EACH OTHER, exactly as the two manuals do
+         (Jacob, 2026-09-12: "buttons in the header that match the way we did the
+         buttons for the guides"). `guide/index.html` and `handbook/index.html`
+         each carry ONE filled `.band-cta` naming the other; these carry the same,
+         because The Ask and The Split are two halves of one argument — what it
+         costs to run, and where an order's money goes — and a reader holding one
+         is exactly the reader who wants the other.
+         ⛔ STILL NO TRAIL GUIDE LINK. The rule that /works is not in the network
+         of manuals is untouched: this is a lateral move between two documents in
+         the SAME set, not an advertisement for a different one. The colophon
+         still does the reaching to /works, the guide and the terms. -->
+    <span class="band-links">
+      <a class="band-cta" href="../ask/">The Ask</a>
+    </span>
+  </div>
+</header>
+
+<main class="shell tool--split" id="main">
+
+  <section class="sec pro-head">
+    <p class="pro-kicker">What a delivery order divides into</p>
+    <h1>The Split</h1>
+    <p class="lede">The customer carries the largest share; the business pays a small fee; the courier is paid first out of the service charge; and the Host and the Ward divide what is left.</p>
+  </section>
+
+  <section class="sec">
+
+
+
+<div class="sheet">
+  <div class="group">
+    <h3>The order</h3>
+
+    <div class="dial">
+      <div class="dial-head"><span class="dial-label"><span>Who runs the rails</span></span><span class="dial-val" id="owner-v">Independent</span></div>
+      <div class="seg" id="ownersel" role="group" aria-label="Who runs the rails">
+        <button type="button" data-v="indep" aria-pressed="true">Independent</button>
+        <button type="button" data-v="inst">A payments institution</button>
+      </div>
+    </div>
+
+    <div class="dial" id="spread-row" hidden>
+      <div class="dial-head"><span class="dial-label"><span>Its processing saving</span></span><span class="dial-val" id="spread-v">To the customer</span></div>
+      <div class="seg" id="spreadsel" role="group" aria-label="Where the processing saving goes">
+        <button type="button" data-v="pass" aria-pressed="true">Passed to the customer</button>
+        <button type="button" data-v="keep">Kept by the Ward</button>
+      </div>
+    </div>
+
+    <div class="dial">
+      <div class="dial-head"><label class="dial-label" for="sub"><span>Food subtotal</span></label><span class="dial-val" id="sub-v">$55</span></div>
+      <input type="range" id="sub" min="40" max="250" step="5" value="55">
+    </div>
+
+    <div class="dial">
+      <div class="dial-head"><label class="dial-label" for="tax"><span>Sales tax</span></label><span class="dial-val" id="tax-v">8.725%</span></div>
+      <input type="range" id="tax" min="0" max="12000" step="25" value="8725">
+    </div>
+
+    <div class="dial">
+      <div class="dial-head"><label class="dial-label" for="svc"><span>Service charge</span></label><span class="dial-val" id="svc-v">22%</span></div>
+      <input type="range" id="svc" min="0" max="40" step="1" value="22">
+    </div>
+
+    <div class="dial">
+      <div class="dial-head"><label class="dial-label" for="tip"><span>Tip</span></label><span class="dial-val" id="tip-v">$0</span></div>
+      <input type="range" id="tip" min="0" max="40" step="1" value="0">
+    </div>
+
+    <div class="dial">
+      <div class="dial-head"><span class="dial-label"><span>Processor</span></span><span class="dial-val" id="proc-v">2.9% + 30¢</span></div>
+      <div class="seg" id="procsel" role="group" aria-label="Payment processor">
+        <button type="button" data-r="290" data-f="30" aria-pressed="true">Stripe</button>
+        <button type="button" data-r="290" data-f="30">Square API</button>
+        <button type="button" data-r="253" data-f="25">Adyen IC++ &middot; modeled</button>
+        <button type="button" data-r="25" data-f="10">Institutional &middot; scenario</button>
+      </div>
+      <p class="note" id="proc-note">Stripe and Square publish <b>2.9% + 30¢</b> for online payments. Adyen publishes <b>$0.13 + interchange + scheme fees + 0.60%</b> — the modeled figure adds typical US card-not-present interchange and scheme fees to that markup. The institutional rate is a scenario, not a quote.</p>
+    </div>
+
+<div class="dial">
+      <div class="dial-head"><label class="dial-label" for="vol"><span>Orders / restaurant / month</span></label><span class="dial-val" id="vol-v">40</span></div>
+      <input type="range" id="vol" min="0" max="400" step="5" value="40">
+    </div>
+
+    <h3 class="mt-4">How it divides</h3>
+
+    <div class="dial">
+      <div class="dial-head"><label class="dial-label" for="keep"><span>Fee the restaurant pays</span></label><span class="dial-val" id="keep-v">5% &middot; $2.75</span></div>
+      <input type="range" id="keep" min="70" max="100" step="1" value="95">
+    </div>
+
+    <div class="dial dial--open">
+      <div class="dial-head"><span class="dial-label"><span>What Cary collects</span></span><span class="dial-val" id="pot-v">$17.24</span></div>
+
+      <div class="splitbar" id="splitbar">
+        <div class="sb-seg sb-proc" id="sb-proc"></div>
+        <div class="sb-seg sb-cour" id="sb-cour"></div>
+        <div class="sb-seg sb-host" id="sb-host"></div>
+        <div class="sb-seg sb-ward" id="sb-ward"></div>
+        <div class="sb-seg sb-spread" id="sb-spread"></div>
+        <div class="sb-grip" id="grip-cour" role="slider" tabindex="0"
+             aria-label="Courier&rsquo;s share of the service charge" aria-valuemin="50" aria-valuemax="90" aria-valuenow="75"></div>
+        <div class="sb-grip" id="grip-host" role="slider" tabindex="0"
+             aria-label="Host&rsquo;s share of what the courier leaves" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40"></div>
+      </div>
+      <div class="sb-key" id="sb-key"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Where it goes</h3>
+    <figure class="figbox">
+      <svg id="flow" viewBox="0 0 560 300" role="img" aria-label="One customer payment dividing into business, courier, host, the Ward and the processor" class="fig-svg"></svg>
+      <figcaption class="note fignote">Band heights are the money. Left: what the customer pays. Right: who is owed it.</figcaption>
+    </figure>
+    <div class="legend" id="legend"></div>
+
+    <h4 class="mini">The customer pays</h4>
+    <dl>
+      <div class="line"><dt>Food</dt><dd id="o-food">—</dd></div>
+      <div class="line"><dt>Sales tax</dt><dd id="o-tax">—</dd></div>
+      <div class="line"><dt>Service charge</dt><dd id="o-svc">—</dd></div>
+      <div class="line"><dt>Processing</dt><dd id="o-proc">—</dd></div>
+      <div class="line" id="tip-row"><dt>Tip</dt><dd id="o-tip">—</dd></div>
+      <div class="line tot"><dt>Total</dt><dd id="o-total">—</dd></div>
+    </dl>
+
+    <h4 class="mini">And it is owed to</h4>
+    <dl>
+      <div class="line"><dt><b>Business</b> — food less the fee, plus tax</dt><dd id="p-rest">—</dd></div>
+      <div class="line sub2"><dt>fee withheld</dt><dd id="p-comm">—</dd></div>
+      <div class="line"><dt><b>Courier</b> — share + all tips </dt><dd id="p-cour">—</dd></div>
+      <div class="line"><dt><b>Host</b> </dt><dd id="p-host">—</dd></div>
+      <div class="line"><dt><b>The Ward</b></dt><dd id="p-plat">—</dd></div>
+      <div class="line"><dt><b>Processor</b> — at cost </dt><dd id="p-proc">—</dd></div>
+      <div class="line tot"><dt>Accounted for</dt><dd id="p-total">—</dd></div>
+    </dl>
+
+    <h4 class="mini">What the POS is told</h4>
+    <dl>
+      <div class="line tot mt-1"><dt>Paid-external tender</dt><dd id="p-pos">—</dd></div>
+    </dl>
+    <h4 class="mini">The same order elsewhere </h4>
+    <figure class="figbox">
+      <svg id="vs" viewBox="0 0 520 230" role="img" aria-label="What the business pays on the same order, compared across delivery platforms, against the 15 percent regulatory cap" class="fig-svg"></svg>
+      <figcaption class="note fignote" id="vs-month"></figcaption>
+      <figcaption class="note fignote">What the business pays on food + tax. The dashed line is the 15% cap, permanent in New York, San Francisco, Denver, Seattle and Washington DC.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<section class="rules">
+  <h2>The rules</h2>
+  <div class="rulegrid">
+    <div class="rule">
+      <h4>A fee, and a small one</h4>
+      <p><b id="rule-comm">5%</b> of food. The business keeps the rest, and pays nothing to be listed.</p>
+    </div>
+    <div class="rule">
+      <h4>Tips are the courier's, entire</h4>
+      <p>Not split, not matched against a wage floor, not counted toward anyone else's share.</p>
+    </div>
+    <div class="rule">
+      <h4>Processing is a pass-through</h4>
+      <p><i>"charged to the customer and used solely to cover processing costs."</i> What is charged must be what is paid.</p>
+    </div>
+    <div class="rule">
+      <h4>The Host is paid from the platform's own share</h4>
+      <p>A division of what the platform already collects. Nobody pays more because a Host exists.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Processing and incumbent rates are published 2026 figures. The fee the restaurant pays and the Host share are proposals, not yet set. Not legal, tax, or financial advice.
+</footer>
+
+  </section>
+
+</main>
+
+<footer class="shell">
+  <div class="colophon">
+    <div class="colophon-row">
+      <span class="colophon-k">The Ask</span>
+      <span>What it would cost to staff and run this properly, under each of the three shapes the money could take. <a href="../ask/">Open the tool &rarr;</a></span>
+    </div>
+    <div class="colophon-row">
+      <span class="colophon-k">Works</span>
+      <span>How a neighborhood is actually constructed &mdash; the sources, the pipeline, and the instruments that build a Ward. <a href="../">See the works &rarr;</a></span>
+    </div>
+    <div class="colophon-row">
+      <span class="colophon-k">Legal</span>
+      <span>What you may and may not rely on here, what belongs to whom, and what visiting or discussing The Ward does and does not establish. <a href="../../legal.html">Read the terms &rarr;</a></span>
+    </div>
+    <div class="colophon-foot">
+      <span>&copy; 2026 <a href="https://jacobhenderson.studio">Jacob Henderson</a> LLC</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../js/site.js?v=0f3be1550239"></script>
+<script src="../../js/split.js?v=a3f1ecf107af"></script>
+</body>
+</html>
