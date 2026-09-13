@@ -20,7 +20,7 @@
     {id:'ta',band:'Engineering',name:'Technical artist',owns:'Tree &amp; asset pipeline · ~32k',pay:88000,
      why:'Species, atlases, impostors, GLB processing, look bakes.',modes:['product','full']},
 
-    {id:'jh',band:'Studio & mission',name:'You — principal & creative director',owns:'Direction, the look, the doctrine',pay:110000,
+    {id:'jh',band:'Studio & mission',name:'Jacob Henderson — principal &amp; creative director',owns:'Direction, the look, the doctrine',pay:110000,
      why:'Owner of the studio, creative director of the nonprofit. Currently zero.',modes:['custodial','product','full']},
     {id:'ed',band:'Studio & mission',name:'Founding executive director',owns:'The raise, governance, the sponsor',pay:80000,
      why:'Works the grant cycle. Nothing gets funded until this seat is filled.',modes:['custodial','product','full']},
@@ -348,7 +348,7 @@
   var TOPO={
     np:{
       nodes:[['Funders','Foundations, public and philanthropic money'],
-             ['Nonprofit','<b>Raises the money.</b> Yours, or someone else\u2019s'],
+             ['Nonprofit','<b>Raises the money.</b> The studio\u2019s own, or an existing one'],
              ['The studio','Paid <b>market rate</b>, arm\u2019s length, to build and pour'],
              ['The neighborhood','<b>Pays nothing.</b> Gets its portrait, and keeps it']],
       note:'The studio is a vendor to the entity that raised the money. Needs a founding ED and a fiscal sponsor first.',
