@@ -367,7 +367,7 @@
       raiseHead:'What must be raised', gapLabel:'Gap before sponsor fee',
       poursLabel:'Pours commissioned this year', wantsED:true,
       tierLabel:'Rate per pour', tierNote:'Commissioned by a nonprofit \u2014 never sold to the neighborhood.',
-      setupLabel:'Setup &amp; overhead', setupNote:'Workspace, legal, accounting, insurance, hosting, compute, equipment \u2014 all new.',
+      setupLabel:'Setup &amp; overhead', setupNote:'Legal, accounting, insurance, hosting, compute, equipment \u2014 all new.',
       defaultMode:'custodial', forceOff:[],
       rosterWhy:''
     },
@@ -380,7 +380,7 @@
       raiseHead:'What the institution does not cover', gapLabel:'Gap',
       poursLabel:'Pours commissioned this year', wantsED:false,
       tierLabel:'Rate per pour', tierNote:'What the institution pays for a pour.',
-      setupLabel:'Setup &amp; overhead', setupNote:'Workspace, legal, accounting, insurance, hosting, compute, equipment.',
+      setupLabel:'Setup &amp; overhead', setupNote:'Legal, accounting, insurance, hosting, compute, equipment.',
       defaultMode:'product', forceOff:['ed','grants'],
       rosterWhy:''
     },
@@ -392,7 +392,7 @@
       askLabel:'The budget line', sponsor:false, market:1.60, annualPct:0,
       raiseHead:'Net cost to the institution', gapLabel:'Cost, less what the unit earns',
       poursLabel:'Neighborhoods poured this year', wantsED:false, hop:true,
-      setupLabel:'Incremental overhead only', setupNote:'\u26d4 Desks, legal, accounting, insurance and IT already exist. Count only what this unit <b>adds</b>.',
+      setupLabel:'Incremental overhead only', setupNote:'\u26d4 Legal, accounting, insurance and IT already exist. Count only what this unit <b>adds</b>.',
       defaultMode:'product', forceOff:['ed','grants'],
       rosterWhy:''
     },
@@ -405,7 +405,7 @@
       raiseHead:'What earned revenue does not cover', gapLabel:'Shortfall',
       poursLabel:'Pours sold this year', wantsED:true,
       tierLabel:'Price per pour', tierNote:'What a buyer pays. Nobody has quoted this.',
-      setupLabel:'Setup &amp; overhead', setupNote:'Workspace, legal, accounting, insurance, hosting, compute, equipment.',
+      setupLabel:'Setup &amp; overhead', setupNote:'Legal, accounting, insurance, hosting, compute, equipment.',
       defaultMode:'custodial', forceOff:['ta','geo','gfx','grants'],
       rosterWhy:'\u26d4 Earned revenue supports a custodial roster at best \u2014 enough to keep it running, not to develop it.'
     }
