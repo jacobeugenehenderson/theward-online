@@ -39,7 +39,7 @@ const DOCS = [
     out: 'works/license/index.html',
     dir: 'license',
     title: 'Platform License Agreement',
-    desc: "A working draft of The Ward's Platform License Agreement: the Host relationship, the platform commitments, operating responsibilities, and commercial structure.",
+    desc: "A working draft of The Ward's Platform License Agreement: the Local Host relationship, the platform commitments, operating responsibilities, and commercial structure.",
     sibling: { slug: 'developer-license', name: 'Developer License Agreement',
                text: 'The licence for an organization authorized to develop, provision, or deploy Wards using designated portions of the Platform.' },
   },
@@ -50,7 +50,7 @@ const DOCS = [
     title: 'Developer License Agreement',
     desc: 'A working draft of The Ward\u2019s Developer License Agreement: Developer Materials, authorized deployment, the incorporated platform commitments, and downstream operation.',
     sibling: { slug: 'license', name: 'Platform License Agreement',
-               text: 'The licence under which a Host operates a single Ward, and the home of the Platform Commitments this agreement incorporates.' },
+               text: 'The licence under which a Local Host operates a single Ward, and the home of the Platform Commitments this agreement incorporates.' },
   },
 ]
 

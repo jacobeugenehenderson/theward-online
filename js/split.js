@@ -29,7 +29,7 @@
     if(d.tip>0) left.push(['Tip',d.tip]);
     left=left.filter(function(x){return x[1]>0;});
     var right=[['Business',d.business,HUE.business],['Courier',d.courier,HUE.courier],
-               ['Host',d.host,HUE.host],['The Ward',d.ward,HUE.ward],['Processor',d.proc,HUE.proc]]
+               ['Local Host',d.host,HUE.host],['The Ward',d.ward,HUE.ward],['Processor',d.proc,HUE.proc]]
                .filter(function(x){return x[1]>0;});
 
     var lGap=(left.length-1)*GAP, rGap=(right.length-1)*GAP;
@@ -44,11 +44,11 @@
     var svcToPool=d.svc-Math.round(d.svc*d.courR);
     var flows=[
       ['Food','Business',d.sub-d.commission],
-      ['Food','Host',Math.round(d.commission*d.hostR)],
+      ['Food','Local Host',Math.round(d.commission*d.hostR)],
       ['Food','The Ward',d.commission-Math.round(d.commission*d.hostR)],
       ['Tax','Business',d.tax],
       ['Service charge','Courier',Math.round(d.svc*d.courR)],
-      ['Service charge','Host',Math.round(svcToPool*d.hostR)],
+      ['Service charge','Local Host',Math.round(svcToPool*d.hostR)],
       ['Service charge','The Ward',svcToPool-Math.round(svcToPool*d.hostR)],
       ['Processing','Processor',d.proc],
       ['Platform fee','The Ward',d.procSpread||0]
@@ -77,7 +77,7 @@
     var lastY=-99;
     var rBars=right.map(function(b){
       var B=ry[b[0]];
-      // ⛔ A thin band's label pair landed on its neighbour's — Host and the
+      // ⛔ A thin band's label pair landed on its neighbour's — Local Host and the
       // Ward are small shares by design, so this is the normal case, not an
       // edge one. Each label is pushed clear of the last and tied back to its
       // band with a leader when it has moved.
@@ -99,7 +99,7 @@
   // ⭐ The two division ratios live here rather than on inputs, because the
   // control is a bar the reader divides, not two sliders whose bases are a
   // screenful apart. The bar is drawn from the MONEY; the grips read back out
-  // of it. Courier is paid from the service charge; Host and the Ward divide
+  // of it. Courier is paid from the service charge; Local Host and the Ward divide
   // what the courier leaves PLUS the commission — so the two ratios have
   // different bases, and only the bar makes that legible.
   var COUR=0.75, HOST=0.40;
@@ -165,7 +165,7 @@
     $('sb-key').innerHTML=
       '<div class="k-proc"><b>'+M(proc)+'</b>Processor <span>· at cost, straight out</span></div>'+
       '<div class="k-cour"><b>'+M(courierCut)+'</b>Courier <span>· '+Math.round(COUR*100)+'% of the service charge</span></div>'+
-      '<div class="k-host"><b>'+M(host)+'</b>Host <span>· '+Math.round(HOST*100)+'% of the rest</span></div>'+
+      '<div class="k-host"><b>'+M(host)+'</b>Local Host <span>· '+Math.round(HOST*100)+'% of the rest</span></div>'+
       '<div class="k-ward"><b>'+M(ward)+'</b>The Ward</div>'+
       (procSpread>0?'<div class="k-spread"><b>'+M(procSpread)+'</b>The Ward <span>· the in-house saving</span></div>':'');
   }
@@ -238,7 +238,7 @@
     $('p-pos').textContent=M(sub+tax);
 
     var parts=[['s-rest','Business',business],['s-cour','Courier',courier],
-               ['s-host','Host',host],['s-plat','The Ward',ward],['s-proc','Processor',procPaid]];
+               ['s-host','Local Host',host],['s-plat','The Ward',ward],['s-proc','Processor',procPaid]];
     drawFlow({ sub:sub, tax:tax, svc:svc, proc:procPaid, procSpread:procSpread, tip:tip, total:total,
                commission:commission, business:business, courier:courier,
                host:host, ward:ward, courR:courR, hostR:hostR });

@@ -1,10 +1,10 @@
 # THE WARD PLATFORM LICENSE AGREEMENT
 >> Working draft for research and due diligence.
-> This document describes the proposed licensing and operating structure for a Ward. It is provided for evaluation and remains subject to legal review and revision before use with a Host.
+> This document describes the proposed licensing and operating structure for a Ward. It is provided for evaluation and remains subject to legal review and revision before use with a Local Host.
 
-This Platform License Agreement (the “Agreement”) is entered into as of the Effective Date stated in the applicable Ward Schedule by and between the owner and operator of The Ward identified in that Ward Schedule (“The Ward”) and the person or entity identified as the Host (“Host”).
+This Platform License Agreement (the “Agreement”) is entered into as of the Effective Date stated in the applicable Ward Schedule by and between the owner and operator of The Ward identified in that Ward Schedule (“The Ward”) and the person or entity identified as the Local Host (“Local Host”).
 
-This Agreement governs Host’s operation of a local instance of The Ward. Each such instance is referred to as a “Ward.”
+This Agreement governs Local Host’s operation of a local instance of The Ward. Each such instance is referred to as a “Ward.”
 
 The Agreement consists of this master Platform License Agreement and the applicable Ward Schedule. If a Ward Schedule expressly varies a provision of this Agreement, the Ward Schedule controls for that Ward, except that no Ward Schedule may waive or materially weaken the Platform Commitments in Section 8.
 
@@ -33,7 +33,7 @@ Platform components may include, without limitation:
 - neighborhood authoring and publishing systems;
 - Cartograph, Survey, Section, Stage, Preview, Arborist, Meteorologist, Almanac, the Universal Player, and related production systems;
 - Cary;
-- administrative and Host controls;
+- administrative and Local Host controls;
 - APIs, integrations, data pipelines, and supporting infrastructure; and
 - future additions, replacements, improvements, and successors to those systems.
 
@@ -43,7 +43,7 @@ The availability and configuration of particular capabilities may differ among W
 
 The Ward may maintain, improve, replace, reorganize, extend, or discontinue Platform components as the Platform develops.
 
-Nothing in this Agreement gives Host ownership of a particular implementation, interface, workflow, technical architecture, or version of the Platform.
+Nothing in this Agreement gives Local Host ownership of a particular implementation, interface, workflow, technical architecture, or version of the Platform.
 
 The Ward will use commercially reasonable efforts to avoid changes that materially impair an active Ward’s core operation without reasonable notice, except where a change is reasonably necessary for security, legal compliance, safety, third-party compatibility, or continued operation.
 
@@ -51,13 +51,13 @@ The Ward will use commercially reasonable efforts to avoid changes that material
 
 ### 2.1 Grant
 
-Subject to this Agreement and the applicable Ward Schedule, The Ward grants Host a limited, non-transferable, non-sublicensable license during the Term to operate the Platform for the Ward and geographic area identified in the Ward Schedule.
+Subject to this Agreement and the applicable Ward Schedule, The Ward grants Local Host a limited, non-transferable, non-sublicensable license during the Term to operate the Platform for the Ward and geographic area identified in the Ward Schedule.
 
-The license permits Host to administer the Ward, maintain authorized local information, manage local participation, use enabled Platform capabilities, and promote the Ward in connection with the represented community.
+The license permits Local Host to administer the Ward, maintain authorized local information, manage local participation, use enabled Platform capabilities, and promote the Ward in connection with the represented community.
 
 ### 2.2 A License, Not a Sale
 
-Host does not purchase or acquire the Platform.
+Local Host does not purchase or acquire the Platform.
 
 All right, title, and interest in the Platform, including its software, systems, architecture, authoring environments, reusable data structures, design systems, documentation, trademarks, and underlying technology, remain with The Ward or its applicable licensors.
 
@@ -65,7 +65,7 @@ All right, title, and interest in the Platform, including its software, systems,
 
 Each license applies only to the Ward identified in the Ward Schedule.
 
-Host may not use the Platform to establish another Ward, reproduce the Platform for another geography, sublicense its operation, or represent that it possesses rights to The Ward outside the licensed Ward.
+Local Host may not use the Platform to establish another Ward, reproduce the Platform for another geography, sublicense its operation, or represent that it possesses rights to The Ward outside the licensed Ward.
 
 ### 2.4 Exclusivity
 
@@ -75,15 +75,15 @@ Any exclusivity that is granted may be subject to performance, term, payment, la
 
 ## 3. THE HOST
 
-### 3.1 Host Role
+### 3.1 Local Host Role
 
-The Host is the locally responsible party entrusted with operation of the Ward.
+The Local Host is the locally responsible party entrusted with operation of the Ward.
 
-Depending on the Ward, a Host may be a neighborhood organization, nonprofit, municipality, district, institution, business, financial institution, property organization, community group, or another entity approved by The Ward.
+Depending on the Ward, a Local Host may be a neighborhood organization, nonprofit, municipality, district, institution, business, financial institution, property organization, community group, or another entity approved by The Ward.
 
 ### 3.2 Local Authority
 
-Subject to this Agreement, the Ward Schedule, applicable law, and Platform-wide rules necessary for safe and reliable operation, Host has primary authority over ordinary local operation of its Ward.
+Subject to this Agreement, the Ward Schedule, applicable law, and Platform-wide rules necessary for safe and reliable operation, Local Host has primary authority over ordinary local operation of its Ward.
 
 That authority may include:
 
@@ -98,21 +98,21 @@ That authority may include:
 - establishing locally permitted uses; and
 - determining whether a locally optional Platform capability should remain active.
 
-The Ward provides and protects the Platform; Host makes the ordinary operating decisions of the place it has been entrusted to run.
+The Ward provides and protects the Platform; Local Host makes the ordinary operating decisions of the place it has been entrusted to run.
 
 ### 3.3 Local Moderation
 
-Each active Ward will have an identified Host with responsibility for active local moderation of participant-submitted content and conduct on locally administered Platform surfaces.
+Each active Ward will have an identified Local Host with responsibility for active local moderation of participant-submitted content and conduct on locally administered Platform surfaces.
 
-Host will use reasonable efforts to review reports, address misuse, enforce applicable local and Platform rules, and remove or restrict content or participation where reasonably appropriate.
+Local Host will use reasonable efforts to review reports, address misuse, enforce applicable local and Platform rules, and remove or restrict content or participation where reasonably appropriate.
 
-The Platform is intentionally designed to limit the number and scope of participant publishing surfaces and to support accountable local administration. Host’s moderation responsibility does not eliminate The Ward’s authority to intervene under Section 14 where Platform-wide action is reasonably necessary.
+The Platform is intentionally designed to limit the number and scope of participant publishing surfaces and to support accountable local administration. Local Host’s moderation responsibility does not eliminate The Ward’s authority to intervene under Section 14 where Platform-wide action is reasonably necessary.
 
-Nothing in this Section determines the legal status of Host or The Ward under any statute governing third-party or user-generated content. The parties’ rights and protections under applicable law remain determined by that law and the facts of the applicable activity.
+Nothing in this Section determines the legal status of Local Host or The Ward under any statute governing third-party or user-generated content. The parties’ rights and protections under applicable law remain determined by that law and the facts of the applicable activity.
 
-### 3.4 Limits on Host Authority
+### 3.4 Limits on Local Host Authority
 
-Host may not:
+Local Host may not:
 
 - alter, reverse engineer, reproduce, or commercially exploit the Platform except as authorized by this Agreement;
 - represent itself as the owner of The Ward or its underlying technology;
@@ -124,13 +124,13 @@ Host may not:
 
 ## 4. LOCAL CONTENT AND DATA
 
-### 4.1 Host Content
+### 4.1 Local Host Content
 
-“Host Content” means original content supplied by Host for publication or operation of its Ward, including text, photographs, records, notices, local documentation, and other materials to which Host holds sufficient rights.
+“Local Host Content” means original content supplied by Local Host for publication or operation of its Ward, including text, photographs, records, notices, local documentation, and other materials to which Local Host holds sufficient rights.
 
-Host retains ownership of Host Content.
+Local Host retains ownership of Local Host Content.
 
-Host grants The Ward a nonexclusive license to store, process, reproduce, adapt as technically necessary, display, distribute, and otherwise use Host Content for operation, maintenance, presentation, support, archival preservation, and improvement of the applicable Ward.
+Local Host grants The Ward a nonexclusive license to store, process, reproduce, adapt as technically necessary, display, distribute, and otherwise use Local Host Content for operation, maintenance, presentation, support, archival preservation, and improvement of the applicable Ward.
 
 ### 4.2 Third-Party and Community Content
 
@@ -138,17 +138,17 @@ A Ward may contain information or material supplied by businesses, institutions,
 
 Ownership of such material remains subject to the rights of its respective owner or source.
 
-Neither Host nor The Ward obtains ownership merely because material appears within a Ward.
+Neither Local Host nor The Ward obtains ownership merely because material appears within a Ward.
 
 ### 4.3 Platform Data Structures
 
 The organization, schema, technical representation, processing methods, derived system structures, and reusable mechanisms through which local information is incorporated into the Platform remain part of the Platform.
 
-This does not transfer ownership of underlying Host or third-party content to The Ward.
+This does not transfer ownership of underlying Local Host or third-party content to The Ward.
 
 ### 4.4 Local Portability
 
-Upon expiration or termination, The Ward will make reasonably exportable Host Content and other Host-controlled local information available to Host in a commercially reasonable format, subject to third-party rights, privacy requirements, technical limitations, and applicable law.
+Upon expiration or termination, The Ward will make reasonably exportable Local Host Content and other Local Host-controlled local information available to Local Host in a commercially reasonable format, subject to third-party rights, privacy requirements, technical limitations, and applicable law.
 
 The Ward is not required to transfer Platform software, proprietary schemas, authoring systems, presentation systems, derived Platform technology, or third-party licensed data that cannot lawfully be redistributed.
 
@@ -156,9 +156,9 @@ The Ward is not required to transfer Platform software, proprietary schemas, aut
 
 The Platform may recognize different forms of local standing, including Townies, Residents, Guardians, Keyholders, Couriers, and other roles introduced by The Ward.
 
-Standing is a Platform mechanism for determining access or authority. It does not by itself create employment, ownership, tenancy, agency, partnership, membership in Host, or another legal relationship.
+Standing is a Platform mechanism for determining access or authority. It does not by itself create employment, ownership, tenancy, agency, partnership, membership in Local Host, or another legal relationship.
 
-Host may exercise local authority over roles where the Platform permits it but may not redefine Platform standing in a manner that creates unauthorized access or conflicts with Platform-wide requirements.
+Local Host may exercise local authority over roles where the Platform permits it but may not redefine Platform standing in a manner that creates unauthorized access or conflicts with Platform-wide requirements.
 
 ## 6. CARY
 
@@ -196,13 +196,13 @@ Depending on the Ward and transaction, Payment may be provided by a participatin
 
 For transactions in which a participating merchant sells its own goods or services, the parties intend that the participating merchant remain the merchant or seller of record for that sale and that the Platform’s transactional architecture preserve that relationship to the extent reasonably practicable and permitted by applicable law and payment-system requirements.
 
-The Ward will not knowingly structure Cary for the purpose of making The Ward or Host the merchant or seller of record for goods or services sold by an independent participating merchant.
+The Ward will not knowingly structure Cary for the purpose of making The Ward or Local Host the merchant or seller of record for goods or services sold by an independent participating merchant.
 
-If a proposed feature, integration, payment arrangement, or transaction structure would require The Ward or Host to assume merchant-of-record or seller-of-record status for such sales, the parties will first seek a commercially reasonable alternative structure, modification, provider, or discontinuation of the affected feature rather than assume that status.
+If a proposed feature, integration, payment arrangement, or transaction structure would require The Ward or Local Host to assume merchant-of-record or seller-of-record status for such sales, the parties will first seek a commercially reasonable alternative structure, modification, provider, or discontinuation of the affected feature rather than assume that status.
 
 Any deliberate departure from this structure must be expressly identified in the Ward Schedule or a written amendment and evaluated for the resulting legal, tax, payment, operational, insurance, and compliance obligations.
 
-Nothing in this Section determines whether The Ward, Host, a participating merchant, or another participant is a bank, money transmitter, payment processor, marketplace facilitator, merchant of record, seller of record, custodian of funds, or other regulated or legally defined person where that status is determined by applicable law or actual conduct.
+Nothing in this Section determines whether The Ward, Local Host, a participating merchant, or another participant is a bank, money transmitter, payment processor, marketplace facilitator, merchant of record, seller of record, custodian of funds, or other regulated or legally defined person where that status is determined by applicable law or actual conduct.
 
 ### 6.5 Fulfillment
 
@@ -222,7 +222,7 @@ A Ward may use Cary for transactions completed by customer pickup, merchant fulf
 
 ### 6.7 Separation of Functions
 
-Cary does not require The Ward, Host, or any single third party to provide every component of a transaction.
+Cary does not require The Ward, Local Host, or any single third party to provide every component of a transaction.
 
 Commerce, Payment, Fulfillment, and Delivery may be provided through different Platform components, participants, and third-party systems.
 
@@ -247,7 +247,7 @@ Each participating seller or provider remains responsible for matters ordinarily
 - merchant-specific customer service; and
 - compliance with laws applicable to its business.
 
-Participation in Cary does not transfer ownership of a participating business or its goods to Host or The Ward.
+Participation in Cary does not transfer ownership of a participating business or its goods to Local Host or The Ward.
 
 ### 7.2 Couriers
 
@@ -261,13 +261,13 @@ Declining an offered opportunity does not, by itself, constitute a violation of 
 
 ### 7.3 Courier Requirements
 
-The Ward or Host may establish reasonable requirements concerning age, identity, standing, transportation, service area, safety, regulated goods, insurance, training, or other matters relevant to Courier activity.
+The Ward or Local Host may establish reasonable requirements concerning age, identity, standing, transportation, service area, safety, regulated goods, insurance, training, or other matters relevant to Courier activity.
 
 Different requirements may apply to different categories of Fulfillment.
 
 ### 7.4 Employment Status
 
-Nothing in this Agreement alone establishes that a Courier is an employee of The Ward, Host, or a participating merchant.
+Nothing in this Agreement alone establishes that a Courier is an employee of The Ward, Local Host, or a participating merchant.
 
 The actual legal status of Couriers will be determined by applicable law and the circumstances of the applicable Cary program. No party may rely on this section to override a classification required by law.
 
@@ -285,10 +285,10 @@ This commitment does not prohibit:
 - transaction or service fees associated with optional Commerce or Fulfillment;
 - charges for optional premium or separately commissioned services;
 - voluntary sponsorship, contribution, or support;
-- commercial arrangements with a Host; or
-- implementation, production, licensing, hosting, support, or other charges paid by a Host or sponsor for establishing or operating the Ward.
+- commercial arrangements with a Local Host; or
+- implementation, production, licensing, hosting, support, or other charges paid by a Local Host or sponsor for establishing or operating the Ward.
 
-A neighborhood organization that serves as Host may therefore enter into a commercial arrangement with The Ward without converting ordinary neighborhood participation into a paid service.
+A neighborhood organization that serves as Local Host may therefore enter into a commercial arrangement with The Ward without converting ordinary neighborhood participation into a paid service.
 
 ### 8.2 Local Commerce
 
@@ -296,7 +296,7 @@ Cary will be structured to preserve as much transaction value as reasonably prac
 
 For a sale by an independent participating merchant, the purchase price of the goods or services belongs economically to that merchant, subject only to taxes, refunds, chargebacks, expressly disclosed transaction fees, and other amounts properly attributable to the transaction.
 
-Fees charged to participating merchants for Platform-facilitated transactions will be separately disclosed and structured as charges for the services actually provided rather than as a claim by The Ward or Host to the merchant’s underlying sale proceeds.
+Fees charged to participating merchants for Platform-facilitated transactions will be separately disclosed and structured as charges for the services actually provided rather than as a claim by The Ward or Local Host to the merchant’s underlying sale proceeds.
 
 The amount or percentage of such a fee may be established in the Ward Schedule.
 
@@ -312,19 +312,19 @@ A Ward Schedule may increase the Courier’s allocation or provide additional co
 
 A voluntary gratuity designated by a customer for a Courier belongs entirely to that Courier.
 
-Neither The Ward nor Host will retain, share in, redirect, or treat such a gratuity as Platform or Host revenue.
+Neither The Ward nor Local Host will retain, share in, redirect, or treat such a gratuity as Platform or Local Host revenue.
 
 Except where required by applicable law, a gratuity will not be treated as satisfying or reducing another amount that the Courier would otherwise be entitled to receive for the applicable Fulfillment.
 
 ### 8.5 Processing at Cost
 
-A charge identified to a customer or merchant specifically as payment processing, card processing, payment-network cost, or substantially equivalent third-party processing cost will be a pass-through charge and will not contain undisclosed margin for The Ward or Host.
+A charge identified to a customer or merchant specifically as payment processing, card processing, payment-network cost, or substantially equivalent third-party processing cost will be a pass-through charge and will not contain undisclosed margin for The Ward or Local Host.
 
 The amount collected as such a processing charge will not exceed the amount reasonably attributable to the applicable processing cost, subject to ordinary reconciliation, estimation, minimum charges, refunds, and processor adjustments.
 
 Nothing in this Section prevents a payment processor, financial institution, point-of-sale provider, or other third party from earning its ordinary disclosed compensation for the service it provides.
 
-If processing is subsidized or absorbed by The Ward, Host, a sponsor, financial institution, or another participant, the resulting savings may be passed to the customer or otherwise allocated as disclosed in the Ward Schedule, but an amount represented as reimbursement of processing cost will remain subject to this Section.
+If processing is subsidized or absorbed by The Ward, Local Host, a sponsor, financial institution, or another participant, the resulting savings may be passed to the customer or otherwise allocated as disclosed in the Ward Schedule, but an amount represented as reimbursement of processing cost will remain subject to this Section.
 
 ### 8.6 Privacy by Design
 
@@ -332,17 +332,17 @@ The Ward will be operated on the principle that participation should require no 
 
 Ordinary participation in a Ward will not require conventional user accounts where Platform standing or local presence can provide the necessary function without them.
 
-The Ward and Host will not sell participant personal information, build unrelated advertising profiles from participation, or use administrative access to create dossiers about residents, visitors, customers, or other participants.
+The Ward and Local Host will not sell participant personal information, build unrelated advertising profiles from participation, or use administrative access to create dossiers about residents, visitors, customers, or other participants.
 
 Information collected for standing, Commerce, Payment, Fulfillment, safety, moderation, or another specific Platform function will be limited to what is reasonably necessary for that function and will not be repurposed in a manner materially inconsistent with the reason it was collected.
 
 A Ward Schedule may establish additional privacy protections or operational requirements but may not materially weaken this Section.
 
-### 8.7 Host Economics
+### 8.7 Local Host Economics
 
-Host may receive compensation, revenue share, sponsorship value, or another economic benefit from operation of a Ward as stated in the Ward Schedule.
+Local Host may receive compensation, revenue share, sponsorship value, or another economic benefit from operation of a Ward as stated in the Ward Schedule.
 
-Where Host participates in the economics of Cary or another Platform transaction, Host’s allocation will be made from amounts already available to The Ward or otherwise expressly disclosed for that purpose. The existence of a Host will not, by itself, create an additional undisclosed charge to the customer, merchant, Courier, or other participant.
+Where Local Host participates in the economics of Cary or another Platform transaction, Local Host’s allocation will be made from amounts already available to The Ward or otherwise expressly disclosed for that purpose. The existence of a Local Host will not, by itself, create an additional undisclosed charge to the customer, merchant, Courier, or other participant.
 
 ### 8.8 Schedules Set the Numbers
 
@@ -352,7 +352,7 @@ Subject to the commitments above, the Ward Schedule may establish:
 - customer service or Commerce fees;
 - Fulfillment and Delivery fees;
 - Courier allocations;
-- Host allocations;
+- Local Host allocations;
 - The Ward’s allocation;
 - subsidies and sponsorships;
 - third-party costs;
@@ -370,7 +370,7 @@ Cary may charge separately disclosed Commerce, service, Fulfillment, Delivery, o
 Such fees may be allocated among:
 
 - the person or entity performing Fulfillment;
-- Host;
+- Local Host;
 - The Ward;
 - payment, point-of-sale, or technology providers;
 - other service providers necessary to complete the transaction; and
@@ -390,7 +390,7 @@ The Platform may rely upon or integrate with third-party services, software, dat
 
 Third-party materials remain subject to their applicable licenses and terms.
 
-The Ward does not grant Host rights in third-party property beyond those The Ward is authorized to provide.
+The Ward does not grant Local Host rights in third-party property beyond those The Ward is authorized to provide.
 
 The Ward may replace, modify, or discontinue an integration where the third party changes its terms, technology, availability, pricing, or access, or where continued integration becomes impracticable, unlawful, insecure, or materially disadvantageous.
 
@@ -402,23 +402,23 @@ The Ward will use commercially reasonable efforts to preserve equivalent Platfor
 
 The Ward name, marks, visual identity, and associated Platform branding remain the property of The Ward.
 
-Host may use approved Ward branding during the Term solely in connection with operation and promotion of the licensed Ward.
+Local Host may use approved Ward branding during the Term solely in connection with operation and promotion of the licensed Ward.
 
 ### 11.2 Local Identity
 
-A Ward may incorporate local names, identities, visual material, sponsor recognition, benefactor recognition, or co-branding as approved by The Ward and Host.
+A Ward may incorporate local names, identities, visual material, sponsor recognition, benefactor recognition, or co-branding as approved by The Ward and Local Host.
 
 The applicable Ward Schedule may establish naming, presentation, sponsorship, or co-branding requirements.
 
 ### 11.3 No Implied Endorsement
 
-Hosting, sponsorship, processing transactions, providing infrastructure, or otherwise participating in a Ward does not by itself imply that The Ward endorses a Host or that Host endorses every participant, business, statement, or transaction appearing in the Ward.
+Hosting, sponsorship, processing transactions, providing infrastructure, or otherwise participating in a Ward does not by itself imply that The Ward endorses a Local Host or that Local Host endorses every participant, business, statement, or transaction appearing in the Ward.
 
 ## 12. HOSTING, MAINTENANCE, AND SECURITY
 
 The party responsible for hosting, domains, infrastructure costs, technical support, local administration, data maintenance, and other operational functions will be identified in the Ward Schedule where material.
 
-Host will use reasonable care in protecting administrative access and promptly report known or suspected unauthorized access.
+Local Host will use reasonable care in protecting administrative access and promptly report known or suspected unauthorized access.
 
 The Ward may take immediate reasonable action where necessary to protect Platform security, user privacy, transactional integrity, legal compliance, or continued operation.
 
@@ -426,31 +426,31 @@ The Ward may take immediate reasonable action where necessary to protect Platfor
 
 The Platform and each Ward will be operated consistently with the Privacy by Design commitment in Section 8.6.
 
-The Ward and Host will comply with applicable privacy law and the privacy disclosures applicable to the Platform.
+The Ward and Local Host will comply with applicable privacy law and the privacy disclosures applicable to the Platform.
 
 Where a Platform function requires personal information beyond ordinary participation, including Commerce, Payment, Fulfillment, safety, moderation, identity verification, or regulated activity, that information may be collected and processed only as reasonably necessary for the applicable function and as permitted by the relevant disclosures, agreements, and law.
 
-Host may not use administrative access to circumvent Platform privacy controls or use participant information in a manner inconsistent with Section 8.6.
+Local Host may not use administrative access to circumvent Platform privacy controls or use participant information in a manner inconsistent with Section 8.6.
 
 ## 14. PLATFORM AND LOCAL RULES
 
 The Ward may maintain reasonable Platform-wide rules concerning security, privacy, intellectual property, unlawful conduct, transactional integrity, safety, technical compatibility, moderation standards, and protection of the Platform.
 
-Host may establish additional local rules consistent with this Agreement.
+Local Host may establish additional local rules consistent with this Agreement.
 
-Host is responsible for ordinary local moderation as provided in Section 3.3. The Ward retains Platform-wide authority and may intervene where reasonably necessary to address material harm, unlawful activity, abuse, security compromise, fraud, significant Platform disruption, or a Host’s material failure to perform its moderation responsibilities.
+Local Host is responsible for ordinary local moderation as provided in Section 3.3. The Ward retains Platform-wide authority and may intervene where reasonably necessary to address material harm, unlawful activity, abuse, security compromise, fraud, significant Platform disruption, or a Local Host’s material failure to perform its moderation responsibilities.
 
-Where immediate action is reasonably necessary, The Ward may temporarily restrict the affected content, participant, Place, transaction, or capability. Where practicable, intervention will be limited to what is reasonably necessary, The Ward will notify Host, and ordinary local authority will be restored as soon as reasonably practicable.
+Where immediate action is reasonably necessary, The Ward may temporarily restrict the affected content, participant, Place, transaction, or capability. Where practicable, intervention will be limited to what is reasonably necessary, The Ward will notify Local Host, and ordinary local authority will be restored as soon as reasonably practicable.
 
 ## 15. FEES AND COMMERCIAL TERMS
 
-Subject to Section 8, Host will pay any license, hosting, implementation, support, transactional, revenue-share, or other amounts stated in the Ward Schedule.
+Subject to Section 8, Local Host will pay any license, hosting, implementation, support, transactional, revenue-share, or other amounts stated in the Ward Schedule.
 
 A Ward may be operated under a commercial, sponsored, subsidized, pilot, nonprofit, institutional, benefactor-supported, or other approved economic arrangement.
 
-Amounts paid by Host for licensing, implementation, production, hosting, support, or other services do not constitute a charge to residents, businesses, or institutions for ordinary participation in the Ward.
+Amounts paid by Local Host for licensing, implementation, production, hosting, support, or other services do not constitute a charge to residents, businesses, or institutions for ordinary participation in the Ward.
 
-The existence of one arrangement does not obligate The Ward to offer equivalent terms to another Host or Ward.
+The existence of one arrangement does not obligate The Ward to offer equivalent terms to another Local Host or Ward.
 
 ## 16. REPRESENTATIONS
 
@@ -460,9 +460,9 @@ Each party represents that:
 - entering into the Agreement does not knowingly violate another binding obligation; and
 - it will comply with applicable law in performing its obligations.
 
-Host additionally represents that it has sufficient authority or community, institutional, commercial, or other legitimate basis to serve as Host for the Ward identified in its Ward Schedule.
+Local Host additionally represents that it has sufficient authority or community, institutional, commercial, or other legitimate basis to serve as Local Host for the Ward identified in its Ward Schedule.
 
-The Ward does not represent that Host speaks for every resident, business, property owner, institution, or other person within a geographic Ward.
+The Ward does not represent that Local Host speaks for every resident, business, property owner, institution, or other person within a geographic Ward.
 
 ## 17. WARRANTIES AND PLATFORM AVAILABILITY
 
@@ -482,9 +482,9 @@ Nothing in this Agreement is intended to waive liability that cannot lawfully be
 
 ## 19. INDEMNIFICATION
 
-Host will defend and indemnify The Ward against third-party claims arising from Host Content, Host’s unauthorized conduct, Host’s violation of law, or Host’s material breach of this Agreement.
+Local Host will defend and indemnify The Ward against third-party claims arising from Local Host Content, Local Host’s unauthorized conduct, Local Host’s violation of law, or Local Host’s material breach of this Agreement.
 
-The Ward will defend and indemnify Host against third-party claims alleging that Host’s authorized use of the Platform itself infringes intellectual property rights, subject to customary exclusions for Host modifications, combinations not supplied or authorized by The Ward, third-party content, or continued use after notice of a required modification.
+The Ward will defend and indemnify Local Host against third-party claims alleging that Local Host’s authorized use of the Platform itself infringes intellectual property rights, subject to customary exclusions for Local Host modifications, combinations not supplied or authorized by The Ward, third-party content, or continued use after notice of a required modification.
 
 Procedures, limitations, and additional indemnification obligations may be specified in the Ward Schedule.
 
@@ -508,32 +508,32 @@ Where practicable, suspension will be limited to the affected function rather th
 
 Upon termination:
 
-- Host’s Platform license ends;
-- Host will cease representing itself as an authorized Host;
+- Local Host’s Platform license ends;
+- Local Host will cease representing itself as an authorized Local Host;
 - outstanding financial obligations remain payable;
 - pending Commerce and Fulfillment obligations will be resolved where reasonably practicable;
-- Host Content will be handled under Section 4.4; and
+- Local Host Content will be handled under Section 4.4; and
 - The Ward may discontinue public operation of the Ward.
 
-Termination does not transfer ownership of the Platform to Host.
+Termination does not transfer ownership of the Platform to Local Host.
 
 ### 20.5 Future Operation of the Geography
 
-Unless the Ward Schedule expressly provides otherwise, expiration or termination does not permanently prevent The Ward from licensing a future Ward covering the same geography to another qualified Host.
+Unless the Ward Schedule expressly provides otherwise, expiration or termination does not permanently prevent The Ward from licensing a future Ward covering the same geography to another qualified Local Host.
 
 ## 21. RELATIONSHIP OF THE PARTIES
 
 The parties are independent contracting parties.
 
-Nothing in this Agreement creates a partnership, joint venture, franchise, fiduciary relationship, employment relationship, or agency between The Ward and Host.
+Nothing in this Agreement creates a partnership, joint venture, franchise, fiduciary relationship, employment relationship, or agency between The Ward and Local Host.
 
 Neither party may bind the other except where expressly authorized in writing.
 
-Terms such as Host, Guardian, Resident, Courier, or Partner describe Platform or commercial roles and do not independently establish a legal relationship inconsistent with this Agreement.
+Terms such as Local Host, Guardian, Resident, Courier, or Partner describe Platform or commercial roles and do not independently establish a legal relationship inconsistent with this Agreement.
 
 ## 22. ASSIGNMENT AND SUCCESSOR OPERATION
 
-Host may not assign this Agreement or transfer operation of its Ward without The Ward’s written consent.
+Local Host may not assign this Agreement or transfer operation of its Ward without The Ward’s written consent.
 
 The Ward may assign this Agreement in connection with a merger, reorganization, financing, sale of substantially all relevant assets, or transfer of the Platform to a successor operator, provided the successor assumes The Ward’s obligations under this Agreement.
 
@@ -561,7 +561,7 @@ Amendments must be agreed in writing, except that The Ward may make reasonable P
 
 No Ward Schedule, Platform rule, configuration, incorporated commercial term, or other document subordinate to this Agreement may waive or materially weaken Section 8.
 
-Section 8 may be waived or materially weakened only if The Ward and Host expressly amend Section 8 in a writing signed by both parties.
+Section 8 may be waived or materially weakened only if The Ward and Local Host expressly amend Section 8 in a writing signed by both parties.
 
 ### 24.3 Severability
 
@@ -581,20 +581,20 @@ The Ward Schedule will specify governing law, venue, and any agreed dispute-reso
 
 ### 24.7 No Third-Party Beneficiaries
 
-Except as expressly provided in a separate agreement between The Ward and a participant, this Agreement is for the benefit of The Ward and Host and does not create a right of enforcement in any Courier, merchant, resident, Guardian, customer, or other third party.
+Except as expressly provided in a separate agreement between The Ward and a participant, this Agreement is for the benefit of The Ward and Local Host and does not create a right of enforcement in any Courier, merchant, resident, Guardian, customer, or other third party.
 
-The Platform Commitments in Section 8 nevertheless govern The Ward’s and Host’s operation of the Ward and may not be weakened on the ground that an affected participant is not a party to this Agreement.
+The Platform Commitments in Section 8 nevertheless govern The Ward’s and Local Host’s operation of the Ward and may not be weakened on the ground that an affected participant is not a party to this Agreement.
 
 ## WARD SCHEDULE
 
 Schedule No.: [_____]
 
-This Ward Schedule is incorporated into the Platform License Agreement between The Ward and Host. The Schedule configures the applicable Ward within the boundaries established by the Agreement, including the Platform Commitments in Section 8.
+This Ward Schedule is incorporated into the Platform License Agreement between The Ward and Local Host. The Schedule configures the applicable Ward within the boundaries established by the Agreement, including the Platform Commitments in Section 8.
 
 ### A. Parties
 
 = The Ward: [Legal entity / address / contact]
-= Host: [Legal entity / address / contact]
+= Local Host: [Legal entity / address / contact]
 = Effective Date: [Date]
 
 ### B. Licensed Ward
@@ -627,7 +627,7 @@ This Ward Schedule is incorporated into the Platform License Agreement between T
 = Fulfillment or Delivery Fee: [_____]
 = Courier Allocation (minimum, per §8.3): [_____]
 = Tips: [100% to designated Courier]
-= Host Allocation: [_____]
+= Local Host Allocation: [_____]
 = The Ward Allocation: [_____]
 = Payment / POS / Third-Party Costs: [_____]
 = Processing Charge Treatment: [At cost / subsidized / absorbed / other treatment consistent with Section 8.5]
@@ -644,14 +644,14 @@ This Ward Schedule is incorporated into the Platform License Agreement between T
 ### G. Responsibilities
 
 = The Ward provides: [_____]
-= Host provides: [_____]
+= Local Host provides: [_____]
 = Local moderation responsibility and staffing: [_____]
 = Shared responsibilities: [_____]
 
 ### H. Branding and Sponsorship
 
 = Local Ward Identity: [_____]
-= Host Attribution: [_____]
+= Local Host Attribution: [_____]
 = Sponsor / Benefactor Attribution: [_____]
 = Special Branding Terms: [_____]
 

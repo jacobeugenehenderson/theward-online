@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="../../css/tokens.css?v=7ce1d022c15e">
-<link rel="stylesheet" href="../../css/site.css?v=f128c8420e54">
+<link rel="stylesheet" href="../../css/site.css?v=6c90a778f15f">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 
 <!-- ⛔ THIS PAGE DECLARES NO CSS OF ITS OWN AND CARRIES NO PLACEMENT
@@ -211,15 +211,6 @@
 
       <div class="dial">
         <div class="dial-head">
-          <label class="dial-label" for="hostshare"><span>The Host&rsquo;s share</span></label>
-          <span class="dial-val" id="hostshare-v">4.2% of food</span>
-        </div>
-        <input type="range" id="hostshare" min="0" max="105" step="1" value="42">
-        <p class="note" id="foodrate-note">The Ward keeps <b>6.3%</b> of food sold.</p>
-      </div>
-
-      <div class="dial">
-        <div class="dial-head">
           <label class="dial-label" for="pfee"><span>Fee on other local commerce</span></label>
           <span class="dial-val" id="pfee-v">5.0%</span>
         </div>
@@ -254,6 +245,15 @@
       <div class="dial">
         <div class="dial-head"><label class="dial-label" for="commission"><span>Commission, per ward poured</span></label><span class="dial-val" id="commission-v">$8k</span></div>
         <input type="range" id="commission" min="0" max="40000" step="500" value="8000">
+      </div>
+
+      <div class="dial">
+        <div class="dial-head">
+          <label class="dial-label" for="hostshare"><span>The Local Host&rsquo;s share</span></label>
+          <span class="dial-val" id="hostshare-v">4.2% of food</span>
+        </div>
+        <input type="range" id="hostshare" min="0" max="105" step="1" value="42">
+        <p class="note" id="foodrate-note">The Ward keeps <b>6.3%</b> of food sold.</p>
       </div>
 
       <div class="dial">
@@ -323,7 +323,7 @@
       <div class="line"><dt>Fee on other local commerce</dt><dd id="o-rails">—</dd></div>
       <div class="line"><dt>Earned total</dt><dd id="o-earn">—</dd></div>
     </dl>
-    <h4>Earned by the Hosts</h4>
+    <h4>Earned by the Local Hosts</h4>
     <dl>
       <div class="line"><dt>Share of food orders</dt><dd id="o-host">—</dd></div>
       <div class="line"><dt>Per ward</dt><dd id="o-hostper">—</dd></div>
@@ -357,7 +357,7 @@
       <p>One module, in the neighborhoods we run.</p>
       <ul>
         <li><span id="pf-1">6.3%</span> of food sold, after the courier and the neighborhood are paid</li>
-        <li>The Host runs the place — Places, local administrators, businesses, and moderation (§3.2, §3.3). Its share is what that is paid with</li>
+        <li>The Local Host runs the place — Places, local administrators, businesses, and moderation (§3.2, §3.3). Its share is what that is paid with</li>
         <li>Processing is pass-through at cost. Never revenue</li>
       </ul>
     </div>
@@ -385,7 +385,7 @@
       </ul>
     </div>
   </div>
-  <p class="railfoot">The service charge and the commission are sourced; the Host’s <span id="pf-3">4.2%</span> is a proposal, not yet set, and <b>every volume figure above is invented.</b> The entity split is open — <code>org-structure.md</code> says decide it before <code>place-order</code> ships.</p>
+  <p class="railfoot">The service charge and the commission are sourced; the Local Host’s <span id="pf-3">4.2%</span> is a proposal, not yet set, and <b>every volume figure above is invented.</b> The entity split is open — <code>org-structure.md</code> says decide it before <code>place-order</code> ships.</p>
 
 </details>
 
@@ -485,6 +485,6 @@
 </footer>
 
 <script src="../../js/site.js?v=0f3be1550239"></script>
-<script src="../../js/ask.js?v=f9dd26ef550e"></script>
+<script src="../../js/ask.js?v=ce17a9e283a3"></script>
 </body>
 </html>

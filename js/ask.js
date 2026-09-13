@@ -25,7 +25,7 @@
     {id:'ed',band:'Studio & mission',name:'Founding executive director',owns:'The raise, governance, the sponsor',pay:80000,
      why:'Works the grant cycle. Nothing gets funded until this seat is filled.',modes:['custodial','product','full']},
     {id:'host',band:'Studio & mission',name:'Trust &amp; safety',owns:'Platform-wide intervention &amp; the public line',pay:58000,
-     why:'Local moderation is the Host\u2019s under \u00a73.3. This seat is \u00a714 \u2014 platform-wide intervention on harm, fraud and abuse, and a Host that stops moderating. \u26d4 The Section 230 posture rests on it.',modes:['custodial','product','full']},
+     why:'Local moderation is the Local Host\u2019s under \u00a73.3. This seat is \u00a714 \u2014 platform-wide intervention on harm, fraud and abuse, and a Local Host that stops moderating. \u26d4 The Section 230 posture rests on it.',modes:['custodial','product','full']},
     {id:'ops',band:'Studio & mission',name:'Neighborhood operations',owns:'Restaurants, guardians, couriers',pay:60000,
      why:'Signs the restaurants, trains the guardians. Does not scale past a couple of neighborhoods.',modes:['product','full']},
     {id:'grants',band:'Studio & mission',name:'Grants associate',owns:'The second raiser',pay:62000,

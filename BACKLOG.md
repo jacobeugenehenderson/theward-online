@@ -156,7 +156,7 @@ either.
   That is the **fourth-place-the-number-lives** failure this file already warns
   about under *the courier rate*, in different clothes, and it would have drifted
   from `LegalPage.jsx` the first time either moved.
-  ⚠️ It also promised on behalf of **every** Ward, when a Host's installation is
+  ⚠️ It also promised on behalf of **every** Ward, when a Local Host's installation is
   not ours to speak for — which `legal.html §1` explicitly disclaims.
   ▶ **Parked, not pursued:** a mission-style statement about earning standing by
   presence rather than by an account might belong somewhere on this page. Jacob
@@ -205,20 +205,20 @@ product says 22 % (cart math, the public legal page, and the Cary brief all
 agree) and Jacob said 25 %. Whichever is right, it must move in all four places
 at once, and the legal page is the canonical public statement.
 
-**The Host's share, and whether a Cary order pays it.** The Host Handbook
+**The Local Host's share, and whether a Cary order pays it.** The Local Host Handbook
 (`/handbook/`, 2026-09-09) describes the share by its SHAPE and prints no
 figure — Jacob's ruling, and §7d of the README carries the reasoning. Two things
 are owed before a figure can go anywhere:
 
 - ⛔ **The rate itself.** The draft said the business keeps 97 %, of which 3 %
-  splits evenly between The Ward and the Host. No percentage appears anywhere on
+  splits evenly between The Ward and the Local Host. No percentage appears anywhere on
   this site today, so these would be the first — and this page is INDEXED, which
   is the whole reason the ruling matters here more than it did on the front page.
 - ⚠️ **The two commerce paths have never been reconciled in writing.** The front
   page's Cary terms say *"No commission. Keep the full price of the order,"* and
   the handbook says commerce through a Ward keeps a small share. Both may be
   true — a delivery charge is not a sale — but **nobody has written down whether
-  a Cary order also carries the commerce share**, and a Host reading both pages
+  a Cary order also carries the commerce share**, and a Local Host reading both pages
   is entitled to ask. ⛔ Do not answer it by editing either page's copy; the
   answer is a fact about the product.
 

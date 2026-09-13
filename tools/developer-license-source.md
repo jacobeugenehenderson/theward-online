@@ -33,7 +33,7 @@ Platform components may include, without limitation:
 - neighborhood authoring and publishing systems;
 - Cartograph, Survey, Section, Stage, Preview, Arborist, Meteorologist, Almanac, the Universal Player, and related production systems;
 - Cary;
-- administrative and Host controls;
+- administrative and Local Host controls;
 - APIs, integrations, data pipelines, and supporting infrastructure; and
 - future additions, replacements, improvements, and successors to those systems.
 
@@ -68,7 +68,7 @@ The license may permit Developer, as expressly authorized, to:
 - provision authorized Ward instances;
 - develop approved interfaces or services using Platform APIs;
 - prepare or maintain local information and geographic content;
-- support authorized Hosts or Ward operators; and
+- support authorized Local Hosts or Ward operators; and
 - deploy or operate authorized Platform components.
 
 No right is granted except as expressly provided by this Agreement and the Developer Schedule.
@@ -81,7 +81,7 @@ All right, title, and interest in the Platform, Developer Materials, software, s
 
 ### 2.3 Authorized Deployment
 
-Unlike a Host license for a single Ward, this Agreement may authorize Developer to use designated Developer Materials to create or deploy more than one Ward.
+Unlike a Local Host license for a single Ward, this Agreement may authorize Developer to use designated Developer Materials to create or deploy more than one Ward.
 
 The number, geography, territory, category, identity, approval mechanism, or other boundaries of authorized deployments will be stated in the Developer Schedule.
 
@@ -147,9 +147,9 @@ Authorized Wards may be identified individually, by approved geography, through 
 
 Developer will maintain records reasonably sufficient to identify Authorized Wards created or operated under this Agreement.
 
-### 4.3 Hosts and Operators
+### 4.3 Local Hosts and Operators
 
-An Authorized Ward may be operated by Developer, The Ward, a local Host, an affiliate, institution, municipality, sponsor, or another approved operator.
+An Authorized Ward may be operated by Developer, The Ward, a Local Host, an affiliate, institution, municipality, sponsor, or another approved operator.
 
 Where an entity other than Developer operates an Authorized Ward, the applicable contractual structure must preserve the Platform Commitments and any material Platform-wide obligations required by this Agreement.
 
@@ -171,7 +171,7 @@ Developer grants The Ward a nonexclusive license to store, process, reproduce, a
 
 ### 5.2 Local and Third-Party Content
 
-Authorized Wards may contain information supplied by Hosts, businesses, institutions, residents, Guardians, public agencies, licensors, public datasets, or other sources.
+Authorized Wards may contain information supplied by Local Hosts, businesses, institutions, residents, Guardians, public agencies, licensors, public datasets, or other sources.
 
 Ownership remains subject to the rights of the applicable owner or source.
 
@@ -181,7 +181,7 @@ Neither Developer nor The Ward obtains ownership merely because material is inco
 
 “Ward Model” means the structured digital representation of a place produced through use of Developer Materials, including the assembled geographic, spatial, environmental, structural, relational, or other Platform-specific representation resulting from an authorized pour, build, or comparable authoring process.
 
-Ownership of source materials incorporated into a Ward Model remains with their respective owners. Developer, Host, and The Ward do not acquire ownership of underlying public data, third-party data, Developer Content, content supplied by a Host, or other source material merely because it is incorporated into a Ward Model.
+Ownership of source materials incorporated into a Ward Model remains with their respective owners. Developer, Local Host, and The Ward do not acquire ownership of underlying public data, third-party data, Developer Content, content supplied by a Local Host, or other source material merely because it is incorporated into a Ward Model.
 
 The Platform-specific structure, organization, transformation, relationships, derived geometry, processing results, and other proprietary expression produced through Developer Materials as part of a Ward Model are Platform Outputs and remain part of the Platform, subject to any use, access, portability, or continuing-operation rights expressly granted in the Developer Schedule.
 
@@ -191,7 +191,7 @@ Developer-created original content that is separable from the Ward Model remains
 
 ### 5.4 Portability
 
-The parties will support commercially reasonable portability of Developer-controlled and Host-controlled local content, subject to third-party rights, privacy requirements, technical limitations, and applicable law.
+The parties will support commercially reasonable portability of Developer-controlled and Local Host-controlled local content, subject to third-party rights, privacy requirements, technical limitations, and applicable law.
 
 Portability does not require transfer of proprietary Platform technology, internal schemas, authoring systems, source code, Ward Models, Platform Outputs, or third-party materials that cannot lawfully be redistributed.
 
@@ -225,13 +225,13 @@ Cary may support Commerce, Payment, Fulfillment, Delivery, or other transactiona
 
 ### 7.2 Separation of Functions
 
-Commerce, Payment, Fulfillment, and Delivery are distinct functions and may be provided through different Platform components, Developer systems, participating merchants, financial institutions, point-of-sale providers, Couriers, Hosts, or other authorized participants.
+Commerce, Payment, Fulfillment, and Delivery are distinct functions and may be provided through different Platform components, Developer systems, participating merchants, financial institutions, point-of-sale providers, Couriers, Local Hosts, or other authorized participants.
 
 ### 7.3 Payment and Merchant of Record
 
 For transactions in which an independent participating merchant sells its own goods or services, the parties intend that the participating merchant remain the merchant or seller of record and that the transactional architecture preserve that relationship to the extent reasonably practicable and permitted by applicable law and payment-system requirements.
 
-Developer will not knowingly use Developer Materials to structure Cary for the purpose of making The Ward, Developer, or a Host the merchant or seller of record for goods or services sold by an independent participating merchant.
+Developer will not knowingly use Developer Materials to structure Cary for the purpose of making The Ward, Developer, or a Local Host the merchant or seller of record for goods or services sold by an independent participating merchant.
 
 If a proposed integration or transactional structure would require such a change, the parties will first evaluate a commercially reasonable alternative structure, provider, modification, or discontinuation of the affected feature.
 
@@ -243,7 +243,7 @@ Nothing in this Section determines a legally defined or regulated status where t
 
 Each active Authorized Ward will have an identified party responsible for ordinary local administration and moderation.
 
-That party may be Developer, a Host, or another operator approved under this Agreement.
+That party may be Developer, a Local Host, or another operator approved under this Agreement.
 
 ### 8.2 Local Moderation
 
@@ -261,11 +261,11 @@ The Ward may intervene where reasonably necessary to address material harm, unla
 
 ### 9.1 Incorporated Platform Commitments
 
-The “Platform Commitments” are the baseline commitments established in Section 8 of [The Ward Platform License Agreement](../license/#8-platform-commitments), including its commitments concerning free ordinary participation, local commerce, Courier compensation, gratuities, processing at cost, privacy by design, local Host economics, and the role of local commercial schedules.
+The “Platform Commitments” are the baseline commitments established in Section 8 of [The Ward Platform License Agreement](../license/#8-platform-commitments), including its commitments concerning free ordinary participation, local commerce, Courier compensation, gratuities, processing at cost, privacy by design, Local Host economics, and the role of local commercial schedules.
 
 Those Platform Commitments are incorporated into this Agreement by reference as obligations of the Platform and apply to every Authorized Ward created, configured, provisioned, operated, sublicensed, transferred, or otherwise enabled through Developer Materials.
 
-For purposes of applying the Platform Commitments under this Agreement, references in them to a Host, Ward Schedule, or other Host-license mechanism will be read, where the context requires, to include Developer, an approved operator, the Developer Schedule, or the corresponding mechanism under this Agreement.
+For purposes of applying the Platform Commitments under this Agreement, references in them to a Local Host, Ward Schedule, or other Local Host-license mechanism will be read, where the context requires, to include Developer, an approved operator, the Developer Schedule, or the corresponding mechanism under this Agreement.
 
 The Platform Commitments incorporated into this Agreement are those in effect on the Effective Date together with any later amendment that maintains or strengthens protection of local participants. A later amendment that materially weakens a Platform Commitment does not apply to an active Authorized Ward except as permitted by Section 25.2.
 
@@ -297,7 +297,7 @@ Developer may not characterize an Authorized Ward as independent of The Ward, or
 
 Developer has no general right to sublicense Developer Materials.
 
-Any right to permit affiliates, Hosts, operators, contractors, or other persons to access Developer Materials must be expressly authorized in the Developer Schedule.
+Any right to permit affiliates, Local Hosts, operators, contractors, or other persons to access Developer Materials must be expressly authorized in the Developer Schedule.
 
 ### 10.2 Approved Downstream Rights
 
@@ -326,7 +326,7 @@ Developer may use Ward branding only as expressly authorized.
 
 ### 11.2 Local and Developer Identity
 
-Authorized Wards may incorporate local identity, Developer attribution, Host attribution, sponsor or benefactor recognition, or approved co-branding.
+Authorized Wards may incorporate local identity, Developer attribution, Local Host attribution, sponsor or benefactor recognition, or approved co-branding.
 
 Branding requirements will be established in the Developer Schedule or applicable deployment terms.
 
@@ -458,9 +458,9 @@ Termination does not transfer ownership of the Platform or Developer Materials t
 
 Termination of Developer’s development rights will not, by itself, require immediate termination of an otherwise compliant active Authorized Ward.
 
-The parties will use commercially reasonable efforts to provide orderly continuity, transition, migration, relicensing, assumption by The Ward, transfer to an approved Host or operator, or other disposition of active Authorized Wards.
+The parties will use commercially reasonable efforts to provide orderly continuity, transition, migration, relicensing, assumption by The Ward, transfer to an approved Local Host or operator, or other disposition of active Authorized Wards.
 
-The applicable Developer Schedule may establish transition periods, continuing runtime rights, migration assistance, costs, data-transfer procedures, Host protections, or other continuity terms.
+The applicable Developer Schedule may establish transition periods, continuing runtime rights, migration assistance, costs, data-transfer procedures, Local Host protections, or other continuity terms.
 
 Developer may not use termination, transfer, or migration to evade the Platform Commitments.
 
@@ -482,7 +482,7 @@ Nothing in this Agreement creates a partnership, joint venture, franchise, fiduc
 
 Neither party may bind the other except where expressly authorized in writing.
 
-Terms such as Developer, Host, Guardian, Resident, Courier, or Partner describe Platform or commercial roles and do not independently establish another legal relationship.
+Terms such as Developer, Local Host, Guardian, Resident, Courier, or Partner describe Platform or commercial roles and do not independently establish another legal relationship.
 
 ## 25. GENERAL TERMS
 
@@ -494,13 +494,13 @@ This Agreement and the Developer Schedule constitute the agreement between the p
 
 Amendments must be agreed in writing, except that The Ward may make reasonable Platform-wide operational or technical changes as permitted under this Agreement.
 
-No Developer Schedule, deployment agreement, Host agreement, sublicense, Platform rule, configuration, incorporated commercial term, or other document subordinate to this Agreement may waive or materially weaken Section 9 or the Platform Commitments incorporated through it.
+No Developer Schedule, deployment agreement, Local Host agreement, sublicense, Platform rule, configuration, incorporated commercial term, or other document subordinate to this Agreement may waive or materially weaken Section 9 or the Platform Commitments incorporated through it.
 
 The Developer-specific obligations in Section 9 may be waived or materially weakened only if The Ward and Developer expressly amend Section 9 in a writing signed by both parties.
 
 An amendment that materially weakens an incorporated Platform Commitment applies only to Authorized Wards created after that amendment takes effect.
 
-The Platform Commitments applicable to an active Authorized Ward may not be materially weakened during its then-current committed term except with the written consent of the Host or other approved operator responsible for that Ward.
+The Platform Commitments applicable to an active Authorized Ward may not be materially weakened during its then-current committed term except with the written consent of the Local Host or other approved operator responsible for that Ward.
 
 ### 25.3 Severability
 
@@ -520,7 +520,7 @@ The Developer Schedule will specify governing law, venue, and any agreed dispute
 
 ### 25.7 No Third-Party Beneficiaries
 
-Except as expressly provided in a separate agreement between The Ward and a participant, this Agreement is for the benefit of The Ward and Developer and does not create a right of enforcement in any Host, Courier, merchant, resident, Guardian, customer, operator, or other third party.
+Except as expressly provided in a separate agreement between The Ward and a participant, this Agreement is for the benefit of The Ward and Developer and does not create a right of enforcement in any Local Host, Courier, merchant, resident, Guardian, customer, operator, or other third party.
 
 The Platform Commitments nevertheless govern The Ward’s and Developer’s exercise of rights under this Agreement and may not be weakened on the ground that an affected participant is not a party to this Agreement.
 
@@ -565,7 +565,7 @@ This Developer Schedule is incorporated into the Developer License Agreement bet
 = Hosting: [_____]
 = Domains: [_____]
 = Ward Provisioning: [_____]
-= Host / Operator Structure: [_____]
+= Local Host / Operator Structure: [_____]
 = Developer Systems / Integrations: [_____]
 = Identity / Standing Architecture: [_____]
 = Data Responsibilities: [_____]
@@ -588,7 +588,7 @@ This Developer Schedule is incorporated into the Developer License Agreement bet
 = Courier Allocation (minimum, under the Platform Commitments): [_____]
 = Tips: [100% to designated Courier]
 = Developer Allocation: [_____]
-= Host Allocation: [_____]
+= Local Host Allocation: [_____]
 = The Ward Allocation: [_____]
 = Payment / POS / Third-Party Costs: [_____]
 = Processing Charge Treatment: [At cost / subsidized / absorbed / other treatment consistent with the Platform Commitments]
@@ -608,7 +608,7 @@ This Developer Schedule is incorporated into the Developer License Agreement bet
 ### I. Downstream Rights
 
 = Authorized Affiliates: [_____]
-= Authorized Hosts / Operators: [_____]
+= Authorized Local Hosts / Operators: [_____]
 = Sublicensing Rights: [None except as stated here]
 = Required Operator Agreement: [_____]
 = Flow-Down Requirements: [_____]
@@ -617,7 +617,7 @@ This Developer Schedule is incorporated into the Developer License Agreement bet
 
 = The Ward provides: [_____]
 = Developer provides: [_____]
-= Host / local operator provides: [_____]
+= Local Host / local operator provides: [_____]
 = Local moderation responsibility: [_____]
 = Shared responsibilities: [_____]
 
@@ -642,7 +642,7 @@ This Developer Schedule is incorporated into the Developer License Agreement bet
 = Active Ward Runtime Rights after Termination: [_____]
 = Transition Period: [_____]
 = Migration / Assumption by The Ward: [_____]
-= Host / Operator Transition: [_____]
+= Local Host / Operator Transition: [_____]
 = Data Portability: [_____]
 = Transition Assistance / Costs: [_____]
 

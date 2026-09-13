@@ -254,7 +254,7 @@ split_head = '''
   <section class="sec pro-head">
     <p class="pro-kicker">What a delivery order divides into</p>
     <h1>The Split</h1>
-    <p class="lede">The customer carries the largest share; the business pays a small fee; the courier is paid first out of the service charge; and the Host and the Ward divide what is left.</p>
+    <p class="lede">The customer carries the largest share; the business pays a small fee; the courier is paid first out of the service charge; and the Local Host and the Ward divide what is left.</p>
   </section>
 
   <section class="sec">
@@ -262,7 +262,7 @@ split_head = '''
 page = (HEAD % dict(title='The Split', slug='split',
         sibslug='ask', sibname='The Ask',
         ogtitle='The Split &mdash; where a delivery order&rsquo;s money goes',
-        desc='Every dollar of a delivery order, and who is owed it: the business, the courier, the Host, the Ward and the processor — against what the same order costs on DoorDash, Uber Eats and Grubhub.',
+        desc='Every dollar of a delivery order, and who is owed it: the business, the courier, the Local Host, the Ward and the processor — against what the same order costs on DoorDash, Uber Eats and Grubhub.',
         css=css)
      + split_head + body + '\n  </section>\n'
      + FOOT % dict(slug='split', sibk='The Ask', sibslug='ask', siblink='Open the tool',
