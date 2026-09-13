@@ -2,6 +2,18 @@
 # Read from the Namecheap account, 2026-09-12. One per line, no TLD.
 # ⛔ Do not edit works/index.html's DOMAINS block — edit this and run
 #    node tools/build-domains.mjs
+#
+# ⚠️ THE ACCOUNT HOLDS 42 .online DOMAINS AND THIS LIST HAS 40. The two left
+# out are deliberate, so that a later reader who counts the account does not
+# reopen it:
+#   theward.online     — the platform itself, not a reserved neighborhood
+#   provincetown.online — real, but not New York, and one domain is not a
+#                         footprint (Jacob, 2026-09-12). It earns a place here
+#                         when either (1) a map is actually started in
+#                         Provincetown, or (2) a comparable list of Cape Cod
+#                         neighborhoods is held. Until then Cape Cod is named
+#                         in the "Beyond St. Louis" section instead, which is
+#                         a claim about work rather than about inventory.
 astorianyc
 bayridge
 bedstuy
