@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="../../css/tokens.css?v=7ce1d022c15e">
-<link rel="stylesheet" href="../../css/site.css?v=0f5eada072ff">
+<link rel="stylesheet" href="../../css/site.css?v=90808b51b908">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 
 <!-- ⛔ THIS PAGE DECLARES NO CSS OF ITS OWN AND CARRIES NO PLACEMENT
@@ -92,17 +92,18 @@
 
 <div class="sheet">
   <div class="group">
+    <div class="lead-dial">
+      <div class="dial-head"><label class="dial-label" for="sub"><span>One order of</span></label><span class="dial-val" id="sub-v">$55</span></div>
+      <input type="range" id="sub" min="40" max="250" step="5" value="55">
+      <p class="note lead-note">Everything on this page is a function of this number.</p>
+    </div>
+
     <div class="dial">
       <div class="dial-head"><span class="dial-label"><span>Who runs the rails</span></span><span class="dial-val" id="owner-v">Independent</span></div>
       <div class="seg" id="ownersel" role="group" aria-label="Who runs the rails">
         <button type="button" data-v="indep" aria-pressed="true">Independent</button>
         <button type="button" data-v="inst">A payments institution</button>
       </div>
-    </div>
-
-    <div class="dial lead-dial">
-      <div class="dial-head"><label class="dial-label" for="sub"><span>Food subtotal</span></label><span class="dial-val" id="sub-v">$55</span></div>
-      <input type="range" id="sub" min="40" max="250" step="5" value="55">
     </div>
 
     <h3 class="mt-4">The order</h3>
