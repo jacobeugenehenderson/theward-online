@@ -78,24 +78,35 @@
   //   bar is longer because the customer pays more. Nothing to read — the difference
   //   is the shape (Jacob, 2026-09-13: "split out the whole customer bar the way we
   //   did with what cary collects").
-  function drawCustomer(here, rival){
-    var max = Math.max(here.total, rival.total) || 1;
+  // ⭐ ONE TOTAL, DIVIDED TWICE, AT TRUE SCALE. "What the customer pays" and "What
+  //   Cary collects" were two decompositions of overlapping money in two columns —
+  //   and Cary's pot turned out to be exactly the non-business part of the second
+  //   division ($32.18 + $20.47 + $0.74 = $53.39 on a $195 order). So they combine:
+  //   the same bar length, split once by WHAT YOU ARE CHARGED and once by WHO
+  //   RECEIVES IT, with the restaurant included, which is the whole transaction.
+  //   ⛔ IT COSTS THE ZOOM, DELIBERATELY. At true scale the business is ~79% of the
+  //   bar and the Ward is ~8%; the old Cary bar existed to magnify that sliver. The
+  //   page has spent its length asserting in words that what we take is small, and
+  //   at true scale a reader simply sees it (Jacob, 2026-09-13).
+  //   ⭐ All three bars share ONE scale — the largest total — so the incumbent's bar is
+  //   visibly longer rather than merely labelled with a bigger number.
+  function drawWhole(charged, received, rival){
+    var max = Math.max(charged.total, rival.total) || 1;
     var seg = function(cls, v){ return v>0 ? '<div class="sb-seg '+cls+'" style="width:'+(v/max*100).toFixed(2)+'%"></div>' : ''; };
-    // ⭐ THE MARKUP IS ITS OWN BLOCK, and the menu block is IDENTICAL on both bars.
-    //   Showing two different food figures asked the reader to subtract; showing the
-    //   same menu twice and then a separate marked-up block shows it (Jacob: "we can
-    //   have The ward, in-store menu, markup").
-    $('cmp-here').innerHTML  = seg('c-food',here.menu)+seg('c-mark',here.markup)+seg('c-tax',here.tax)+seg('c-svc',here.svc)+seg('c-proc',here.fee);
-    $('cmp-rival').innerHTML = seg('c-food',rival.menu)+seg('c-mark',rival.markup)+seg('c-tax',rival.tax)+seg('c-svc',rival.svc)+seg('c-proc',rival.fee);
-    $('cmp-tot-here').textContent  = M(here.total);
-    $('cmp-tot-rival').textContent = M(rival.total);
-    $('cmp-key').innerHTML =
-      '<div class="k-food"><b>'+M(here.menu)+'</b>In-store menu <span>· the same on both</span></div>'+
-      '<div class="k-mark"><b>'+M(rival.markup)+'</b>Markup <span>· '+
-        (rival.menu>0?Math.round(rival.markup/rival.menu*1000)/10:0)+'% on the menu, theirs only</span></div>'+
-      '<div class="k-tax"><b>'+M(here.tax)+' · '+M(rival.tax)+'</b>Sales tax</div>'+
-      '<div class="k-svc"><b>'+M(here.svc)+' · '+M(rival.svc)+'</b>Service charge</div>'+
-      '<div class="k-proc2"><b>'+M(here.fee)+' · '+M(rival.fee)+'</b>Processing <span>· delivery fee there</span></div>';
+    $('w1').innerHTML = seg('c-food',charged.menu)+seg('c-tax',charged.tax)+seg('c-svc',charged.svc)+seg('c-proc',charged.fee);
+    $('w2').innerHTML = seg('c-food',received.business)+seg('c-svc',received.courier)+seg('c-ward',received.ward)+seg('c-proc',received.proc);
+    $('w3').innerHTML = seg('c-food',rival.menu)+seg('c-mark',rival.markup)+seg('c-tax',rival.tax)+seg('c-svc',rival.svc)+seg('c-proc',rival.fee);
+    $('w1-tot').textContent=M(charged.total);
+    $('w2-tot').textContent=M(received.total);
+    $('w3-tot').textContent=M(rival.total);
+    $('w-key').innerHTML =
+      '<div class="k-food"><b>'+M(charged.menu)+'</b>Menu <span>· and the business keeps '+M(received.business)+'</span></div>'+
+      '<div class="k-mark"><b>'+M(rival.markup)+'</b>Markup <span>· theirs only, '+
+        (rival.menu>0?Math.round(rival.markup/rival.menu*1000)/10:0)+'% on the menu</span></div>'+
+      '<div class="k-tax"><b>'+M(charged.tax)+' · '+M(rival.tax)+'</b>Sales tax</div>'+
+      '<div class="k-svc"><b>'+M(charged.svc)+'</b>Service charge <span>· the courier takes '+M(received.courier)+'</span></div>'+
+      '<div class="k-ward"><b>'+M(received.ward)+'</b>The Ward</div>'+
+      '<div class="k-proc2"><b>'+M(charged.fee)+' · '+M(rival.fee)+'</b>Processing <span>· delivery fee there</span></div>';
   }
 
   // ⭐ BOTH SIDES OF THE ORDER, IN ONE TABLE. This answered only what the BUSINESS
@@ -159,28 +170,6 @@
 
   // The bar IS the money: segment widths are dollars, so the divisions fall
   // where the money actually puts them rather than where a ratio would.
-  function drawSplit(proc, svc, commission, courierCut, ward){
-    // ⛔ Processing is IN the bar and leaves it first. It is money Cary
-    // collects and does not keep — a reader who cannot see it leave assumes
-    // it was kept, which is the exact accusation the pass-through rule exists
-    // to answer. It is fixed, not draggable: it is a published rate.
-    var pot=proc+svc+commission; if(!pot) pot=1;
-    var f0=proc/pot, f1=f0+courierCut/pot, f2=f1+ward/pot;
-    $('pot-v').textContent=M(pot);
-    $('sb-proc').style.width=(f0*100).toFixed(2)+'%';
-    $('sb-cour').style.width=((f1-f0)*100).toFixed(2)+'%';
-    $('sb-ward').style.width=((f2-f1)*100).toFixed(2)+'%';
-    $('sb-key').innerHTML=
-      // ⭐ A LEGEND NAMES, IT DOES NOT EXPLAIN. Each row carried a trailing clause —
-      // "at cost, straight out", the courier's percentage, who the Ward pays — and
-      // two of the three are already rules three screens down, stated better there.
-      // The amount and the party are the legend's whole job.
-      '<div class="k-proc"><b>'+M(proc)+'</b>Processor</div>'+
-      '<div class="k-cour"><b>'+M(courierCut)+'</b>Courier</div>'+
-      '<div class="k-ward"><b>'+M(ward)+'</b>The Ward</div>'+
-      '';
-  }
-
   function calc(){
     var sub=+$('sub').value*100,
         taxR=+$('tax').value/100000,
@@ -223,7 +212,6 @@
     $('cour-note').innerHTML='The courier is paid <b>'+Math.round(COUR*100)+'%</b> of it.';
     $('proc-v').textContent=(rate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+rate.f+'¢';
     $('keep-v').textContent=(+$('keep').value)+'% · '+M(commission);
-    drawSplit(procPaid, svc, commission, courier, ward);
 
 
     $('o-food').textContent=M(sub);
@@ -277,8 +265,9 @@
     var iFood=menuAt(CAP,1), iTotal=custAt(CAP,1);
     var iFee=Math.round(iFood*INCUMBENT_SERVICE), iTax=Math.round(iFood*taxR);
     drawVs(sub, 1-keepR, costHere, costAt);
-    drawCustomer({menu:sub, markup:0, tax:tax, svc:svc, fee:procPaid, total:total},
-                 {menu:sub, markup:iFood-sub, tax:iTax, svc:iFee, fee:INCUMBENT_DELIVERY, total:iTotal});
+    drawWhole({menu:sub, tax:tax, svc:svc, fee:procPaid, total:total},
+              {business:business, courier:courier, ward:ward, proc:procPaid, total:total},
+              {menu:sub, markup:iFood-sub, tax:iTax, svc:iFee, fee:INCUMBENT_DELIVERY, total:iTotal});
     var vc=$('vs-cust');
     if(vc) vc.innerHTML = sub>0
       ? (function(){

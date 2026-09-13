@@ -57,23 +57,26 @@ header h1{font-size:clamp(34px,6vw,52px); font-weight:600; line-height:1.02; let
 .seg button:focus-visible{outline:2px solid var(--brick); outline-offset:2px}
 .splitbar{position:relative; display:flex; height:44px; margin-top:14px; border:1px solid var(--ink)}
 .sb-seg{height:100%; min-width:0; overflow:hidden}
-.sb-proc{background:var(--rule)} .sb-cour{background:var(--brick)} .sb-ward{background:var(--ink)}
 /* ⭐ THE PAGE'S ONE INPUT. Every figure on the page is a function of this and it sat
    as the first of four equal dials. It is above the section now, and larger. */
 .lead-dial{background:var(--paper); border:1px solid var(--rule); padding:18px 20px 22px; margin-bottom:26px}
 .lead-dial .dial-label{font-size:19px}
 .lead-dial .dial-val{font-size:34px; letter-spacing:-.02em; line-height:1}
 .lead-dial input[type=range]{width:100%; height:26px; margin-top:14px; accent-color:var(--brick)}
-.cmp{margin:10px 0 4px}
-.cmp-row{display:flex; justify-content:space-between; align-items:baseline; margin-top:12px; font-size:12.5px}
-.cmp-lbl{color:var(--ink-2)}
-.cmp-tot{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; font-weight:600; font-size:14px}
-.cmp-bar{height:30px; margin-top:5px}
-.c-food{background:var(--verdigris)} .c-mark{background:var(--amber)} .c-tax{background:var(--ink-3)} .c-svc{background:var(--brick)} .c-proc{background:var(--rule)}
-.sb-key .k-food{border-color:var(--verdigris)} .sb-key .k-mark{border-color:var(--amber)} .sb-key .k-tax{border-color:var(--ink-3)} .sb-key .k-svc{border-color:var(--brick)} .sb-key .k-proc2{border-color:var(--rule)}
+/* ⭐ FULL WIDTH, BECAUSE TRUE SCALE NEEDS IT. The business is ~79% of the bar and
+   the Ward ~8%; in a half-width column those slices are a few pixels. The figure
+   spans the page so the small ones are still readable at honest proportion. */
+.whole{margin-top:44px}
+.whole-h{font-size:clamp(20px,2.6vw,26px); letter-spacing:-.01em; margin-bottom:6px}
+.whole-row{display:flex; justify-content:space-between; align-items:baseline; margin-top:20px; font-size:13.5px}
+.whole-lbl{color:var(--ink-2)}
+.whole-tot{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; font-weight:600; font-size:17px}
+.whole-bar{height:34px; margin-top:7px}
+.whole-key{margin-top:20px}
+.c-food{background:var(--verdigris)} .c-mark{background:var(--amber)} .c-ward{background:var(--ink)} .c-tax{background:var(--ink-3)} .c-svc{background:var(--brick)} .c-proc{background:var(--rule)}
+.sb-key .k-food{border-color:var(--verdigris)} .sb-key .k-mark{border-color:var(--amber)} .sb-key .k-tax{border-color:var(--ink-3)} .sb-key .k-svc{border-color:var(--brick)} .sb-key .k-proc2{border-color:var(--rule)} .sb-key .k-ward{border-color:var(--ink)}
 .sb-key{display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:10px; margin-top:11px; font-size:12px}
 .sb-key div{border-top:3px solid; padding-top:6px; min-width:0}
-.sb-key .k-proc{border-color:var(--rule)} .sb-key .k-cour{border-color:var(--brick)} .sb-key .k-ward{border-color:var(--ink)}
 .sb-key b{display:block; font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; font-size:16px; font-weight:600; color:var(--ink)}
 .sb-key span{color:var(--ink-3)}
 .note{font-size:12px; color:var(--ink-3); margin-top:5px; max-width:52ch}
@@ -160,17 +163,6 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
       <input type="range" id="keep" min="0" max="30" step="1" value="5">
     </div>
 
-    <div class="dial" style="border-bottom:none">
-      <div class="dial-head"><span class="dial-label"><span>What Cary collects</span></span><span class="dial-val" id="pot-v">$17.24</span></div>
-
-      <div class="splitbar" id="splitbar">
-        <div class="sb-seg sb-proc" id="sb-proc"></div>
-        <div class="sb-seg sb-cour" id="sb-cour"></div>
-        <div class="sb-seg sb-ward" id="sb-ward"></div>
-      </div>
-      <div class="sb-key" id="sb-key"></div>
-    </div>
-
   </div>
 
   <div class="panel">
@@ -195,15 +187,6 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
       <div class="line tot"><dt>Accounted for</dt><dd id="p-total">—</dd></div>
     </dl>
 
-    <h4 class="mini">What the customer pays</h4>
-    <div class="cmp">
-      <div class="cmp-row"><span class="cmp-lbl">Here</span><span class="cmp-tot" id="cmp-tot-here">$74.29</span></div>
-      <div class="splitbar cmp-bar" id="cmp-here"></div>
-      <div class="cmp-row"><span class="cmp-lbl">On an incumbent</span><span class="cmp-tot" id="cmp-tot-rival">$83.06</span></div>
-      <div class="splitbar cmp-bar" id="cmp-rival"></div>
-      <div class="sb-key" id="cmp-key"></div>
-    </div>
-
     <h4 class="mini">The same order elsewhere </h4>
     <figure style="margin:10px 0 4px">
       <svg id="vs" viewBox="0 0 700 285" role="img" aria-label="What the business pays on the same order, compared across delivery platforms, against the 15 percent regulatory cap" style="max-width:100%;height:auto"></svg>
@@ -213,6 +196,17 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     </figure>
   </div>
 </div>
+
+<section class="sec whole">
+  <h2 class="whole-h">The whole transaction</h2>
+  <div class="whole-row"><span class="whole-lbl">What the customer is charged</span><span class="whole-tot" id="w1-tot">$74.29</span></div>
+  <div class="splitbar whole-bar" id="w1"></div>
+  <div class="whole-row"><span class="whole-lbl">Who receives it</span><span class="whole-tot" id="w2-tot">$74.29</span></div>
+  <div class="splitbar whole-bar" id="w2"></div>
+  <div class="whole-row"><span class="whole-lbl">The same order on an incumbent</span><span class="whole-tot" id="w3-tot">$83.06</span></div>
+  <div class="splitbar whole-bar" id="w3"></div>
+  <div class="sb-key whole-key" id="w-key"></div>
+</section>
 
 <section class="rules">
   <h2>The rules</h2>
@@ -317,24 +311,35 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
   //   bar is longer because the customer pays more. Nothing to read — the difference
   //   is the shape (Jacob, 2026-09-13: "split out the whole customer bar the way we
   //   did with what cary collects").
-  function drawCustomer(here, rival){
-    var max = Math.max(here.total, rival.total) || 1;
+  // ⭐ ONE TOTAL, DIVIDED TWICE, AT TRUE SCALE. "What the customer pays" and "What
+  //   Cary collects" were two decompositions of overlapping money in two columns —
+  //   and Cary's pot turned out to be exactly the non-business part of the second
+  //   division ($32.18 + $20.47 + $0.74 = $53.39 on a $195 order). So they combine:
+  //   the same bar length, split once by WHAT YOU ARE CHARGED and once by WHO
+  //   RECEIVES IT, with the restaurant included, which is the whole transaction.
+  //   ⛔ IT COSTS THE ZOOM, DELIBERATELY. At true scale the business is ~79% of the
+  //   bar and the Ward is ~8%; the old Cary bar existed to magnify that sliver. The
+  //   page has spent its length asserting in words that what we take is small, and
+  //   at true scale a reader simply sees it (Jacob, 2026-09-13).
+  //   ⭐ All three bars share ONE scale — the largest total — so the incumbent's bar is
+  //   visibly longer rather than merely labelled with a bigger number.
+  function drawWhole(charged, received, rival){
+    var max = Math.max(charged.total, rival.total) || 1;
     var seg = function(cls, v){ return v>0 ? '<div class="sb-seg '+cls+'" style="width:'+(v/max*100).toFixed(2)+'%"></div>' : ''; };
-    // ⭐ THE MARKUP IS ITS OWN BLOCK, and the menu block is IDENTICAL on both bars.
-    //   Showing two different food figures asked the reader to subtract; showing the
-    //   same menu twice and then a separate marked-up block shows it (Jacob: "we can
-    //   have The ward, in-store menu, markup").
-    $('cmp-here').innerHTML  = seg('c-food',here.menu)+seg('c-mark',here.markup)+seg('c-tax',here.tax)+seg('c-svc',here.svc)+seg('c-proc',here.fee);
-    $('cmp-rival').innerHTML = seg('c-food',rival.menu)+seg('c-mark',rival.markup)+seg('c-tax',rival.tax)+seg('c-svc',rival.svc)+seg('c-proc',rival.fee);
-    $('cmp-tot-here').textContent  = M(here.total);
-    $('cmp-tot-rival').textContent = M(rival.total);
-    $('cmp-key').innerHTML =
-      '<div class="k-food"><b>'+M(here.menu)+'</b>In-store menu <span>· the same on both</span></div>'+
-      '<div class="k-mark"><b>'+M(rival.markup)+'</b>Markup <span>· '+
-        (rival.menu>0?Math.round(rival.markup/rival.menu*1000)/10:0)+'% on the menu, theirs only</span></div>'+
-      '<div class="k-tax"><b>'+M(here.tax)+' · '+M(rival.tax)+'</b>Sales tax</div>'+
-      '<div class="k-svc"><b>'+M(here.svc)+' · '+M(rival.svc)+'</b>Service charge</div>'+
-      '<div class="k-proc2"><b>'+M(here.fee)+' · '+M(rival.fee)+'</b>Processing <span>· delivery fee there</span></div>';
+    $('w1').innerHTML = seg('c-food',charged.menu)+seg('c-tax',charged.tax)+seg('c-svc',charged.svc)+seg('c-proc',charged.fee);
+    $('w2').innerHTML = seg('c-food',received.business)+seg('c-svc',received.courier)+seg('c-ward',received.ward)+seg('c-proc',received.proc);
+    $('w3').innerHTML = seg('c-food',rival.menu)+seg('c-mark',rival.markup)+seg('c-tax',rival.tax)+seg('c-svc',rival.svc)+seg('c-proc',rival.fee);
+    $('w1-tot').textContent=M(charged.total);
+    $('w2-tot').textContent=M(received.total);
+    $('w3-tot').textContent=M(rival.total);
+    $('w-key').innerHTML =
+      '<div class="k-food"><b>'+M(charged.menu)+'</b>Menu <span>· and the business keeps '+M(received.business)+'</span></div>'+
+      '<div class="k-mark"><b>'+M(rival.markup)+'</b>Markup <span>· theirs only, '+
+        (rival.menu>0?Math.round(rival.markup/rival.menu*1000)/10:0)+'% on the menu</span></div>'+
+      '<div class="k-tax"><b>'+M(charged.tax)+' · '+M(rival.tax)+'</b>Sales tax</div>'+
+      '<div class="k-svc"><b>'+M(charged.svc)+'</b>Service charge <span>· the courier takes '+M(received.courier)+'</span></div>'+
+      '<div class="k-ward"><b>'+M(received.ward)+'</b>The Ward</div>'+
+      '<div class="k-proc2"><b>'+M(charged.fee)+' · '+M(rival.fee)+'</b>Processing <span>· delivery fee there</span></div>';
   }
 
   // ⭐ BOTH SIDES OF THE ORDER, IN ONE TABLE. This answered only what the BUSINESS
@@ -398,28 +403,6 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
 
   // The bar IS the money: segment widths are dollars, so the divisions fall
   // where the money actually puts them rather than where a ratio would.
-  function drawSplit(proc, svc, commission, courierCut, ward){
-    // ⛔ Processing is IN the bar and leaves it first. It is money Cary
-    // collects and does not keep — a reader who cannot see it leave assumes
-    // it was kept, which is the exact accusation the pass-through rule exists
-    // to answer. It is fixed, not draggable: it is a published rate.
-    var pot=proc+svc+commission; if(!pot) pot=1;
-    var f0=proc/pot, f1=f0+courierCut/pot, f2=f1+ward/pot;
-    $('pot-v').textContent=M(pot);
-    $('sb-proc').style.width=(f0*100).toFixed(2)+'%';
-    $('sb-cour').style.width=((f1-f0)*100).toFixed(2)+'%';
-    $('sb-ward').style.width=((f2-f1)*100).toFixed(2)+'%';
-    $('sb-key').innerHTML=
-      // ⭐ A LEGEND NAMES, IT DOES NOT EXPLAIN. Each row carried a trailing clause —
-      // "at cost, straight out", the courier's percentage, who the Ward pays — and
-      // two of the three are already rules three screens down, stated better there.
-      // The amount and the party are the legend's whole job.
-      '<div class="k-proc"><b>'+M(proc)+'</b>Processor</div>'+
-      '<div class="k-cour"><b>'+M(courierCut)+'</b>Courier</div>'+
-      '<div class="k-ward"><b>'+M(ward)+'</b>The Ward</div>'+
-      '';
-  }
-
   function calc(){
     var sub=+$('sub').value*100,
         taxR=+$('tax').value/100000,
@@ -462,7 +445,6 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     $('cour-note').innerHTML='The courier is paid <b>'+Math.round(COUR*100)+'%</b> of it.';
     $('proc-v').textContent=(rate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+rate.f+'¢';
     $('keep-v').textContent=(+$('keep').value)+'% · '+M(commission);
-    drawSplit(procPaid, svc, commission, courier, ward);
 
 
     $('o-food').textContent=M(sub);
@@ -516,8 +498,9 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     var iFood=menuAt(CAP,1), iTotal=custAt(CAP,1);
     var iFee=Math.round(iFood*INCUMBENT_SERVICE), iTax=Math.round(iFood*taxR);
     drawVs(sub, 1-keepR, costHere, costAt);
-    drawCustomer({menu:sub, markup:0, tax:tax, svc:svc, fee:procPaid, total:total},
-                 {menu:sub, markup:iFood-sub, tax:iTax, svc:iFee, fee:INCUMBENT_DELIVERY, total:iTotal});
+    drawWhole({menu:sub, tax:tax, svc:svc, fee:procPaid, total:total},
+              {business:business, courier:courier, ward:ward, proc:procPaid, total:total},
+              {menu:sub, markup:iFood-sub, tax:iTax, svc:iFee, fee:INCUMBENT_DELIVERY, total:iTotal});
     var vc=$('vs-cust');
     if(vc) vc.innerHTML = sub>0
       ? (function(){

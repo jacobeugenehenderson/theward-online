@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="../../css/tokens.css?v=7ce1d022c15e">
-<link rel="stylesheet" href="../../css/site.css?v=4e142787b45e">
+<link rel="stylesheet" href="../../css/site.css?v=22c845b05fa2">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 
 <!-- ⛔ THIS PAGE DECLARES NO CSS OF ITS OWN AND CARRIES NO PLACEMENT
@@ -136,17 +136,6 @@
       <input type="range" id="keep" min="0" max="30" step="1" value="5">
     </div>
 
-    <div class="dial dial--open">
-      <div class="dial-head"><span class="dial-label"><span>What Cary collects</span></span><span class="dial-val" id="pot-v">$17.24</span></div>
-
-      <div class="splitbar" id="splitbar">
-        <div class="sb-seg sb-proc" id="sb-proc"></div>
-        <div class="sb-seg sb-cour" id="sb-cour"></div>
-        <div class="sb-seg sb-ward" id="sb-ward"></div>
-      </div>
-      <div class="sb-key" id="sb-key"></div>
-    </div>
-
   </div>
 
   <div class="panel">
@@ -171,15 +160,6 @@
       <div class="line tot"><dt>Accounted for</dt><dd id="p-total">—</dd></div>
     </dl>
 
-    <h4 class="mini">What the customer pays</h4>
-    <div class="cmp">
-      <div class="cmp-row"><span class="cmp-lbl">Here</span><span class="cmp-tot" id="cmp-tot-here">$74.29</span></div>
-      <div class="splitbar cmp-bar" id="cmp-here"></div>
-      <div class="cmp-row"><span class="cmp-lbl">On an incumbent</span><span class="cmp-tot" id="cmp-tot-rival">$83.06</span></div>
-      <div class="splitbar cmp-bar" id="cmp-rival"></div>
-      <div class="sb-key" id="cmp-key"></div>
-    </div>
-
     <h4 class="mini">The same order elsewhere </h4>
     <figure class="figbox">
       <svg id="vs" viewBox="0 0 700 285" role="img" aria-label="What the business pays on the same order, compared across delivery platforms, against the 15 percent regulatory cap" class="fig-svg"></svg>
@@ -189,6 +169,17 @@
     </figure>
   </div>
 </div>
+
+<section class="sec whole">
+  <h2 class="whole-h">The whole transaction</h2>
+  <div class="whole-row"><span class="whole-lbl">What the customer is charged</span><span class="whole-tot" id="w1-tot">$74.29</span></div>
+  <div class="splitbar whole-bar" id="w1"></div>
+  <div class="whole-row"><span class="whole-lbl">Who receives it</span><span class="whole-tot" id="w2-tot">$74.29</span></div>
+  <div class="splitbar whole-bar" id="w2"></div>
+  <div class="whole-row"><span class="whole-lbl">The same order on an incumbent</span><span class="whole-tot" id="w3-tot">$83.06</span></div>
+  <div class="splitbar whole-bar" id="w3"></div>
+  <div class="sb-key whole-key" id="w-key"></div>
+</section>
 
 <section class="rules">
   <h2>The rules</h2>
@@ -241,6 +232,6 @@
 </footer>
 
 <script src="../../js/site.js?v=0f3be1550239"></script>
-<script src="../../js/split.js?v=5dd9a46996af"></script>
+<script src="../../js/split.js?v=7894a6effece"></script>
 </body>
 </html>
