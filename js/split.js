@@ -156,7 +156,8 @@
     $('cmp-tot-rival').textContent = M(rival.total);
     $('cmp-key').innerHTML =
       '<div class="k-food"><b>'+M(here.menu)+'</b>In-store menu <span>· the same on both</span></div>'+
-      '<div class="k-mark"><b>'+M(rival.markup)+'</b>Markup <span>· theirs only</span></div>'+
+      '<div class="k-mark"><b>'+M(rival.markup)+'</b>Markup <span>· '+
+        (rival.menu>0?Math.round(rival.markup/rival.menu*1000)/10:0)+'% on the menu, theirs only</span></div>'+
       '<div class="k-tax"><b>'+M(here.tax)+' · '+M(rival.tax)+'</b>Sales tax</div>'+
       '<div class="k-svc"><b>'+M(here.svc)+' · '+M(rival.svc)+'</b>Service charge</div>'+
       '<div class="k-proc2"><b>'+M(here.fee)+' · '+M(rival.fee)+'</b>Processing <span>· delivery fee there</span></div>';
