@@ -146,12 +146,17 @@
   function drawCustomer(here, rival){
     var max = Math.max(here.total, rival.total) || 1;
     var seg = function(cls, v){ return v>0 ? '<div class="sb-seg '+cls+'" style="width:'+(v/max*100).toFixed(2)+'%"></div>' : ''; };
-    $('cmp-here').innerHTML  = seg('c-food',here.food)+seg('c-tax',here.tax)+seg('c-svc',here.svc)+seg('c-proc',here.fee);
-    $('cmp-rival').innerHTML = seg('c-food',rival.food)+seg('c-tax',rival.tax)+seg('c-svc',rival.svc)+seg('c-proc',rival.fee);
+    // ⭐ THE MARKUP IS ITS OWN BLOCK, and the menu block is IDENTICAL on both bars.
+    //   Showing two different food figures asked the reader to subtract; showing the
+    //   same menu twice and then a separate marked-up block shows it (Jacob: "we can
+    //   have The ward, in-store menu, markup").
+    $('cmp-here').innerHTML  = seg('c-food',here.menu)+seg('c-mark',here.markup)+seg('c-tax',here.tax)+seg('c-svc',here.svc)+seg('c-proc',here.fee);
+    $('cmp-rival').innerHTML = seg('c-food',rival.menu)+seg('c-mark',rival.markup)+seg('c-tax',rival.tax)+seg('c-svc',rival.svc)+seg('c-proc',rival.fee);
     $('cmp-tot-here').textContent  = M(here.total);
     $('cmp-tot-rival').textContent = M(rival.total);
     $('cmp-key').innerHTML =
-      '<div class="k-food"><b>'+M(here.food)+' · '+M(rival.food)+'</b>Menu <span>· marked up there</span></div>'+
+      '<div class="k-food"><b>'+M(here.menu)+'</b>In-store menu <span>· the same on both</span></div>'+
+      '<div class="k-mark"><b>'+M(rival.markup)+'</b>Markup <span>· theirs only</span></div>'+
       '<div class="k-tax"><b>'+M(here.tax)+' · '+M(rival.tax)+'</b>Sales tax</div>'+
       '<div class="k-svc"><b>'+M(here.svc)+' · '+M(rival.svc)+'</b>Service charge</div>'+
       '<div class="k-proc2"><b>'+M(here.fee)+' · '+M(rival.fee)+'</b>Processing <span>· delivery fee there</span></div>';
@@ -267,14 +272,6 @@
     $('tip-v').textContent='$'+$('tip').value;
     $('proc-v').textContent=(rate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+rate.f+'¢';
     $('keep-v').textContent=(+$('keep').value)+'% · '+M(commission);
-    $('rule-comm').textContent=(+$('keep').value)+'%';
-    // ⭐ THE RULE THAT MAKES THE COMPARISON TRUE, and the only one that was not
-    //   written down. The page's customer-side claim wins by $6.96, of which $8.25 is
-    //   markup the incumbents carry and MINUS $3.25 is fees we carry — so the whole
-    //   advantage rests on OUR menu being unmarked, which is a commitment about us
-    //   rather than an assumption about them. It quotes the commission because that
-    //   is the reason it holds: at 5% there is little left to mark up for.
-    $('rule-comm2').textContent=(+$('keep').value)+'%';
     drawSplit(procPaid, svc, commission, courier-tip, ward);
 
 
@@ -320,8 +317,8 @@
     var iTax=Math.round(iFood*taxR);
     var iTotal=iFood+iFee+INCUMBENT_DELIVERY+iTax;
     drawVs(sub, 1-keepR, sub, iFood, total, iTotal);
-    drawCustomer({food:sub, tax:tax, svc:svc, fee:procPaid, total:total},
-                 {food:iFood, tax:iTax, svc:iFee, fee:INCUMBENT_DELIVERY, total:iTotal});
+    drawCustomer({menu:sub, markup:0, tax:tax, svc:svc, fee:procPaid, total:total},
+                 {menu:sub, markup:iFood-sub, tax:iTax, svc:iFee, fee:INCUMBENT_DELIVERY, total:iTotal});
     var vc=$('vs-cust');
     if(vc) vc.innerHTML = sub>0
       ? '<b>The same dish is '+M(sub)+' here and '+M(iFood)+' there.</b> Restaurants raise delivery menus to survive a 15\u201330% commission; at '+
