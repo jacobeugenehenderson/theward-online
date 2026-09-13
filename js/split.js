@@ -277,10 +277,11 @@
     //   from the figures it is describing.
     var wr=$('w-rates');
     if(wr) wr.innerHTML = sub>0
-      ? '<b>Their menu is '+M(iFood)+' because a '+Math.round(CAP*100)+'% commission is charged on the '+
-        'marked-up price</b> — coming out whole takes a '+(Math.round((iFood-sub)/sub*1000)/10)+
-        '% rise, not '+Math.round(CAP*100)+'%. Which is why '+Math.round(svcR*100)+'% here and '+
-        Math.round(CAP*100)+'% there are not the same rate: ours is charged on '+M(sub)+'.'
+      ? '<b>The percentages are not directly comparable.</b> Their commission is charged against a '+
+        'marked-up menu price; our service charge is calculated from the '+M(sub)+' counter price. '+
+        'A '+Math.round(CAP*100)+'% commission taken on the marked-up price needs a '+
+        (Math.round((iFood-sub)/sub*1000)/10)+'% rise to leave the restaurant whole — which is '+
+        'where their '+M(iFood)+' comes from.'
       : '';
 
     var vc=$('vs-cust');
