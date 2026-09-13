@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="../../css/tokens.css?v=7ce1d022c15e">
-<link rel="stylesheet" href="../../css/site.css?v=364e94471e9d">
+<link rel="stylesheet" href="../../css/site.css?v=b67cd614b883">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 
 <!-- ⛔ THIS PAGE DECLARES NO CSS OF ITS OWN AND CARRIES NO PLACEMENT
@@ -155,13 +155,10 @@
       <div class="splitbar" id="splitbar">
         <div class="sb-seg sb-proc" id="sb-proc"></div>
         <div class="sb-seg sb-cour" id="sb-cour"></div>
-        <div class="sb-seg sb-host" id="sb-host"></div>
         <div class="sb-seg sb-ward" id="sb-ward"></div>
         <div class="sb-seg sb-spread" id="sb-spread"></div>
         <div class="sb-grip" id="grip-cour" role="slider" tabindex="0"
              aria-label="Courier&rsquo;s share of the service charge" aria-valuemin="50" aria-valuemax="90" aria-valuenow="75"></div>
-        <div class="sb-grip" id="grip-host" role="slider" tabindex="0"
-             aria-label="Local Host&rsquo;s share of what the courier leaves" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40"></div>
       </div>
       <div class="sb-key" id="sb-key"></div>
     </div>
@@ -205,8 +202,7 @@
       <div class="line"><dt><b>Business</b> — food less the fee, plus tax</dt><dd id="p-rest">—</dd></div>
       <div class="line sub2"><dt>fee withheld</dt><dd id="p-comm">—</dd></div>
       <div class="line"><dt><b>Courier</b> — share + all tips </dt><dd id="p-cour">—</dd></div>
-      <div class="line"><dt><b>Local Host</b> </dt><dd id="p-host">—</dd></div>
-      <div class="line"><dt><b>The Ward</b></dt><dd id="p-plat">—</dd></div>
+      <div class="line"><dt><b>The Ward</b> — out of which the neighborhood’s Local Host is paid</dt><dd id="p-plat">—</dd></div>
       <div class="line"><dt><b>Processor</b> — at cost </dt><dd id="p-proc">—</dd></div>
       <div class="line tot"><dt>Accounted for</dt><dd id="p-total">—</dd></div>
     </dl>
@@ -276,6 +272,6 @@
 </footer>
 
 <script src="../../js/site.js?v=0f3be1550239"></script>
-<script src="../../js/split.js?v=d1fd4a3bd95f"></script>
+<script src="../../js/split.js?v=b29b13b3e741"></script>
 </body>
 </html>

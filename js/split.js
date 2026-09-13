@@ -16,7 +16,7 @@
     ['Grubhub + delivery',0.30]
   ];
 
-  var HUE={business:'var(--cary-rule)', courier:'var(--cary-rule)', host:'var(--sign)', ward:'var(--text)', proc:'var(--rule)'};
+  var HUE={business:'var(--cary-rule)', courier:'var(--cary-rule)', ward:'var(--text)', proc:'var(--rule)'};
 
   // One payment, divided once. Band heights are proportional to money, so the
   // picture is the arithmetic rather than an illustration of it.
@@ -29,7 +29,7 @@
     if(d.tip>0) left.push(['Tip',d.tip]);
     left=left.filter(function(x){return x[1]>0;});
     var right=[['Business',d.business,HUE.business],['Courier',d.courier,HUE.courier],
-               ['Local Host',d.host,HUE.host],['The Ward',d.ward,HUE.ward],['Processor',d.proc,HUE.proc]]
+               ['The Ward',d.ward,HUE.ward],['Processor',d.proc,HUE.proc]]
                .filter(function(x){return x[1]>0;});
 
     var lGap=(left.length-1)*GAP, rGap=(right.length-1)*GAP;
@@ -44,12 +44,10 @@
     var svcToPool=d.svc-Math.round(d.svc*d.courR);
     var flows=[
       ['Food','Business',d.sub-d.commission],
-      ['Food','Local Host',Math.round(d.commission*d.hostR)],
-      ['Food','The Ward',d.commission-Math.round(d.commission*d.hostR)],
+      ['Food','The Ward',d.commission],
       ['Tax','Business',d.tax],
       ['Service charge','Courier',Math.round(d.svc*d.courR)],
-      ['Service charge','Local Host',Math.round(svcToPool*d.hostR)],
-      ['Service charge','The Ward',svcToPool-Math.round(svcToPool*d.hostR)],
+      ['Service charge','The Ward',svcToPool],
       ['Processing','Processor',d.proc],
       ['Platform fee','The Ward',d.procSpread||0]
     ];
@@ -102,7 +100,16 @@
   // of it. Courier is paid from the service charge; Local Host and the Ward divide
   // what the courier leaves PLUS the commission — so the two ratios have
   // different bases, and only the bar makes that legible.
-  var COUR=0.75, HOST=0.40;
+  // ⛔ THE LOCAL HOST IS NOT PAID BY THE ORDER, so the order does not draw them a
+  //   slice. They are salaried by their own neighbourhood out of what the Ward
+  //   collects there, annually, plus a courtesy that comes to pennies on one order —
+  //   so a per-order slice implied a payment that does not happen. It was also the
+  //   term that DRIFTED: this page said "40% of the rest" for a day after The Ask
+  //   stopped paying the host that way. The claim it carried survives as a line on
+  //   the Ward's own slice.
+  //   ⭐ And removing it cost nothing: the host slice is carved AFTER the business
+  //   and the courier are paid, so it never moved the number this page exists for.
+  var COUR=0.75;
   var CAP=0.15;   // NYC · SF · Denver · Seattle · DC
   // ◆ Published consumer-side fees on the major platforms, 2026.
   var INCUMBENT_SERVICE=0.15, INCUMBENT_DELIVERY=299;
@@ -143,30 +150,25 @@
 
   // The bar IS the money: segment widths are dollars, so the grips sit where
   // the divisions actually fall rather than where a ratio would put them.
-  function drawSplit(proc, procSpread, svc, commission, courierCut, host, ward){
+  function drawSplit(proc, procSpread, svc, commission, courierCut, ward){
     // ⛔ Processing is IN the bar and leaves it first. It is money Cary
     // collects and does not keep — a reader who cannot see it leave assumes
     // it was kept, which is the exact accusation the pass-through rule exists
     // to answer. It is fixed, not draggable: it is a published rate.
     var pot=proc+procSpread+svc+commission; if(!pot) pot=1;
-    var f0=proc/pot, f1=f0+courierCut/pot, f2=f1+host/pot, f3=f2+ward/pot;
+    var f0=proc/pot, f1=f0+courierCut/pot, f2=f1+ward/pot;
     $('pot-v').textContent=M(pot);
     $('sb-proc').style.width=(f0*100).toFixed(2)+'%';
     $('sb-cour').style.width=((f1-f0)*100).toFixed(2)+'%';
-    $('sb-host').style.width=((f2-f1)*100).toFixed(2)+'%';
-    $('sb-ward').style.width=((f3-f2)*100).toFixed(2)+'%';
-    $('sb-spread').style.width=((1-f3)*100).toFixed(2)+'%';
+    $('sb-ward').style.width=((f2-f1)*100).toFixed(2)+'%';
+    $('sb-spread').style.width=((1-f2)*100).toFixed(2)+'%';
     $('grip-cour').style.left=(f1*100).toFixed(2)+'%';
-    $('grip-host').style.left=(f2*100).toFixed(2)+'%';
     $('grip-cour').setAttribute('aria-valuenow', Math.round(COUR*100));
     $('grip-cour').setAttribute('aria-valuetext', Math.round(COUR*100)+'% of the service charge, '+M(courierCut));
-    $('grip-host').setAttribute('aria-valuenow', Math.round(HOST*100));
-    $('grip-host').setAttribute('aria-valuetext', Math.round(HOST*100)+'% of what is left, '+M(host));
     $('sb-key').innerHTML=
       '<div class="k-proc"><b>'+M(proc)+'</b>Processor <span>· at cost, straight out</span></div>'+
       '<div class="k-cour"><b>'+M(courierCut)+'</b>Courier <span>· '+Math.round(COUR*100)+'% of the service charge</span></div>'+
-      '<div class="k-host"><b>'+M(host)+'</b>Local Host <span>· '+Math.round(HOST*100)+'% of the rest</span></div>'+
-      '<div class="k-ward"><b>'+M(ward)+'</b>The Ward</div>'+
+      '<div class="k-ward"><b>'+M(ward)+'</b>The Ward <span>· pays the neighborhood’s Local Host</span></div>'+
       (procSpread>0?'<div class="k-spread"><b>'+M(procSpread)+'</b>The Ward <span>· the in-house saving</span></div>':'');
   }
 
@@ -176,7 +178,7 @@
         svcR=+$('svc').value/100,
         tip=+$('tip').value*100,
         keepR=1-(+$('keep').value/100),
-        courR=COUR, hostR=HOST;
+        courR=COUR;
 
     var tax=Math.round(sub*taxR);
     var svc=Math.round(sub*svcR);
@@ -198,8 +200,7 @@
     var business=sub-commission+tax;
     var courier=Math.round(svc*courR)+tip;
     var pool=(svc-Math.round(svc*courR))+commission;
-    var host=Math.round(pool*hostR);
-    var ward=pool-host+procSpread;
+    var ward=pool+procSpread;
 
     $('sub-v').textContent='$'+(sub/100).toFixed(0);
     $('tax-v').textContent=(+$('tax').value/1000).toFixed(3).replace(/0+$/,'').replace(/\.$/,'')+'%';
@@ -210,7 +211,7 @@
     $('vol-v').textContent=vol;
     $('keep-v').textContent=(+$('keep').value)+'% · '+M(commission);
     $('rule-comm').textContent=(+$('keep').value)+'%';
-    drawSplit(procPaid, procSpread, svc, commission, courier-tip, host, ward-procSpread);
+    drawSplit(procPaid, procSpread, svc, commission, courier-tip, ward-procSpread);
 
 
     $('o-food').textContent=M(sub);
@@ -231,17 +232,16 @@
     $('p-rest').textContent=M(business);
     $('p-comm').textContent='−'+M(commission);
     $('p-cour').textContent=M(courier);
-    $('p-host').textContent=M(host);
     $('p-plat').textContent=M(ward);
     $('p-proc').textContent=M(procPaid);
-    $('p-total').textContent=M(business+courier+host+ward+procPaid);
+    $('p-total').textContent=M(business+courier+ward+procPaid);
     $('p-pos').textContent=M(sub+tax);
 
     var parts=[['s-rest','Business',business],['s-cour','Courier',courier],
-               ['s-host','Local Host',host],['s-plat','The Ward',ward],['s-proc','Processor',procPaid]];
+               ['s-plat','The Ward',ward],['s-proc','Processor',procPaid]];
     drawFlow({ sub:sub, tax:tax, svc:svc, proc:procPaid, procSpread:procSpread, tip:tip, total:total,
                commission:commission, business:business, courier:courier,
-               host:host, ward:ward, courR:courR, hostR:hostR });
+               ward:ward, courR:courR });
     $('legend').innerHTML=parts.map(function(x){
       var pct=total>0?(x[2]/total*100):0;
       return '<span><i class="sw '+x[0]+'"></i>'+x[1]+' '+pct.toFixed(1)+'%</span>';
@@ -297,13 +297,10 @@
     if(which==='cour'){
       COUR = b.svc>0 ? clamp(past/b.svc, 0.50, 0.90) : COUR;
     } else {
-      var courierCut=Math.round(b.svc*COUR);
-      var pool=(b.svc-courierCut)+b.commission;
-      HOST = pool>0 ? clamp((past-courierCut)/pool, 0, 1) : HOST;
     }
     calc();
   }
-  ['cour','host'].forEach(function(which){
+  ['cour'].forEach(function(which){
     var g=$('grip-'+which);
     g.addEventListener('pointerdown',function(e){
       g.setPointerCapture(e.pointerId); e.preventDefault();
@@ -322,8 +319,7 @@
             : e.key==='ArrowRight'||e.key==='ArrowUp' ? 1 : 0;
       if(!d) return;
       e.preventDefault();
-      if(which==='cour') COUR=clamp(COUR+d*0.01, 0.50, 0.90);
-      else               HOST=clamp(HOST+d*0.05, 0, 1);
+      COUR=clamp(COUR+d*0.01, 0.50, 0.90);
       calc();
     });
   });

@@ -1619,14 +1619,14 @@ a { color: inherit; }
 .tool--split .seg button:focus-visible{outline:2px solid var(--cary-rule); outline-offset:2px}
 .tool--split .splitbar{position:relative; display:flex; height:44px; margin-top:14px; border:1px solid var(--text); overflow:visible; touch-action:none; user-select:none}
 .tool--split .sb-seg{height:100%; min-width:0; overflow:hidden}
-.tool--split .sb-proc{background:var(--rule)} .sb-cour{background:var(--cary-rule)} .sb-host{background:var(--sign)} .sb-ward{background:var(--text)} .sb-spread{background:repeating-linear-gradient(135deg,var(--text) 0 5px,var(--text-faint) 5px 10px)}
+.tool--split .sb-proc{background:var(--rule)} .sb-cour{background:var(--cary-rule)} .sb-ward{background:var(--text)} .sb-spread{background:repeating-linear-gradient(135deg,var(--text) 0 5px,var(--text-faint) 5px 10px)}
 .tool--split .sb-grip{position:absolute; top:-7px; bottom:-7px; width:13px; margin-left:-6px; cursor:ew-resize;
   background:var(--ground-2); border:1px solid var(--text); border-radius:2px}
 .tool--split .sb-grip::after{content:""; position:absolute; inset:6px 4px; border-left:1px solid var(--text-faint); border-right:1px solid var(--text-faint); opacity:.6}
 .tool--split .sb-grip:focus-visible{outline:2px solid var(--cary-rule); outline-offset:2px}
 .tool--split .sb-key{display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:10px; margin-top:11px; font-size:12px}
 .tool--split .sb-key div{border-top:3px solid; padding-top:6px; min-width:0}
-.tool--split .sb-key .k-proc{border-color:var(--rule)} .sb-key .k-cour{border-color:var(--cary-rule)} .sb-key .k-host{border-color:var(--sign)} .sb-key .k-ward{border-color:var(--text)} .sb-key .k-spread{border-color:var(--text-faint)}
+.tool--split .sb-key .k-proc{border-color:var(--rule)} .sb-key .k-cour{border-color:var(--cary-rule)} .sb-key .sb-key .k-ward{border-color:var(--text)} .sb-key .k-spread{border-color:var(--text-faint)}
 .tool--split .sb-key b{display:block; font-family:var(--f-sys); font-variant-numeric:tabular-nums; font-size:16px; font-weight:600; color:var(--text)}
 .tool--split .sb-key span{color:var(--text-faint)}
 .tool--split .note{font-size:12px; color:var(--text-faint); margin-top:5px; max-width:52ch}
@@ -1635,7 +1635,7 @@ a { color: inherit; }
 .tool--split .panel{background:var(--ground-2); border:1px solid var(--rule); padding:22px 20px; position:sticky; top:20px}
 @media (max-width:880px){ .panel{position:static} }
 
-.tool--split .s-host{background:var(--sign)} .s-plat{background:var(--text)} .s-proc{background:var(--rule); color:var(--text-soft)}
+.tool--split .s-plat{background:var(--text)} .s-proc{background:var(--rule); color:var(--text-soft)}
 .tool--split .legend{display:flex; flex-wrap:wrap; gap:4px 16px; font-size:11.5px; color:var(--text-soft); margin-bottom:16px}
 .tool--split .legend span{display:flex; align-items:center; gap:5px}
 .tool--split .sw{width:9px; height:9px; display:inline-block; border:1px solid var(--text)}
