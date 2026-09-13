@@ -161,9 +161,13 @@
     $('sb-cour').style.width=((f1-f0)*100).toFixed(2)+'%';
     $('sb-ward').style.width=((f2-f1)*100).toFixed(2)+'%';
     $('sb-key').innerHTML=
-      '<div class="k-proc"><b>'+M(proc)+'</b>Processor <span>· at cost, straight out</span></div>'+
-      '<div class="k-cour"><b>'+M(courierCut)+'</b>Courier <span>· '+Math.round(COUR*100)+'% of the service charge</span></div>'+
-      '<div class="k-ward"><b>'+M(ward)+'</b>The Ward <span>· pays the neighborhood’s Local Host</span></div>'+
+      // ⭐ A LEGEND NAMES, IT DOES NOT EXPLAIN. Each row carried a trailing clause —
+      // "at cost, straight out", the courier's percentage, who the Ward pays — and
+      // two of the three are already rules three screens down, stated better there.
+      // The amount and the party are the legend's whole job.
+      '<div class="k-proc"><b>'+M(proc)+'</b>Processor</div>'+
+      '<div class="k-cour"><b>'+M(courierCut)+'</b>Courier</div>'+
+      '<div class="k-ward"><b>'+M(ward)+'</b>The Ward</div>'+
       '';
   }
 
@@ -200,6 +204,9 @@
     $('sub-v').textContent='$'+(sub/100).toFixed(0);
     $('tax-v').textContent=(+$('tax').value/1000).toFixed(3).replace(/0+$/,'').replace(/\.$/,'')+'%';
     $('svc-v').textContent=$('svc').value+'%';
+    // ⛔ THE ONLY PLACE THIS NUMBER IS STATED ON THIS PAGE, so it is written from
+    //   COUR rather than typed — it used to live in the bar's key and vanished with it.
+    $('cour-note').innerHTML='The courier is paid <b>'+Math.round(COUR*100)+'%</b> of it.';
     $('tip-v').textContent='$'+$('tip').value;
     $('markup-v').textContent=$('markup').value+'%';
     $('proc-v').textContent=(rate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+rate.f+'¢';
