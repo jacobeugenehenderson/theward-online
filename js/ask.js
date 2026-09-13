@@ -234,7 +234,6 @@
     // an artist — and a sponsor-funded takeover is not the studio's cost at all.
     var clusters=clustersNow();
     var retainerAll=a.hoods*(+el('retainer').value);
-    var hostBaseAll=a.hoods*(+el('hostbase').value);
     var takeCount=+el('takeovers').value, takeFee=feeFromSlider(+el('takefee').value);
     var takeAll=takePayer==='studio' ? takeCount*takeFee : 0;
     // ⭐ One source for volumes: the revenue panel. Nothing here re-derives them.
@@ -243,7 +242,7 @@
     var pourIsRevenue=(topo!=='inst');   // a pour an institution absorbs is a cost, and only a cost
     var poursDone=a.pours;
     var commissionAll=poursDone*(+el('commission').value);
-    var cost=sal+loading+setup+retainerAll+commissionAll+takeAll+hostBaseAll;
+    var cost=sal+loading+setup+retainerAll+commissionAll+takeAll;
     // ⭐ Support is charged on every neighborhood standing, not on this year's
     // sales — so it compounds with the installed base rather than the sales rate.
     var poursRev=pourIsRevenue?poursDone*tierVal:0,
@@ -281,10 +280,7 @@
       : '<b>'+K(takeFee)+'</b> to the artist for a season on one ward.';
     el('ret-label').textContent='Ward upkeep \u00b7 '+clusters+' cartographer'+(clusters===1?'':'s');
     el('o-ret').textContent=K(retainerAll);
-    el('o-hostbase').textContent=K(hostBaseAll);
-    el('hostbase-v').textContent=K(+el('hostbase').value);
-    var hbn=document.getElementById('hostbase-note');
-    if(hbn) hbn.innerHTML='<b>'+K(Math.round((+el('hostbase').value)/12))+'</b> a month, before the share.';
+
     el('o-comm').textContent=K(commissionAll);
     el('o-take').textContent=takePayer==='studio'?K(takeAll):'sponsor-funded';
     el('take-row').style.display=takeCount>0?'':'none';
@@ -296,9 +292,8 @@
       var r=document.getElementById(id); if(r) r.style.display=pourIsRevenue?'':'none';
     });
     var hostFood=deliveryFlow*(SVC*(1-COURIER)+COMM)*HOSTSHARE*12;
-    el('o-hostbase2').textContent=K(hostBaseAll);
     el('o-host').textContent=K(hostFood);
-    el('o-hostper').textContent=a.hoods>0?K(Math.round((hostFood+hostBaseAll)/a.hoods)):'\u2014';
+    el('o-hostper').textContent=a.hoods>0?K(Math.round(hostFood/a.hoods)):'\u2014';
     el('o-del').textContent=K(delivery); el('o-rails').textContent=K(railsFee); el('o-earn').textContent=K(earned);
     var covered=surplus>0;
     var rh=document.getElementById('raise-head');
@@ -345,15 +340,15 @@
     // cost of the page behind four triangles.
     var gt={'The roster':on.length+(on.length===1?' person · ':' people · ')+K(sal),
             'Revenue assumptions':K(earned)+' earned',
-            'Commissioned work':K(retainerAll+commissionAll+takeAll+hostBaseAll),
+            'Commissioned work':K(retainerAll+commissionAll+takeAll),
             'On top of salary':K(loading+setup)};
     Array.prototype.forEach.call(document.querySelectorAll('.gtally'),function(t){
       if(gt[t.dataset.g]!==undefined) t.textContent=gt[t.dataset.g];
     });
     drawChart({ pours:a.pours, cluster:+el('cluster').value,
                 rests:a.rests, perrest:a.perrest, localflow:a.localflow,
-                fixedCost:cost-retainerAll-hostBaseAll,
-                perWard:(+el('retainer').value)+(+el('hostbase').value),
+                fixedCost:cost-retainerAll,
+                perWard:+el('retainer').value,
                 hoods:a.hoods, pourIsRevenue:pourIsRevenue });
   }
 
@@ -561,7 +556,7 @@
       b.setAttribute('aria-pressed','true'); mode=b.dataset.m; build(); update(); rails();
     });
   });
-  ['load','sponsor','setup','hoods','rests','perrest','localflow','pours','pfee','svc','comm','hostshare','hostbase','annual','tier',
+  ['load','sponsor','setup','hoods','rests','perrest','localflow','pours','pfee','svc','comm','hostshare','annual','tier',
    'cluster','retainer','commission','takeovers','takefee'].forEach(function(id){
     el(id).addEventListener('input',function(){ update(); rails(); });
   });
