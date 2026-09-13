@@ -223,10 +223,10 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
       <div class="dial" id="hostshare-dial">
         <div class="dial-head">
           <label class="dial-label" for="hostshare"><span>The Local Host&rsquo;s share</span></label>
-          <span class="dial-val" id="hostshare-v">4.2% of food</span>
+          <span class="dial-val" id="hostshare-v">40%</span>
         </div>
-        <input type="range" id="hostshare" min="0" max="105" step="1" value="42">
-        <p class="note" id="foodrate-note">The Ward keeps <b>6.3%</b> of food sold.</p>
+        <input type="range" id="hostshare" min="0" max="100" step="1" value="40">
+        <p class="note" id="foodrate-note">Of everything the Ward collects in the neighborhood. The Ward keeps <b>6.3%</b> of food sold.</p>
       </div>
 
     </details>
@@ -392,8 +392,8 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
     </dl>
     <h4>Earned by the Local Hosts</h4>
     <dl>
-      <div class="line"><dt>Salaries, all wards</dt><dd id="o-hostsal">—</dd></div>
       <div class="line"><dt>Share of food orders</dt><dd id="o-host">—</dd></div>
+      <div class="line"><dt>Share of other local commerce</dt><dd id="o-hostrails">—</dd></div>
       <div class="line"><dt>Each Local Host</dt><dd id="o-hostper">—</dd></div>
     </dl>
     <h4 id="raise-head">What must be raised</h4>
@@ -519,8 +519,6 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
 
     {id:'jh',band:'Studio & mission',name:'Jacob Henderson — principal &amp; creative director',owns:'Direction, the look, the doctrine',pay:110000,
      why:'Owner of the studio, creative director of the nonprofit. Currently zero.',modes:['custodial','product']},
-    {id:'host',band:'Studio & mission',name:'Local Host',owns:'Runs one neighborhood &middot; local moderation',perWard:true,pay:60000,
-     why:'One per ward, so this salary is paid once per neighborhood on the rails.',modes:['custodial','product']},
     {id:'ed',band:'Studio & mission',name:'Founding executive director',owns:'The raise, governance, the sponsor',pay:80000,
      why:'Works the grant cycle. Nothing gets funded until this seat is filled.',modes:['custodial','product']},
     {id:'grants',band:'Studio & mission',name:'Grants associate',owns:'The second raiser',pay:62000,
@@ -540,12 +538,6 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
     [1.45,'Chicago · Boston'],
     [1.60,'NYC · SF Bay']
   ];
-  function rosterAt(k){
-    return ROLES.filter(function(r){return r.on;}).reduce(function(a,r){
-      var kk=LOCAL_SEATS.indexOf(r.id)!==-1?1.00:k;
-      return a+Math.round(r.base*kk/1000)*1000;
-    },0);
-  }
   // A scale, not a second control — the slider is the control. These mark where
   // real metros sit on it.
   function drawLegend(){
@@ -565,7 +557,7 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
     var poursRev=ctx.pourIsRevenue?ctx.pours*tierVal:0;
     var annual=ctx.pourIsRevenue?n*tierVal*ANNUAL:0;
     var delivery=n*ctx.rests*ctx.perrest*foodRate()*12;
-    var rails=n*ctx.localflow*PLATFORM_FEE*12;
+    var rails=n*ctx.localflow*PLATFORM_FEE*(1-HOSTSHARE)*12;
     return poursRev+annual+delivery+rails-(ctx.fixedCost+ctx.perWard*n);
   }
   function drawChart(ctx){
@@ -598,10 +590,7 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
       : (pts[0]>=0 ? 'Covers itself from the first neighborhood.' : 'Never covers itself at this roster and these rates.');
   }
 
-  function marketPay(r){
-    var k=LOCAL_SEATS.indexOf(r.id)!==-1 ? 1.00 : market;
-    return Math.round(r.base*k/1000)*1000;
-  }
+  function marketPay(r){ return Math.round(r.base*market/1000)*1000; }
   // ⭐ Each slider spans ITS OWN band, not one global range — so the ends mean
   // something. A top-of-range executive director and a bottom-of-range geometry
   // engineer were both implausible when every role shared 45k–220k.
@@ -610,22 +599,13 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
     return { lo:Math.round(mid*0.72/5000)*5000, hi:Math.round(mid*1.55/5000)*5000 };
   }
   var host=el('roles');
-  // ⛔⛔ THE SHARE DIAL IS MOVED INTO THE ROSTER, SO build() MUST RESCUE IT BEFORE
-  //    IT WIPES THE ROSTER. The Local Host's share sits on the seat it pays, which
-  //    means build() appends #hostshare-dial into a row it just created — and
-  //    build() opens with `host.innerHTML=''`. The FIRST build() moved the dial in;
-  //    the SECOND destroyed it. readRates() then threw on `hs.max` forever after,
-  //    so ONE click on a topology tab, a roster mode or the pay market froze every
-  //    figure on the page — while the sliders carried on moving, which is why it
-  //    read as "the knobs aren't doing anything" rather than as a crash.
-  //    ⭐ HELD BY REFERENCE, NOT LOOKED UP: a detached element is invisible to
-  //    getElementById, so the lookup that used to guard this could never have
-  //    found it after the wipe. Detach, wipe, re-home.
-  //    (Measured on production 2026-09-13, not introduced by that day's edits.)
-  var shareDial=document.getElementById('hostshare-dial');
-  // ⭐ Collapse state is REMEMBERED ACROSS REBUILDS. build() re-runs on every
-  // mode, topology and pay-market change, so holding the state on the elements
-  // would silently re-open a band the reader had shut.
+  // ⭐ THE SHARE DIAL STAYS WHERE IT IS WRITTEN. Until 2026-09-13 the Local Host
+  //   was a salaried seat and its share dial was appended INTO that seat's row by
+  //   build() — which opens by wiping the roster, so the second build() destroyed
+  //   #hostshare and readRates() threw on `hs.max` for the rest of the session.
+  //   The seat is now paid by the neighborhood rather than the studio, so there is
+  //   no row to sit on and nothing to rescue. The bug's mechanism is retired, not
+  //   merely guarded.
   var collapsed={};
   function seatsHere(){
     var off=TOPO[topo].forceOff||[];
@@ -636,7 +616,6 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
     });
   }
   function build(){
-    if(shareDial && shareDial.parentNode) shareDial.parentNode.removeChild(shareDial);
     host.innerHTML=''; var currentBand=null, bandBox=null, bandHead=null;
     seatsHere().forEach(function(r){
       if(r.band!==currentBand){
@@ -670,14 +649,12 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
         '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--ink-3);margin-top:1px">'+K(bd.lo)+'–'+K(bd.hi)+'</div>'+
         '<input type="range" id="rng-'+r.id+'" min="'+bd.lo+'" max="'+bd.hi+'" step="2500" value="'+r.pay+'" aria-label="'+r.name+' salary, '+K(bd.lo)+' to '+K(bd.hi)+'"></div>';
       bandBox.appendChild(d);
-      if(r.id==='host' && shareDial) d.appendChild(shareDial);
       d.querySelector('#chk-'+r.id).addEventListener('change',function(e){
         r.on=e.target.checked; d.className='role'+(r.on?'':' off'); update();
       });
       d.querySelector('#rng-'+r.id).addEventListener('input',function(e){
         r.pay=+e.target.value;
-        var k=LOCAL_SEATS.indexOf(r.id)!==-1?1.00:market;
-        r.base=r.pay/k;
+        r.base=r.pay/market;
         el('pay-'+r.id).textContent=K(r.pay); update();
       });
     });
@@ -690,7 +667,7 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
     seatsHere().forEach(function(r){
       by[r.band]=by[r.band]||{on:0,of:0,pay:0};
       by[r.band].of++;
-      if(r.on){ by[r.band].on++; by[r.band].pay+=r.perWard?r.pay*hoodsFromSlider(+el('hoods').value):r.pay; }
+      if(r.on){ by[r.band].on++; by[r.band].pay+=r.pay; }
     });
     Array.prototype.forEach.call(host.querySelectorAll('.rtally'),function(t){
       var b=by[t.dataset.band]; if(!b) return;
@@ -708,7 +685,7 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
     tierVal=+el('tier').value; el('tier-v').textContent=K(tierVal);
 
     var a2=a, on=ROLES.filter(function(r){return r.on;});
-    var sal=on.reduce(function(a,r){return a+(r.perWard?r.pay*a2.hoods:r.pay);},0);
+    var sal=on.reduce(function(a,r){return a+r.pay;},0);
     var loading=sal*load;
     // ⭐ COMMISSIONED WORK IS A COST, NOT HEADCOUNT. Two cadences: once per ward
     // to make it, and every year per ward to look after it.
@@ -716,8 +693,6 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
     // three controls and a reading row here until 2026-09-13. The notion is
     // described in prose on /works, and a sponsored one was never the studio's
     // cost — so it has no place on a page about what the studio must raise.
-    var hostSeat=ROLES.filter(function(r){return r.id==='host';})[0];
-    var hostSalPer=(hostSeat&&hostSeat.on)?hostSeat.pay:0, hostSalAll=hostSalPer*a.hoods;
     var retainerAll=a.hoods*(+el('retainer').value);
     // ⭐ One source for volumes: the revenue panel. Nothing here re-derives them.
     // ⛔ Under absorption with internally-funded pours, the institution is paying
@@ -736,7 +711,12 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
         annual=pourIsRevenue?a.hoods*tierVal*ANNUAL:0,
         deliveryFlow=a.hoods*a.rests*a.perrest,
         delivery=deliveryFlow*foodRate()*12,
-        railsFee=a.hoods*a.localflow*PLATFORM_FEE*12,
+        // ⭐ THE HOST'S SHARE COMES OFF EVERY FLOW, NOT JUST FOOD. It was food-only
+        // until 2026-09-13, when the seat stopped being a studio salary and became
+        // a share of what the neighborhood sells — at which point taking a share of
+        // the restaurants and none of the shops was arbitrary (Jacob: "a share of
+        // everything the hood sells"). foodRate() already nets it out of food.
+        railsFee=a.hoods*a.localflow*PLATFORM_FEE*(1-HOSTSHARE)*12,
         earned=poursRev+annual+delivery+railsFee;
     // ⛔ `Math.max(0, …)` FROZE THE WHOLE BOTTOM OF THE PANEL. Once earned
     // revenue passed the roster, the gap and the ask both pinned to $0 and
@@ -769,10 +749,14 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
     ['tier-row','annual-row','pours-row','ann-row'].forEach(function(id){
       var r=document.getElementById(id); if(r) r.style.display=pourIsRevenue?'':'none';
     });
-    var hostFood=deliveryFlow*(SVC*(1-COURIER)+COMM)*HOSTSHARE*12;
-    el('o-hostsal').textContent=K(hostSalAll);
+    var hostFood=deliveryFlow*(SVC*(1-COURIER)+COMM)*HOSTSHARE*12,
+        hostRails=a.hoods*a.localflow*PLATFORM_FEE*HOSTSHARE*12;
     el('o-host').textContent=K(hostFood);
-    el('o-hostper').textContent=a.hoods>0?K(hostSalPer+Math.round(hostFood/a.hoods)):'\u2014';
+    el('o-hostrails').textContent=K(hostRails);
+    // ⛔ NO FLOOR. What a Local Host earns is what their own neighborhood sells,
+    // and in a thin ward that is a small number — which is the honest reading and
+    // the reason this is not a salary line (Jacob, 2026-09-13).
+    el('o-hostper').textContent=a.hoods>0?K(Math.round((hostFood+hostRails)/a.hoods)):'\u2014';
     el('o-del').textContent=K(delivery); el('o-rails').textContent=K(railsFee); el('o-earn').textContent=K(earned);
     var covered=surplus>0;
     var rh=document.getElementById('raise-head');
@@ -845,8 +829,8 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
     });
     drawChart({ pours:a.pours,
                 rests:a.rests, perrest:a.perrest, localflow:a.localflow,
-                fixedCost:cost-retainerAll-hostSalAll,
-                perWard:(+el('retainer').value)+hostSalPer,
+                fixedCost:cost-retainerAll,
+                perWard:(+el('retainer').value),
                 hoods:a.hoods, pourIsRevenue:pourIsRevenue });
   }
 
@@ -907,9 +891,6 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
   //   open-ended commitment is not a thing an institution can approve.
   var TERM=3;
   var topo='inst', market=1.00;
-  // ⛔ These seats must be IN the neighborhood — you cannot pour Lafayette Square
-  // or train Barrio\u2019s guardians from Manhattan. They price to the ward, not the buyer.
-  var LOCAL_SEATS=['host'];
 
   function drawTopo(resetRoster){
     var t=TOPO[topo], h='';
@@ -985,19 +966,22 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
     PLATFORM_FEE=+el('pfee').value/1000;
     SVC=+el('svc').value/100; COMM=+el('comm').value/100;
     var poolRate=SVC*(1-COURIER)+COMM;
-    var hs=el('hostshare'); hs.max=Math.round(poolRate*1000);
-    if(+hs.value>+hs.max) hs.value=hs.max;
-    var hostFood=+hs.value/1000;
-    HOSTSHARE = poolRate>0 ? hostFood/poolRate : 0;
+    // ⭐ THE SHARE IS OF WHAT THE WARD COLLECTS, expressed directly. It used to be
+    // dialled as a percentage OF FOOD and divided back out by the food pool, with a
+    // max that moved whenever the service charge moved — and it was that `hs.max`
+    // write that threw for a whole session once the dial had been destroyed. A share
+    // that applies to several flows cannot be expressed in any one of them, so the
+    // dial states the share and the note below states what it comes to on food.
+    HOSTSHARE = +el('hostshare').value/100;
     ANNUAL=+el('annual').value/100;
     el('pfee-v').textContent=(PLATFORM_FEE*100).toFixed(1)+'%';
     el('svc-v').textContent=el('svc').value+'%';
     el('comm-v').textContent=el('comm').value+'%';
-    el('hostshare-v').textContent=(hostFood*100).toFixed(1)+'% of food';
+    el('hostshare-v').textContent=el('hostshare').value+'%';
     // ⭐ Three dials compound into one rate, and the rate is the only one of the
     // four numbers that appears in the reading. Say it where it is decided.
     var fn=document.getElementById('foodrate-note');
-    if(fn) fn.innerHTML='The Ward keeps <b>'+(foodRate()*100).toFixed(1)+'%</b> of food sold.';
+    if(fn) fn.innerHTML='Of everything the Ward collects in the neighborhood. The Ward keeps <b>'+(foodRate()*100).toFixed(1)+'%</b> of food sold.';
     // ⭐ IN DOLLARS BESIDE THE PERCENTAGE, because a share of the pour price
     // means nothing until you know the pour price — and because this is what a
     // ward is CHARGED for support, against "Ward upkeep" in Commissioned work,
