@@ -100,12 +100,12 @@
     $('w2-tot').textContent=M(received.total);
     $('w3-tot').textContent=M(rival.total);
     $('w-key').innerHTML =
-      '<div class="k-food"><b>'+M(charged.menu)+'</b>Menu <span>· business keeps '+M(received.business)+'</span></div>'+
-      '<div class="k-mark"><b>'+M(rival.markup)+'</b>Markup <span>· theirs only</span></div>'+
+      '<div class="k-food"><b>'+M(charged.menu)+'</b>Menu</div>'+
+      '<div class="k-mark"><b>'+M(rival.markup)+'</b>Markup (theirs)</div>'+
       '<div class="k-tax"><b>'+M(charged.tax)+' · '+M(rival.tax)+'</b>Sales tax</div>'+
-      '<div class="k-svc"><b>'+M(charged.svc)+'</b>Service charge <span>· courier takes '+M(received.courier)+'</span></div>'+
+      '<div class="k-svc"><b>'+M(charged.svc)+'</b>Service charge</div>'+
       '<div class="k-ward"><b>'+M(received.ward)+'</b>The Ward</div>'+
-      '<div class="k-proc2"><b>'+M(charged.fee)+' · '+M(rival.fee)+'</b>Processing <span>· their delivery fee</span></div>';
+      '<div class="k-proc2"><b>'+M(charged.fee)+' · '+M(rival.fee)+'</b>Processing · delivery fee</div>';
   }
 
   // ⭐ BOTH SIDES OF THE ORDER, IN ONE TABLE. This answered only what the BUSINESS

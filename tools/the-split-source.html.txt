@@ -88,7 +88,6 @@ header h1{font-size:clamp(34px,6vw,52px); font-weight:600; line-height:1.02; let
 .sb-key{display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:10px; margin-top:11px; font-size:12px}
 .sb-key div{border-top:3px solid; padding-top:6px; min-width:0}
 .sb-key b{display:block; font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; font-size:16px; font-weight:600; color:var(--ink)}
-.sb-key span{color:var(--ink-3)}
 .note{font-size:12px; color:var(--ink-3); margin-top:5px; max-width:52ch}
 /* ⛔ after .note, not before — equal specificity, so declaration order decides. */
 .w-rates{max-width:none; margin-top:14px}
@@ -352,12 +351,12 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     $('w2-tot').textContent=M(received.total);
     $('w3-tot').textContent=M(rival.total);
     $('w-key').innerHTML =
-      '<div class="k-food"><b>'+M(charged.menu)+'</b>Menu <span>· business keeps '+M(received.business)+'</span></div>'+
-      '<div class="k-mark"><b>'+M(rival.markup)+'</b>Markup <span>· theirs only</span></div>'+
+      '<div class="k-food"><b>'+M(charged.menu)+'</b>Menu</div>'+
+      '<div class="k-mark"><b>'+M(rival.markup)+'</b>Markup (theirs)</div>'+
       '<div class="k-tax"><b>'+M(charged.tax)+' · '+M(rival.tax)+'</b>Sales tax</div>'+
-      '<div class="k-svc"><b>'+M(charged.svc)+'</b>Service charge <span>· courier takes '+M(received.courier)+'</span></div>'+
+      '<div class="k-svc"><b>'+M(charged.svc)+'</b>Service charge</div>'+
       '<div class="k-ward"><b>'+M(received.ward)+'</b>The Ward</div>'+
-      '<div class="k-proc2"><b>'+M(charged.fee)+' · '+M(rival.fee)+'</b>Processing <span>· their delivery fee</span></div>';
+      '<div class="k-proc2"><b>'+M(charged.fee)+' · '+M(rival.fee)+'</b>Processing · delivery fee</div>';
   }
 
   // ⭐ BOTH SIDES OF THE ORDER, IN ONE TABLE. This answered only what the BUSINESS
