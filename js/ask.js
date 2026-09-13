@@ -468,12 +468,11 @@
     el('pfee-v').textContent=(PLATFORM_FEE*100).toFixed(1)+'%';
     el('svc-v').textContent=el('svc').value+'%';
     el('comm-v').textContent=el('comm').value+'%';
-    el('hostshare-v').textContent=el('hostshare').value+'%';
+    el('hostshare-v').textContent=((SVC*(1-COURIER)+COMM)*HOSTSHARE*100).toFixed(1)+'% of food';
     // ⭐ Three dials compound into one rate, and the rate is the only one of the
     // four numbers that appears in the reading. Say it where it is decided.
     var fn=document.getElementById('foodrate-note');
-    if(fn) fn.innerHTML='The Ward keeps <b>'+(foodRate()*100).toFixed(1)+'%</b> of food sold; the neighborhood keeps <b>'+
-      ((SVC*(1-COURIER)+COMM)*HOSTSHARE*100).toFixed(1)+'%</b>.';
+    if(fn) fn.innerHTML='The Ward keeps the rest — <b>'+(foodRate()*100).toFixed(1)+'%</b> of food sold.';
     // ⭐ IN DOLLARS BESIDE THE PERCENTAGE, because a share of the pour price
     // means nothing until you know the pour price — and because this is what a
     // ward is CHARGED for support, against "Ward upkeep" in Commissioned work,
