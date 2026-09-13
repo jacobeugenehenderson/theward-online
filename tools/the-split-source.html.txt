@@ -60,9 +60,10 @@ header h1{font-size:clamp(34px,6vw,52px); font-weight:600; line-height:1.02; let
 .sb-proc{background:var(--rule)} .sb-cour{background:var(--brick)} .sb-ward{background:var(--ink)}
 /* ⭐ THE PAGE'S ONE INPUT. Every figure on the page is a function of this and it sat
    as the first of four equal dials. It is above the section now, and larger. */
-.lead-dial{border-bottom:none; padding-top:0}
-.lead-dial .dial-label{font-size:16px}
-.lead-dial .dial-val{font-size:22px}
+.lead-dial{border-bottom:none; padding:2px 0 26px}
+.lead-dial .dial-label{font-size:19px}
+.lead-dial .dial-val{font-size:34px; letter-spacing:-.02em; line-height:1}
+.lead-dial input[type=range]{height:26px; margin-top:16px}
 .cmp{margin:10px 0 4px}
 .cmp-row{display:flex; justify-content:space-between; align-items:baseline; margin-top:12px; font-size:12.5px}
 .cmp-lbl{color:var(--ink-2)}
