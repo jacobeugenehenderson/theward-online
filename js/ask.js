@@ -223,7 +223,7 @@
     el('load-v').textContent=el('load').value+'%';
     el('sponsor-v').textContent=el('sponsor').value+'%';
     el('setup-v').textContent=K(setup);
-    el('tier-v').textContent=K(tierVal);
+    tierVal=+el('tier').value; el('tier-v').textContent=K(tierVal);
 
     var on=ROLES.filter(function(r){return r.on;});
     var sal=on.reduce(function(a,r){return a+r.pay;},0);
@@ -300,9 +300,10 @@
         ' cartographer'+(clusters===1?'':'s')+' can pour in a year';
     }
     var pl=document.getElementById('pours-label');
-    if(pl) pl.innerHTML=pourIsRevenue?(TOPO[topo].poursLabel||'Pours').replace(' / yr',''):'Pours — <i>internal, not revenue</i>';
-    var al=document.getElementById('ann-label');
-    if(al) al.innerHTML=pourIsRevenue?'Support on the installed base':'Support — <i>internal, not revenue</i>';
+    if(pl) pl.innerHTML=(TOPO[topo].poursLabel||'Pours').replace(' / yr','');
+    ['tier-row','annual-row','pours-row','ann-row'].forEach(function(id){
+      var r=document.getElementById(id); if(r) r.style.display=pourIsRevenue?'':'none';
+    });
     el('o-del').textContent=K(delivery); el('o-rails').textContent=K(railsFee); el('o-earn').textContent=K(earned);
     var covered=surplus>0;
     var rh=document.getElementById('raise-head');
@@ -549,13 +550,7 @@
       b.setAttribute('aria-pressed','true'); mode=b.dataset.m; build(); update(); rails();
     });
   });
-  Array.prototype.forEach.call(el('tier').querySelectorAll('button'),function(b){
-    b.addEventListener('click',function(){
-      Array.prototype.forEach.call(el('tier').querySelectorAll('button'),function(x){x.setAttribute('aria-pressed','false');});
-      b.setAttribute('aria-pressed','true'); tierVal=+b.dataset.v; update(); rails();
-    });
-  });
-  ['load','sponsor','setup','hoods','rests','perrest','localflow','pours','pfee','ctake','annual',
+  ['load','sponsor','setup','hoods','rests','perrest','localflow','pours','pfee','ctake','annual','tier',
    'cluster','retainer','commission','takeovers','takefee'].forEach(function(id){
     el(id).addEventListener('input',function(){ update(); rails(); });
   });

@@ -183,16 +183,12 @@
         <input type="range" id="pours" min="0" max="40" step="1" value="3">
       </div>
 
-      <div class="dial">
+      <div class="dial" id="tier-row">
         <div class="dial-head">
           <label class="dial-label" for="tier"><span id="tier-dial-label">Rate per pour</span></label>
           <span class="dial-val" id="tier-v">$105k</span>
         </div>
-        <div class="seg" id="tier" role="group" aria-label="Rate per pour">
-          <button type="button" data-v="105000" aria-pressed="true">High · $105k</button>
-          <button type="button" data-v="55000">Low · $55k</button>
-          <button type="button" data-v="50000">At cost · $50k</button>
-        </div>
+        <input type="range" id="tier" min="0" max="250000" step="5000" value="105000">
         <p class="note" id="tier-note"></p>
       </div>
 
@@ -204,7 +200,7 @@
           <button type="button" data-v="internal" aria-pressed="true">The institution’s own budget</button>
           <button type="button" data-v="external">An outside funder</button>
         </div>
-        <p class="note">Its own budget moves money between departments, so pours earn nothing. An outside funder is real income.</p>
+        <p class="note">Its own budget moves money between departments — pours earn nothing.</p>
       </div>
 
       <div class="dial">
@@ -224,7 +220,7 @@
         <p class="note">A quarter of the service charge. ▶ <a id="split-link-2" href="../split/" class="tag-ward">The Split</a></p>
       </div>
 
-      <div class="dial dial--open">
+      <div class="dial dial--open" id="annual-row">
         <div class="dial-head">
           <label class="dial-label" for="annual"><span>Support charged, per ward / yr</span></label>
           <span class="dial-val" id="annual-v">0% &middot; $0</span>
@@ -314,9 +310,9 @@
     </dl>
     <h4>Earned by the studio</h4>
     <dl>
-      <div class="line"><dt id="pours-label">Pours commissioned</dt><dd id="o-pours">—</dd></div>
+      <div class="line" id="pours-row"><dt id="pours-label">Pours commissioned</dt><dd id="o-pours">—</dd></div>
       <div class="line sub2" id="pours-cap-row"><dt id="pours-cap">—</dt><dd></dd></div>
-      <div class="line"><dt id="ann-label">Support on the installed base</dt><dd id="o-ann">—</dd></div>
+      <div class="line" id="ann-row"><dt id="ann-label">Support on the installed base</dt><dd id="o-ann">—</dd></div>
       <div class="line"><dt>Delivery, Cary's operator take</dt><dd id="o-del">—</dd></div>
       <div class="line"><dt>Money crossing the rails</dt><dd id="o-rails">—</dd></div>
       <div class="line"><dt>Earned total</dt><dd id="o-earn">—</dd></div>
@@ -478,6 +474,6 @@
 </footer>
 
 <script src="../../js/site.js?v=0f3be1550239"></script>
-<script src="../../js/ask.js?v=b541a7156294"></script>
+<script src="../../js/ask.js?v=e8ec8587deea"></script>
 </body>
 </html>
