@@ -234,6 +234,45 @@
     </div>
 
     <div class="group">
+      <h3>Commissioned work</h3>
+      <p class="grouphint">Pouring and looking after a ward is commissioned, not staffed. <b>Once</b> per ward to make it, <b>every year</b> per cluster to look after it, <b>sometimes</b> for an artist.</p>
+
+      <div class="dial">
+        <div class="dial-head"><label class="dial-label" for="cluster"><span>Wards per cartographer</span></label><span class="dial-val" id="cluster-v">3</span></div>
+        <input type="range" id="cluster" min="1" max="8" step="1" value="3">
+        <p class="note">Contiguous, so the edges between them stay coherent.</p>
+      </div>
+
+      <div class="dial">
+        <div class="dial-head"><label class="dial-label" for="retainer"><span>Cartographer retainer, per cluster / yr</span></label><span class="dial-val" id="retainer-v">$25k</span></div>
+        <input type="range" id="retainer" min="0" max="80000" step="1000" value="25000">
+      </div>
+
+      <div class="dial">
+        <div class="dial-head"><label class="dial-label" for="commission"><span>Commission, per ward poured</span></label><span class="dial-val" id="commission-v">$8k</span></div>
+        <input type="range" id="commission" min="0" max="40000" step="500" value="8000">
+      </div>
+
+      <div class="dial">
+        <div class="dial-head"><label class="dial-label" for="takeovers"><span>Artist takeovers / yr</span></label><span class="dial-val" id="takeovers-v">0</span></div>
+        <input type="range" id="takeovers" min="0" max="40" step="1" value="0">
+      </div>
+
+      <div class="dial">
+        <div class="dial-head"><label class="dial-label" for="takefee"><span>Takeover fee</span></label><span class="dial-val" id="takefee-v">$5k</span></div>
+        <input type="range" id="takefee" min="0" max="40000" step="500" value="5000">
+      </div>
+
+      <div class="dial dial--open">
+        <div class="dial-head"><span class="dial-label"><span>Who pays for a takeover?</span></span></div>
+        <div class="seg" id="takepayer" role="group" aria-label="Who pays for a takeover">
+          <button type="button" data-v="studio" aria-pressed="true">The studio</button>
+          <button type="button" data-v="sponsor">A sponsor</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="group">
       <h3>On top of salary</h3>
       <div class="dial">
         <div class="dial-head">
@@ -268,6 +307,9 @@
       <div class="line"><dt>Salaries</dt><dd id="o-sal">—</dd></div>
       <div class="line"><dt>Payroll tax &amp; benefits</dt><dd id="o-load">—</dd></div>
       <div class="line"><dt>Setup &amp; overhead</dt><dd id="o-setup">—</dd></div>
+      <div class="line"><dt id="ret-label">Cartographer retainers</dt><dd id="o-ret">—</dd></div>
+      <div class="line"><dt>Pour commissions</dt><dd id="o-comm">—</dd></div>
+      <div class="line" id="take-row"><dt>Artist takeovers</dt><dd id="o-take">—</dd></div>
     </dl>
     <h4>Earned by the studio</h4>
     <dl>
@@ -435,6 +477,6 @@
 </footer>
 
 <script src="../../js/site.js?v=0f3be1550239"></script>
-<script src="../../js/ask.js?v=33a9b5ebc102"></script>
+<script src="../../js/ask.js?v=85409433931d"></script>
 </body>
 </html>

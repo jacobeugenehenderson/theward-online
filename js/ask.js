@@ -24,14 +24,10 @@
      why:'Owner of the studio, creative director of the nonprofit. Currently zero.',modes:['custodial','product','full']},
     {id:'ed',band:'Studio & mission',name:'Founding executive director',owns:'The raise, governance, the sponsor',pay:80000,
      why:'Works the grant cycle. Nothing gets funded until this seat is filled.',modes:['custodial','product','full']},
-    {id:'op',band:'Studio & mission',name:'Authoring operator',owns:'Pours a town · 3–8 weeks each',pay:68000,
-     why:'A second pair of hands that can pour a town. Today exactly one person can.',modes:['custodial','product','full']},
     {id:'host',band:'Studio & mission',name:'Host / trust &amp; safety',owns:'Moderation, safety reports, the public line',pay:58000,
      why:'Moderation, safety reports, the public line. ⛔ The Section 230 posture rests on this seat.',modes:['custodial','product','full']},
     {id:'ops',band:'Studio & mission',name:'Neighborhood operations',owns:'Restaurants, guardians, couriers',pay:60000,
      why:'Signs the restaurants, trains the guardians. Does not scale past a couple of neighborhoods.',modes:['product','full']},
-    {id:'op2',band:'Studio & mission',name:'Second authoring operator',owns:'Pours in parallel',pay:68000,
-     why:'Only once pours outpace one operator.',modes:['full']},
     {id:'grants',band:'Studio & mission',name:'Grants associate',owns:'The second raiser',pay:62000,
      why:'A second raiser, once one person cannot fundraise for them all.',modes:['full']}
   ];
@@ -85,17 +81,26 @@
   // pours a roster can actually author is the only thing the reader needs from
   // the learning curve — the curve itself, the weeks-per-pour and the operator
   // count were three sentences of working shown to reach one number.
+  // ⭐ THE CEILING FOLLOWS CARTOGRAPHERS, NOT PAYROLL. Pouring is commissioned,
+  // so the constraint is no longer how many operators are employed — it is how
+  // many retained cartographers there are and how much of their year this is.
+  // ⛔ A retainer is PART-TIME by construction; counting a full working year
+  // against it would claim capacity nobody is being paid for.
+  var CARTO_WEEKS=20;   // ○ how much of a year a retained cartographer gives
+  function clustersNow(){
+    var a=assumptions();
+    return Math.max(1, Math.ceil(a.hoods/Math.max(1,+el('cluster').value)));
+  }
   function capacityNow(){
     var a=assumptions();
-    var ops=ROLES.filter(function(r){return r.on && (r.id==='op'||r.id==='op2');}).length;
-    return ops>0 ? Math.floor(ops*WORK_WEEKS/pourWeeks(a.hoods)) : 0;
+    return Math.floor(clustersNow()*CARTO_WEEKS/pourWeeks(a.hoods));
   }
 
   // The leverage, drawn: revenue rises with neighborhoods while the roster does
   // not. Pours are taken at what the operators can actually author.
   function netAt(n, ctx){
     var w=pourWeeks(n);
-    var cap=ctx.ops>0?Math.floor(ctx.ops*WORK_WEEKS/w):0;
+    var cap=Math.floor(Math.max(1,Math.ceil(n/ctx.cluster))*CARTO_WEEKS/w);
     var poursRev=ctx.pourIsRevenue?Math.min(ctx.pours,cap)*tierVal:0;
     var annual=ctx.pourIsRevenue?n*tierVal*ANNUAL:0;
     var delivery=n*ctx.rests*ctx.perrest*CARY_TAKE*12;
@@ -218,15 +223,23 @@
 
     var on=ROLES.filter(function(r){return r.on;});
     var sal=on.reduce(function(a,r){return a+r.pay;},0);
-    var loading=sal*load, cost=sal+loading+setup;
+    var loading=sal*load;
+    // ⭐ COMMISSIONED WORK IS A COST, NOT HEADCOUNT. Three cadences: once per
+    // ward to make it, every year per cluster to look after it, sometimes for
+    // an artist — and a sponsor-funded takeover is not the studio's cost at all.
+    var clusters=clustersNow();
+    var retainerAll=clusters*(+el('retainer').value);
+    var takeCount=+el('takeovers').value, takeFee=+el('takefee').value;
+    var takeAll=takePayer==='studio' ? takeCount*takeFee : 0;
     // ⭐ One source for volumes: the revenue panel. Nothing here re-derives them.
     // ⛔ Under absorption with internally-funded pours, the institution is paying
     // itself: that is a transfer, not income, and counting it inflates the unit.
     var pourIsRevenue=!(topo==='inst' && pourPayer==='internal');
     // ⛔ Only pours that can actually be authored are earned. The capacity line
     // says when the dial is over; the reading must not bill what it warns about.
-    var opsOn=ROLES.filter(function(r){return r.on&&(r.id==='op'||r.id==='op2');}).length;
-    var poursDone=Math.min(a.pours, opsOn>0?Math.floor(opsOn*WORK_WEEKS/pourWeeks(a.hoods)):0);
+    var poursDone=Math.min(a.pours, capacityNow());
+    var commissionAll=poursDone*(+el('commission').value);
+    var cost=sal+loading+setup+retainerAll+commissionAll+takeAll;
     // ⭐ Support is charged on every neighborhood standing, not on this year's
     // sales — so it compounds with the installed base rather than the sales rate.
     var poursRev=pourIsRevenue?poursDone*tierVal:0,
@@ -248,6 +261,16 @@
     var fee=TOPO[topo].sponsor?gap*spon:0, ask=gap+fee;
 
     el('o-head').textContent=on.length+(on.length===1?' person':' people');
+    el('cluster-v').textContent=el('cluster').value;
+    el('retainer-v').textContent=K(+el('retainer').value);
+    el('commission-v').textContent=K(+el('commission').value);
+    el('takeovers-v').textContent=takeCount;
+    el('takefee-v').textContent=K(takeFee);
+    el('ret-label').textContent='Cartographer retainers \u00b7 '+clusters+(clusters===1?' cluster':' clusters');
+    el('o-ret').textContent=K(retainerAll);
+    el('o-comm').textContent=K(commissionAll);
+    el('o-take').textContent=takePayer==='studio'?K(takeAll):'sponsor-funded';
+    el('take-row').style.display=takeCount>0?'':'none';
     el('o-sal').textContent=K(sal); el('o-load').textContent=K(loading); el('o-setup').textContent=K(setup);
     el('o-pours').textContent=K(poursRev); el('o-ann').textContent=K(annual);
     // ⭐ THE ONE COUNTERINTUITIVE COUPLING ON THE PAGE, SAID WHERE IT LANDS.
@@ -259,9 +282,8 @@
         capTxt=document.getElementById('pours-cap');
     if(capRow&&capTxt){
       capRow.style.display = (pourIsRevenue && poursDone < a.pours) ? '' : 'none';
-      capTxt.textContent = opsOn===0
-        ? 'no authoring operator, so none can be poured'
-        : poursDone+' of '+a.pours+' \u2014 all '+opsOn+' operator'+(opsOn===1?'':'s')+' can author in a year';
+      capTxt.textContent = poursDone+' of '+a.pours+' \u2014 all '+clusters+
+        ' cartographer'+(clusters===1?'':'s')+' can pour in a year';
     }
     var pl=document.getElementById('pours-label');
     if(pl) pl.innerHTML=pourIsRevenue?(TOPO[topo].poursLabel||'Pours').replace(' / yr',''):'Pours — <i>internal, not revenue</i>';
@@ -308,7 +330,7 @@
     }
     el('sentence').innerHTML=s;
     tallyBands();
-    drawChart({ ops:opsOn, pours:a.pours,
+    drawChart({ pours:a.pours, cluster:+el('cluster').value,
                 rests:a.rests, perrest:a.perrest, localflow:a.localflow,
                 cost:cost, hoods:a.hoods, pourIsRevenue:pourIsRevenue });
   }
@@ -352,14 +374,14 @@
       poursLabel:'Pours sold / yr', wantsED:true,
       tierLabel:'Price per pour', tierNote:'What a buyer pays. Nobody has quoted this.',
       setupLabel:'Setup &amp; overhead', setupNote:'Legal, accounting, insurance, hosting, compute, equipment.',
-      defaultMode:'custodial', forceOff:['ta','geo','gfx','grants','op2'],
+      defaultMode:'custodial', forceOff:['ta','geo','gfx','grants'],
       rosterWhy:'\u26d4 Earned revenue supports a custodial roster at best \u2014 enough to keep it running, not to develop it.'
     }
   };
-  var topo='inst', pourPayer='internal', market=1.00;
+  var topo='inst', pourPayer='internal', takePayer='studio', market=1.00;
   // ⛔ These seats must be IN the neighborhood — you cannot pour Lafayette Square
   // or train Barrio\u2019s guardians from Manhattan. They price to the ward, not the buyer.
-  var LOCAL_SEATS=['op','ops','op2','host'];
+  var LOCAL_SEATS=['ops','host'];
 
   function drawTopo(resetRoster){
     var t=TOPO[topo], h='';
@@ -461,6 +483,13 @@
     drawTopo(false); build(); update(); rails();
   });
 
+  Array.prototype.forEach.call(el('takepayer').querySelectorAll('button'),function(b){
+    b.addEventListener('click',function(){
+      Array.prototype.forEach.call(el('takepayer').querySelectorAll('button'),function(x){x.setAttribute('aria-pressed','false');});
+      b.setAttribute('aria-pressed','true'); takePayer=b.dataset.v; update();
+    });
+  });
+
   Array.prototype.forEach.call(el('pourpayer').querySelectorAll('button'),function(b){
     b.addEventListener('click',function(){
       Array.prototype.forEach.call(el('pourpayer').querySelectorAll('button'),function(x){x.setAttribute('aria-pressed','false');});
@@ -487,7 +516,8 @@
       b.setAttribute('aria-pressed','true'); tierVal=+b.dataset.v; update(); rails();
     });
   });
-  ['load','sponsor','setup','hoods','rests','perrest','localflow','pours','pfee','ctake','annual'].forEach(function(id){
+  ['load','sponsor','setup','hoods','rests','perrest','localflow','pours','pfee','ctake','annual',
+   'cluster','retainer','commission','takeovers','takefee'].forEach(function(id){
     el(id).addEventListener('input',function(){ update(); rails(); });
   });
   drawTopo(true); build(); update(); rails();
