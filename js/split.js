@@ -95,7 +95,7 @@
 
   // ⭐ The two division ratios live here rather than on inputs, because the
   // control is a bar the reader divides, not two sliders whose bases are a
-  // screenful apart. The bar is drawn from the MONEY; the grips read back out
+  // screenful apart. The bar is drawn from the MONEY
   // of it. Courier is paid from the service charge; Local Host and the Ward divide
   // what the courier leaves PLUS the commission — so the two ratios have
   // different bases, and only the bar makes that legible.
@@ -147,8 +147,8 @@
       bars;
   }
 
-  // The bar IS the money: segment widths are dollars, so the grips sit where
-  // the divisions actually fall rather than where a ratio would put them.
+  // The bar IS the money: segment widths are dollars, so the divisions fall
+  // where the money actually puts them rather than where a ratio would.
   function drawSplit(proc, svc, commission, courierCut, ward){
     // ⛔ Processing is IN the bar and leaves it first. It is money Cary
     // collects and does not keep — a reader who cannot see it leave assumes
@@ -160,9 +160,6 @@
     $('sb-proc').style.width=(f0*100).toFixed(2)+'%';
     $('sb-cour').style.width=((f1-f0)*100).toFixed(2)+'%';
     $('sb-ward').style.width=((f2-f1)*100).toFixed(2)+'%';
-    $('grip-cour').style.left=(f1*100).toFixed(2)+'%';
-    $('grip-cour').setAttribute('aria-valuenow', Math.round(COUR*100));
-    $('grip-cour').setAttribute('aria-valuetext', Math.round(COUR*100)+'% of the service charge, '+M(courierCut));
     $('sb-key').innerHTML=
       '<div class="k-proc"><b>'+M(proc)+'</b>Processor <span>· at cost, straight out</span></div>'+
       '<div class="k-cour"><b>'+M(courierCut)+'</b>Courier <span>· '+Math.round(COUR*100)+'% of the service charge</span></div>'+
@@ -272,49 +269,15 @@
 
   ['sub','tax','svc','tip','vol','keep','markup'].forEach(function(id){ $(id).addEventListener('input',calc); });
 
-  // Dragging a grip sets the ratio its division implies. The pointer gives a
-  // position in the bar; the money at that position gives the ratio back.
-  function bases(){
-    var sub=+$('sub').value*100, tax=Math.round(sub*(+$('tax').value/100000)),
-        svc=Math.round(sub*(+$('svc').value/100));
-    var rate=(owner==='inst')?INHOUSE:PROC;
-    var proc    =sub>0?Math.round((sub+tax+svc)*(rate.r/10000))+rate.f:0;
-    var commission=Math.round(sub*(+$('keep').value/100));
-    return { proc:proc, svc:svc, commission:commission, pot:proc+svc+commission };
-  }
-  function clamp(v,lo,hi){ return v<lo?lo:(v>hi?hi:v); }
-  function gripTo(which, frac){
-    var b=bases(); if(!b.pot) return;
-    var past=frac*b.pot-b.proc;   // money to the right of the fixed slice
-    if(which==='cour'){
-      COUR = b.svc>0 ? clamp(past/b.svc, 0.50, 0.90) : COUR;
-    } else {
-    }
-    calc();
-  }
-  ['cour'].forEach(function(which){
-    var g=$('grip-'+which);
-    g.addEventListener('pointerdown',function(e){
-      g.setPointerCapture(e.pointerId); e.preventDefault();
-      var bar=$('splitbar');
-      var move=function(ev){
-        var r=bar.getBoundingClientRect();
-        gripTo(which, clamp((ev.clientX-r.left)/r.width, 0, 1));
-      };
-      var up=function(){ g.releasePointerCapture(e.pointerId);
-        g.removeEventListener('pointermove',move); g.removeEventListener('pointerup',up); };
-      g.addEventListener('pointermove',move); g.addEventListener('pointerup',up);
-      move(e);
-    });
-    g.addEventListener('keydown',function(e){
-      var d = e.key==='ArrowLeft'||e.key==='ArrowDown' ? -1
-            : e.key==='ArrowRight'||e.key==='ArrowUp' ? 1 : 0;
-      if(!d) return;
-      e.preventDefault();
-      COUR=clamp(COUR+d*0.01, 0.50, 0.90);
-      calc();
-    });
-  });
+  // ⛔ NO GRIP. The bar had a drag handle on the courier/Ward division, and there
+  //   is nothing to experiment with: the payouts are CALCULATED from the stated
+  //   percentages applied to one food subtotal (Jacob, 2026-09-13: "there's nothing
+  //   to slide, no experiment here"). A handle is a promise that the number is the
+  //   reader's to choose, and this one is not — it is policy, stated, the same way
+  //   the restaurant's fee and the service charge are stated above it.
+  //   ⭐ It also takes the last of the pointer-capture drag code with it, which never
+  //   worked on touch: no touch-action, no pointercancel, and a 13px target.
+
   function pickOne(hostId, fn){
     Array.prototype.forEach.call($(hostId).querySelectorAll('button'),function(b){
       b.addEventListener('click',function(){

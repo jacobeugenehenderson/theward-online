@@ -1617,13 +1617,9 @@ a { color: inherit; }
 .tool--split .seg button{font-family:var(--f-sys); font-size:11.5px; padding:6px 9px; background:transparent; color:var(--text-soft); border:1px solid var(--rule); cursor:pointer}
 .tool--split .seg button[aria-pressed="true"]{background:var(--text); color:var(--ground); border-color:var(--text)}
 .tool--split .seg button:focus-visible{outline:2px solid var(--cary-rule); outline-offset:2px}
-.tool--split .splitbar{position:relative; display:flex; height:44px; margin-top:14px; border:1px solid var(--text); overflow:visible; touch-action:none; user-select:none}
+.tool--split .splitbar{position:relative; display:flex; height:44px; margin-top:14px; border:1px solid var(--text)}
 .tool--split .sb-seg{height:100%; min-width:0; overflow:hidden}
 .tool--split .sb-proc{background:var(--rule)} .sb-cour{background:var(--cary-rule)} .sb-ward{background:var(--text)}
-.tool--split .sb-grip{position:absolute; top:-7px; bottom:-7px; width:13px; margin-left:-6px; cursor:ew-resize;
-  background:var(--ground-2); border:1px solid var(--text); border-radius:2px}
-.tool--split .sb-grip::after{content:""; position:absolute; inset:6px 4px; border-left:1px solid var(--text-faint); border-right:1px solid var(--text-faint); opacity:.6}
-.tool--split .sb-grip:focus-visible{outline:2px solid var(--cary-rule); outline-offset:2px}
 .tool--split .sb-key{display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:10px; margin-top:11px; font-size:12px}
 .tool--split .sb-key div{border-top:3px solid; padding-top:6px; min-width:0}
 .tool--split .sb-key .k-proc{border-color:var(--rule)} .sb-key .k-cour{border-color:var(--cary-rule)} .sb-key .k-ward{border-color:var(--text)}
