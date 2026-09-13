@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="../../css/tokens.css?v=7ce1d022c15e">
-<link rel="stylesheet" href="../../css/site.css?v=0da199e91693">
+<link rel="stylesheet" href="../../css/site.css?v=364e94471e9d">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 
 <!-- ⛔ THIS PAGE DECLARES NO CSS OF ITS OWN AND CARRIES NO PLACEMENT
@@ -89,7 +89,7 @@
   <section class="sec">
 <div class="modes topobar" id="topo" role="group" aria-label="Who pays for it">
     <button type="button" data-t="inst" aria-pressed="true">An institution absorbs it</button>
-    <button type="button" data-t="fund">An institution funds it</button>
+    <button type="button" data-t="fund">An institution underwrites it</button>
     <button type="button" data-t="np">A nonprofit raises it</button>
     <button type="button" data-t="own">We operate it ourselves</button>
   </div>
@@ -151,6 +151,15 @@
 
     <details class="group gfold" open>
       <summary class="ghead"><span>Revenue assumptions</span><span class="gtally" data-g="Revenue assumptions"></span></summary>
+
+      <div class="dial" id="underwrite-row">
+        <div class="dial-head">
+          <label class="dial-label" for="underwrite"><span>Underwritten, per year</span></label>
+          <span class="dial-val" id="underwrite-v">$0</span>
+        </div>
+        <input type="range" id="underwrite" min="0" max="3000000" step="25000" value="0">
+        <p class="note" id="underwrite-note"></p>
+      </div>
 
       <div class="dial">
         <div class="dial-head">
@@ -239,18 +248,7 @@
 
     <details class="group gfold">
       <summary class="ghead"><span>Commissioned work</span><span class="gtally" data-g="Commissioned work"></span></summary>
-      <p class="grouphint">Pouring and looking after a ward is commissioned, not staffed. One rate, used twice: <b>once</b> to make a ward, <b>every year</b> to keep it.</p>
-
-      <div class="dial">
-        <div class="dial-head"><label class="dial-label" for="cluster"><span>Wards per cartographer</span></label><span class="dial-val" id="cluster-v">3</span></div>
-        <input type="range" id="cluster" min="1" max="8" step="1" value="3">
-        <p class="note" id="carto-earns">$24k a year, plus $8k for each ward poured.</p>
-      </div>
-
-      <div class="dial">
-        <div class="dial-head"><label class="dial-label" for="retainer"><span>Upkeep, per ward / yr</span></label><span class="dial-val" id="retainer-v">$8k</span></div>
-        <input type="range" id="retainer" min="0" max="30000" step="500" value="8000">
-      </div>
+      <p class="grouphint">Pouring and looking after a ward is commissioned, not staffed.</p>
 
       <div class="dial">
         <div class="dial-head"><label class="dial-label" for="commission"><span>Commission, per ward poured</span></label><span class="dial-val" id="commission-v">$8k</span></div>
@@ -258,23 +256,10 @@
       </div>
 
       <div class="dial">
-        <div class="dial-head"><label class="dial-label" for="takeovers"><span>Artist takeovers / yr</span></label><span class="dial-val" id="takeovers-v">0</span></div>
-        <input type="range" id="takeovers" min="0" max="40" step="1" value="0">
+        <div class="dial-head"><label class="dial-label" for="retainer"><span>Upkeep, per ward / yr</span></label><span class="dial-val" id="retainer-v">$8k</span></div>
+        <input type="range" id="retainer" min="0" max="30000" step="500" value="8000">
       </div>
 
-      <div class="dial">
-        <div class="dial-head"><label class="dial-label" for="takefee"><span>Takeover fee</span></label><span class="dial-val" id="takefee-v">$5k</span></div>
-        <input type="range" id="takefee" min="0" max="100" step="1" value="29">
-        <p class="note" id="takefee-note"></p>
-      </div>
-
-      <div class="dial dial--open">
-        <div class="dial-head"><span class="dial-label"><span>Who pays for a takeover?</span></span></div>
-        <div class="seg" id="takepayer" role="group" aria-label="Who pays for a takeover">
-          <button type="button" data-v="studio" aria-pressed="true">The studio</button>
-          <button type="button" data-v="sponsor">A sponsor</button>
-        </div>
-      </div>
     </details>
 
     <details class="group gfold">
@@ -295,7 +280,7 @@
       </div>
       <div class="dial">
         <div class="dial-head">
-          <label class="dial-label" for="setup"><span id="setup-dial-label">Setup &amp; overhead</span></label>
+          <label class="dial-label" for="setup"><span id="setup-dial-label">Incremental overhead only</span></label>
           <span class="dial-val" id="setup-v">$60k</span>
         </div>
         <input type="range" id="setup" min="0" max="200000" step="10000" value="60000">
@@ -311,10 +296,9 @@
       <div class="line"><dt>Headcount</dt><dd id="o-head">—</dd></div>
       <div class="line"><dt>Salaries</dt><dd id="o-sal">—</dd></div>
       <div class="line"><dt>Payroll tax &amp; benefits</dt><dd id="o-load">—</dd></div>
-      <div class="line"><dt id="setup-read-label">Setup &amp; overhead</dt><dd id="o-setup">—</dd></div>
-      <div class="line"><dt id="ret-label">Ward upkeep</dt><dd id="o-ret">—</dd></div>
+      <div class="line"><dt id="setup-read-label">Incremental overhead only</dt><dd id="o-setup">—</dd></div>
       <div class="line"><dt>Pour commissions</dt><dd id="o-comm">—</dd></div>
-      <div class="line" id="take-row"><dt>Artist takeovers</dt><dd id="o-take">—</dd></div>
+      <div class="line"><dt id="ret-label">Ward upkeep</dt><dd id="o-ret">—</dd></div>
     </dl>
     <h4>Earned by the studio</h4>
     <dl>
@@ -334,6 +318,7 @@
     <dl>
       <div class="line"><dt id="gap-label">Gap before sponsor fee</dt><dd id="o-gap">—</dd></div>
       <div class="line" id="spon-line"><dt>Fiscal sponsor fee</dt><dd id="o-spon">—</dd></div>
+      <div class="line" id="under-line"><dt>Underwritten, per year</dt><dd id="o-under">—</dd></div>
       <div class="line total"><dt id="ask-label">The ask</dt><dd id="o-ask">—</dd></div>
     </dl>
     <div class="sentence" id="sentence"></div>
@@ -346,56 +331,25 @@
 </div>
 
 <details class="fold">
-  <summary>What crosses the rails</summary>
+  <summary>What we take, and what we don’t</summary>
 
-  <p><b>The platform is free.</b> Nobody pays to be on it. We take a cut of what is bought through it, so revenue follows <b>how much a neighborhood sells</b> — not how much anyone is charged for access.</p>
+  <p><b>Nobody pays to be on it.</b> Revenue comes from transactions and services that happen through the platform, so it follows <b>how much a neighborhood sells</b> — not how much anyone is charged for access.</p>
   <p class="railnote">A townie has checked in on three distinct days in a rolling fourteen, in the neighborhood, server-side; every delivery resolves to a building inside the boundary. <b>Participation is structural, not acquired.</b></p>
 
-  <div class="rails">
-    <div class="rail">
-      <h4>Delivery only</h4>
-      <div class="amt" id="r1">—</div>
-      <div class="mult">where we are</div>
-      <p>One module, in the neighborhoods we run.</p>
-      <ul>
-        <li><span id="pf-1">6.3%</span> of food sold, after the courier and the neighborhood are paid</li>
-        <li>The Local Host runs the neighborhood and is paid a share of what it sells</li>
-        <li>Processing is pass-through at cost. Never revenue</li>
-      </ul>
-    </div>
-    <div class="rail">
-      <h4>The ward's commerce</h4>
-      <div class="amt" id="r2">—</div>
-      <div class="mult" id="m2">—</div>
-      <p>⛔ Nothing is built for this yet.</p>
-      <ul>
-        <li>Retail, services, tickets, events — in-boundary by construction</li>
-        <li>No acquisition cost: a module switched on inherits every townie already here</li>
-        <li>Nothing charged to a merchant to participate</li>
-      </ul>
-    </div>
-    <div class="rail lead">
-      <h4>Many wards</h4>
-      <div class="amt" id="r3">—</div>
-      <div class="mult" id="m3">—</div>
-      <p>The same rails under every neighborhood poured.</p>
-      <ul>
-        <li>Each pour is paid for once — commissioned, never sold to the neighborhood</li>
-        <li>The unit is a <b>bounded economy with verified-by-presence participants</b> — a place, not a market</li>
-        <li>⛔ To a payments institution <span id="pf-2">6.3%</span> understates it: behind the flow sit the merchant relationships, the deposits, and a channel to residents verified by presence</li>
-        <li>⛔ It survives only while the platform is free. Monetise the relationship directly and there is nothing left but a map</li>
-      </ul>
-    </div>
-  </div>
-  <p class="railfoot">The service charge and the commission are sourced; the Local Host’s <span id="pf-3">4.2%</span> is a proposal, not yet set, and <b>every volume figure above is invented.</b> The entity split is open — <code>org-structure.md</code> says decide it before <code>place-order</code> ships.</p>
+  <ul class="rail-list">
+    <li><b><span id="pf-1">6.3%</span> of food sold</b>, after the courier and the neighborhood are paid. Processing is pass-through at cost — never revenue — and nothing is charged to a merchant to participate.</li>
+    <li><b>New capabilities enter an existing Ward, not a new market.</b> Retail, services, tickets and events are in-boundary by construction; they do not require a separate population to be acquired.</li>
+    <li><b>The unit is a bounded economy with verified-by-presence participants</b> — a place, not a market. ⛔ To a payments institution <span id="pf-2">6.3%</span> understates it: behind the flow sit merchant relationships, deposits, payments, payouts, and participation in a locally verified economy.</li>
+  </ul>
+
 
 </details>
 
 
 <details class="fold">
-  <summary>The eight surfaces — why five engineers</summary>
+  <summary>The engineering footprint</summary>
 
-  <p>Counted from the repository, excluding dependencies, archives and scratch. No two rows are the same hire.</p>
+  <p>Eight distinct surfaces across five engineering disciplines. Counted from the repository, excluding dependencies, archives and scratch.</p>
   <div class="tblwrap">
     <table class="surf">
       <thead><tr><th>Surface</th><th>Scale</th><th>What it is</th><th>Who owns it</th></tr></thead>
@@ -433,9 +387,9 @@
     <div class="truth-col">
       <h4>Not yet true</h4>
       <ul>
-        <li><b>No revenue has ever come in</b></li>
+        <li><b>Pre-revenue — commercial operation has not begun</b></li>
         <li>The commerce layer is written but <b>has never run</b> — four deploy steps outstanding</li>
-        <li>Two lawyer items open: the sales-tax ruling, the alcohol permit</li>
+        <li>Two legal items remain open</li>
         <li>Insurance unpriced, and a condition of switching delivery on</li>
         <li>The entity split — infrastructure vs. operator — <b>undecided</b></li>
         <li>No fiscal sponsor chosen; no board recruited</li>
@@ -446,10 +400,10 @@
       <h4>What the roster means</h4>
       <ul>
         <li>A studio at full strength is a <b>seven-figure annual budget</b> — a different class of funder than a first community grant</li>
-        <li>Which is why <b>absorption is not the fallback path</b>: an established organisation already employs these five engineers</li>
+        <li><b>Absorption changes the staffing equation</b>: an established organisation may already employ these five disciplines.</li>
         <li>Custodial staffing keeps it alive and pours towns. It does not develop the product</li>
         <li>Assembling this team from grants alone is a multi-year fundraising project before a line is written</li>
-        <li>Software got cheaper to write. <b>The pour, and the specialisms above, did not</b></li>
+        <li>The existing Platform reduces what has to be built. <b>It does not eliminate the people required to operate and extend it.</b></li>
       </ul>
     </div>
   </div>
@@ -487,6 +441,6 @@
 </footer>
 
 <script src="../../js/site.js?v=0f3be1550239"></script>
-<script src="../../js/ask.js?v=c98932e06a71"></script>
+<script src="../../js/ask.js?v=d6e031b3a9c9"></script>
 </body>
 </html>

@@ -15,7 +15,6 @@
 .tool--ask .sources-body{padding-top:9px; line-height:1.5}
 .tool--ask .sources-list{margin:8px 0 0; padding-left:16px}
 .tool--ask .railnote{max-width:68ch; margin-top:-12px}
-.tool--ask .railfoot{font-size:13px; color:var(--text-faint); max-width:70ch; margin-top:4px}
 .tool--ask .toponote{font-size:13px; color:var(--text-soft); max-width:70ch; margin:4px 0 0}
 .tool--ask .topobar{margin:20px 0 6px}
 .tool--ask .tag{font-family:var(--f-sys); font-size:10px; letter-spacing:.08em; text-transform:uppercase}

@@ -32,6 +32,27 @@ for (const [pagePath, scriptPath] of PAGES) {
   for (const m of html.matchAll(/<span class="dial-val"[^>]*id="([^"]+)"[^>]*>([\s\S]*?)<\/span>\s*<\/div>/g))
     statics[m[1]] = m[2]
 
+  // \u2b50 AND EVERY INLINE READOUT, not just the ones beside a slider. A rate
+  // quoted mid-sentence is a readout too \u2014 `<span id="pf-1">6.3%</span> of food
+  // sold` is written by the script on every dial move, and the literal in the
+  // file is what a reader of the SOURCE believes. Until 2026-09-13 these were
+  // outside the net, so 6.3% and 4.2% could drift from what foodRate() computes
+  // and nothing would say a word (Jacob: "6.3 is fake and should either be
+  // connected to the knob that generates it or omitted").
+  // \u2b50 HARVESTED BY SHAPE, NOT BY NAME. Matching `pf-*` would cover today's
+  // three and miss the fourth the day it lands \u2014 the same silent-gap failure
+  // tools/audit.py's filesystem glob was written to avoid.
+  // \u26d4 AND NOT WIDER THAN A SPAN, which was tried and reverted the same hour:
+  // harvesting every id'd element flagged 52, because the reading panel's `\u2014`
+  // placeholders and the empty `#flow`/`#sentence` containers are FILLED at
+  // runtime BY DESIGN \u2014 nobody writes "$1,867k" into markup. The claim this
+  // file makes is about a readout that MIRRORS CONTROL STATE, not about every
+  // element a script touches. Any bare `<span id>` is a
+  // candidate; the `if (!live) continue` below drops the ones
+  // the script never writes to, so a span that is pure markup costs nothing.
+  for (const m of html.matchAll(/<span id="([^"]+)">([^<]*)<\/span>/g))
+    if (!(m[1] in statics)) statics[m[1]] = m[2]
+
   const vals = {}
   for (const m of html.matchAll(/<input[^>]*>/g)) {
     const id = /id="([^"]+)"/.exec(m[0])?.[1]

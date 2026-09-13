@@ -1,7 +1,23 @@
-import io, re, sys
+import io, os, re, sys
 
-SRC = "/private/tmp/claude-501/-Users-jacobhenderson-Desktop-lafayette-square-nosync/15948c52-f615-4988-91d4-4415392b0563/scratchpad/%s.html"
-OUT = "/Users/jacobhenderson/Desktop/dev.nosync/theward-online/works/%s/index.html"
+# ⛔ THE SOURCE IS IN THE REPO, AND THAT IS THE POINT. Until 2026-09-13 both of
+#    these were absolute paths into a Claude session scratchpad under /private/tmp
+#    — a directory keyed to one session's UUID, untracked, and gone on the next
+#    reboot. The repo held only the OUTPUT of this script, so losing that folder
+#    meant losing the source of both pages and hand-editing generated files
+#    forever, which is the exact failure the header below warns about.
+#    The artifacts now sit beside license-source.md and domains-source.txt, which
+#    is where this project already keeps a generator's input.
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# ⛔ THE `.txt` SUFFIX IS LORE-BEARING, NOT A TYPO. This repo IS the deploy —
+#    GitHub Pages serves the root, and `tools/` with it (`curl .../tools/audit.py`
+#    → 200). A `.html` here would publish a WORKING, INDEXABLE twin of The Ask at
+#    /tools/, with none of the `noindex` that /works/ask/ deliberately carries.
+#    `.txt` serves as text/plain, renders as nothing, and — second benefit — falls
+#    outside tools/audit.py's `**/*.html` glob, so the audit keeps covering every
+#    real page by filesystem with no exemption list to maintain.
+SRC = os.path.join(ROOT, "tools", "%s-source.html.txt")
+OUT = os.path.join(ROOT, "works", "%s", "index.html")
 
 # ── The palette map. ⭐ COURIER IS THE CARY GREEN AND THAT IS NOT A CHOICE MADE
 #    HERE: tokens.css records verdigris as the product's OWN authored courier
@@ -55,7 +71,6 @@ INLINE = [
   ('style="color:var(--cary-rule)"',                       'class="tag-ward"'),
   ('style="margin-top:18px"',                              'class="mt-3"'),
   ('style="max-width:68ch;margin-top:-12px"',              'class="railnote"'),
-  ('style="font-size:13px;color:var(--text-faint);max-width:70ch;margin-top:4px"', 'class="railfoot"'),
 ]
 
 def deinline(t):
@@ -312,7 +327,7 @@ print('ask    ->', len(page), 'bytes')
 # everything tools/audit.py requires. Hand-patching the output after a run is
 # how the dead rules and the literals kept coming back.
 import re as _re
-OUTDIR = "/Users/jacobhenderson/Desktop/dev.nosync/theward-online/"
+OUTDIR = ROOT + "/"
 
 for slug in ['split','ask']:
     f = OUTDIR + 'works/%s/index.html' % slug

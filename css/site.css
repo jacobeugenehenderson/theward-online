@@ -1754,10 +1754,6 @@ a { color: inherit; }
 .tool--ask .dial-val{font-family:var(--f-sys); font-variant-numeric:tabular-nums; font-size:15px; font-weight:600; white-space:nowrap}
 .tool--ask .dial input[type=range]{width:100%; margin-top:9px; accent-color:var(--cary-rule); height:20px}
 .tool--ask .note{font-size:12px; color:var(--text-faint); margin-top:5px; max-width:54ch}
-.tool--ask .seg{display:flex; flex-wrap:wrap; gap:6px; margin-top:9px}
-.tool--ask .seg button{font-family:var(--f-sys); font-size:12px; padding:6px 10px; background:transparent; color:var(--text-soft); border:1px solid var(--rule); cursor:pointer}
-.tool--ask .seg button[aria-pressed="true"]{background:var(--text); color:var(--ground); border-color:var(--text)}
-.tool--ask .seg button:focus-visible{outline:2px solid var(--cary-rule); outline-offset:2px}
 
 .tool--ask .reading{background:var(--ground-2); border:1px solid var(--rule); padding:23px 21px; position:sticky; top:20px}
 @media (max-width:900px){ .reading{position:static} }
@@ -1775,16 +1771,10 @@ a { color: inherit; }
 .tool--ask .sentence em{font-style:normal; font-weight:600}
 
 
-.tool--ask .rails{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-bottom:22px}
-.tool--ask .rail{background:var(--ground-2); padding:20px 18px; display:flex; flex-direction:column; gap:9px}
-.tool--ask .rail.lead{background:var(--ground-3)}
-.tool--ask .rail h4{font-family:var(--f-sys); font-size:18px; font-weight:600; line-height:1.15}
-.tool--ask .rail .amt{font-family:var(--f-sys); font-variant-numeric:tabular-nums; font-size:25px; font-weight:600; letter-spacing:-.01em}
-.tool--ask .rail .mult{font-family:var(--f-sys); font-size:12px; color:var(--cary-rule); letter-spacing:.05em}
-.tool--ask .rail p{margin:0; font-size:13px; color:var(--text-soft)}
-.tool--ask .rail ul{margin:0; padding:0; list-style:none}
-.tool--ask .rail li{font-size:12.5px; color:var(--text-soft); padding:5px 0 5px 15px; position:relative; border-top:1px solid var(--rule-soft)}
-.tool--ask .rail li::before{content:""; position:absolute; left:0; top:13px; width:6px; height:1px; background:var(--text-faint)}
+.tool--ask .rail-list{margin:0; padding:0; list-style:none; border-top:1px solid var(--rule)}
+.tool--ask .rail-list li{font-size:13.5px; color:var(--text-soft); line-height:1.55; padding:11px 0 11px 15px; position:relative; border-bottom:1px solid var(--rule-soft); max-width:76ch}
+.tool--ask .rail-list li::before{content:""; position:absolute; left:0; top:21px; width:7px; height:1px; background:var(--text-faint)}
+.tool--ask .rail-list b{color:var(--text)}
 .tool--ask table.surf{width:100%; border-collapse:collapse; font-size:13.5px}
 .tool--ask table.surf th{text-align:left; font-family:var(--f-sys); font-size:10.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--text-faint); font-weight:500; padding:0 12px 8px 0; border-bottom:1px solid var(--text)}
 .tool--ask table.surf td{padding:10px 12px 10px 0; border-bottom:1px solid var(--rule-soft); vertical-align:top; color:var(--text-soft)}
@@ -1818,7 +1808,6 @@ a { color: inherit; }
 .tool--ask .sources-body{padding-top:9px; line-height:1.5}
 .tool--ask .sources-list{margin:8px 0 0; padding-left:16px}
 .tool--ask .railnote{max-width:68ch; margin-top:-12px}
-.tool--ask .railfoot{font-size:13px; color:var(--text-faint); max-width:70ch; margin-top:4px}
 .tool--ask .toponote{font-size:13px; color:var(--text-soft); max-width:70ch; margin:4px 0 0}
 .tool--ask .topobar{margin:20px 0 6px}
 .tool--ask .tag{font-family:var(--f-sys); font-size:10px; letter-spacing:.08em; text-transform:uppercase}
