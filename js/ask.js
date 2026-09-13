@@ -469,7 +469,12 @@
     ANNUAL=+el('annual').value/100;
     el('pfee-v').textContent=(PLATFORM_FEE*100).toFixed(1)+'%';
     el('ctake-v').textContent=(CARY_TAKE*100).toFixed(1)+'%';
-    el('annual-v').textContent=(ANNUAL*100).toFixed(0)+'%';
+    // ⭐ IN DOLLARS BESIDE THE PERCENTAGE, because a share of the pour price
+    // means nothing until you know the pour price — and because this is what a
+    // ward is CHARGED for support, against "Ward upkeep" in Commissioned work,
+    // which is what a cartographer is PAID. Two numbers, opposite directions,
+    // and the labels alone let them be confused.
+    el('annual-v').textContent=(ANNUAL*100).toFixed(0)+'% \u00b7 '+K(Math.round(tierVal*ANNUAL));
   }
 
   function assumptions(){

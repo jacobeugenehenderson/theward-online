@@ -1687,8 +1687,8 @@ a { color: inherit; }
   font-size:13px; font-family:var(--f-sys); font-weight:600; letter-spacing:.12em; text-transform:uppercase;
   color:var(--text); padding-bottom:8px; border-bottom:1px solid var(--text)}
 .tool--ask .gfold > .ghead::-webkit-details-marker{display:none}
-.tool--ask .gfold > .ghead::after{content:"+"; font-weight:400; color:var(--cary-rule); letter-spacing:0}
-.tool--ask .gfold[open] > .ghead::after{content:"\2013"}
+.tool--ask .gfold > .ghead::after{content:"\25BE"; font-size:15px; line-height:1; color:var(--cary-rule); letter-spacing:0}
+.tool--ask .gfold[open] > .ghead::after{content:"\25B4"}
 .tool--ask .gfold > .ghead:focus-visible{outline:2px solid var(--cary-rule); outline-offset:3px}
 .tool--ask .gtally{font-variant-numeric:tabular-nums; letter-spacing:.04em; color:var(--text-faint); font-weight:400}
 
@@ -1721,8 +1721,8 @@ a { color: inherit; }
 .tool--ask .rband .rtally{font-variant-numeric:tabular-nums; letter-spacing:.04em}
 /* ⭐ The marker states what a CLICK WILL DO, which is why it is on the summary
    and flips with [open] rather than being drawn once. */
-.tool--ask .rband::after{content:"+"; font-size:13px; line-height:1; color:var(--cary-rule)}
-.tool--ask .rgroup[open] > .rband::after{content:"\2013"}
+.tool--ask .rband::after{content:"\25BE"; font-size:13px; line-height:1; color:var(--cary-rule)}
+.tool--ask .rgroup[open] > .rband::after{content:"\25B4"}
 .tool--ask .role{display:grid; grid-template-columns:24px minmax(0,1fr) auto; gap:11px; align-items:start; padding:12px 0; border-bottom:1px solid var(--rule-soft)}
 .tool--ask .role input[type=checkbox]{width:17px; height:17px; margin-top:3px; accent-color:var(--cary-rule); cursor:pointer}
 .tool--ask .role.off .rname,.tool--ask .role.off .rwhy,.tool--ask .role.off .owns{opacity:.4}
