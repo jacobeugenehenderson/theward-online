@@ -235,17 +235,17 @@
 
     <div class="group">
       <h3>Commissioned work</h3>
-      <p class="grouphint">Pouring and looking after a ward is commissioned, not staffed. <b>Once</b> per ward to make it, <b>every year</b> per cluster to look after it, <b>sometimes</b> for an artist.</p>
+      <p class="grouphint">Pouring and looking after a ward is commissioned, not staffed. One rate, used twice: <b>once</b> to make a ward, <b>every year</b> to keep it.</p>
 
       <div class="dial">
         <div class="dial-head"><label class="dial-label" for="cluster"><span>Wards per cartographer</span></label><span class="dial-val" id="cluster-v">3</span></div>
         <input type="range" id="cluster" min="1" max="8" step="1" value="3">
-        <p class="note">Contiguous, so the edges between them stay coherent.</p>
+        <p class="note">Contiguous, so the edges between them stay coherent. Sets how many cartographers, not what they are paid.</p>
       </div>
 
       <div class="dial">
-        <div class="dial-head"><label class="dial-label" for="retainer"><span>Cartographer retainer, per cluster / yr</span></label><span class="dial-val" id="retainer-v">$25k</span></div>
-        <input type="range" id="retainer" min="0" max="80000" step="1000" value="25000">
+        <div class="dial-head"><label class="dial-label" for="retainer"><span>Upkeep, per ward / yr</span></label><span class="dial-val" id="retainer-v">$8k</span></div>
+        <input type="range" id="retainer" min="0" max="30000" step="500" value="8000">
       </div>
 
       <div class="dial">
@@ -307,7 +307,7 @@
       <div class="line"><dt>Salaries</dt><dd id="o-sal">—</dd></div>
       <div class="line"><dt>Payroll tax &amp; benefits</dt><dd id="o-load">—</dd></div>
       <div class="line"><dt>Setup &amp; overhead</dt><dd id="o-setup">—</dd></div>
-      <div class="line"><dt id="ret-label">Cartographer retainers</dt><dd id="o-ret">—</dd></div>
+      <div class="line"><dt id="ret-label">Ward upkeep</dt><dd id="o-ret">—</dd></div>
       <div class="line"><dt>Pour commissions</dt><dd id="o-comm">—</dd></div>
       <div class="line" id="take-row"><dt>Artist takeovers</dt><dd id="o-take">—</dd></div>
     </dl>
@@ -477,6 +477,6 @@
 </footer>
 
 <script src="../../js/site.js?v=0f3be1550239"></script>
-<script src="../../js/ask.js?v=85409433931d"></script>
+<script src="../../js/ask.js?v=72229a044dde"></script>
 </body>
 </html>

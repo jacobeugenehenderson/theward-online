@@ -228,7 +228,7 @@
     // ward to make it, every year per cluster to look after it, sometimes for
     // an artist — and a sponsor-funded takeover is not the studio's cost at all.
     var clusters=clustersNow();
-    var retainerAll=clusters*(+el('retainer').value);
+    var retainerAll=a.hoods*(+el('retainer').value);
     var takeCount=+el('takeovers').value, takeFee=+el('takefee').value;
     var takeAll=takePayer==='studio' ? takeCount*takeFee : 0;
     // ⭐ One source for volumes: the revenue panel. Nothing here re-derives them.
@@ -266,7 +266,7 @@
     el('commission-v').textContent=K(+el('commission').value);
     el('takeovers-v').textContent=takeCount;
     el('takefee-v').textContent=K(takeFee);
-    el('ret-label').textContent='Cartographer retainers \u00b7 '+clusters+(clusters===1?' cluster':' clusters');
+    el('ret-label').textContent='Ward upkeep \u00b7 '+clusters+' cartographer'+(clusters===1?'':'s');
     el('o-ret').textContent=K(retainerAll);
     el('o-comm').textContent=K(commissionAll);
     el('o-take').textContent=takePayer==='studio'?K(takeAll):'sponsor-funded';
