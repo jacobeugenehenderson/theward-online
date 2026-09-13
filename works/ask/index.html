@@ -228,13 +228,22 @@
         <p class="note">Retail, services, tickets, events. Nothing is built for this yet, and it has no service charge to sit inside.</p>
       </div>
 
+      <div class="dial" id="hostsalary-dial">
+        <div class="dial-head">
+          <label class="dial-label" for="hostsalary"><span>Local Host salary, per ward / yr</span></label>
+          <span class="dial-val" id="hostsalary-v">$60k</span>
+        </div>
+        <input type="range" id="hostsalary" min="0" max="120000" step="2500" value="60000">
+        <p class="note">Runs the neighborhood &mdash; local moderation, trust &amp; safety, the merchant relationships. <b>Paid by the neighborhood out of what the Ward collects there, not by the studio.</b></p>
+      </div>
+
       <div class="dial" id="hostshare-dial">
         <div class="dial-head">
-          <label class="dial-label" for="hostshare"><span>The Local Host&rsquo;s share of it</span></label>
-          <span class="dial-val" id="hostshare-v">40%</span>
+          <label class="dial-label" for="hostshare"><span>Courtesy commission, on top</span></label>
+          <span class="dial-val" id="hostshare-v">5%</span>
         </div>
-        <input type="range" id="hostshare" min="0" max="100" step="1" value="40">
-        <p class="note" id="foodrate-note">Of everything the Ward collects in the neighborhood. The Ward keeps <b>6.3%</b> of food sold.</p>
+        <input type="range" id="hostshare" min="0" max="20" step="1" value="5">
+        <p class="note" id="foodrate-note">Of everything the Ward collects. The Ward keeps <b>10.5%</b> of food sold before the Local Host is paid.</p>
       </div>
 
 
@@ -311,8 +320,8 @@
     </dl>
     <h4>Earned by the Local Hosts</h4>
     <dl>
-      <div class="line"><dt>Share of food orders</dt><dd id="o-host">—</dd></div>
-      <div class="line"><dt>Share of other local commerce</dt><dd id="o-hostrails">—</dd></div>
+      <div class="line"><dt>Salaries, all wards</dt><dd id="o-host">—</dd></div>
+      <div class="line"><dt>Courtesy commission</dt><dd id="o-hostrails">—</dd></div>
       <div class="line"><dt>Each Local Host</dt><dd id="o-hostper">—</dd></div>
     </dl>
     <h4 id="raise-head">What must be raised</h4>
@@ -338,9 +347,9 @@
   <p class="railnote">A townie has checked in on three distinct days in a rolling fourteen, in the neighborhood, server-side; every delivery resolves to a building inside the boundary. <b>Participation is structural, not acquired.</b></p>
 
   <ul class="rail-list">
-    <li><b><span id="pf-1">6.3%</span> of food sold</b>, after the courier and the neighborhood are paid. Processing is pass-through at cost — never revenue — and nothing is charged to a merchant to participate.</li>
+    <li><b><span id="pf-1">10.5%</span> of food sold</b>, after the courier is paid — and the neighborhood’s own Local Host is paid out of that before the studio keeps any of it. Processing is pass-through at cost — never revenue — and nothing is charged to a merchant to participate.</li>
     <li><b>New capabilities enter an existing Ward, not a new market.</b> Retail, services, tickets and events are in-boundary by construction; they do not require a separate population to be acquired.</li>
-    <li><b>The unit is a bounded economy with verified-by-presence participants</b> — a place, not a market. ⛔ To a payments institution <span id="pf-2">6.3%</span> understates it: behind the flow sit merchant relationships, deposits, payments, payouts, and participation in a locally verified economy.</li>
+    <li><b>The unit is a bounded economy with verified-by-presence participants</b> — a place, not a market. ⛔ To a payments institution <span id="pf-2">10.5%</span> understates it: behind the flow sit merchant relationships, deposits, payments, payouts, and participation in a locally verified economy.</li>
   </ul>
 
 
@@ -442,6 +451,6 @@
 </footer>
 
 <script src="../../js/site.js?v=0f3be1550239"></script>
-<script src="../../js/ask.js?v=41873ac32d3f"></script>
+<script src="../../js/ask.js?v=1e4850852189"></script>
 </body>
 </html>

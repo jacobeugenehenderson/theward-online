@@ -60,8 +60,10 @@
     var poursRev=ctx.pourIsRevenue?ctx.pours*tierVal:0;
     var annual=ctx.pourIsRevenue?n*tierVal*ANNUAL:0;
     var delivery=n*ctx.rests*ctx.perrest*foodRate()*12;
-    var rails=n*ctx.localflow*PLATFORM_FEE*(1-HOSTSHARE)*12;
-    return poursRev+annual+delivery+rails-(ctx.fixedCost+ctx.perWard*n);
+    var rails=n*ctx.localflow*PLATFORM_FEE*12;
+    // the ward's own host is paid before the studio keeps anything
+    var host=n*HOST_SALARY+(delivery+rails)*HOSTSHARE;
+    return poursRev+annual+delivery+rails-host-(ctx.fixedCost+ctx.perWard*n);
   }
   function drawChart(ctx){
     var svg=document.getElementById('chart'); if(!svg) return;
@@ -219,8 +221,15 @@
         // a share of what the neighborhood sells — at which point taking a share of
         // the restaurants and none of the shops was arbitrary (Jacob: "a share of
         // everything the hood sells"). foodRate() already nets it out of food.
-        railsFee=a.hoods*a.localflow*PLATFORM_FEE*(1-HOSTSHARE)*12,
-        earned=poursRev+annual+delivery+railsFee;
+        railsFee=a.hoods*a.localflow*PLATFORM_FEE*12,
+        // ⭐ THE NEIGHBOURHOOD PAYS ITS HOST OUT OF WHAT THE WARD COLLECTS THERE,
+        // and it is a FIRST CLAIM on it — a salary is owed whether or not the ward
+        // sold much. ⛔ So in a thin ward this goes NEGATIVE, and that is the true
+        // reading: a neighbourhood that sells little cannot fund a host from its own
+        // commerce, and somebody has to decide who covers it.
+        hostSalAll=a.hoods*HOST_SALARY,
+        hostComm=(delivery+railsFee)*HOSTSHARE,
+        earned=poursRev+annual+delivery+railsFee-hostSalAll-hostComm;
     // ⛔ `Math.max(0, …)` FROZE THE WHOLE BOTTOM OF THE PANEL. Once earned
     // revenue passed the roster, the gap and the ask both pinned to $0 and
     // stayed there — so adding or removing a seat moved headcount and salaries
@@ -252,14 +261,9 @@
     ['tier-row','annual-row','pours-row','ann-row'].forEach(function(id){
       var r=document.getElementById(id); if(r) r.style.display=pourIsRevenue?'':'none';
     });
-    var hostFood=deliveryFlow*(SVC*(1-COURIER)+COMM)*HOSTSHARE*12,
-        hostRails=a.hoods*a.localflow*PLATFORM_FEE*HOSTSHARE*12;
-    el('o-host').textContent=K(hostFood);
-    el('o-hostrails').textContent=K(hostRails);
-    // ⛔ NO FLOOR. What a Local Host earns is what their own neighborhood sells,
-    // and in a thin ward that is a small number — which is the honest reading and
-    // the reason this is not a salary line (Jacob, 2026-09-13).
-    el('o-hostper').textContent=a.hoods>0?K(Math.round((hostFood+hostRails)/a.hoods)):'\u2014';
+    el('o-host').textContent=K(hostSalAll);
+    el('o-hostrails').textContent=K(hostComm);
+    el('o-hostper').textContent=a.hoods>0?K(HOST_SALARY+Math.round(hostComm/a.hoods)):'\u2014';
     el('o-del').textContent=K(delivery); el('o-rails').textContent=K(railsFee); el('o-earn').textContent=K(earned);
     var covered=surplus>0;
     var rh=document.getElementById('raise-head');
@@ -456,8 +460,13 @@
   // it. Ward food revenue was overstated by that 40% (Jacob, 2026-09-13: "where
   // is the 25% charge line? That's where this should go").
   var COURIER=0.75;   // ◆ the courier's share of the service charge, from The Split
-  var SVC=0.22, COMM=0.05, HOSTSHARE=0.40;
-  function foodRate(){ return (SVC*(1-COURIER)+COMM)*(1-HOSTSHARE); }
+  var SVC=0.22, COMM=0.05, HOSTSHARE=0.05, HOST_SALARY=60000;
+  // ⭐ foodRate() IS NOW GROSS — what the Ward collects on food BEFORE the
+  // neighborhood pays its Local Host. The host used to be netted out here as a
+  // percentage share; it is now a SALARY the ward funds plus a small commission,
+  // and a salary is a fixed sum that cannot be folded into a rate (Jacob,
+  // 2026-09-13: "the hood funds a salary with a small courtesy commission").
+  function foodRate(){ return SVC*(1-COURIER)+COMM; }
   var PLATFORM_FEE=0.05, ANNUAL=0.18;
 
   // ⭐ Log scale: 0→1 neighborhood, 100→1,000. Linear would make everything
@@ -476,15 +485,17 @@
     // that applies to several flows cannot be expressed in any one of them, so the
     // dial states the share and the note below states what it comes to on food.
     HOSTSHARE = +el('hostshare').value/100;
+    HOST_SALARY = +el('hostsalary').value;
     ANNUAL=+el('annual').value/100;
     el('pfee-v').textContent=(PLATFORM_FEE*100).toFixed(1)+'%';
     el('svc-v').textContent=el('svc').value+'%';
     el('comm-v').textContent=el('comm').value+'%';
     el('hostshare-v').textContent=el('hostshare').value+'%';
+    el('hostsalary-v').textContent=K(HOST_SALARY);
     // ⭐ Three dials compound into one rate, and the rate is the only one of the
     // four numbers that appears in the reading. Say it where it is decided.
     var fn=document.getElementById('foodrate-note');
-    if(fn) fn.innerHTML='Of everything the Ward collects in the neighborhood. The Ward keeps <b>'+(foodRate()*100).toFixed(1)+'%</b> of food sold.';
+    if(fn) fn.innerHTML='Of everything the Ward collects. The Ward keeps <b>'+(foodRate()*100).toFixed(1)+'%</b> of food sold before the Local Host is paid.';
     // ⭐ IN DOLLARS BESIDE THE PERCENTAGE, because a share of the pour price
     // means nothing until you know the pour price — and because this is what a
     // ward is CHARGED for support, against "Ward upkeep" in Commissioned work,
@@ -543,7 +554,7 @@
     });
   });
   ['load','sponsor','setup','hoods','rests','perrest','localflow','pours','pfee','svc','comm','hostshare','annual','tier',
-   'retainer','commission','underwrite'].forEach(function(id){
+   'retainer','commission','underwrite','hostsalary'].forEach(function(id){
     el(id).addEventListener('input',function(){ update(); rails(); });
   });
   drawTopo(true); build(); update(); rails();
