@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="../../css/tokens.css?v=7ce1d022c15e">
-<link rel="stylesheet" href="../../css/site.css?v=22c845b05fa2">
+<link rel="stylesheet" href="../../css/site.css?v=695c35733adb">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 
 <!-- ⛔ THIS PAGE DECLARES NO CSS OF ITS OWN AND CARRIES NO PLACEMENT
@@ -90,13 +90,24 @@
 
 
 
+<section class="sec whole">
+  <h2 class="whole-h">The whole transaction</h2>
+
+  <div class="lead-dial lead-wide">
+    <div class="dial-head"><label class="dial-label" for="sub"><span>Food subtotal</span></label><span class="dial-val" id="sub-v">$55</span></div>
+    <input type="range" id="sub" min="40" max="250" step="5" value="55">
+  </div>
+  <div class="whole-row"><span class="whole-lbl">What the customer is charged</span><span class="whole-tot" id="w1-tot">$74.29</span></div>
+  <div class="splitbar whole-bar" id="w1"></div>
+  <div class="whole-row"><span class="whole-lbl">Who receives it</span><span class="whole-tot" id="w2-tot">$74.29</span></div>
+  <div class="splitbar whole-bar" id="w2"></div>
+  <div class="whole-row"><span class="whole-lbl">The same order on an incumbent</span><span class="whole-tot" id="w3-tot">$83.06</span></div>
+  <div class="splitbar whole-bar" id="w3"></div>
+  <div class="sb-key whole-key" id="w-key"></div>
+</section>
+
 <div class="sheet">
   <div class="group">
-    <div class="lead-dial">
-      <div class="dial-head"><label class="dial-label" for="sub"><span>Food subtotal</span></label><span class="dial-val" id="sub-v">$55</span></div>
-      <input type="range" id="sub" min="40" max="250" step="5" value="55">
-    </div>
-
     <div class="dial">
       <div class="dial-head"><span class="dial-label"><span>Who runs the rails</span></span><span class="dial-val" id="owner-v">Independent</span></div>
       <div class="seg" id="ownersel" role="group" aria-label="Who runs the rails">
@@ -162,17 +173,6 @@
 
       </div>
 </div>
-
-<section class="sec whole">
-  <h2 class="whole-h">The whole transaction</h2>
-  <div class="whole-row"><span class="whole-lbl">What the customer is charged</span><span class="whole-tot" id="w1-tot">$74.29</span></div>
-  <div class="splitbar whole-bar" id="w1"></div>
-  <div class="whole-row"><span class="whole-lbl">Who receives it</span><span class="whole-tot" id="w2-tot">$74.29</span></div>
-  <div class="splitbar whole-bar" id="w2"></div>
-  <div class="whole-row"><span class="whole-lbl">The same order on an incumbent</span><span class="whole-tot" id="w3-tot">$83.06</span></div>
-  <div class="splitbar whole-bar" id="w3"></div>
-  <div class="sb-key whole-key" id="w-key"></div>
-</section>
 
 <section class="sec whole">
   <h2 class="whole-h">The same order elsewhere</h2>

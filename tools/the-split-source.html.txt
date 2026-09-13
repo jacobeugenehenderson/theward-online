@@ -60,13 +60,19 @@ header h1{font-size:clamp(34px,6vw,52px); font-weight:600; line-height:1.02; let
 /* ⭐ THE PAGE'S ONE INPUT. Every figure on the page is a function of this and it sat
    as the first of four equal dials. It is above the section now, and larger. */
 .lead-dial{background:var(--paper); border:1px solid var(--rule); padding:18px 20px 22px; margin-bottom:26px}
+/* ⭐ at full width the card would be a very wide, very short box; it holds a
+   readable measure and sits left, where the bars below it start. */
+.lead-wide{max-width:420px; margin-top:18px}
 .lead-dial .dial-label{font-size:19px}
 .lead-dial .dial-val{font-size:34px; letter-spacing:-.02em; line-height:1}
 .lead-dial input[type=range]{width:100%; height:26px; margin-top:14px; accent-color:var(--brick)}
 /* ⭐ FULL WIDTH, BECAUSE TRUE SCALE NEEDS IT. The business is ~79% of the bar and
    the Ward ~8%; in a half-width column those slices are a few pixels. The figure
    spans the page so the small ones are still readable at honest proportion. */
-.whole{margin-top:44px}
+/* ⛔ no margin of its own — the 44px here existed to separate this figure from the
+   sheet it used to follow, and now that it leads the page it only pushed it down
+   143px from the lede. The section padding is the spacing. */
+.whole{margin-top:0}
 .whole-h{font-size:clamp(20px,2.6vw,26px); letter-spacing:-.01em; margin-bottom:6px}
 .whole-row{display:flex; justify-content:space-between; align-items:baseline; margin-top:20px; font-size:13.5px}
 .whole-lbl{color:var(--ink-2)}
@@ -117,13 +123,24 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
 </header>
 
 
+<section class="sec whole">
+  <h2 class="whole-h">The whole transaction</h2>
+
+  <div class="lead-dial lead-wide">
+    <div class="dial-head"><label class="dial-label" for="sub"><span>Food subtotal</span></label><span class="dial-val" id="sub-v">$55</span></div>
+    <input type="range" id="sub" min="40" max="250" step="5" value="55">
+  </div>
+  <div class="whole-row"><span class="whole-lbl">What the customer is charged</span><span class="whole-tot" id="w1-tot">$74.29</span></div>
+  <div class="splitbar whole-bar" id="w1"></div>
+  <div class="whole-row"><span class="whole-lbl">Who receives it</span><span class="whole-tot" id="w2-tot">$74.29</span></div>
+  <div class="splitbar whole-bar" id="w2"></div>
+  <div class="whole-row"><span class="whole-lbl">The same order on an incumbent</span><span class="whole-tot" id="w3-tot">$83.06</span></div>
+  <div class="splitbar whole-bar" id="w3"></div>
+  <div class="sb-key whole-key" id="w-key"></div>
+</section>
+
 <div class="sheet">
   <div class="group">
-    <div class="lead-dial">
-      <div class="dial-head"><label class="dial-label" for="sub"><span>Food subtotal</span></label><span class="dial-val" id="sub-v">$55</span></div>
-      <input type="range" id="sub" min="40" max="250" step="5" value="55">
-    </div>
-
     <div class="dial">
       <div class="dial-head"><span class="dial-label"><span>Who runs the rails</span></span><span class="dial-val" id="owner-v">Independent</span></div>
       <div class="seg" id="ownersel" role="group" aria-label="Who runs the rails">
@@ -189,17 +206,6 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
 
       </div>
 </div>
-
-<section class="sec whole">
-  <h2 class="whole-h">The whole transaction</h2>
-  <div class="whole-row"><span class="whole-lbl">What the customer is charged</span><span class="whole-tot" id="w1-tot">$74.29</span></div>
-  <div class="splitbar whole-bar" id="w1"></div>
-  <div class="whole-row"><span class="whole-lbl">Who receives it</span><span class="whole-tot" id="w2-tot">$74.29</span></div>
-  <div class="splitbar whole-bar" id="w2"></div>
-  <div class="whole-row"><span class="whole-lbl">The same order on an incumbent</span><span class="whole-tot" id="w3-tot">$83.06</span></div>
-  <div class="splitbar whole-bar" id="w3"></div>
-  <div class="sb-key whole-key" id="w-key"></div>
-</section>
 
 <section class="sec whole">
   <h2 class="whole-h">The same order elsewhere</h2>

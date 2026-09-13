@@ -1622,13 +1622,19 @@ a { color: inherit; }
 /* ⭐ THE PAGE'S ONE INPUT. Every figure on the page is a function of this and it sat
    as the first of four equal dials. It is above the section now, and larger. */
 .tool--split .lead-dial{background:var(--ground-2); border:1px solid var(--rule); padding:18px 20px 22px; margin-bottom:26px}
+/* ⭐ at full width the card would be a very wide, very short box; it holds a
+   readable measure and sits left, where the bars below it start. */
+.tool--split .lead-wide{max-width:420px; margin-top:18px}
 .tool--split .lead-dial .dial-label{font-size:19px}
 .tool--split .lead-dial .dial-val{font-size:34px; letter-spacing:-.02em; line-height:1}
 .tool--split .lead-dial input[type=range]{width:100%; height:26px; margin-top:14px; accent-color:var(--cary-rule)}
 /* ⭐ FULL WIDTH, BECAUSE TRUE SCALE NEEDS IT. The business is ~79% of the bar and
    the Ward ~8%; in a half-width column those slices are a few pixels. The figure
    spans the page so the small ones are still readable at honest proportion. */
-.tool--split .whole{margin-top:44px}
+/* ⛔ no margin of its own — the 44px here existed to separate this figure from the
+   sheet it used to follow, and now that it leads the page it only pushed it down
+   143px from the lede. The section padding is the spacing. */
+.tool--split .whole{margin-top:0}
 .tool--split .whole-h{font-size:clamp(20px,2.6vw,26px); letter-spacing:-.01em; margin-bottom:6px}
 .tool--split .whole-row{display:flex; justify-content:space-between; align-items:baseline; margin-top:20px; font-size:13.5px}
 .tool--split .whole-lbl{color:var(--text-soft)}
