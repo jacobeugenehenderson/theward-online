@@ -25,7 +25,7 @@
     var W=560,H=300,TOP=26,BOT=14,LW=104,RW=104,H0=H-TOP-BOT;
     var k=H0/d.total, GAP=3;
 
-    var left=[['Food',d.sub],['Tax',d.tax],['Service charge',d.svc],['Processing',d.proc+(d.procSpread||0)]];
+    var left=[['Food',d.sub],['Tax',d.tax],['Service charge',d.svc],['Processing',d.proc],['Platform fee',d.procSpread||0]];
     if(d.tip>0) left.push(['Tip',d.tip]);
     left=left.filter(function(x){return x[1]>0;});
     var right=[['Business',d.business,HUE.business],['Courier',d.courier,HUE.courier],
@@ -51,7 +51,7 @@
       ['Service charge','Host',Math.round(svcToPool*d.hostR)],
       ['Service charge','The Ward',svcToPool-Math.round(svcToPool*d.hostR)],
       ['Processing','Processor',d.proc],
-      ['Processing','The Ward',d.procSpread||0]
+      ['Platform fee','The Ward',d.procSpread||0]
     ];
     if(d.tip>0) flows.push(['Tip','Courier',d.tip]);
 
@@ -210,7 +210,14 @@
     $('o-food').textContent=M(sub);
     $('o-tax').textContent=M(tax);
     $('o-svc').textContent=M(svc);
-    $('o-proc').textContent=M(proc);
+    // ⛔ §8.5 OF THE LICENCE: an amount represented to the customer as
+    // reimbursement of processing cost may not exceed the processing cost. An
+    // owner that processes in-house and keeps the difference may keep it — it
+    // just may not be called processing. So the customer's bill shows the real
+    // processing charge and the retained spread as the platform's own fee.
+    $('o-proc').textContent=M(procPaid);
+    $('o-platfee').textContent=M(procSpread);
+    $('platfee-row').style.display=procSpread>0?'':'none';
     $('o-tip').textContent=M(tip);
     $('tip-row').style.display=tip>0?'':'none';
     $('o-total').textContent=M(total);
