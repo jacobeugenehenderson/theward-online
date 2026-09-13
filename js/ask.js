@@ -371,6 +371,19 @@
       defaultMode:'custodial', forceOff:[],
       rosterWhy:''
     },
+    fund:{
+      nodes:[['An institution','Pays for pours out of its own budget \u2014 no ownership, no grant cycle'],
+             ['The studio','<b>Independent</b>, and commissioned to pour'],
+             ['The neighborhood','<b>Pays nothing, and earns.</b> Its Local Host takes a share of what it sells']],
+      note:'No raise and no sponsor \u2014 a purchase order, at a rate the two sides agree.',
+      askLabel:'What is still uncovered', sponsor:false, market:1.00, annualPct:18,
+      raiseHead:'What the institution does not cover', gapLabel:'Gap',
+      poursLabel:'Pours commissioned this year', wantsED:false,
+      tierLabel:'Rate per pour', tierNote:'What the institution pays for a pour.',
+      setupLabel:'Setup &amp; overhead', setupNote:'Legal, accounting, insurance, hosting, compute, equipment.',
+      defaultMode:'product', forceOff:['ed','grants'],
+      rosterWhy:''
+    },
     inst:{
       nodes:[['An institution','A company, university, or civic arm \u2014 its own budget'],
              ['The studio','A <b>team inside it</b>, not a grantee'],
