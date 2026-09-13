@@ -141,17 +141,6 @@
       <p class="note" id="proc-note">Stripe and Square publish <b>2.9% + 30¢</b> for online payments. Adyen publishes <b>$0.13 + interchange + scheme fees + 0.60%</b> — the modeled figure adds typical US card-not-present interchange and scheme fees to that markup. The institutional rate is a scenario, not a quote.</p>
     </div>
 
-    <div class="dial">
-      <div class="dial-head"><label class="dial-label" for="markup"><span>Menu markup on the incumbents</span></label><span class="dial-val" id="markup-v">15%</span></div>
-      <input type="range" id="markup" min="0" max="35" step="1" value="15">
-      <p class="note">A restaurant raising prices to survive a 30% commission. Widely documented, not published &mdash; unlike the commission tiers.</p>
-    </div>
-
-    <div class="dial">
-      <div class="dial-head"><label class="dial-label" for="vol"><span>Orders / restaurant / month</span></label><span class="dial-val" id="vol-v">40</span></div>
-      <input type="range" id="vol" min="0" max="400" step="5" value="40">
-    </div>
-
     <h3 class="mt-4">How it divides</h3>
 
     <div class="dial">
@@ -175,6 +164,20 @@
       </div>
       <div class="sb-key" id="sb-key"></div>
     </div>
+
+    <h3 class="mt-4">Against the incumbents</h3>
+
+    <div class="dial">
+      <div class="dial-head"><label class="dial-label" for="markup"><span>Menu markup on the incumbents</span></label><span class="dial-val" id="markup-v">15%</span></div>
+      <input type="range" id="markup" min="0" max="35" step="1" value="15">
+      <p class="note">A restaurant raising prices to survive a 30% commission. Widely documented, not published &mdash; unlike the commission tiers.</p>
+    </div>
+
+    <div class="dial">
+      <div class="dial-head"><label class="dial-label" for="vol"><span>Orders / restaurant / month</span></label><span class="dial-val" id="vol-v">40</span></div>
+      <input type="range" id="vol" min="0" max="400" step="5" value="40">
+    </div>
+
   </div>
 
   <div class="panel">
