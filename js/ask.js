@@ -22,8 +22,8 @@
 
     {id:'jh',band:'Studio & mission',name:'Jacob Henderson — principal &amp; creative director',owns:'Direction, the look, the doctrine',pay:110000,
      why:'Owner of the studio, creative director of the nonprofit. Currently zero.',modes:['custodial','product']},
-    {id:'host',band:'Studio & mission',name:'Network operations &amp; trust',owns:'Brings wards live &middot; the public line',pay:60000,
-     why:'Stands each Local Host up, and steps in when something goes wrong.',modes:['custodial','product']},
+    {id:'host',band:'Studio & mission',name:'Local Host',owns:'Runs one neighborhood &middot; local moderation',perWard:true,pay:60000,
+     why:'One per ward, so this salary is paid once per neighborhood on the rails.',modes:['custodial','product']},
     {id:'ed',band:'Studio & mission',name:'Founding executive director',owns:'The raise, governance, the sponsor',pay:80000,
      why:'Works the grant cycle. Nothing gets funded until this seat is filled.',modes:['custodial','product']},
     {id:'grants',band:'Studio & mission',name:'Grants associate',owns:'The second raiser',pay:62000,
@@ -210,7 +210,7 @@
     seatsHere().forEach(function(r){
       by[r.band]=by[r.band]||{on:0,of:0,pay:0};
       by[r.band].of++;
-      if(r.on){ by[r.band].on++; by[r.band].pay+=r.pay; }
+      if(r.on){ by[r.band].on++; by[r.band].pay+=r.perWard?r.pay*hoodsFromSlider(+el('hoods').value):r.pay; }
     });
     Array.prototype.forEach.call(host.querySelectorAll('.rtally'),function(t){
       var b=by[t.dataset.band]; if(!b) return;
@@ -227,13 +227,15 @@
     el('setup-v').textContent=K(setup);
     tierVal=+el('tier').value; el('tier-v').textContent=K(tierVal);
 
-    var on=ROLES.filter(function(r){return r.on;});
-    var sal=on.reduce(function(a,r){return a+r.pay;},0);
+    var a2=a, on=ROLES.filter(function(r){return r.on;});
+    var sal=on.reduce(function(a,r){return a+(r.perWard?r.pay*a2.hoods:r.pay);},0);
     var loading=sal*load;
     // ⭐ COMMISSIONED WORK IS A COST, NOT HEADCOUNT. Three cadences: once per
     // ward to make it, every year per cluster to look after it, sometimes for
     // an artist — and a sponsor-funded takeover is not the studio's cost at all.
     var clusters=clustersNow();
+    var hostSeat=ROLES.filter(function(r){return r.id==='host';})[0];
+    var hostSalPer=(hostSeat&&hostSeat.on)?hostSeat.pay:0, hostSalAll=hostSalPer*a.hoods;
     var retainerAll=a.hoods*(+el('retainer').value);
     var takeCount=+el('takeovers').value, takeFee=feeFromSlider(+el('takefee').value);
     var takeAll=takePayer==='studio' ? takeCount*takeFee : 0;
@@ -293,8 +295,9 @@
       var r=document.getElementById(id); if(r) r.style.display=pourIsRevenue?'':'none';
     });
     var hostFood=deliveryFlow*(SVC*(1-COURIER)+COMM)*HOSTSHARE*12;
+    el('o-hostsal').textContent=K(hostSalAll);
     el('o-host').textContent=K(hostFood);
-    el('o-hostper').textContent=a.hoods>0?K(Math.round(hostFood/a.hoods)):'\u2014';
+    el('o-hostper').textContent=a.hoods>0?K(hostSalPer+Math.round(hostFood/a.hoods)):'\u2014';
     el('o-del').textContent=K(delivery); el('o-rails').textContent=K(railsFee); el('o-earn').textContent=K(earned);
     var covered=surplus>0;
     var rh=document.getElementById('raise-head');
@@ -348,8 +351,8 @@
     });
     drawChart({ pours:a.pours, cluster:+el('cluster').value,
                 rests:a.rests, perrest:a.perrest, localflow:a.localflow,
-                fixedCost:cost-retainerAll,
-                perWard:+el('retainer').value,
+                fixedCost:cost-retainerAll-hostSalAll,
+                perWard:(+el('retainer').value)+hostSalPer,
                 hoods:a.hoods, pourIsRevenue:pourIsRevenue });
   }
 
