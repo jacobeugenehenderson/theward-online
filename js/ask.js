@@ -238,7 +238,7 @@
     // ⭐ One source for volumes: the revenue panel. Nothing here re-derives them.
     // ⛔ Under absorption with internally-funded pours, the institution is paying
     // itself: that is a transfer, not income, and counting it inflates the unit.
-    var pourIsRevenue=!(topo==='inst' && pourPayer==='internal');
+    var pourIsRevenue=(topo!=='inst');   // a pour an institution absorbs is a cost, and only a cost
     // ⛔ Only pours that can actually be authored are earned. The capacity line
     // says when the dial is over; the reading must not bill what it warns about.
     var poursDone=Math.min(a.pours, capacityNow());
@@ -384,7 +384,6 @@
       askLabel:'The budget line', sponsor:false, market:1.60, annualPct:0,
       raiseHead:'Net cost to the institution', gapLabel:'Cost, less what the unit earns',
       poursLabel:'Neighborhoods poured / yr', wantsED:false, hop:true,
-      tierLabel:'Cost basis per pour', tierNote:'\u26d4 Not a price \u2014 the figure a pour is booked at internally.',
       setupLabel:'Incremental overhead only', setupNote:'\u26d4 Legal, accounting, insurance and IT already exist. Count only what this unit <b>adds</b>.',
       defaultMode:'product', forceOff:['ed','grants'],
       rosterWhy:''
@@ -403,7 +402,7 @@
       rosterWhy:'\u26d4 Earned revenue supports a custodial roster at best \u2014 enough to keep it running, not to develop it.'
     }
   };
-  var topo='inst', pourPayer='internal', takePayer='studio', market=1.00;
+  var topo='inst', takePayer='studio', market=1.00;
   // ⛔ These seats must be IN the neighborhood — you cannot pour Lafayette Square
   // or train Barrio\u2019s guardians from Manhattan. They price to the ward, not the buyer.
   var LOCAL_SEATS=['ops','host'];
@@ -445,7 +444,6 @@
     var sdl=document.getElementById('setup-dial-label');if(sdl) sdl.innerHTML=t.setupLabel||'Setup &amp; overhead';
     var sn=document.getElementById('setup-note');      if(sn) sn.innerHTML=t.setupNote||'';
     var sl=document.getElementById('spon-line');  if(sl) sl.style.display=t.sponsor?'':'none';
-    var pp=document.getElementById('pourpayer-row'); if(pp) pp.style.display=(topo==='inst')?'':'none';
     el('ask-label').textContent=t.askLabel;
     var sp=document.getElementById('sponsor-row');
     if(sp) sp.style.display=t.sponsor?'':'none';
@@ -527,13 +525,6 @@
     b.addEventListener('click',function(){
       Array.prototype.forEach.call(el('takepayer').querySelectorAll('button'),function(x){x.setAttribute('aria-pressed','false');});
       b.setAttribute('aria-pressed','true'); takePayer=b.dataset.v; update();
-    });
-  });
-
-  Array.prototype.forEach.call(el('pourpayer').querySelectorAll('button'),function(b){
-    b.addEventListener('click',function(){
-      Array.prototype.forEach.call(el('pourpayer').querySelectorAll('button'),function(x){x.setAttribute('aria-pressed','false');});
-      b.setAttribute('aria-pressed','true'); pourPayer=b.dataset.v; update();
     });
   });
 
