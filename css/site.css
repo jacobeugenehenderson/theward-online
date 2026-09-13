@@ -1635,6 +1635,10 @@ a { color: inherit; }
    sheet it used to follow, and now that it leads the page it only pushed it down
    143px from the lede. The section padding is the spacing. */
 .tool--split .whole{margin-top:0}
+/* ⛔ and no padding of its own when it LEADS. These sections nest inside the page's
+   own <section class="sec">, so the first one stacked its 56px on top of the
+   wrapper's 56px — 112px under the lede where the page's rhythm is 56. */
+.tool--split .whole:first-of-type{padding-top:0}
 .tool--split .whole-h{font-size:clamp(20px,2.6vw,26px); letter-spacing:-.01em; margin-bottom:6px}
 .tool--split .whole-row{display:flex; justify-content:space-between; align-items:baseline; margin-top:20px; font-size:13.5px}
 .tool--split .whole-lbl{color:var(--text-soft)}
@@ -1650,8 +1654,11 @@ a { color: inherit; }
 .tool--split .note{font-size:12px; color:var(--text-faint); margin-top:5px; max-width:52ch}
 .tool--split input:focus-visible{outline:2px solid var(--cary-rule); outline-offset:3px}
 
-.tool--split .panel{background:var(--ground-2); border:1px solid var(--rule); padding:22px 20px; position:sticky; top:20px}
-@media (max-width:880px){ .tool--split .panel{position:static} }
+/* ⛔ NOT sticky. The panel is 680px against a 716px sheet, so sticky had 36px of
+   slack and spent it drifting: scroll past and the panel slid 36px down inside its
+   own column, out of line with the list beside it. Sticky earns its keep when the
+   column is much taller than the box; here it only produced a judder. */
+.tool--split .panel{background:var(--ground-2); border:1px solid var(--rule); padding:22px 20px}
 
 
 .tool--split dl{margin:0}

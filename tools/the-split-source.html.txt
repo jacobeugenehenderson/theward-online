@@ -73,6 +73,10 @@ header h1{font-size:clamp(34px,6vw,52px); font-weight:600; line-height:1.02; let
    sheet it used to follow, and now that it leads the page it only pushed it down
    143px from the lede. The section padding is the spacing. */
 .whole{margin-top:0}
+/* ⛔ and no padding of its own when it LEADS. These sections nest inside the page's
+   own <section class="sec">, so the first one stacked its 56px on top of the
+   wrapper's 56px — 112px under the lede where the page's rhythm is 56. */
+.whole:first-of-type{padding-top:0}
 .whole-h{font-size:clamp(20px,2.6vw,26px); letter-spacing:-.01em; margin-bottom:6px}
 .whole-row{display:flex; justify-content:space-between; align-items:baseline; margin-top:20px; font-size:13.5px}
 .whole-lbl{color:var(--ink-2)}
@@ -88,8 +92,11 @@ header h1{font-size:clamp(34px,6vw,52px); font-weight:600; line-height:1.02; let
 .note{font-size:12px; color:var(--ink-3); margin-top:5px; max-width:52ch}
 input:focus-visible{outline:2px solid var(--brick); outline-offset:3px}
 
-.panel{background:var(--paper); border:1px solid var(--rule); padding:22px 20px; position:sticky; top:20px; box-shadow:0 1px 2px var(--shadow)}
-@media (max-width:880px){ .panel{position:static} }
+/* ⛔ NOT sticky. The panel is 680px against a 716px sheet, so sticky had 36px of
+   slack and spent it drifting: scroll past and the panel slid 36px down inside its
+   own column, out of line with the list beside it. Sticky earns its keep when the
+   column is much taller than the box; here it only produced a judder. */
+.panel{background:var(--paper); border:1px solid var(--rule); padding:22px 20px; box-shadow:0 1px 2px var(--shadow)}
 
 
 dl{margin:0}
@@ -124,7 +131,7 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
 
 
 <section class="sec whole">
-  <h2 class="whole-h">The whole transaction</h2>
+  <h2 class="whole-h">The transaction</h2>
 
   <div class="lead-dial lead-wide">
     <div class="dial-head"><label class="dial-label" for="sub"><span>Food subtotal</span></label><span class="dial-val" id="sub-v">$55</span></div>
