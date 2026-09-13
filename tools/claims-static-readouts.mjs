@@ -59,8 +59,16 @@ for (const [pagePath, scriptPath] of PAGES) {
   for (const k of ['topo','modes','tier','pourpayer','ownersel','spreadsel','procsel'])
     if (byId[k]) byId[k].buttons = []
 
+  // ⛔ The stub must answer every DOM call the page makes, not the ones it made
+  // when this was written. A page that grows a querySelectorAll crashes the
+  // check, and a crashed check reads exactly like a failing one.
   const ctx = {
-    document: { getElementById: (i) => byId[i] || mk(i), createElement: () => mk(null) },
+    document: {
+      getElementById: (i) => byId[i] || mk(i),
+      createElement: () => mk(null),
+      querySelectorAll: () => [],
+      querySelector: () => null,
+    },
     location: { search: '' }, console: { log() {}, error() {} },
   }
   ctx.window = ctx

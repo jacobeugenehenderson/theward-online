@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="../../css/tokens.css?v=7ce1d022c15e">
-<link rel="stylesheet" href="../../css/site.css?v=4f3e86d15436">
+<link rel="stylesheet" href="../../css/site.css?v=5356018b0186">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 
 <!-- ⛔ THIS PAGE DECLARES NO CSS OF ITS OWN AND CARRIES NO PLACEMENT
@@ -104,8 +104,8 @@
 
 <div class="sheet">
   <div>
-    <div class="group">
-      <h3>The roster</h3>
+    <details class="group gfold" open>
+      <summary class="ghead"><span>The roster</span><span class="gtally" data-g="The roster"></span></summary>
       <p class="grouphint"><b>~136,000 lines</b> across eight surfaces, six app entrypoints, 65 files carrying shader code.</p>
       <p class="grouphint soft" id="roster-why"></p>
       <details class="sources">
@@ -137,10 +137,10 @@
         <button type="button" data-m="full">Full — pour in parallel</button>
       </div>
       <div id="roles"></div>
-    </div>
+    </details>
 
-    <div class="group">
-      <h3>Revenue assumptions</h3>
+    <details class="group gfold" open>
+      <summary class="ghead"><span>Revenue assumptions</span><span class="gtally" data-g="Revenue assumptions"></span></summary>
 
       <div class="dial">
         <div class="dial-head">
@@ -231,10 +231,10 @@
         </div>
         <input type="range" id="annual" min="0" max="40" step="1" value="18">
       </div>
-    </div>
+    </details>
 
-    <div class="group">
-      <h3>Commissioned work</h3>
+    <details class="group gfold" open>
+      <summary class="ghead"><span>Commissioned work</span><span class="gtally" data-g="Commissioned work"></span></summary>
       <p class="grouphint">Pouring and looking after a ward is commissioned, not staffed. One rate, used twice: <b>once</b> to make a ward, <b>every year</b> to keep it.</p>
 
       <div class="dial">
@@ -271,10 +271,10 @@
           <button type="button" data-v="sponsor">A sponsor</button>
         </div>
       </div>
-    </div>
+    </details>
 
-    <div class="group">
-      <h3>On top of salary</h3>
+    <details class="group gfold" open>
+      <summary class="ghead"><span>On top of salary</span><span class="gtally" data-g="On top of salary"></span></summary>
       <div class="dial">
         <div class="dial-head">
           <label class="dial-label" for="load"><span>Payroll tax &amp; benefits</span></label>
@@ -297,7 +297,7 @@
         <input type="range" id="setup" min="0" max="200000" step="10000" value="60000">
         <p class="note" id="setup-note"></p>
       </div>
-    </div>
+    </details>
   </div>
 
   <div class="reading">
@@ -478,6 +478,6 @@
 </footer>
 
 <script src="../../js/site.js?v=0f3be1550239"></script>
-<script src="../../js/ask.js?v=8abce3017f65"></script>
+<script src="../../js/ask.js?v=d457df8f35ef"></script>
 </body>
 </html>

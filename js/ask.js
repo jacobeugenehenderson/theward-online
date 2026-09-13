@@ -340,6 +340,16 @@
     }
     el('sentence').innerHTML=s;
     tallyBands();
+    // ⭐ A FOLDED GROUP MUST STILL REPORT ITSELF, exactly as a folded roster
+    // band does. Four headings with nothing beside them would hide the whole
+    // cost of the page behind four triangles.
+    var gt={'The roster':on.length+(on.length===1?' person · ':' people · ')+K(sal),
+            'Revenue assumptions':K(earned)+' earned',
+            'Commissioned work':K(retainerAll+commissionAll+takeAll),
+            'On top of salary':K(loading+setup)};
+    Array.prototype.forEach.call(document.querySelectorAll('.gtally'),function(t){
+      if(gt[t.dataset.g]!==undefined) t.textContent=gt[t.dataset.g];
+    });
     drawChart({ pours:a.pours, cluster:+el('cluster').value,
                 rests:a.rests, perrest:a.perrest, localflow:a.localflow,
                 cost:cost, hoods:a.hoods, pourIsRevenue:pourIsRevenue });
