@@ -481,7 +481,7 @@
     // ⭐ Three dials compound into one rate, and the rate is the only one of the
     // four numbers that appears in the reading. Say it where it is decided.
     var fn=document.getElementById('foodrate-note');
-    if(fn) fn.innerHTML='A local institution — a school, say. Paid out of our own share, so nobody pays more. The Ward keeps the rest — <b>'+(foodRate()*100).toFixed(1)+'%</b> of food sold.';
+    if(fn) fn.innerHTML='The Ward keeps <b>'+(foodRate()*100).toFixed(1)+'%</b> of food sold.';
     // ⭐ IN DOLLARS BESIDE THE PERCENTAGE, because a share of the pour price
     // means nothing until you know the pour price — and because this is what a
     // ward is CHARGED for support, against "Ward upkeep" in Commissioned work,
