@@ -481,9 +481,17 @@
   // dragging it did nothing and then lurched (Jacob, 2026-09-13: "I can only slide
   // the neighborhoods on the rails slider in odd increments").
   // ⛔ The fix is not a finer step — a finer step adds more dead positions at the
-  // bottom. Every position now names a number a person would actually say.
-  var HOODS=[1,2,3,4,5,6,7,8,9,10,12,14,16,18,20,25,30,35,40,50,
-             60,70,80,90,100,125,150,175,200,250,300,400,500,600,700,800,900,1000];
+  // bottom. Every position names a number a person would actually say.
+  // ⭐ AND THE RUNG SPACING FOLLOWS WHERE THE PAGE IS ACTUALLY READ. The first ladder
+  // reached 5-wide rungs by 20 and 25-wide by 100, so the whole realistic range —
+  // a studio pouring a few dozen neighborhoods — was climbed in fives (Jacob,
+  // 2026-09-13: "neighborhoods on the rails only go up in 5 steps increments").
+  // Single steps now run to 20 and twos to 40, which is the span anyone will drag
+  // through; the coarse rungs above 100 are the aspirational tail, where the
+  // difference between 600 and 700 is not a number anyone is choosing.
+  var HOODS=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
+             22,24,26,28,30,32,34,36,38,40,45,50,60,70,80,90,100,
+             125,150,175,200,250,300,400,500,600,700,800,900,1000];
   function hoodsFromSlider(v){ return HOODS[Math.max(0, Math.min(HOODS.length-1, v|0))]; }
 
   function readRates(){
