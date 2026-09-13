@@ -1768,4 +1768,38 @@ a { color: inherit; }
 .tool--ask .tag{font-family:var(--f-sys); font-size:10px; letter-spacing:.08em; text-transform:uppercase}
 .tool--ask .tag-upside{color:var(--sign)}
 .tool--ask .tag-ward{color:var(--cary-rule)}
+
+/* ── /works/license — the agreement as a document ──────────────────────────
+   ⭐ A DIFFERENT REGISTER FROM THE TWO TOOLS, deliberately. Those are operated;
+   this is read start to finish by someone checking whether the structure holds
+   up. So: one measure, generous leading, numbered sections that can be linked
+   to, and no device of any kind. */
+.lic .lic-sec{padding:var(--s5) 0}
+.lic .lic-h{
+  font-family:var(--f-sys); font-size:0.72rem; font-weight:700;
+  letter-spacing:0.16em; text-transform:uppercase; color:var(--sign);
+  margin:0 0 var(--s3); padding-bottom:var(--s1); border-bottom:2px solid var(--sign);
+  max-width:var(--measure);
+}
+.lic .lic-sub{
+  font-family:var(--f-sys); font-size:1rem; font-weight:600;
+  margin:var(--s4) 0 var(--s2); max-width:var(--measure);
+}
+.lic .lic-sec > p,.lic .sec > p{max-width:var(--measure); margin:0 0 var(--s3); line-height:1.62}
+.lic .lic-list{max-width:var(--measure); margin:0 0 var(--s3); padding-left:var(--s3)}
+.lic .lic-list li{margin-bottom:var(--s1); line-height:1.55}
+.lic .lic-fields{
+  max-width:var(--measure); margin:0 0 var(--s3);
+  display:grid; grid-template-columns:minmax(0,14rem) minmax(0,1fr); gap:1px var(--s3);
+}
+@media (max-width:620px){ .lic .lic-fields{grid-template-columns:1fr; gap:0} }
+.lic .lic-fields dt{
+  font-family:var(--f-sys); font-size:0.82rem; font-weight:600;
+  padding:var(--s1) 0; border-top:1px solid var(--rule-soft);
+}
+.lic .lic-fields dd{
+  margin:0; padding:var(--s1) 0; color:var(--text-soft);
+  border-top:1px solid var(--rule-soft);
+}
+@media (max-width:620px){ .lic .lic-fields dd{border-top:0; padding-top:0} }
 /* TOOLS:END */
