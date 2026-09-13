@@ -10,24 +10,24 @@
 
   var ROLES=[
     {id:'geo',band:'Engineering',name:'Geometry engineer',owns:'Pour engine · ~30k lines',pay:165000,
-     why:'Skeleton, derive, ribbons, tileGround. Polygon partitioning and offsetting.',modes:['product','full']},
+     why:'Skeleton, derive, ribbons, tileGround. Polygon partitioning and offsetting.',modes:['product']},
     {id:'gfx',band:'Engineering',name:'Graphics / runtime engineer',owns:'Player · ~20k + 65 GLSL files',pay:150000,
-     why:'Scene, slab, street view, shaders, performance.',modes:['product','full']},
+     why:'Scene, slab, street view, shaders, performance.',modes:['product']},
     {id:'fe',band:'Engineering',name:'Front-end engineer',owns:'Authoring portal + the Ward app · ~34k',pay:120000,
-     why:'Two front ends, one discipline.',modes:['custodial','product','full']},
+     why:'Two front ends, one discipline.',modes:['custodial','product']},
     {id:'plat',band:'Engineering',name:'Platform engineer',owns:'Both backends + bake &amp; deploy · ~12k',pay:140000,
-     why:'Supabase, payments, RLS, auth, the Sheets migration, release. Holds the money and the PII.',modes:['custodial','product','full']},
+     why:'Supabase, payments, RLS, auth, the Sheets migration, release. Holds the money and the PII.',modes:['custodial','product']},
     {id:'ta',band:'Engineering',name:'Technical artist',owns:'Tree &amp; asset pipeline · ~32k',pay:88000,
-     why:'Species, atlases, impostors, GLB processing, look bakes.',modes:['product','full']},
+     why:'Species, atlases, impostors, GLB processing, look bakes.',modes:['product']},
 
     {id:'jh',band:'Studio & mission',name:'Jacob Henderson — principal &amp; creative director',owns:'Direction, the look, the doctrine',pay:110000,
-     why:'Owner of the studio, creative director of the nonprofit. Currently zero.',modes:['custodial','product','full']},
+     why:'Owner of the studio, creative director of the nonprofit. Currently zero.',modes:['custodial','product']},
     {id:'host',band:'Studio & mission',name:'Network operations &amp; trust',owns:'Stands Local Hosts up &middot; \u00a714 intervention &middot; the public line',pay:60000,
-     why:'Brings a ward live, stands its Local Host up, and stays the escalation. Ordinary local moderation is the Local Host\u2019s under \u00a73.3; this seat is \u00a714 \u2014 harm, fraud, abuse, and a Local Host that stops moderating. \u26d4 The Section 230 posture rests on it.',modes:['custodial','product','full']},
+     why:'Brings a ward live, stands its Local Host up, and stays the escalation. Ordinary local moderation is the Local Host\u2019s under \u00a73.3; this seat is \u00a714 \u2014 harm, fraud, abuse, and a Local Host that stops moderating. \u26d4 The Section 230 posture rests on it.',modes:['custodial','product']},
     {id:'ed',band:'Studio & mission',name:'Founding executive director',owns:'The raise, governance, the sponsor',pay:80000,
-     why:'Works the grant cycle. Nothing gets funded until this seat is filled.',modes:['custodial','product','full']},
+     why:'Works the grant cycle. Nothing gets funded until this seat is filled.',modes:['custodial','product']},
     {id:'grants',band:'Studio & mission',name:'Grants associate',owns:'The second raiser',pay:62000,
-     why:'A second raiser, once one person cannot fundraise for them all.',modes:['full']}
+     why:'A second raiser, once one person cannot fundraise for them all.',modes:[]}
   ];
 
   ROLES.forEach(function(r){ r.base=r.pay; });
@@ -167,7 +167,7 @@
         // each is the longest thing on the page, and the tally beside each band
         // says what it costs without opening it. A reader who wants to change
         // staffing opens the band; everyone else reads two lines.
-        bandBox.open = collapsed[currentBand]===false;
+        bandBox.open = collapsed[currentBand]!==true;
         bandHead=document.createElement('summary');
         bandHead.className='rband';
         bandHead.innerHTML='<span>'+currentBand+'</span><span class="rtally" data-band="'+currentBand+'"></span>';
