@@ -92,7 +92,14 @@ for (const [pagePath, scriptPath] of PAGES) {
   // check, and a crashed check reads exactly like a failing one.
   const ctx = {
     document: {
-      getElementById: (i) => byId[i] || mk(i),
+      // \u26d4 NULL FOR AN ID THE PAGE DOES NOT HAVE. This returned a freshly minted
+      // element for ANY id, so a script reaching for something the markup no longer
+      // carries got an object instead of null and sailed past. That is exactly how a
+      // removed control took the page down twice on 2026-09-13 \u2014 #hostshare in the
+      // morning, #markup in the afternoon \u2014 with this check green both times.
+      // Elements the script CREATES are registered by the innerHTML setter above, so
+      // they are in byId by the time anything looks for them.
+      getElementById: (i) => (i in byId) ? byId[i] : null,
       createElement: () => mk(null),
       querySelectorAll: () => [],
       querySelector: () => null,
@@ -101,7 +108,20 @@ for (const [pagePath, scriptPath] of PAGES) {
   }
   ctx.window = ctx
   createContext(ctx)
-  runInContext(src, ctx)
+  // \u26d4 A CRASHED CHECK READS LIKE A FAILING ONE, which this file's own header warns
+  // about. Now that getElementById returns null for an id the markup does not carry,
+  // a script reaching for a removed control throws HERE \u2014 which is the point, and is
+  // a real defect worth naming rather than a stack trace worth deciphering.
+  try {
+    runInContext(src, ctx)
+  } catch (e) {
+    const m = /Cannot read properties of null \(reading '([^']+)'\)/.exec(e.message)
+    console.log(`\u2718 ${scriptPath} threw on load: ${e.message}`)
+    if (m) console.log(`    it reached for .${m[1]} on an element ${pagePath} does not have` +
+                       ` \u2014 a control was removed and its reference left behind`)
+    bad++
+    continue
+  }
 
   const norm = (x) => String(x).replace(/<[^>]+>/g, '').replace(/&middot;/g, '·')
                         .replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim()

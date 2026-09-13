@@ -175,7 +175,7 @@
   function drawVs(sub, ourRate, costHere, costAt){
     var svg=$('vs'); if(!svg) return;
     var rows=[['The Ward',ourRate,true]].concat(RIVALS.map(function(r){return [r[0],r[1],false];}));
-    var W=700,L=150,R=150,TOP=50,BH=24,GAP=10;
+    var W=700,L=150,R=230,TOP=50,BH=24,GAP=10;
     var maxR=0.35, plot=W-L-R;
     var x=function(v){ return L+(v/maxR)*plot; };
     // \u2b50 THREE COLUMNS, LABELLED ONCE. Every row used to repeat "keeps" and
@@ -200,9 +200,9 @@
     var bars=rows.map(function(r,i){
       var y=TOP+i*(BH+GAP);
       var w=Math.max(1,x(r[1])-L);
-      var cost=r[2]?costHere:costAt(r[1]);
+      var cost=r[2]?M(costHere):M(costAt(r[1],0))+'–'+M(costAt(r[1],1)).replace('$','');
       var op=r[2]?'0.95':'0.7';
-      var cell=function(cx,v){ return '<text x="'+cx+'" y="'+(y+14)+'" text-anchor="end" font-size="14" fill="currentColor" opacity="'+op+'" >'+M(v)+'</text>'; };
+      var cell=function(cx,v){ return '<text x="'+cx+'" y="'+(y+14)+'" text-anchor="end" font-size="14" fill="currentColor" opacity="'+op+'" >'+v+'</text>'; };
       return '<rect x="'+L+'" y="'+y+'" width="'+w.toFixed(1)+'" height="'+BH+'" fill="'+(r[2]?'var(--cary-rule)':'var(--cary-rule)')+'" opacity="'+(r[2]?'1':'0.42')+'"/>'+
              '<text x="'+(L-10)+'" y="'+(y+14)+'" text-anchor="end" font-size="13.5" fill="currentColor"'+(r[2]?' font-weight="600"':' opacity="0.75"')+'>'+r[0]+'</text>'+
              '<text x="'+(L+w+8).toFixed(1)+'" y="'+(y+14)+'" font-size="12.5" fill="currentColor" opacity="'+op+'" >'+Math.round(r[1]*100)+'%</text>'+
@@ -329,10 +329,16 @@
     //   PASS ON, and the markup is derived per tier. That also gives every tier its own
     //   menu price; a flat markup gave all five the same customer total, which was the
     //   tell that the model was wrong.
-    var pass=+$('markup').value/100;
-    $('markup-v').textContent=$('markup').value+'%';
-    var menuAt=function(rate){ return Math.round(sub*(1+pass*rate/(1-rate))); };
-    var custAt=function(rate){ var m=menuAt(rate);
+    // ⛔ A SLIDER MADE EVERY NUMBER CONDITIONAL. Nothing could be quoted without a
+    //   qualifier — "$77.04, at 50% pass-through" — and the page's strongest moments are
+    //   flat statements. Worse, it asked the reader to set a variable that CANNOT CHANGE
+    //   THE ANSWER: measured at 0, 25, 50, 75 and 100, our cost of delivery is $17.24 at
+    //   every one (we do not mark up), and every incumbent tier costs more at every one.
+    //   ⭐ So the assumption is shown as the SPAN it creates rather than a control someone
+    //   has to operate: absorbed at one end, passed on at the other (Jacob: "we were just
+    //   talking in somewhat concrete numbers and suddenly we're back in slider %s").
+    var menuAt=function(rate,pass){ return Math.round(sub*(1+pass*rate/(1-rate))); };
+    var custAt=function(rate,pass){ var m=menuAt(rate,pass);
       return m+Math.round(m*taxR)+Math.round(m*INCUMBENT_SERVICE)+INCUMBENT_DELIVERY; };
     // ⭐ THE ONE FIGURE THE MARKUP CANNOT SHUFFLE. Moving cost from the restaurant to the
     //   customer is exactly what a markup does, so either party read alone can be made to
@@ -340,8 +346,8 @@
     //   give up together, and it holds whoever bears it.
     var walkIn=sub+Math.round(sub*taxR);
     var costHere=(total-walkIn)+commission;
-    var costAt=function(rate){ return (custAt(rate)-walkIn)+(sub-Math.round(menuAt(rate)*(1-rate))); };
-    var iFood=menuAt(CAP), iTotal=custAt(CAP);
+    var costAt=function(rate,pass){ return (custAt(rate,pass)-walkIn)+(sub-Math.round(menuAt(rate,pass)*(1-rate))); };
+    var iFood=menuAt(CAP,1), iTotal=custAt(CAP,1);
     var iFee=Math.round(iFood*INCUMBENT_SERVICE), iTax=Math.round(iFood*taxR);
     drawVs(sub, 1-keepR, costHere, costAt);
     drawCustomer({menu:sub, markup:0, tax:tax, svc:svc, fee:procPaid, total:total},
@@ -349,21 +355,10 @@
     var vc=$('vs-cust');
     if(vc) vc.innerHTML = sub>0
       ? (function(){
-          // \u26d4 THE SENTENCE MUST SURVIVE ITS OWN SLIDER. At low pass-through the
-          //   incumbent is CHEAPER for the customer and this read "-5\u2013-5% cheaper".
-          //   A caption that only works at its default is a caption that has not been
-          //   dragged. It flips wording below zero, and collapses the range when every
-          //   tier lands on the same figure, which is what happens at 0% pass-through.
-          var lo=custAt(RIVALS[0][1]), hi=custAt(RIVALS[RIVALS.length-1][1]);
-          var pc=function(v){ return Math.round((v-total)/v*100); };
-          var a=pc(lo), b=pc(hi), span=(a===b)?a+'%':a+'\u2013'+b+'%';
-          var head = a<=0 && b<=0
-            ? '<b>The same food costs your customers '+(a===b?(-a)+'%':(-b)+'\u2013'+(-a)+'%')+' MORE here.</b>'
-            : '<b>The same food reaches your customers '+span+' cheaper here.</b>';
-          var ours=sub-commission, theirs=Math.round(menuAt(CAP)*(1-CAP));
-          if(theirs<=ours) return head+' A restaurant marking up that little is already bearing the commission, and yours is a third the size.';
-          return head+' A restaurant that marks up elsewhere gives up '+M(theirs-ours)+
-                 ' an order to do it, and needs '+Math.round((theirs/ours-1)*100)+'% more orders to be even.';
+          var lo=costAt(CAP,0), hi=costAt(CAP,1);
+          return '<b>Delivered through The Ward the order costs '+M(costHere)+' more than walking in.</b> '+
+                 'Through the capped 15% tier, '+M(lo)+'\u2013'+M(hi)+' \u2014 the span is whether the restaurant absorbs the commission or passes it to you in the menu price. '+
+                 'It costs more either way; only who pays it changes.';
         })()
       : '';
     // ⛔ THE MONTH IS NOT THIS PAGE'S TO ASSUME. "Orders / restaurant / month" was a
@@ -383,7 +378,7 @@
     }
   }
 
-  ['sub','tax','svc','tip','keep','markup'].forEach(function(id){ $(id).addEventListener('input',calc); });
+  ['sub','tax','svc','tip','keep'].forEach(function(id){ $(id).addEventListener('input',calc); });
 
   // ⛔ NO GRIP. The bar had a drag handle on the courier/Ward division, and there
   //   is nothing to experiment with: the payouts are CALCULATED from the stated
