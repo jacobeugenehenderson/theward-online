@@ -262,17 +262,17 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
       <div class="dial">
         <div class="dial-head">
           <label class="dial-label" for="perrest"><span>Food sold through Cary, per restaurant / month</span></label>
-          <span class="dial-val" id="perrest-v">$2k</span>
+          <span class="dial-val" id="perrest-v">$8k</span>
         </div>
-        <input type="range" id="perrest" min="0" max="20000" step="500" value="2000">
+        <input type="range" id="perrest" min="0" max="20000" step="500" value="8000">
       </div>
 
       <div class="dial">
         <div class="dial-head">
           <label class="dial-label" for="localflow"><span>Other local commerce, per neighborhood / mo <span class="tag" style="color:var(--amber)">UPSIDE</span></span></label>
-          <span class="dial-val" id="localflow-v">$0</span>
+          <span class="dial-val" id="localflow-v">$10k</span>
         </div>
-        <input type="range" id="localflow" min="0" max="1000000" step="10000" value="0">
+        <input type="range" id="localflow" min="0" max="1000000" step="10000" value="10000">
         <p class="note">Retail · services · tickets · events · memberships</p>
       </div>
 
