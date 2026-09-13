@@ -123,7 +123,7 @@
   //   of how every other incumbent figure here is handled: sourced, fixed, stated.
   //   Widely documented, so it stays; a slider, so it went (Jacob, 2026-09-13, third
   //   time of asking: "these controls don't do anything useful").
-  var INCUMBENT_MARKUP=0.15;
+
   // ◆ The Ask's food-per-restaurant-per-month, in cents. Shared, and checked.
   var MONTHLY=800000;
   var PROC={r:290,f:30};
@@ -174,7 +174,7 @@
   function drawVs(sub, ourRate, hereMenu, rivalMenu, hereTotal, rivalTotal){
     var svg=$('vs'); if(!svg) return;
     var rows=[['The Ward',ourRate,true]].concat(RIVALS.map(function(r){return [r[0],r[1],false];}));
-    var W=700,L=150,R=370,TOP=50,BH=24,GAP=10;
+    var W=700,L=150,R=150,TOP=50,BH=24,GAP=10;
     var maxR=0.35, plot=W-L-R;
     var x=function(v){ return L+(v/maxR)*plot; };
     // \u2b50 THREE COLUMNS, LABELLED ONCE. Every row used to repeat "keeps" and
@@ -185,22 +185,22 @@
     //   the words so the rows carry only money (Jacob, 2026-09-13: "still not clear
     //   that restaurants jack up the prices, too many words which are also confusing").
     //   \u26d4 The commission is gone from the row text because the BAR already is it.
-    var C1=W-270, C2=W-155, C3=W-6;
-    var head='<text x="'+C1+'" y="'+(TOP-13)+'" text-anchor="end" font-size="11" fill="currentColor" opacity="0.55" letter-spacing="0.6">MENU</text>'+
-             '<text x="'+C2+'" y="'+(TOP-13)+'" text-anchor="end" font-size="11" fill="currentColor" opacity="0.55" letter-spacing="0.6">BUSINESS KEEPS</text>'+
-             '<text x="'+C3+'" y="'+(TOP-13)+'" text-anchor="end" font-size="11" fill="currentColor" opacity="0.55" letter-spacing="0.6">CUSTOMER PAYS</text>';
+    var C3=W-6;
+    // ⛔ ONLY WHAT VARIES. Menu and customer-total were identical down all five
+    //   incumbent rows — five rows of apparatus for one changing number — and both are
+    //   drawn better by the customer bars above (Jacob: "what is all of this for then").
+    var head='<text x="'+C3+'" y="'+(TOP-13)+'" text-anchor="end" font-size="11" fill="currentColor" opacity="0.55" letter-spacing="0.6">BUSINESS KEEPS</text>';
 
     var bars=rows.map(function(r,i){
       var y=TOP+i*(BH+GAP);
       var w=Math.max(1,x(r[1])-L);
       var menu=r[2]?hereMenu:rivalMenu;
       var kept=Math.round(menu*(1-r[1]));
-      var pays=r[2]?hereTotal:rivalTotal;
       var op=r[2]?'0.95':'0.7';
       var cell=function(cx,v){ return '<text x="'+cx+'" y="'+(y+14)+'" text-anchor="end" font-size="14" fill="currentColor" opacity="'+op+'" >'+M(v)+'</text>'; };
       return '<rect x="'+L+'" y="'+y+'" width="'+w.toFixed(1)+'" height="'+BH+'" fill="'+(r[2]?'var(--cary-rule)':'var(--cary-rule)')+'" opacity="'+(r[2]?'1':'0.42')+'"/>'+
              '<text x="'+(L-10)+'" y="'+(y+14)+'" text-anchor="end" font-size="13.5" fill="currentColor"'+(r[2]?' font-weight="600"':' opacity="0.75"')+'>'+r[0]+'</text>'+
-             cell(C1,menu)+cell(C2,kept)+cell(C3,pays);
+             cell(C3,kept);
     }).join('');
 
     var capX=x(CAP), H=TOP+rows.length*(BH+GAP)+16;
@@ -311,7 +311,8 @@
     // until 2026-09-13 for exactly that reason — which had it backwards. The one
     // figure nobody publishes is the last one a reader should be invited to tune,
     // because tuning it moves the comparison this page exists to make.
-    var mk=INCUMBENT_MARKUP;
+    var mk=+$('markup').value/100;
+    $('markup-v').textContent=$('markup').value+'%';
     var iFood=Math.round(sub*(1+mk));
     var iFee=Math.round(iFood*INCUMBENT_SERVICE);
     var iTax=Math.round(iFood*taxR);
@@ -321,8 +322,7 @@
                  {menu:sub, markup:iFood-sub, tax:iTax, svc:iFee, fee:INCUMBENT_DELIVERY, total:iTotal});
     var vc=$('vs-cust');
     if(vc) vc.innerHTML = sub>0
-      ? '<b>The same dish is '+M(sub)+' here and '+M(iFood)+' there.</b> Restaurants raise delivery menus to survive a 15\u201330% commission; at '+
-        (+$('keep').value)+'% there is little reason to.'
+      ? 'Restaurants raise delivery menus to survive a 15\u201330% commission. At '+(+$('keep').value)+'% there is little reason to.'
       : '';
     // ⛔ THE MONTH IS NOT THIS PAGE'S TO ASSUME. "Orders / restaurant / month" was a
     //   dial set to 40, implying $2,200 of trade — while The Ask, which actually models
@@ -341,7 +341,7 @@
     }
   }
 
-  ['sub','tax','svc','tip','keep'].forEach(function(id){ $(id).addEventListener('input',calc); });
+  ['sub','tax','svc','tip','keep','markup'].forEach(function(id){ $(id).addEventListener('input',calc); });
 
   // ⛔ NO GRIP. The bar had a drag handle on the courier/Ward division, and there
   //   is nothing to experiment with: the payouts are CALCULATED from the stated
