@@ -112,8 +112,6 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
 
 <div class="sheet">
   <div class="group">
-    <h3>The order</h3>
-
     <div class="dial">
       <div class="dial-head"><span class="dial-label"><span>Who runs the rails</span></span><span class="dial-val" id="owner-v">Independent</span></div>
       <div class="seg" id="ownersel" role="group" aria-label="Who runs the rails">
@@ -122,13 +120,7 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
       </div>
     </div>
 
-    <div class="dial" id="spread-row" hidden>
-      <div class="dial-head"><span class="dial-label"><span>The in-house saving</span></span><span class="dial-val" id="spread-v">$2.11</span></div>
-      <div class="seg" id="spreadsel" role="group" aria-label="Where the in-house saving goes">
-        <button type="button" data-v="pass" aria-pressed="true">To the customer</button>
-        <button type="button" data-v="keep">To the Ward</button>
-      </div>
-    </div>
+    <h3>The order</h3>
 
     <div class="dial">
       <div class="dial-head"><label class="dial-label" for="sub"><span>Food subtotal</span></label><span class="dial-val" id="sub-v">$55</span></div>
@@ -150,6 +142,8 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
       <input type="range" id="tip" min="0" max="40" step="1" value="0">
     </div>
 
+    <h3 style="margin-top:30px">How it divides</h3>
+
     <div class="dial">
       <div class="dial-head"><span class="dial-label"><span>Processor</span></span><span class="dial-val" id="proc-v">2.9% + 30¢</span></div>
       <div class="seg" id="procsel" role="group" aria-label="Payment processor">
@@ -161,11 +155,18 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
       <p class="note" id="proc-note">Stripe and Square publish <b>2.9% + 30¢</b> for online payments. Adyen publishes <b>$0.13 + interchange + scheme fees + 0.60%</b> — the modeled figure adds typical US card-not-present interchange and scheme fees to that markup. The institutional rate is a scenario, not a quote.</p>
     </div>
 
-    <h3 style="margin-top:30px">How it divides</h3>
+    <div class="dial" id="spread-row" hidden>
+      <div class="dial-head"><span class="dial-label"><span>The in-house saving</span></span><span class="dial-val" id="spread-v">$2.11</span></div>
+      <div class="seg" id="spreadsel" role="group" aria-label="Where the in-house saving goes">
+        <button type="button" data-v="pass" aria-pressed="true">To the customer</button>
+        <button type="button" data-v="keep">To the Ward</button>
+      </div>
+    </div>
+
 
     <div class="dial">
       <div class="dial-head"><label class="dial-label" for="keep"><span>Fee the restaurant pays</span></label><span class="dial-val" id="keep-v">5% &middot; $2.75</span></div>
-      <input type="range" id="keep" min="70" max="100" step="1" value="95">
+      <input type="range" id="keep" min="0" max="30" step="1" value="5">
     </div>
 
     <div class="dial" style="border-bottom:none">
@@ -444,7 +445,7 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
         taxR=+$('tax').value/100000,
         svcR=+$('svc').value/100,
         tip=+$('tip').value*100,
-        keepR=+$('keep').value/100,
+        keepR=1-(+$('keep').value/100),
         courR=COUR, hostR=HOST;
 
     var tax=Math.round(sub*taxR);
@@ -477,8 +478,8 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     $('markup-v').textContent=$('markup').value+'%';
     $('proc-v').textContent=(chargeRate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+chargeRate.f+'¢';
     $('vol-v').textContent=vol;
-    $('keep-v').textContent=(100-(+$('keep').value))+'% · '+M(commission);
-    $('rule-comm').textContent=(100-(+$('keep').value))+'%';
+    $('keep-v').textContent=(+$('keep').value)+'% · '+M(commission);
+    $('rule-comm').textContent=(+$('keep').value)+'%';
     drawSplit(procPaid, procSpread, svc, commission, courier-tip, host, ward-procSpread);
 
 
@@ -556,7 +557,7 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     var pay=(owner==='inst')?INHOUSE:PROC, chg=(owner==='inst'&&spread==='keep')?PROC:pay;
     var proc    =sub>0?Math.round((sub+tax+svc)*(pay.r/10000))+pay.f:0;
     var charged =sub>0?Math.round((sub+tax+svc)*(chg.r/10000))+chg.f:0;
-    var commission=Math.round(sub*(1-(+$('keep').value/100)));
+    var commission=Math.round(sub*(+$('keep').value/100));
     return { proc:proc, svc:svc, commission:commission, pot:charged+svc+commission };
   }
   function clamp(v,lo,hi){ return v<lo?lo:(v>hi?hi:v); }

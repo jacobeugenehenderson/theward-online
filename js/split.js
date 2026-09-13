@@ -175,7 +175,7 @@
         taxR=+$('tax').value/100000,
         svcR=+$('svc').value/100,
         tip=+$('tip').value*100,
-        keepR=+$('keep').value/100,
+        keepR=1-(+$('keep').value/100),
         courR=COUR, hostR=HOST;
 
     var tax=Math.round(sub*taxR);
@@ -208,8 +208,8 @@
     $('markup-v').textContent=$('markup').value+'%';
     $('proc-v').textContent=(chargeRate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+chargeRate.f+'¢';
     $('vol-v').textContent=vol;
-    $('keep-v').textContent=(100-(+$('keep').value))+'% · '+M(commission);
-    $('rule-comm').textContent=(100-(+$('keep').value))+'%';
+    $('keep-v').textContent=(+$('keep').value)+'% · '+M(commission);
+    $('rule-comm').textContent=(+$('keep').value)+'%';
     drawSplit(procPaid, procSpread, svc, commission, courier-tip, host, ward-procSpread);
 
 
@@ -287,7 +287,7 @@
     var pay=(owner==='inst')?INHOUSE:PROC, chg=(owner==='inst'&&spread==='keep')?PROC:pay;
     var proc    =sub>0?Math.round((sub+tax+svc)*(pay.r/10000))+pay.f:0;
     var charged =sub>0?Math.round((sub+tax+svc)*(chg.r/10000))+chg.f:0;
-    var commission=Math.round(sub*(1-(+$('keep').value/100)));
+    var commission=Math.round(sub*(+$('keep').value/100));
     return { proc:proc, svc:svc, commission:commission, pot:charged+svc+commission };
   }
   function clamp(v,lo,hi){ return v<lo?lo:(v>hi?hi:v); }

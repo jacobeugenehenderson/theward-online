@@ -92,8 +92,6 @@
 
 <div class="sheet">
   <div class="group">
-    <h3>The order</h3>
-
     <div class="dial">
       <div class="dial-head"><span class="dial-label"><span>Who runs the rails</span></span><span class="dial-val" id="owner-v">Independent</span></div>
       <div class="seg" id="ownersel" role="group" aria-label="Who runs the rails">
@@ -102,13 +100,7 @@
       </div>
     </div>
 
-    <div class="dial" id="spread-row" hidden>
-      <div class="dial-head"><span class="dial-label"><span>The in-house saving</span></span><span class="dial-val" id="spread-v">$2.11</span></div>
-      <div class="seg" id="spreadsel" role="group" aria-label="Where the in-house saving goes">
-        <button type="button" data-v="pass" aria-pressed="true">To the customer</button>
-        <button type="button" data-v="keep">To the Ward</button>
-      </div>
-    </div>
+    <h3>The order</h3>
 
     <div class="dial">
       <div class="dial-head"><label class="dial-label" for="sub"><span>Food subtotal</span></label><span class="dial-val" id="sub-v">$55</span></div>
@@ -130,6 +122,8 @@
       <input type="range" id="tip" min="0" max="40" step="1" value="0">
     </div>
 
+    <h3 class="mt-4">How it divides</h3>
+
     <div class="dial">
       <div class="dial-head"><span class="dial-label"><span>Processor</span></span><span class="dial-val" id="proc-v">2.9% + 30¢</span></div>
       <div class="seg" id="procsel" role="group" aria-label="Payment processor">
@@ -141,11 +135,18 @@
       <p class="note" id="proc-note">Stripe and Square publish <b>2.9% + 30¢</b> for online payments. Adyen publishes <b>$0.13 + interchange + scheme fees + 0.60%</b> — the modeled figure adds typical US card-not-present interchange and scheme fees to that markup. The institutional rate is a scenario, not a quote.</p>
     </div>
 
-    <h3 class="mt-4">How it divides</h3>
+    <div class="dial" id="spread-row" hidden>
+      <div class="dial-head"><span class="dial-label"><span>The in-house saving</span></span><span class="dial-val" id="spread-v">$2.11</span></div>
+      <div class="seg" id="spreadsel" role="group" aria-label="Where the in-house saving goes">
+        <button type="button" data-v="pass" aria-pressed="true">To the customer</button>
+        <button type="button" data-v="keep">To the Ward</button>
+      </div>
+    </div>
+
 
     <div class="dial">
       <div class="dial-head"><label class="dial-label" for="keep"><span>Fee the restaurant pays</span></label><span class="dial-val" id="keep-v">5% &middot; $2.75</span></div>
-      <input type="range" id="keep" min="70" max="100" step="1" value="95">
+      <input type="range" id="keep" min="0" max="30" step="1" value="5">
     </div>
 
     <div class="dial dial--open">
@@ -275,6 +276,6 @@
 </footer>
 
 <script src="../../js/site.js?v=0f3be1550239"></script>
-<script src="../../js/split.js?v=b51b7e99c996"></script>
+<script src="../../js/split.js?v=d1fd4a3bd95f"></script>
 </body>
 </html>
