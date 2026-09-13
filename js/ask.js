@@ -361,7 +361,7 @@
       nodes:[['Funders','Foundations, public and philanthropic money'],
              ['Nonprofit','<b>Raises the money.</b> The studio\u2019s own, or an existing one'],
              ['The studio','Paid <b>market rate</b>, arm\u2019s length, to build and pour'],
-             ['The neighborhood','<b>Pays nothing.</b> Gets its portrait, and keeps it']],
+             ['The neighborhood','<b>Pays nothing, and earns.</b> Its Local Host takes a share of what it sells']],
       note:'The studio is a vendor to the entity that raised the money. Needs a founding ED and a fiscal sponsor first.',
       askLabel:'The ask', sponsor:true, market:1.00, annualPct:18,
       raiseHead:'What must be raised', gapLabel:'Gap before sponsor fee',
@@ -373,9 +373,8 @@
     },
     inst:{
       nodes:[['An institution','A company, university, or civic arm \u2014 its own budget'],
-             ['Possibly a nonprofit','Its own foundation, a partner, or one it helps create. <b>Optional, and often preferred</b>'],
              ['The studio','A <b>team inside it</b>, not a grantee'],
-             ['The neighborhood','<b>Still pays nothing.</b> That part cannot change']],
+             ['The neighborhood','<b>Pays nothing, and earns.</b> Its Local Host takes a share of what it sells']],
       note:'No raise, no ED \u2014 the number is <b>a budget line and a headcount</b>.',
       askLabel:'The budget line', sponsor:false, market:1.60, annualPct:0,
       raiseHead:'Net cost to the institution', gapLabel:'Cost, less what the unit earns',
@@ -387,7 +386,7 @@
     own:{
       nodes:[['Earned revenue','Pours commissioned, and money crossing the rails'],
              ['The studio','<b>Funds itself</b>, or does not grow'],
-             ['The neighborhood','<b>Pays nothing.</b> Same as every other shape']],
+             ['The neighborhood','<b>Pays nothing, and earns.</b> Same as every other shape']],
       note:'No raise. Turn the roster down until the gap reaches zero.',
       askLabel:'The gap', sponsor:false, market:1.00, annualPct:18,
       raiseHead:'What earned revenue does not cover', gapLabel:'Shortfall',
