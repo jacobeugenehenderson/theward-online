@@ -72,7 +72,7 @@
     var lBars=left.map(function(b){
       var B=ly[b[0]];
       return '<rect x="'+(LW-9)+'" y="'+B.y.toFixed(1)+'" width="9" height="'+B.h.toFixed(1)+'" fill="currentColor" opacity="0.35"/>'+
-             '<text x="'+(LW-14)+'" y="'+(B.y+B.h/2+4).toFixed(1)+'" text-anchor="end" font-size="11.5" fill="currentColor">'+b[0]+'</text>'+
+             '<text x="'+(LW-14)+'" y="'+(B.y+B.h/2+4).toFixed(1)+'" text-anchor="end" font-size="13.5" fill="currentColor">'+b[0]+'</text>'+
              '<text x="'+(LW-14)+'" y="'+(B.y+B.h/2+16).toFixed(1)+'" text-anchor="end" font-size="10" fill="currentColor" opacity="0.55" >'+M(b[1])+'</text>';
     }).join('');
 
@@ -138,10 +138,19 @@
   // Ward's, never left sitting in a line labelled "processing".
   var INHOUSE={r:25,f:10};
   var owner='indep';
-  function drawVs(sub, ourRate){
+  // ⭐ BOTH SIDES OF THE ORDER, IN ONE TABLE. This answered only what the BUSINESS
+  //   keeps; the customer's half lived in a caption underneath. And the customer
+  //   figure is the same on every incumbent row, which is not a simplification — a
+  //   restaurant's PLAN changes its commission, not the consumer's fees. So the tiers
+  //   are a difference between the incumbents that the customer never sees, while
+  //   here the customer pays less AND the restaurant keeps more.
+  //   ⛔ The incumbent figure carries a 15% menu markup and ours carries none, which
+  //   is the whole comparison, and is why "Menu prices match in-store" is the first
+  //   rule on the page.
+  function drawVs(sub, ourRate, hereTotal, rivalTotal){
     var svg=$('vs'); if(!svg) return;
     var rows=[['The Ward',ourRate,true]].concat(RIVALS.map(function(r){return [r[0],r[1],false];}));
-    var W=520,L=132,R=76,TOP=22,BH=18,GAP=8;
+    var W=620,L=132,R=210,TOP=26,BH=21,GAP=9;
     var maxR=0.35, plot=W-L-R;
     var x=function(v){ return L+(v/maxR)*plot; };
 
@@ -149,15 +158,16 @@
       var y=TOP+i*(BH+GAP);
       var w=Math.max(1,x(r[1])-L);
       var kept=Math.round(sub*(1-r[1]));
+      var pays=r[2]?hereTotal:rivalTotal;
       return '<rect x="'+L+'" y="'+y+'" width="'+w.toFixed(1)+'" height="'+BH+'" fill="'+(r[2]?'var(--cary-rule)':'var(--cary-rule)')+'" opacity="'+(r[2]?'1':'0.42')+'"/>'+
              '<text x="'+(L-10)+'" y="'+(y+13)+'" text-anchor="end" font-size="11.5" fill="currentColor"'+(r[2]?' font-weight="600"':' opacity="0.75"')+'>'+r[0]+'</text>'+
-             '<text x="'+(L+w+7).toFixed(1)+'" y="'+(y+13)+'" font-size="10.5" fill="currentColor" opacity="0.7" >'+Math.round(r[1]*100)+'% · keeps '+M(kept)+'</text>';
+             '<text x="'+(W-6)+'" y="'+(y+13)+'" text-anchor="end" font-size="12.5" fill="currentColor" opacity="'+(r[2]?'0.95':'0.7')+'" >'+Math.round(r[1]*100)+'% · keeps '+M(kept)+' · customer '+M(pays)+'</text>';
     }).join('');
 
     var capX=x(CAP), H=TOP+rows.length*(BH+GAP)+16;
     return svg.innerHTML=
       '<line x1="'+capX.toFixed(1)+'" y1="'+(TOP-8)+'" x2="'+capX.toFixed(1)+'" y2="'+(H-14)+'" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3" opacity="0.65"/>'+
-      '<text x="'+(capX+5).toFixed(1)+'" y="'+(TOP-11)+'" font-size="9.5" fill="currentColor" opacity="0.65" letter-spacing="0.8">15% CAP</text>'+
+      '<text x="'+(capX+5).toFixed(1)+'" y="'+(TOP-11)+'" font-size="11" fill="currentColor" opacity="0.65" letter-spacing="0.9">15% CAP</text>'+
       bars;
   }
 
@@ -262,7 +272,6 @@
       return '<span><i class="sw '+x[0]+'"></i>'+x[1]+' '+pct.toFixed(1)+'%</span>';
     }).join('');
 
-    drawVs(sub, 1-keepR);
     // ⭐ THE OTHER HALF OF THE ARGUMENT. The chart answers what the BUSINESS
     // pays; a reader's next question is always what THEY pay. The incumbents'
     // damage on that side is mostly menu markup — a restaurant raising prices
@@ -276,6 +285,7 @@
     var iFee=Math.round(iFood*INCUMBENT_SERVICE);
     var iTax=Math.round(iFood*taxR);
     var iTotal=iFood+iFee+INCUMBENT_DELIVERY+iTax;
+    drawVs(sub, 1-keepR, total, iTotal);
     var vc=$('vs-cust');
     if(vc) vc.innerHTML = sub>0
       ? '<b>The customer pays '+M(total)+' here, about '+M(iTotal)+' on an incumbent.</b> '+
