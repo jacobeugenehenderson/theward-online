@@ -347,11 +347,42 @@ for name, slug in [('the-split','split'), ('the-ask','ask')]:
     css, js, body = grab(name)
     css = strip_local_tokens(css)
     scope = '.tool--' + slug
-    lines = []
-    for line in css.split('\n'):
-        m = _re.match(r'^([^{@/\s][^{]*)\{', line)
-        lines.append(','.join(scope + ' ' + x.strip() for x in m.group(1).split(',')) + '{' + line[m.end():] if m else line)
-    css = '\n'.join(lines)
+    # ⛔ EVERY RULE ON THE LINE, NOT THE FIRST. This matched `^selector{` and so
+    #    scoped only the first rule when a line carried several — the artifact CSS
+    #    writes related one-liners side by side, `.sb-proc{…} .sb-cour{…} .sb-ward{…}`.
+    #    16 rules shipped unscoped, and two kinds of damage followed. The visible one:
+    #    an unscoped `.sb-key .k-cour` (0,2,0) LOST to the scoped `.tool--split
+    #    .sb-key div{border-top:3px solid}` (0,2,1), so the courier's border fell back
+    #    to currentColor and the key stopped matching the bar. `.k-ward` broke
+    #    identically and LOOKED right, because currentColor happens to equal --text.
+    #    The quieter one: generic names — `.sheet`, `.panel`, `.reading`, `.tick`,
+    #    `.neg`, and a bare `*` — leaked out of their tool and applied site-wide.
+    #    ⭐ tools/audit.py cannot see either: it asks whether a class is USED, never
+    #    whether a selector is SCOPED or even valid.
+    def _scope_rules(txt):
+        out, pos = [], 0
+        for m in _re.finditer(r'(\s*)([^{}\s][^{}]*?)\s*\{', txt):
+            out.append(txt[pos:m.start()])
+            out.append(m.group(1))
+            out.append(','.join(scope + ' ' + x.strip() for x in m.group(2).split(',')) + '{')
+            pos = m.end()
+        out.append(txt[pos:])
+        return ''.join(out)
+    # \u26d4 AND INSIDE A MEDIA QUERY, which is where the rest of them were hiding: ten
+    #    single-line `@media (...){ .sheet{...} }` blocks shipped their selector
+    #    unscoped, so a tool's `.sheet`, `.panel`, `.reading`, `.tick` and a bare `*`
+    #    applied to the whole site at those widths. The site declares its own
+    #    reduced-motion handling outside this block, so scoping the artifacts' copy
+    #    takes nothing away from it.
+    def _scope_line(line):
+        if '{' not in line: return line
+        st = line.lstrip()
+        if st.startswith(('/', '}')): return line
+        if st.startswith('@'):
+            i = line.index('{')
+            return line[:i+1] + _scope_rules(line[i+1:])
+        return _scope_rules(line)
+    css = '\n'.join(_scope_line(l) for l in css.split('\n'))
     js = retoken(js).replace('https://claude.ai/code/artifact/b01d3133-917f-4ead-b46a-460462d0e6b6', '../ask/') \
                     .replace('https://claude.ai/code/artifact/58b3e743-b13d-4860-8f5c-b4d6ebb08dca', '../split/')
     io.open(OUTDIR + 'js/%s.js' % slug, 'w', encoding='utf-8').write(
