@@ -160,7 +160,11 @@
         currentBand=r.band;
         bandBox=document.createElement('details');
         bandBox.className='rgroup';
-        bandBox.open=!collapsed[currentBand];
+        // ⭐ SHUT ON ARRIVAL. Ten seats with a description and a salary slider
+        // each is the longest thing on the page, and the tally beside each band
+        // says what it costs without opening it. A reader who wants to change
+        // staffing opens the band; everyone else reads two lines.
+        bandBox.open = collapsed[currentBand]===false;
         bandHead=document.createElement('summary');
         bandHead.className='rband';
         bandHead.innerHTML='<span>'+currentBand+'</span><span class="rtally" data-band="'+currentBand+'"></span>';
