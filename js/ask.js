@@ -148,9 +148,17 @@
   // mode, topology and pay-market change, so holding the state on the elements
   // would silently re-open a band the reader had shut.
   var collapsed={};
+  function seatsHere(){
+    var off=TOPO[topo].forceOff||[];
+    return ROLES.filter(function(r){
+      var gone=off.indexOf(r.id)!==-1;
+      if(gone) r.on=false;
+      return !gone;
+    });
+  }
   function build(){
     host.innerHTML=''; var currentBand=null, bandBox=null, bandHead=null;
-    ROLES.forEach(function(r){
+    seatsHere().forEach(function(r){
       if(r.band!==currentBand){
         currentBand=r.band;
         bandBox=document.createElement('details');
@@ -171,8 +179,7 @@
       }
       r.pay=marketPay(r);
       var bd=payBand(r);
-      var off=(TOPO[topo].forceOff||[]).indexOf(r.id)!==-1;
-      var on=!off && r.modes.indexOf(mode)!==-1;
+      var on=r.modes.indexOf(mode)!==-1;
       r.on=on;
       var d=document.createElement('div');
       d.className='role'+(on?'':' off');
@@ -199,7 +206,7 @@
   // no figure would hide most of the roster's cost behind a triangle.
   function tallyBands(){
     var by={};
-    ROLES.forEach(function(r){
+    seatsHere().forEach(function(r){
       by[r.band]=by[r.band]||{on:0,of:0,pay:0};
       by[r.band].of++;
       if(r.on){ by[r.band].on++; by[r.band].pay+=r.pay; }
