@@ -24,7 +24,7 @@
      why:'Owner of the studio, creative director of the nonprofit. Currently zero.',modes:['custodial','product','full']},
     {id:'ed',band:'Studio & mission',name:'Founding executive director',owns:'The raise, governance, the sponsor',pay:80000,
      why:'Works the grant cycle. Nothing gets funded until this seat is filled.',modes:['custodial','product','full']},
-    {id:'host',band:'Studio & mission',name:'Host / trust &amp; safety',owns:'Moderation, safety reports, the public line',pay:58000,
+    {id:'host',band:'Studio & mission',name:'Trust &amp; safety',owns:'Moderation, safety reports, the public line',pay:58000,
      why:'Moderation, safety reports, the public line. ⛔ The Section 230 posture rests on this seat.',modes:['custodial','product','full']},
     {id:'ops',band:'Studio & mission',name:'Neighborhood operations',owns:'Restaurants, guardians, couriers',pay:60000,
      why:'Signs the restaurants, trains the guardians. Does not scale past a couple of neighborhoods.',modes:['product','full']},
@@ -481,7 +481,7 @@
     // ⭐ Three dials compound into one rate, and the rate is the only one of the
     // four numbers that appears in the reading. Say it where it is decided.
     var fn=document.getElementById('foodrate-note');
-    if(fn) fn.innerHTML='A division of our own share, not an extra charge. The Ward keeps the rest — <b>'+(foodRate()*100).toFixed(1)+'%</b> of food sold.';
+    if(fn) fn.innerHTML='A local institution — a school, say. Paid out of our own share, so nobody pays more. The Ward keeps the rest — <b>'+(foodRate()*100).toFixed(1)+'%</b> of food sold.';
     // ⭐ IN DOLLARS BESIDE THE PERCENTAGE, because a share of the pour price
     // means nothing until you know the pour price — and because this is what a
     // ward is CHARGED for support, against "Ward upkeep" in Commissioned work,
