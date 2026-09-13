@@ -287,6 +287,9 @@
     ['tier-row','annual-row','pours-row','ann-row'].forEach(function(id){
       var r=document.getElementById(id); if(r) r.style.display=pourIsRevenue?'':'none';
     });
+    var hostFood=deliveryFlow*(SVC*(1-COURIER)+COMM)*HOSTSHARE*12;
+    el('o-host').textContent=K(hostFood);
+    el('o-hostper').textContent=a.hoods>0?K(Math.round(hostFood/a.hoods)):'\u2014';
     el('o-del').textContent=K(delivery); el('o-rails').textContent=K(railsFee); el('o-earn').textContent=K(earned);
     var covered=surplus>0;
     var rh=document.getElementById('raise-head');
@@ -463,12 +466,17 @@
 
   function readRates(){
     PLATFORM_FEE=+el('pfee').value/1000;
-    SVC=+el('svc').value/100; COMM=+el('comm').value/100; HOSTSHARE=+el('hostshare').value/100;
+    SVC=+el('svc').value/100; COMM=+el('comm').value/100;
+    var poolRate=SVC*(1-COURIER)+COMM;
+    var hs=el('hostshare'); hs.max=Math.round(poolRate*1000);
+    if(+hs.value>+hs.max) hs.value=hs.max;
+    var hostFood=+hs.value/1000;
+    HOSTSHARE = poolRate>0 ? hostFood/poolRate : 0;
     ANNUAL=+el('annual').value/100;
     el('pfee-v').textContent=(PLATFORM_FEE*100).toFixed(1)+'%';
     el('svc-v').textContent=el('svc').value+'%';
     el('comm-v').textContent=el('comm').value+'%';
-    el('hostshare-v').textContent=((SVC*(1-COURIER)+COMM)*HOSTSHARE*100).toFixed(1)+'% of food';
+    el('hostshare-v').textContent=(hostFood*100).toFixed(1)+'% of food';
     // ⭐ Three dials compound into one rate, and the rate is the only one of the
     // four numbers that appears in the reading. Say it where it is decided.
     var fn=document.getElementById('foodrate-note');
