@@ -289,7 +289,7 @@ ask_head = '''
   <section class="sec pro-head">
     <p class="pro-kicker">What it costs to build this properly</p>
     <h1>The Ask</h1>
-    <p class="lede"><b>The neighborhood never pays</b> and participation stays free. &#9888;&#65039; These are not exclusive; the likeliest outcome is a blend.</p>
+    <p class="lede"><b>The neighborhood never pays</b> and participation stays free.</p>
   </section>
 
   <section class="sec">
