@@ -165,7 +165,7 @@
       '<div class="k-cour"><b>'+M(courierCut)+'</b>Courier <span>· '+Math.round(COUR*100)+'% of the service charge</span></div>'+
       '<div class="k-host"><b>'+M(host)+'</b>Host <span>· '+Math.round(HOST*100)+'% of the rest</span></div>'+
       '<div class="k-ward"><b>'+M(ward)+'</b>The Ward</div>'+
-      (procSpread>0?'<div class="k-spread"><b>'+M(procSpread)+'</b>The Ward <span>· its own processing saving, kept</span></div>':'');
+      (procSpread>0?'<div class="k-spread"><b>'+M(procSpread)+'</b>The Ward <span>· the in-house saving</span></div>':'');
   }
 
   function calc(){
@@ -183,6 +183,9 @@
     var chargeRate=PROC, payRate=PROC;
     if(owner==='inst'){ payRate=INHOUSE; if(spread==='pass') chargeRate=INHOUSE; }
     var basis=sub+tax+svc;
+    var atMarket = sub>0?Math.round(basis*(PROC.r/10000))+PROC.f:0;
+    var inHouse  = sub>0?Math.round(basis*(INHOUSE.r/10000))+INHOUSE.f:0;
+    $('spread-v').textContent=M(Math.max(0, atMarket-inHouse));
     var proc    = sub>0?Math.round(basis*(chargeRate.r/10000))+chargeRate.f:0;
     var procPaid= sub>0?Math.round(basis*(payRate.r/10000))+payRate.f:0;
     var procSpread=proc-procPaid;
@@ -325,7 +328,7 @@
       ? 'Processed in-house at a <b>scenario rate, not a quote</b> — an acquirer that is also the issuer internalises interchange, and no published figure covers that.'
       : 'Stripe and Square publish <b>2.9% + 30¢</b> for online payments. Adyen publishes <b>$0.13 + interchange + scheme fees + 0.60%</b> — the modeled figure adds typical US card-not-present interchange and scheme fees to that markup. The institutional rate is a scenario, not a quote.';
   });
-  pickOne('spreadsel', function(v,b){ spread=v; $('spread-v').textContent=b.textContent; });
+  pickOne('spreadsel', function(v,b){ spread=v; });
 
   // ⭐ The Ask hands the shape over in the URL, so the two pages agree about
   // who owns the rails instead of each asking separately.
