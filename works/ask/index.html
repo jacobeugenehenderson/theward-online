@@ -240,7 +240,7 @@
       <div class="dial">
         <div class="dial-head"><label class="dial-label" for="cluster"><span>Wards per cartographer</span></label><span class="dial-val" id="cluster-v">3</span></div>
         <input type="range" id="cluster" min="1" max="8" step="1" value="3">
-        <p class="note">Contiguous, so the edges between them stay coherent. Sets how many cartographers, not what they are paid.</p>
+        <p class="note" id="carto-earns"></p>
       </div>
 
       <div class="dial">
@@ -260,7 +260,8 @@
 
       <div class="dial">
         <div class="dial-head"><label class="dial-label" for="takefee"><span>Takeover fee</span></label><span class="dial-val" id="takefee-v">$5k</span></div>
-        <input type="range" id="takefee" min="0" max="40000" step="500" value="5000">
+        <input type="range" id="takefee" min="0" max="100" step="1" value="29">
+        <p class="note" id="takefee-note"></p>
       </div>
 
       <div class="dial dial--open">
@@ -477,6 +478,6 @@
 </footer>
 
 <script src="../../js/site.js?v=0f3be1550239"></script>
-<script src="../../js/ask.js?v=72229a044dde"></script>
+<script src="../../js/ask.js?v=a391bbd0abc1"></script>
 </body>
 </html>

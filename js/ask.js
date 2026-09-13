@@ -229,7 +229,7 @@
     // an artist — and a sponsor-funded takeover is not the studio's cost at all.
     var clusters=clustersNow();
     var retainerAll=a.hoods*(+el('retainer').value);
-    var takeCount=+el('takeovers').value, takeFee=+el('takefee').value;
+    var takeCount=+el('takeovers').value, takeFee=feeFromSlider(+el('takefee').value);
     var takeAll=takePayer==='studio' ? takeCount*takeFee : 0;
     // ⭐ One source for volumes: the revenue panel. Nothing here re-derives them.
     // ⛔ Under absorption with internally-funded pours, the institution is paying
@@ -266,6 +266,16 @@
     el('commission-v').textContent=K(+el('commission').value);
     el('takeovers-v').textContent=takeCount;
     el('takefee-v').textContent=K(takeFee);
+    // ⭐ THE SLIDERS ARE ABOUT PEOPLE, SO SAY WHAT THE PERSON GETS. The panel
+    // shows what the studio pays in total; neither dial ever answered the
+    // question they exist to settle — is this worth someone's while.
+    var per=+el('cluster').value, birth=+el('commission').value, keep=+el('retainer').value;
+    el('carto-earns').innerHTML='<b>'+per+(per===1?' ward':' wards')+'</b> — a cartographer earns '+
+      K(per*(birth+keep))+' in a ward\u2019s first year, '+K(per*keep)+' a year after.';
+    var fn=document.getElementById('takefee-note');
+    if(fn) fn.innerHTML = takeCount>0
+      ? '<b>'+K(takeFee)+'</b> to the artist, '+takeCount+(takeCount===1?' takeover':' takeovers')+' a year — '+K(takeCount*takeFee)+' committed.'
+      : '<b>'+K(takeFee)+'</b> to the artist for a season on one ward.';
     el('ret-label').textContent='Ward upkeep \u00b7 '+clusters+' cartographer'+(clusters===1?'':'s');
     el('o-ret').textContent=K(retainerAll);
     el('o-comm').textContent=K(commissionAll);
@@ -433,6 +443,10 @@
   // ⭐ Log scale: 0→1 neighborhood, 100→1,000. Linear would make everything
   // below 25 a single pixel, and everything below 25 is where we actually are.
   function hoodsFromSlider(v){ return Math.max(1, Math.round(Math.pow(10, (v/100)*3))); }
+  function feeFromSlider(v){
+    var f=Math.pow(10, 3 + (v/100)*(Math.log(250000)/Math.LN10 - 3));
+    return f<50000 ? Math.round(f/500)*500 : Math.round(f/5000)*5000;
+  }
   function sliderFromHoods(n){ return Math.round(100*Math.log(n)/Math.log(1000)); }
 
   function readRates(){
