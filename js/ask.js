@@ -22,10 +22,10 @@
 
     {id:'jh',band:'Studio & mission',name:'Jacob Henderson — principal &amp; creative director',owns:'Direction, the look, the doctrine',pay:110000,
      why:'Owner of the studio, creative director of the nonprofit. Currently zero.',modes:['custodial','product','full']},
-    {id:'ed',band:'Studio & mission',name:'Founding executive director',owns:'The raise, governance, the sponsor',pay:80000,
-     why:'Works the grant cycle. Nothing gets funded until this seat is filled.',modes:['custodial','product','full']},
     {id:'host',band:'Studio & mission',name:'Network operations &amp; trust',owns:'Stands Local Hosts up &middot; \u00a714 intervention &middot; the public line',pay:60000,
      why:'Brings a ward live, stands its Local Host up, and stays the escalation. Ordinary local moderation is the Local Host\u2019s under \u00a73.3; this seat is \u00a714 \u2014 harm, fraud, abuse, and a Local Host that stops moderating. \u26d4 The Section 230 posture rests on it.',modes:['custodial','product','full']},
+    {id:'ed',band:'Studio & mission',name:'Founding executive director',owns:'The raise, governance, the sponsor',pay:80000,
+     why:'Works the grant cycle. Nothing gets funded until this seat is filled.',modes:['custodial','product','full']},
     {id:'grants',band:'Studio & mission',name:'Grants associate',owns:'The second raiser',pay:62000,
      why:'A second raiser, once one person cannot fundraise for them all.',modes:['full']}
   ];
@@ -171,15 +171,14 @@
       }
       r.pay=marketPay(r);
       var bd=payBand(r);
-      var local=LOCAL_SEATS.indexOf(r.id)!==-1;
       var off=(TOPO[topo].forceOff||[]).indexOf(r.id)!==-1;
       var on=!off && r.modes.indexOf(mode)!==-1;
       r.on=on;
       var d=document.createElement('div');
       d.className='role'+(on?'':' off');
       d.innerHTML='<input type="checkbox" id="chk-'+r.id+'"'+(on?' checked':'')+' aria-label="Include '+r.name+'">'+
-        '<div><label class="rname" for="chk-'+r.id+'">'+r.name+(local?' <span class="tag" style="color:var(--cary-rule)">IN THE WARD · 1.00×</span>':'')+'</label>'+
-        '<div class="owns">'+r.owns+'</div><div class="rwhy">'+r.why+(local?' ⛔ <b>Must be local</b> \u2014 prices to the ward, not the buyer\u2019s market.':'')+'</div></div>'+
+        '<div><label class="rname" for="chk-'+r.id+'">'+r.name+'</label>'+
+        '<div class="owns">'+r.owns+'</div><div class="rwhy">'+r.why+'</div></div>'+
         '<div class="rpay"><output id="pay-'+r.id+'">'+K(r.pay)+'</output>'+
         '<div style="font-family:var(--f-sys);font-size:10px;color:var(--text-faint);margin-top:1px">'+K(bd.lo)+'–'+K(bd.hi)+'</div>'+
         '<input type="range" id="rng-'+r.id+'" min="'+bd.lo+'" max="'+bd.hi+'" step="2500" value="'+r.pay+'" aria-label="'+r.name+' salary, '+K(bd.lo)+' to '+K(bd.hi)+'"></div>';
@@ -377,7 +376,7 @@
       raiseHead:'Net cost to the institution', gapLabel:'Cost, less what the unit earns',
       poursLabel:'Neighborhoods poured this year', wantsED:false, hop:true,
       setupLabel:'Incremental overhead only', setupNote:'\u26d4 Legal, accounting, insurance and IT already exist. Count only what this unit <b>adds</b>.',
-      defaultMode:'product', forceOff:['ed','grants','host'],
+      defaultMode:'product', forceOff:['ed','grants'],
       rosterWhy:''
     },
     own:{
