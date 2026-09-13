@@ -283,7 +283,7 @@
     el('o-sal').textContent=K(sal); el('o-load').textContent=K(loading); el('o-setup').textContent=K(setup);
     el('o-pours').textContent=K(poursRev); el('o-ann').textContent=K(annual);
     var pl=document.getElementById('pours-label');
-    if(pl) pl.innerHTML=(TOPO[topo].poursLabel||'Pours').replace(' / yr','');
+    if(pl) pl.innerHTML=(TOPO[topo].poursLabel||'Pours').replace(' this year','');
     ['tier-row','annual-row','pours-row','ann-row'].forEach(function(id){
       var r=document.getElementById(id); if(r) r.style.display=pourIsRevenue?'':'none';
     });
@@ -352,7 +352,7 @@
       note:'The studio is a vendor to the entity that raised the money. Needs a founding ED and a fiscal sponsor first.',
       askLabel:'The ask', sponsor:true, market:1.00, annualPct:18,
       raiseHead:'What must be raised', gapLabel:'Gap before sponsor fee',
-      poursLabel:'Pours commissioned / yr', wantsED:true,
+      poursLabel:'Pours commissioned this year', wantsED:true,
       tierLabel:'Rate per pour', tierNote:'Commissioned by a nonprofit \u2014 never sold to the neighborhood.',
       setupLabel:'Setup &amp; overhead', setupNote:'Legal, accounting, insurance, hosting, compute, equipment \u2014 all new.',
       defaultMode:'custodial', forceOff:[],
@@ -366,7 +366,7 @@
       note:'No raise, no ED \u2014 the number is <b>a budget line and a headcount</b>.',
       askLabel:'The budget line', sponsor:false, market:1.60, annualPct:0,
       raiseHead:'Net cost to the institution', gapLabel:'Cost, less what the unit earns',
-      poursLabel:'Neighborhoods poured / yr', wantsED:false, hop:true,
+      poursLabel:'Neighborhoods poured this year', wantsED:false, hop:true,
       setupLabel:'Incremental overhead only', setupNote:'\u26d4 Legal, accounting, insurance and IT already exist. Count only what this unit <b>adds</b>.',
       defaultMode:'product', forceOff:['ed','grants'],
       rosterWhy:''
@@ -378,7 +378,7 @@
       note:'No raise. Turn the roster down until the gap reaches zero.',
       askLabel:'The gap', sponsor:false, market:1.00, annualPct:18,
       raiseHead:'What earned revenue does not cover', gapLabel:'Shortfall',
-      poursLabel:'Pours sold / yr', wantsED:true,
+      poursLabel:'Pours sold this year', wantsED:true,
       tierLabel:'Price per pour', tierNote:'What a buyer pays. Nobody has quoted this.',
       setupLabel:'Setup &amp; overhead', setupNote:'Legal, accounting, insurance, hosting, compute, equipment.',
       defaultMode:'custodial', forceOff:['ta','geo','gfx','grants'],
