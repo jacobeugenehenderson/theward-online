@@ -144,6 +144,13 @@
     return { lo:Math.round(mid*0.72/5000)*5000, hi:Math.round(mid*1.55/5000)*5000 };
   }
   var host=el('roles'), built=false;
+  // What one Local Host earns from the share in a year — display only.
+  var hostShareEach=0;
+  function paintHostPay(){
+    var out=document.getElementById('pay-host'); if(!out) return;
+    var r=ROLES.filter(function(x){return x.id==='host';})[0]; if(!r) return;
+    out.innerHTML=K(r.pay+hostShareEach)+(hostShareEach?' <span class="plus">'+K(r.pay)+' + '+K(hostShareEach)+'</span>':'');
+  }
   // ⭐ Collapse state is REMEMBERED ACROSS REBUILDS. build() re-runs on every
   // mode, topology and pay-market change, so holding the state on the elements
   // would silently re-open a band the reader had shut.
@@ -198,7 +205,8 @@
         r.pay=+e.target.value;
         var k=LOCAL_SEATS.indexOf(r.id)!==-1?1.00:market;
         r.base=r.pay/k;
-        el('pay-'+r.id).textContent=K(r.pay); update();
+        if(r.id==='host') paintHostPay(); else el('pay-'+r.id).textContent=K(r.pay);
+        update();
       });
     });
   }
@@ -293,6 +301,8 @@
       var r=document.getElementById(id); if(r) r.style.display=pourIsRevenue?'':'none';
     });
     var hostFood=deliveryFlow*(SVC*(1-COURIER)+COMM)*HOSTSHARE*12;
+    hostShareEach = a.hoods>0 ? Math.round(hostFood/a.hoods) : 0;
+    paintHostPay();
     el('o-host').textContent=K(hostFood);
     el('o-hostper').textContent=a.hoods>0?K(Math.round(hostFood/a.hoods)):'\u2014';
     el('o-del').textContent=K(delivery); el('o-rails').textContent=K(railsFee); el('o-earn').textContent=K(earned);

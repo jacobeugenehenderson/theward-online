@@ -1737,6 +1737,7 @@ a { color: inherit; }
 .tool--ask .role{display:grid; grid-template-columns:24px minmax(0,1fr) auto; gap:11px; align-items:start; padding:12px 0; border-bottom:1px solid var(--rule-soft)}
 .tool--ask .role input[type=checkbox]{width:17px; height:17px; margin-top:3px; accent-color:var(--cary-rule); cursor:pointer}
 .tool--ask .role.off .rname,.tool--ask .role.off .rwhy,.tool--ask .role.off .owns{opacity:.4}
+.tool--ask .rpay .plus{display:block; font-family:var(--f-sys); font-size:10px; font-weight:400; color:var(--text-faint)}
 /* The share sits inside its seat's row, spanning the text and pay columns so it
    lines up with the salary slider above it rather than starting at the checkbox. */
 .tool--ask .role > .dial{grid-column:2 / -1; border-bottom:none; padding:10px 0 0; margin-top:8px; border-top:1px solid var(--rule-soft)}
