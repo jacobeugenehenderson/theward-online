@@ -100,8 +100,8 @@
   function netAt(n, ctx){
     var poursRev=ctx.pourIsRevenue?ctx.pours*tierVal:0;
     var annual=ctx.pourIsRevenue?n*tierVal*ANNUAL:0;
-    var delivery=n*ctx.rests*ctx.perrest*CARY_TAKE*12;
-    var rails=(n*ctx.rests*ctx.perrest+n*ctx.localflow)*PLATFORM_FEE*12;
+    var delivery=n*ctx.rests*ctx.perrest*foodRate()*12;
+    var rails=n*ctx.localflow*PLATFORM_FEE*12;
     return poursRev+annual+delivery+rails-ctx.cost;
   }
   function drawChart(ctx){
@@ -245,8 +245,8 @@
         // ⛔ If a pour is an internal transfer, so is the support on it.
         annual=pourIsRevenue?a.hoods*tierVal*ANNUAL:0,
         deliveryFlow=a.hoods*a.rests*a.perrest,
-        delivery=deliveryFlow*CARY_TAKE*12,
-        railsFee=(deliveryFlow+a.hoods*a.localflow)*PLATFORM_FEE*12,
+        delivery=deliveryFlow*foodRate()*12,
+        railsFee=a.hoods*a.localflow*PLATFORM_FEE*12,
         earned=poursRev+annual+delivery+railsFee;
     // ⛔ `Math.max(0, …)` FROZE THE WHOLE BOTTOM OF THE PANEL. Once earned
     // revenue passed the roster, the gap and the ask both pinned to $0 and
@@ -440,7 +440,17 @@
   }
 
   // ◆ sourced defaults, but these are policy the operator sets — not physics.
-  var PLATFORM_FEE=0.05, CARY_TAKE=0.055, ANNUAL=0.18;
+  // ⛔ FOOD REVENUE IS THE ORDER'S SPLIT, NOT A FEE BESIDE IT. The page used to
+  // carry "Cary's take 5.5%" and a "platform fee 5%" as two independent takes on
+  // the same food. They are the two halves of The Split's pool — the service
+  // charge left after the courier, plus the restaurant's commission — and the
+  // page banked the whole pool while The Split pays the host neighborhood 40% of
+  // it. Ward food revenue was overstated by that 40% (Jacob, 2026-09-13: "where
+  // is the 25% charge line? That's where this should go").
+  var COURIER=0.75;   // ◆ the courier's share of the service charge, from The Split
+  var SVC=0.22, COMM=0.05, HOSTSHARE=0.40;
+  function foodRate(){ return (SVC*(1-COURIER)+COMM)*(1-HOSTSHARE); }
+  var PLATFORM_FEE=0.05, ANNUAL=0.18;
 
   // ⭐ Log scale: 0→1 neighborhood, 100→1,000. Linear would make everything
   // below 25 a single pixel, and everything below 25 is where we actually are.
@@ -453,10 +463,17 @@
 
   function readRates(){
     PLATFORM_FEE=+el('pfee').value/1000;
-    CARY_TAKE=+el('ctake').value/1000;
+    SVC=+el('svc').value/100; COMM=+el('comm').value/100; HOSTSHARE=+el('hostshare').value/100;
     ANNUAL=+el('annual').value/100;
     el('pfee-v').textContent=(PLATFORM_FEE*100).toFixed(1)+'%';
-    el('ctake-v').textContent=(CARY_TAKE*100).toFixed(1)+'%';
+    el('svc-v').textContent=el('svc').value+'%';
+    el('comm-v').textContent=el('comm').value+'%';
+    el('hostshare-v').textContent=el('hostshare').value+'%';
+    // ⭐ Three dials compound into one rate, and the rate is the only one of the
+    // four numbers that appears in the reading. Say it where it is decided.
+    var fn=document.getElementById('foodrate-note');
+    if(fn) fn.innerHTML='The Ward keeps <b>'+(foodRate()*100).toFixed(1)+'%</b> of food sold; the neighborhood keeps <b>'+
+      ((SVC*(1-COURIER)+COMM)*HOSTSHARE*100).toFixed(1)+'%</b>.';
     // ⭐ IN DOLLARS BESIDE THE PERCENTAGE, because a share of the pour price
     // means nothing until you know the pour price — and because this is what a
     // ward is CHARGED for support, against "Ward upkeep" in Commissioned work,
@@ -483,11 +500,15 @@
     el('pours-v').textContent = a.pours;
 
     var deliveryPerHood=a.rests*a.perrest;
-    var p1=deliveryPerHood*PLATFORM_FEE*12*a.hoods;
-    var perHoodAll=(deliveryPerHood+a.localflow)*PLATFORM_FEE*12;
+    var p1=deliveryPerHood*foodRate()*12*a.hoods;
+    var perHoodAll=deliveryPerHood*foodRate()*12+a.localflow*PLATFORM_FEE*12;
     var p2=perHoodAll;
     var p3=perHoodAll*a.hoods;
 
+    var fr=(foodRate()*100).toFixed(1)+'%';
+    ['pf-1','pf-2'].forEach(function(id){ var n=document.getElementById(id); if(n) n.textContent=fr; });
+    var n3=document.getElementById('pf-3');
+    if(n3) n3.textContent=((SVC*(1-COURIER)+COMM)*HOSTSHARE*100).toFixed(1)+'%';
     el('r1').textContent=K(p1);
     el('r2').textContent=K(p2);
     el('r3').textContent=K(p3);
@@ -521,7 +542,7 @@
       b.setAttribute('aria-pressed','true'); mode=b.dataset.m; build(); update(); rails();
     });
   });
-  ['load','sponsor','setup','hoods','rests','perrest','localflow','pours','pfee','ctake','annual','tier',
+  ['load','sponsor','setup','hoods','rests','perrest','localflow','pours','pfee','svc','comm','hostshare','annual','tier',
    'cluster','retainer','commission','takeovers','takefee'].forEach(function(id){
     el(id).addEventListener('input',function(){ update(); rails(); });
   });

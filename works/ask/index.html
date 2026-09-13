@@ -194,20 +194,37 @@
 
       <div class="dial">
         <div class="dial-head">
-          <label class="dial-label" for="pfee"><span>Platform fee, on money crossing</span></label>
-          <span class="dial-val" id="pfee-v">5.0%</span>
+          <label class="dial-label" for="svc"><span>Service charge, on food</span></label>
+          <span class="dial-val" id="svc-v">22%</span>
         </div>
-        <input type="range" id="pfee" min="0" max="150" step="5" value="50">
-        <p class="note">Taken on everything paid through the rails — food, delivery, and other local commerce.</p>
+        <input type="range" id="svc" min="0" max="40" step="1" value="22">
+        <p class="note">The courier is paid 75% of it. ▶ <a id="split-link-2" href="../split/" class="tag-ward">The Split</a></p>
       </div>
 
       <div class="dial">
         <div class="dial-head">
-          <label class="dial-label" for="ctake"><span>Cary's take, of food</span></label>
-          <span class="dial-val" id="ctake-v">5.5%</span>
+          <label class="dial-label" for="comm"><span>Restaurant commission</span></label>
+          <span class="dial-val" id="comm-v">5%</span>
         </div>
-        <input type="range" id="ctake" min="0" max="150" step="5" value="55">
-        <p class="note">A quarter of the service charge. ▶ <a id="split-link-2" href="../split/" class="tag-ward">The Split</a></p>
+        <input type="range" id="comm" min="0" max="30" step="1" value="5">
+      </div>
+
+      <div class="dial">
+        <div class="dial-head">
+          <label class="dial-label" for="hostshare"><span>The host neighborhood&rsquo;s share</span></label>
+          <span class="dial-val" id="hostshare-v">40%</span>
+        </div>
+        <input type="range" id="hostshare" min="0" max="100" step="5" value="40">
+        <p class="note" id="foodrate-note"></p>
+      </div>
+
+      <div class="dial">
+        <div class="dial-head">
+          <label class="dial-label" for="pfee"><span>Fee on other local commerce</span></label>
+          <span class="dial-val" id="pfee-v">5.0%</span>
+        </div>
+        <input type="range" id="pfee" min="0" max="150" step="5" value="50">
+        <p class="note">Retail, services, tickets, events. Nothing is built for this yet, and it has no service charge to sit inside.</p>
       </div>
 
       <div class="dial dial--open" id="annual-row">
@@ -302,8 +319,8 @@
     <dl>
       <div class="line" id="pours-row"><dt id="pours-label">Pours commissioned</dt><dd id="o-pours">—</dd></div>
       <div class="line" id="ann-row"><dt id="ann-label">Support on the installed base</dt><dd id="o-ann">—</dd></div>
-      <div class="line"><dt>Delivery, Cary's operator take</dt><dd id="o-del">—</dd></div>
-      <div class="line"><dt>Money crossing the rails</dt><dd id="o-rails">—</dd></div>
+      <div class="line"><dt>The Ward&rsquo;s share of food orders</dt><dd id="o-del">—</dd></div>
+      <div class="line"><dt>Fee on other local commerce</dt><dd id="o-rails">—</dd></div>
       <div class="line"><dt>Earned total</dt><dd id="o-earn">—</dd></div>
     </dl>
     <h4 id="raise-head">What must be raised</h4>
@@ -324,7 +341,7 @@
 <details class="fold">
   <summary>What crosses the rails</summary>
 
-  <p><b>The platform is free</b> — a fee on money crossing the rails, not a charge to participate. So revenue scales with <b>how much crosses</b>, not with what anyone is charged.</p>
+  <p><b>The platform is free.</b> Nobody pays to be on it. We take a cut of what is bought through it, so revenue follows <b>how much a neighborhood sells</b> — not how much anyone is charged for access.</p>
   <p class="railnote">A townie has checked in on three distinct days in a rolling fourteen, in the neighborhood, server-side; every delivery resolves to a building inside the boundary. <b>Participation is structural, not acquired.</b></p>
 
   <div class="rails">
@@ -334,8 +351,8 @@
       <div class="mult">where we are</div>
       <p>One module, in the neighborhoods we run.</p>
       <ul>
-        <li>5% of money crossing the rails</li>
-        <li>Cary's 5.5% of food is separate — a different entity, not yet drawn</li>
+        <li><span id="pf-1">6.3%</span> of food sold, after the courier and the neighborhood are paid</li>
+        <li>The neighborhood keeps its share of every order — it never reaches us, and it is not a cost we carry</li>
         <li>Processing is pass-through at cost. Never revenue</li>
       </ul>
     </div>
@@ -356,14 +373,14 @@
       <div class="mult" id="m3">—</div>
       <p>The same rails under every neighborhood poured.</p>
       <ul>
-        <li>Each pour is paid for once, by a nonprofit, at a market rate</li>
+        <li>Each pour is paid for once — commissioned, never sold to the neighborhood</li>
         <li>The unit is a <b>bounded economy with verified-by-presence participants</b> — a place, not a market</li>
-        <li>⛔ To a payments institution the 5% understates it: behind the flow sit the merchant relationships, the deposits, and a channel to residents verified by presence</li>
+        <li>⛔ To a payments institution <span id="pf-2">6.3%</span> understates it: behind the flow sit the merchant relationships, the deposits, and a channel to residents verified by presence</li>
         <li>⛔ It survives only while the platform is free. Monetise the relationship directly and there is nothing left but a map</li>
       </ul>
     </div>
   </div>
-  <p class="railfoot">The 5% and 5.5% are sourced; <b>every volume figure above is invented.</b> The entity split is open — <code>org-structure.md</code> says decide it before <code>place-order</code> ships.</p>
+  <p class="railfoot">The service charge and the commission are sourced; the neighborhood’s <span id="pf-3">4.2%</span> follows from them, and <b>every volume figure above is invented.</b> The entity split is open — <code>org-structure.md</code> says decide it before <code>place-order</code> ships.</p>
 
 </details>
 
@@ -463,6 +480,6 @@
 </footer>
 
 <script src="../../js/site.js?v=0f3be1550239"></script>
-<script src="../../js/ask.js?v=46a3f90980ed"></script>
+<script src="../../js/ask.js?v=ac82cca8cc2e"></script>
 </body>
 </html>
