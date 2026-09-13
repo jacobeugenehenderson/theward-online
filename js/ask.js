@@ -356,7 +356,7 @@
       rosterWhy:'\u26d4 Earned revenue supports a custodial roster at best \u2014 enough to keep it running, not to develop it.'
     }
   };
-  var topo='np', pourPayer='internal', market=1.00;
+  var topo='inst', pourPayer='internal', market=1.00;
   // ⛔ These seats must be IN the neighborhood — you cannot pour Lafayette Square
   // or train Barrio\u2019s guardians from Manhattan. They price to the ward, not the buyer.
   var LOCAL_SEATS=['op','ops','op2','host'];
