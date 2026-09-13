@@ -428,6 +428,7 @@
     var tdl=document.getElementById('tier-dial-label'); if(tdl) tdl.textContent=t.tierLabel||'Rate per pour';
     var tn=document.getElementById('tier-note');       if(tn) tn.innerHTML=t.tierNote||'';
     var sdl=document.getElementById('setup-dial-label');if(sdl) sdl.innerHTML=t.setupLabel||'Setup &amp; overhead';
+    var srl=document.getElementById('setup-read-label');if(srl) srl.innerHTML=t.setupLabel||'Setup &amp; overhead';
     var sn=document.getElementById('setup-note');      if(sn) sn.innerHTML=t.setupNote||'';
     var sl=document.getElementById('spon-line');  if(sl) sl.style.display=t.sponsor?'':'none';
     el('ask-label').textContent=t.askLabel;
