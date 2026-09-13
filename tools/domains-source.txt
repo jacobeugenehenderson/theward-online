@@ -1,0 +1,44 @@
+# The .online domains held for prospective New York City Wards.
+# Read from the Namecheap account, 2026-09-12. One per line, no TLD.
+# ⛔ Do not edit works/index.html's DOMAINS block — edit this and run
+#    node tools/build-domains.mjs
+astorianyc
+bayridge
+bedstuy
+boroughpark
+brownsvillenyc
+bushwicknyc
+canarsie
+carrollgardens
+chelseanyc
+chinatownnyc
+coneyisland
+crownheights
+dykerheights
+eastflatbush
+eastharlem
+eastnewyork
+eastvillagenyc
+flatbushnyc
+ftgreene
+gramercy
+harlemnyc
+lesnyc
+longislandcity
+lowereastside
+meatpacking
+midtownnyc
+midwood
+murrayhill
+northbronx
+northbrooklyn
+parkslope
+prospectheights
+sheepsheadbay
+southbronx
+southbrooklyn
+uesnyc
+unionsquarenyc
+uwsnyc
+washingtonheights
+westvillagenyc

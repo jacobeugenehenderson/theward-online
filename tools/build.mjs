@@ -28,7 +28,7 @@ const args = CHECK ? ['--check'] : []
    exact drift `--check` exists to catch, so it is deleted rather than disabled.
    ⭐ To restore: git show HEAD:tools/build-sky.mjs, put the SKY markers back in
    index.html, and add it to this array again. */
-for (const tool of ['build-sources.mjs', 'build-vignettes.mjs', 'build-license.mjs']) {
+for (const tool of ['build-sources.mjs', 'build-vignettes.mjs', 'build-license.mjs', 'build-domains.mjs']) {
   execFileSync('node', [resolve(ROOT, 'tools', tool), ...args], { stdio: 'inherit', cwd: ROOT })
 }
 
