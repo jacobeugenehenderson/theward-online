@@ -274,8 +274,7 @@
     // shows what the studio pays in total; neither dial ever answered the
     // question they exist to settle — is this worth someone's while.
     var per=+el('cluster').value, birth=+el('commission').value, keep=+el('retainer').value;
-    el('carto-earns').innerHTML='<b>'+per+(per===1?' ward':' wards')+'</b> — a cartographer earns '+
-      K(per*(birth+keep))+' in a ward\u2019s first year, '+K(per*keep)+' a year after.';
+    el('carto-earns').innerHTML='<b>'+K(per*keep)+'</b> a year, plus '+K(birth)+' for each ward poured.';
     var fn=document.getElementById('takefee-note');
     if(fn) fn.innerHTML = takeCount>0
       ? '<b>'+K(takeFee)+'</b> to the artist, '+takeCount+(takeCount===1?' takeover':' takeovers')+' a year — '+K(takeCount*takeFee)+' committed.'
