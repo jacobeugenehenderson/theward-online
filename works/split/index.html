@@ -141,7 +141,13 @@
       <p class="note" id="proc-note">Stripe and Square publish <b>2.9% + 30¢</b> for online payments. Adyen publishes <b>$0.13 + interchange + scheme fees + 0.60%</b> — the modeled figure adds typical US card-not-present interchange and scheme fees to that markup. The institutional rate is a scenario, not a quote.</p>
     </div>
 
-<div class="dial">
+    <div class="dial">
+      <div class="dial-head"><label class="dial-label" for="markup"><span>Menu markup on the incumbents</span></label><span class="dial-val" id="markup-v">15%</span></div>
+      <input type="range" id="markup" min="0" max="35" step="1" value="15">
+      <p class="note">A restaurant raising prices to survive a 30% commission. Widely documented, not published &mdash; unlike the commission tiers.</p>
+    </div>
+
+    <div class="dial">
       <div class="dial-head"><label class="dial-label" for="vol"><span>Orders / restaurant / month</span></label><span class="dial-val" id="vol-v">40</span></div>
       <input type="range" id="vol" min="0" max="400" step="5" value="40">
     </div>
@@ -208,6 +214,7 @@
     <h4 class="mini">The same order elsewhere </h4>
     <figure class="figbox">
       <svg id="vs" viewBox="0 0 520 230" role="img" aria-label="What the business pays on the same order, compared across delivery platforms, against the 15 percent regulatory cap" class="fig-svg"></svg>
+      <figcaption class="note fignote" id="vs-cust"></figcaption>
       <figcaption class="note fignote" id="vs-month"></figcaption>
       <figcaption class="note fignote">What the business pays on food + tax. The dashed line is the 15% cap, permanent in New York, San Francisco, Denver, Seattle and Washington DC.</figcaption>
     </figure>
@@ -265,6 +272,6 @@
 </footer>
 
 <script src="../../js/site.js?v=0f3be1550239"></script>
-<script src="../../js/split.js?v=ac9d0955e9a9"></script>
+<script src="../../js/split.js?v=d6ec64b4aa26"></script>
 </body>
 </html>

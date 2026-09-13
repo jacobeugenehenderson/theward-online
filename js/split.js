@@ -104,6 +104,8 @@
   // different bases, and only the bar makes that legible.
   var COUR=0.75, HOST=0.40;
   var CAP=0.15;   // NYC · SF · Denver · Seattle · DC
+  // ◆ Published consumer-side fees on the major platforms, 2026.
+  var INCUMBENT_SERVICE=0.15, INCUMBENT_DELIVERY=299;
   var PROC={r:290,f:30};
   // ⭐ A payments institution that owns the rails is its own acquirer, so the
   // processing line stops being a cost paid out and becomes a rate paid to
@@ -203,6 +205,7 @@
     $('tax-v').textContent=(+$('tax').value/1000).toFixed(3).replace(/0+$/,'').replace(/\.$/,'')+'%';
     $('svc-v').textContent=$('svc').value+'%';
     $('tip-v').textContent='$'+$('tip').value;
+    $('markup-v').textContent=$('markup').value+'%';
     $('proc-v').textContent=(chargeRate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+chargeRate.f+'¢';
     $('vol-v').textContent=vol;
     $('keep-v').textContent=(100-(+$('keep').value))+'% · '+M(commission);
@@ -245,6 +248,22 @@
     }).join('');
 
     drawVs(sub, 1-keepR);
+    // ⭐ THE OTHER HALF OF THE ARGUMENT. The chart answers what the BUSINESS
+    // pays; a reader's next question is always what THEY pay. The incumbents'
+    // damage on that side is mostly menu markup — a restaurant raising prices
+    // to survive a 30% commission has no reason to do it here.
+    // ⛔ Service and delivery fees are published; the markup is the dial,
+    // because it is the one number nobody publishes.
+    var mk=+$('markup').value/100;
+    var iFood=Math.round(sub*(1+mk));
+    var iFee=Math.round(iFood*INCUMBENT_SERVICE);
+    var iTax=Math.round(iFood*taxR);
+    var iTotal=iFood+iFee+INCUMBENT_DELIVERY+iTax;
+    var vc=$('vs-cust');
+    if(vc) vc.innerHTML = sub>0
+      ? '<b>The customer pays '+M(total)+' here, about '+M(iTotal)+' on an incumbent.</b> '+
+        'The same food marked up '+Math.round(mk*100)+'% to '+M(iFood)+', a 15% service fee and a '+M(INCUMBENT_DELIVERY)+' delivery fee.'
+      : '';
     var vm=$('vs-month');
     if(vm){
       if(!vol){ vm.innerHTML=''; }
@@ -258,7 +277,7 @@
     }
   }
 
-  ['sub','tax','svc','tip','vol','keep'].forEach(function(id){ $(id).addEventListener('input',calc); });
+  ['sub','tax','svc','tip','vol','keep','markup'].forEach(function(id){ $(id).addEventListener('input',calc); });
 
   // Dragging a grip sets the ratio its division implies. The pointer gives a
   // position in the bar; the money at that position gives the ratio back.
