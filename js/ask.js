@@ -26,8 +26,6 @@
      why:'Works the grant cycle. Nothing gets funded until this seat is filled.',modes:['custodial','product','full']},
     {id:'host',band:'Studio & mission',name:'Trust &amp; safety',owns:'Platform-wide intervention &amp; the public line',pay:58000,
      why:'Local moderation is the Local Host\u2019s under \u00a73.3. This seat is \u00a714 \u2014 platform-wide intervention on harm, fraud and abuse, and a Local Host that stops moderating. \u26d4 The Section 230 posture rests on it.',modes:['custodial','product','full']},
-    {id:'ops',band:'Studio & mission',name:'Neighborhood operations',owns:'Restaurants, guardians, couriers',pay:60000,
-     why:'Signs the restaurants, trains the guardians. Does not scale past a couple of neighborhoods.',modes:['product','full']},
     {id:'grants',band:'Studio & mission',name:'Grants associate',owns:'The second raiser',pay:62000,
      why:'A second raiser, once one person cannot fundraise for them all.',modes:['full']}
   ];
@@ -102,7 +100,7 @@
     var annual=ctx.pourIsRevenue?n*tierVal*ANNUAL:0;
     var delivery=n*ctx.rests*ctx.perrest*foodRate()*12;
     var rails=n*ctx.localflow*PLATFORM_FEE*12;
-    return poursRev+annual+delivery+rails-ctx.cost;
+    return poursRev+annual+delivery+rails-(ctx.fixedCost+ctx.perWard*n);
   }
   function drawChart(ctx){
     var svg=document.getElementById('chart'); if(!svg) return;
@@ -230,6 +228,7 @@
     // an artist — and a sponsor-funded takeover is not the studio's cost at all.
     var clusters=clustersNow();
     var retainerAll=a.hoods*(+el('retainer').value);
+    var hostBaseAll=a.hoods*(+el('hostbase').value);
     var takeCount=+el('takeovers').value, takeFee=feeFromSlider(+el('takefee').value);
     var takeAll=takePayer==='studio' ? takeCount*takeFee : 0;
     // ⭐ One source for volumes: the revenue panel. Nothing here re-derives them.
@@ -238,7 +237,7 @@
     var pourIsRevenue=(topo!=='inst');   // a pour an institution absorbs is a cost, and only a cost
     var poursDone=a.pours;
     var commissionAll=poursDone*(+el('commission').value);
-    var cost=sal+loading+setup+retainerAll+commissionAll+takeAll;
+    var cost=sal+loading+setup+retainerAll+commissionAll+takeAll+hostBaseAll;
     // ⭐ Support is charged on every neighborhood standing, not on this year's
     // sales — so it compounds with the installed base rather than the sales rate.
     var poursRev=pourIsRevenue?poursDone*tierVal:0,
@@ -277,6 +276,10 @@
       : '<b>'+K(takeFee)+'</b> to the artist for a season on one ward.';
     el('ret-label').textContent='Ward upkeep \u00b7 '+clusters+' cartographer'+(clusters===1?'':'s');
     el('o-ret').textContent=K(retainerAll);
+    el('o-hostbase').textContent=K(hostBaseAll);
+    el('hostbase-v').textContent=K(+el('hostbase').value);
+    var hbn=document.getElementById('hostbase-note');
+    if(hbn) hbn.innerHTML='<b>'+K(Math.round((+el('hostbase').value)/12))+'</b> a month, before the share.';
     el('o-comm').textContent=K(commissionAll);
     el('o-take').textContent=takePayer==='studio'?K(takeAll):'sponsor-funded';
     el('take-row').style.display=takeCount>0?'':'none';
@@ -288,8 +291,9 @@
       var r=document.getElementById(id); if(r) r.style.display=pourIsRevenue?'':'none';
     });
     var hostFood=deliveryFlow*(SVC*(1-COURIER)+COMM)*HOSTSHARE*12;
+    el('o-hostbase2').textContent=K(hostBaseAll);
     el('o-host').textContent=K(hostFood);
-    el('o-hostper').textContent=a.hoods>0?K(Math.round(hostFood/a.hoods)):'\u2014';
+    el('o-hostper').textContent=a.hoods>0?K(Math.round((hostFood+hostBaseAll)/a.hoods)):'\u2014';
     el('o-del').textContent=K(delivery); el('o-rails').textContent=K(railsFee); el('o-earn').textContent=K(earned);
     var covered=surplus>0;
     var rh=document.getElementById('raise-head');
@@ -336,14 +340,16 @@
     // cost of the page behind four triangles.
     var gt={'The roster':on.length+(on.length===1?' person · ':' people · ')+K(sal),
             'Revenue assumptions':K(earned)+' earned',
-            'Commissioned work':K(retainerAll+commissionAll+takeAll),
+            'Commissioned work':K(retainerAll+commissionAll+takeAll+hostBaseAll),
             'On top of salary':K(loading+setup)};
     Array.prototype.forEach.call(document.querySelectorAll('.gtally'),function(t){
       if(gt[t.dataset.g]!==undefined) t.textContent=gt[t.dataset.g];
     });
     drawChart({ pours:a.pours, cluster:+el('cluster').value,
                 rests:a.rests, perrest:a.perrest, localflow:a.localflow,
-                cost:cost, hoods:a.hoods, pourIsRevenue:pourIsRevenue });
+                fixedCost:cost-retainerAll-hostBaseAll,
+                perWard:(+el('retainer').value)+(+el('hostbase').value),
+                hoods:a.hoods, pourIsRevenue:pourIsRevenue });
   }
 
   var TOPO={
@@ -391,7 +397,7 @@
   var topo='inst', takePayer='studio', market=1.00;
   // ⛔ These seats must be IN the neighborhood — you cannot pour Lafayette Square
   // or train Barrio\u2019s guardians from Manhattan. They price to the ward, not the buyer.
-  var LOCAL_SEATS=['ops','host'];
+  var LOCAL_SEATS=['host'];
 
   function drawTopo(resetRoster){
     var t=TOPO[topo], h='';
@@ -550,7 +556,7 @@
       b.setAttribute('aria-pressed','true'); mode=b.dataset.m; build(); update(); rails();
     });
   });
-  ['load','sponsor','setup','hoods','rests','perrest','localflow','pours','pfee','svc','comm','hostshare','annual','tier',
+  ['load','sponsor','setup','hoods','rests','perrest','localflow','pours','pfee','svc','comm','hostshare','hostbase','annual','tier',
    'cluster','retainer','commission','takeovers','takefee'].forEach(function(id){
     el(id).addEventListener('input',function(){ update(); rails(); });
   });
