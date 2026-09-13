@@ -1683,13 +1683,26 @@ a { color: inherit; }
 @media (max-width:900px){ .sheet{grid-template-columns:1fr; gap:30px} }
 
 .tool--ask .group{margin-bottom:32px}
-.tool--ask .gfold > .ghead{list-style:none; cursor:pointer; display:flex; align-items:baseline; justify-content:space-between; gap:12px;
-  font-size:13px; font-family:var(--f-sys); font-weight:600; letter-spacing:.12em; text-transform:uppercase;
-  color:var(--text); padding-bottom:8px; border-bottom:1px solid var(--text)}
+/* ⭐ THE FOLDED GROUPS ARE THE PAGE'S NAVIGATION, so they have to read as bands
+   rather than as four lines of small caps with a caret. Filled, padded, and
+   striped — the alternation is what makes four of them scan as a list at a
+   glance instead of as four unrelated rules. */
+.tool--ask .gfold{margin-bottom:0}
+.tool--ask .gfold + .gfold{margin-top:2px}
+.tool--ask .gfold > .ghead{
+  list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:12px;
+  font-size:12.5px; font-family:var(--f-sys); font-weight:600; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--text); padding:13px 14px;
+  background:var(--ground-2); border:1px solid var(--rule); border-left:3px solid var(--text);
+}
+.tool--ask .gfold:nth-of-type(even) > .ghead{background:var(--ground)}
+.tool--ask .gfold[open] > .ghead{border-left-color:var(--cary-rule)}
+.tool--ask .gfold > .ghead:hover{border-left-color:var(--cary-rule)}
 .tool--ask .gfold > .ghead::-webkit-details-marker{display:none}
-.tool--ask .gfold > .ghead::after{content:"\25BE"; font-size:15px; line-height:1; color:var(--cary-rule); letter-spacing:0}
+.tool--ask .gfold > .ghead::after{content:"\25BE"; font-size:14px; line-height:1; color:var(--cary-rule); letter-spacing:0}
 .tool--ask .gfold[open] > .ghead::after{content:"\25B4"}
-.tool--ask .gfold > .ghead:focus-visible{outline:2px solid var(--cary-rule); outline-offset:3px}
+.tool--ask .gfold > .ghead:focus-visible{outline:2px solid var(--cary-rule); outline-offset:2px}
+.tool--ask .gfold[open] > *:not(.ghead){margin-left:14px; margin-right:14px}
 .tool--ask .gtally{font-variant-numeric:tabular-nums; letter-spacing:.04em; color:var(--text-faint); font-weight:400}
 
 .tool--ask .group > h3{font-size:13px; font-family:var(--f-sys); font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--text); padding-bottom:8px; border-bottom:1px solid var(--text)}

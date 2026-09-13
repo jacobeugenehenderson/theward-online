@@ -366,7 +366,7 @@
              ['The studio','Paid <b>market rate</b>, arm\u2019s length, to build and pour'],
              ['The neighborhood','<b>Pays nothing.</b> Gets its portrait, and keeps it']],
       note:'The studio is a vendor to the entity that raised the money. Needs a founding ED and a fiscal sponsor first.',
-      askLabel:'The ask', sponsor:true, market:1.00,
+      askLabel:'The ask', sponsor:true, market:1.00, annualPct:18,
       raiseHead:'What must be raised', gapLabel:'Gap before sponsor fee',
       poursLabel:'Pours commissioned / yr', wantsED:true,
       tierLabel:'Rate per pour', tierNote:'Commissioned by a nonprofit \u2014 never sold to the neighborhood.',
@@ -380,7 +380,7 @@
              ['The studio','A <b>team inside it</b>, not a grantee'],
              ['The neighborhood','<b>Still pays nothing.</b> That part cannot change']],
       note:'No raise, no ED \u2014 the number is <b>a budget line and a headcount</b>.',
-      askLabel:'The budget line', sponsor:false, market:1.60,
+      askLabel:'The budget line', sponsor:false, market:1.60, annualPct:0,
       raiseHead:'Net cost to the institution', gapLabel:'Cost, less what the unit earns',
       poursLabel:'Neighborhoods poured / yr', wantsED:false, hop:true,
       tierLabel:'Cost basis per pour', tierNote:'\u26d4 Not a price \u2014 the figure a pour is booked at internally.',
@@ -393,7 +393,7 @@
              ['The studio','<b>Funds itself</b>, or does not grow'],
              ['The neighborhood','<b>Pays nothing.</b> Same as every other shape']],
       note:'No raise. Turn the roster down until the gap reaches zero.',
-      askLabel:'The gap', sponsor:false, market:1.00,
+      askLabel:'The gap', sponsor:false, market:1.00, annualPct:18,
       raiseHead:'What earned revenue does not cover', gapLabel:'Shortfall',
       poursLabel:'Pours sold / yr', wantsED:true,
       tierLabel:'Price per pour', tierNote:'What a buyer pays. Nobody has quoted this.',
@@ -416,6 +416,12 @@
     el('market-v').textContent=market.toFixed(2)+'×';
     drawLegend();
 
+    // ⭐ ZERO UNDER ABSORPTION. Annual support is a yearly fee a ward pays to be
+    // kept running — but an institution's own wards would be charging themselves,
+    // and we already budget a cartographer to do the keeping ("Ward upkeep" in
+    // Commissioned work). The dial stays so a real support contract can be
+    // modelled; the model stops assuming one.
+    if(resetRoster!==false && t.annualPct!=null) el('annual').value=t.annualPct;
     if(resetRoster!==false && t.defaultMode){
       mode=t.defaultMode;
       Array.prototype.forEach.call(el('modes').querySelectorAll('button'),function(x){
