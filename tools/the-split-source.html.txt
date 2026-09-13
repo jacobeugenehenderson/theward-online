@@ -58,6 +58,11 @@ header h1{font-size:clamp(34px,6vw,52px); font-weight:600; line-height:1.02; let
 .splitbar{position:relative; display:flex; height:44px; margin-top:14px; border:1px solid var(--ink)}
 .sb-seg{height:100%; min-width:0; overflow:hidden}
 .sb-proc{background:var(--rule)} .sb-cour{background:var(--brick)} .sb-ward{background:var(--ink)}
+/* ⭐ THE PAGE'S ONE INPUT. Every figure on the page is a function of this and it sat
+   as the first of four equal dials. It is above the section now, and larger. */
+.lead-dial{border-bottom:none; padding-top:0}
+.lead-dial .dial-label{font-size:16px}
+.lead-dial .dial-val{font-size:22px}
 .cmp{margin:10px 0 4px}
 .cmp-row{display:flex; justify-content:space-between; align-items:baseline; margin-top:12px; font-size:12.5px}
 .cmp-lbl{color:var(--ink-2)}
@@ -123,12 +128,12 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
       </div>
     </div>
 
-    <h3>The order</h3>
-
-    <div class="dial">
+    <div class="dial lead-dial">
       <div class="dial-head"><label class="dial-label" for="sub"><span>Food subtotal</span></label><span class="dial-val" id="sub-v">$55</span></div>
       <input type="range" id="sub" min="40" max="250" step="5" value="55">
     </div>
+
+    <h3 style="margin-top:30px">The order</h3>
 
     <div class="dial">
       <div class="dial-head"><label class="dial-label" for="tax"><span>Sales tax</span></label><span class="dial-val" id="tax-v">8.725%</span></div>
@@ -138,12 +143,6 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     <div class="dial">
       <div class="dial-head"><label class="dial-label" for="svc"><span>Service charge</span></label><span class="dial-val" id="svc-v">22%</span></div>
       <input type="range" id="svc" min="0" max="40" step="1" value="22">
-      <p class="note" id="cour-note">The courier is paid <b>75%</b> of it.</p>
-    </div>
-
-    <div class="dial">
-      <div class="dial-head"><label class="dial-label" for="tip"><span>Tip</span></label><span class="dial-val" id="tip-v">$0</span></div>
-      <input type="range" id="tip" min="0" max="40" step="1" value="0">
     </div>
 
     <h3 style="margin-top:30px">How it divides</h3>
@@ -191,7 +190,6 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
       <div class="line"><dt>Sales tax</dt><dd id="o-tax">—</dd></div>
       <div class="line"><dt>Service charge</dt><dd id="o-svc">—</dd></div>
       <div class="line"><dt>Processing</dt><dd id="o-proc">—</dd></div>
-      <div class="line" id="tip-row"><dt>Tip</dt><dd id="o-tip">—</dd></div>
       <div class="line tot"><dt>Total</dt><dd id="o-total">—</dd></div>
     </dl>
 
@@ -199,7 +197,7 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     <dl>
       <div class="line"><dt><b>Business</b> — food less the fee, plus tax</dt><dd id="p-rest">—</dd></div>
       <div class="line sub2"><dt>fee withheld</dt><dd id="p-comm">—</dd></div>
-      <div class="line"><dt><b>Courier</b> — share + all tips </dt><dd id="p-cour">—</dd></div>
+      <div class="line"><dt><b>Courier</b></dt><dd id="p-cour">—</dd></div>
       <div class="line"><dt><b>The Ward</b> — out of which the neighborhood’s Local Host is paid</dt><dd id="p-plat">—</dd></div>
       <div class="line"><dt><b>Processor</b> — at cost </dt><dd id="p-proc">—</dd></div>
       <div class="line tot"><dt>Accounted for</dt><dd id="p-total">—</dd></div>
@@ -284,7 +282,6 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     var k=H0/d.total, GAP=3;
 
     var left=[['Food',d.sub],['Tax',d.tax],['Service charge',d.svc],['Processing',d.proc]];
-    if(d.tip>0) left.push(['Tip',d.tip]);
     left=left.filter(function(x){return x[1]>0;});
     var right=[['Business',d.business,HUE.business],['Courier',d.courier,HUE.courier],
                ['The Ward',d.ward,HUE.ward],['Processor',d.proc,HUE.proc]]
@@ -308,7 +305,6 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
       ['Service charge','The Ward',svcToPool],
       ['Processing','Processor',d.proc]
     ];
-    if(d.tip>0) flows.push(['Tip','Courier',d.tip]);
 
     var ribbons=flows.filter(function(f){return f[2]>0 && ly[f[0]] && ry[f[1]];}).map(function(f){
       var L=ly[f[0]], R=ry[f[1]];
@@ -503,7 +499,6 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     var sub=+$('sub').value*100,
         taxR=+$('tax').value/100000,
         svcR=+$('svc').value/100,
-        tip=+$('tip').value*100,
         keepR=1-(+$('keep').value/100),
         courR=COUR;
 
@@ -520,24 +515,24 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     var rate = owner==='inst' ? INHOUSE : PROC;
     var basis=sub+tax+svc;
     var procPaid= sub>0?Math.round(basis*(rate.r/10000))+rate.f:0;
-    var total=sub+tax+svc+procPaid+tip;
+    var total=sub+tax+svc+procPaid;
 
     var commission=Math.round(sub*(1-keepR));
     var business=sub-commission+tax;
-    var courier=Math.round(svc*courR)+tip;
+    // ⛔ NO TIP ON THIS PAGE. The service charge is meant to BE the wage — an in-house
+    //   waiter's scale — and a tip dial beside it says the opposite: that the wage is a
+    //   base to be topped up. Couriers keep any tip they are given; the page does not
+    //   model one, because modelling it concedes the argument (Jacob, 2026-09-13).
+    var courier=Math.round(svc*courR);
     var pool=(svc-Math.round(svc*courR))+commission;
     var ward=pool;
 
     $('sub-v').textContent='$'+(sub/100).toFixed(0);
     $('tax-v').textContent=(+$('tax').value/1000).toFixed(3).replace(/0+$/,'').replace(/\.$/,'')+'%';
     $('svc-v').textContent=$('svc').value+'%';
-    // ⛔ THE ONLY PLACE THIS NUMBER IS STATED ON THIS PAGE, so it is written from
-    //   COUR rather than typed — it used to live in the bar's key and vanished with it.
-    $('cour-note').innerHTML='The courier is paid <b>'+Math.round(COUR*100)+'%</b> of it.';
-    $('tip-v').textContent='$'+$('tip').value;
     $('proc-v').textContent=(rate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+rate.f+'¢';
     $('keep-v').textContent=(+$('keep').value)+'% · '+M(commission);
-    drawSplit(procPaid, svc, commission, courier-tip, ward);
+    drawSplit(procPaid, svc, commission, courier, ward);
 
 
     $('o-food').textContent=M(sub);
@@ -546,8 +541,6 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     // ⛔ §8.5 OF THE LICENCE: an amount represented to the customer as
     // reimbursement of processing cost may not exceed the processing cost. An
     $('o-proc').textContent=M(procPaid);
-    $('o-tip').textContent=M(tip);
-    $('tip-row').style.display=tip>0?'':'none';
     $('o-total').textContent=M(total);
 
     $('p-rest').textContent=M(business);
@@ -560,7 +553,7 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
 
     var parts=[['s-rest','Business',business],['s-cour','Courier',courier],
                ['s-plat','The Ward',ward],['s-proc','Processor',procPaid]];
-    drawFlow({ sub:sub, tax:tax, svc:svc, proc:procPaid, tip:tip, total:total,
+    drawFlow({ sub:sub, tax:tax, svc:svc, proc:procPaid, total:total,
                commission:commission, business:business, courier:courier,
                ward:ward, courR:courR });
     $('legend').innerHTML=parts.map(function(x){
@@ -631,7 +624,7 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     }
   }
 
-  ['sub','tax','svc','tip','keep'].forEach(function(id){ $(id).addEventListener('input',calc); });
+  ['sub','tax','svc','keep'].forEach(function(id){ $(id).addEventListener('input',calc); });
 
   // ⛔ NO GRIP. The bar had a drag handle on the courier/Ward division, and there
   //   is nothing to experiment with: the payouts are CALCULATED from the stated

@@ -1620,6 +1620,11 @@ a { color: inherit; }
 .tool--split .splitbar{position:relative; display:flex; height:44px; margin-top:14px; border:1px solid var(--text)}
 .tool--split .sb-seg{height:100%; min-width:0; overflow:hidden}
 .tool--split .sb-proc{background:var(--rule)} .tool--split .sb-cour{background:var(--cary-rule)} .tool--split .sb-ward{background:var(--text)}
+/* ⭐ THE PAGE'S ONE INPUT. Every figure on the page is a function of this and it sat
+   as the first of four equal dials. It is above the section now, and larger. */
+.tool--split .lead-dial{border-bottom:none; padding-top:0}
+.tool--split .lead-dial .dial-label{font-size:16px}
+.tool--split .lead-dial .dial-val{font-size:22px}
 .tool--split .cmp{margin:10px 0 4px}
 .tool--split .cmp-row{display:flex; justify-content:space-between; align-items:baseline; margin-top:12px; font-size:12.5px}
 .tool--split .cmp-lbl{color:var(--text-soft)}

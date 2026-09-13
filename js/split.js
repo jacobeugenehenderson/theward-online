@@ -31,7 +31,6 @@
     var k=H0/d.total, GAP=3;
 
     var left=[['Food',d.sub],['Tax',d.tax],['Service charge',d.svc],['Processing',d.proc]];
-    if(d.tip>0) left.push(['Tip',d.tip]);
     left=left.filter(function(x){return x[1]>0;});
     var right=[['Business',d.business,HUE.business],['Courier',d.courier,HUE.courier],
                ['The Ward',d.ward,HUE.ward],['Processor',d.proc,HUE.proc]]
@@ -55,7 +54,6 @@
       ['Service charge','The Ward',svcToPool],
       ['Processing','Processor',d.proc]
     ];
-    if(d.tip>0) flows.push(['Tip','Courier',d.tip]);
 
     var ribbons=flows.filter(function(f){return f[2]>0 && ly[f[0]] && ry[f[1]];}).map(function(f){
       var L=ly[f[0]], R=ry[f[1]];
@@ -250,7 +248,6 @@
     var sub=+$('sub').value*100,
         taxR=+$('tax').value/100000,
         svcR=+$('svc').value/100,
-        tip=+$('tip').value*100,
         keepR=1-(+$('keep').value/100),
         courR=COUR;
 
@@ -267,24 +264,24 @@
     var rate = owner==='inst' ? INHOUSE : PROC;
     var basis=sub+tax+svc;
     var procPaid= sub>0?Math.round(basis*(rate.r/10000))+rate.f:0;
-    var total=sub+tax+svc+procPaid+tip;
+    var total=sub+tax+svc+procPaid;
 
     var commission=Math.round(sub*(1-keepR));
     var business=sub-commission+tax;
-    var courier=Math.round(svc*courR)+tip;
+    // ⛔ NO TIP ON THIS PAGE. The service charge is meant to BE the wage — an in-house
+    //   waiter's scale — and a tip dial beside it says the opposite: that the wage is a
+    //   base to be topped up. Couriers keep any tip they are given; the page does not
+    //   model one, because modelling it concedes the argument (Jacob, 2026-09-13).
+    var courier=Math.round(svc*courR);
     var pool=(svc-Math.round(svc*courR))+commission;
     var ward=pool;
 
     $('sub-v').textContent='$'+(sub/100).toFixed(0);
     $('tax-v').textContent=(+$('tax').value/1000).toFixed(3).replace(/0+$/,'').replace(/\.$/,'')+'%';
     $('svc-v').textContent=$('svc').value+'%';
-    // ⛔ THE ONLY PLACE THIS NUMBER IS STATED ON THIS PAGE, so it is written from
-    //   COUR rather than typed — it used to live in the bar's key and vanished with it.
-    $('cour-note').innerHTML='The courier is paid <b>'+Math.round(COUR*100)+'%</b> of it.';
-    $('tip-v').textContent='$'+$('tip').value;
     $('proc-v').textContent=(rate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+rate.f+'¢';
     $('keep-v').textContent=(+$('keep').value)+'% · '+M(commission);
-    drawSplit(procPaid, svc, commission, courier-tip, ward);
+    drawSplit(procPaid, svc, commission, courier, ward);
 
 
     $('o-food').textContent=M(sub);
@@ -293,8 +290,6 @@
     // ⛔ §8.5 OF THE LICENCE: an amount represented to the customer as
     // reimbursement of processing cost may not exceed the processing cost. An
     $('o-proc').textContent=M(procPaid);
-    $('o-tip').textContent=M(tip);
-    $('tip-row').style.display=tip>0?'':'none';
     $('o-total').textContent=M(total);
 
     $('p-rest').textContent=M(business);
@@ -307,7 +302,7 @@
 
     var parts=[['s-rest','Business',business],['s-cour','Courier',courier],
                ['s-plat','The Ward',ward],['s-proc','Processor',procPaid]];
-    drawFlow({ sub:sub, tax:tax, svc:svc, proc:procPaid, tip:tip, total:total,
+    drawFlow({ sub:sub, tax:tax, svc:svc, proc:procPaid, total:total,
                commission:commission, business:business, courier:courier,
                ward:ward, courR:courR });
     $('legend').innerHTML=parts.map(function(x){
@@ -378,7 +373,7 @@
     }
   }
 
-  ['sub','tax','svc','tip','keep'].forEach(function(id){ $(id).addEventListener('input',calc); });
+  ['sub','tax','svc','keep'].forEach(function(id){ $(id).addEventListener('input',calc); });
 
   // ⛔ NO GRIP. The bar had a drag handle on the courier/Ward division, and there
   //   is nothing to experiment with: the payouts are CALCULATED from the stated
