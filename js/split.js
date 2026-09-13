@@ -21,80 +21,17 @@
     ['Grubhub + delivery',0.30]
   ];
 
-  var HUE={business:'var(--cary-rule)', courier:'var(--cary-rule)', ward:'var(--text)', proc:'var(--rule)'};
 
   // One payment, divided once. Band heights are proportional to money, so the
   // picture is the arithmetic rather than an illustration of it.
-  function drawFlow(d){
-    var svg=$('flow'); if(!svg||!d.total) return;
-    var W=560,H=300,TOP=26,BOT=14,LW=104,RW=104,H0=H-TOP-BOT;
-    var k=H0/d.total, GAP=3;
-
-    var left=[['Food',d.sub],['Tax',d.tax],['Service charge',d.svc],['Processing',d.proc]];
-    left=left.filter(function(x){return x[1]>0;});
-    var right=[['Business',d.business,HUE.business],['Courier',d.courier,HUE.courier],
-               ['The Ward',d.ward,HUE.ward],['Processor',d.proc,HUE.proc]]
-               .filter(function(x){return x[1]>0;});
-
-    var lGap=(left.length-1)*GAP, rGap=(right.length-1)*GAP;
-    var lk=(H0-lGap)/d.total, rk=(H0-rGap)/d.total;
-
-    var ly={}, y=TOP;
-    left.forEach(function(b){ ly[b[0]]={y:y,h:b[1]*lk,cur:y}; y+=b[1]*lk+GAP; });
-    var ry={}; y=TOP;
-    right.forEach(function(b){ ry[b[0]]={y:y,h:b[1]*rk,cur:y,hue:b[2]}; y+=b[1]*rk+GAP; });
-
-    // every flow of money, as [from, to, amount]
-    var svcToPool=d.svc-Math.round(d.svc*d.courR);
-    var flows=[
-      ['Food','Business',d.sub-d.commission],
-      ['Food','The Ward',d.commission],
-      ['Tax','Business',d.tax],
-      ['Service charge','Courier',Math.round(d.svc*d.courR)],
-      ['Service charge','The Ward',svcToPool],
-      ['Processing','Processor',d.proc]
-    ];
-
-    var ribbons=flows.filter(function(f){return f[2]>0 && ly[f[0]] && ry[f[1]];}).map(function(f){
-      var L=ly[f[0]], R=ry[f[1]];
-      var h1=f[2]*lk, h2=f[2]*rk;
-      var y1=L.cur, y2=R.cur; L.cur+=h1; R.cur+=h2;
-      var x1=LW, x2=W-RW, mx=(x1+x2)/2;
-      return '<path d="M'+x1+' '+y1.toFixed(1)+
-             ' C'+mx+' '+y1.toFixed(1)+' '+mx+' '+y2.toFixed(1)+' '+x2+' '+y2.toFixed(1)+
-             ' L'+x2+' '+(y2+h2).toFixed(1)+
-             ' C'+mx+' '+(y2+h2).toFixed(1)+' '+mx+' '+(y1+h1).toFixed(1)+' '+x1+' '+(y1+h1).toFixed(1)+' Z" '+
-             'fill="'+R.hue+'" opacity="0.3"/>';
-    }).join('');
-
-    var lBars=left.map(function(b){
-      var B=ly[b[0]];
-      return '<rect x="'+(LW-9)+'" y="'+B.y.toFixed(1)+'" width="9" height="'+B.h.toFixed(1)+'" fill="currentColor" opacity="0.35"/>'+
-             '<text x="'+(LW-14)+'" y="'+(B.y+B.h/2+4).toFixed(1)+'" text-anchor="end" font-size="15" fill="currentColor">'+b[0]+'</text>'+
-             '<text x="'+(LW-14)+'" y="'+(B.y+B.h/2+16).toFixed(1)+'" text-anchor="end" font-size="10" fill="currentColor" opacity="0.55" >'+M(b[1])+'</text>';
-    }).join('');
-
-    var lastY=-99;
-    var rBars=right.map(function(b){
-      var B=ry[b[0]];
-      // ⛔ A thin band's label pair landed on its neighbour's — Local Host and the
-      // Ward are small shares by design, so this is the normal case, not an
-      // edge one. Each label is pushed clear of the last and tied back to its
-      // band with a leader when it has moved.
-      var ty=Math.max(B.y+B.h/2+4, lastY+25); lastY=ty;
-      return '<rect x="'+(W-RW)+'" y="'+B.y.toFixed(1)+'" width="9" height="'+B.h.toFixed(1)+'" fill="'+b[2]+'"/>'+
-             (ty-(B.y+B.h/2+4)>2
-               ? '<line x1="'+(W-RW+9.5)+'" y1="'+(B.y+B.h/2).toFixed(1)+'" x2="'+(W-RW+12.5)+'" y2="'+(ty-4).toFixed(1)+'" stroke="currentColor" stroke-width="0.75" opacity="0.35"/>'
-               : '')+
-             '<text x="'+(W-RW+15)+'" y="'+ty.toFixed(1)+'" font-size="11.5" fill="currentColor">'+b[0]+'</text>'+
-             '<text x="'+(W-RW+15)+'" y="'+(ty+12).toFixed(1)+'" font-size="10" fill="currentColor" opacity="0.55">'+M(b[1])+'</text>';
-    }).join('');
-
-    svg.innerHTML=
-      '<text x="0" y="14" font-size="9.5" fill="currentColor" opacity="0.5" letter-spacing="1.1">THE CUSTOMER PAYS</text>'+
-      '<text x="'+(W-RW+14)+'" y="14" font-size="10" fill="currentColor" opacity="0.5" letter-spacing="1.2">IT IS OWED TO</text>'+
-      ribbons+lBars+rBars;
-  }
+  // ⛔ THE SANKEY IS GONE, AND IT WAS THE THIRD TELLING. It drew what the two lists
+  //   below it already state precisely — left side "the customer pays", right side "and
+  //   it is owed to" — plus a legend restating both as percentages. Three
+  //   representations of one decomposition, of which it was the least exact, the hardest
+  //   to trace, and the only one BROKEN: "Service charge" sat at x=-13, clipped off the
+  //   left edge of its own viewBox on the live page.
+  //   ⭐ The customer bars below do the visual job now, comparatively, which the sankey
+  //   never did (Jacob, 2026-09-13: "is all this necessary?").
 
   // ⭐ The two division ratios live here rather than on inputs, because the
   // control is a bar the reader divides, not two sliders whose bases are a
@@ -303,17 +240,7 @@
     $('p-plat').textContent=M(ward);
     $('p-proc').textContent=M(procPaid);
     $('p-total').textContent=M(business+courier+ward+procPaid);
-    $('p-pos').textContent=M(sub+tax);
 
-    var parts=[['s-rest','Business',business],['s-cour','Courier',courier],
-               ['s-plat','The Ward',ward],['s-proc','Processor',procPaid]];
-    drawFlow({ sub:sub, tax:tax, svc:svc, proc:procPaid, total:total,
-               commission:commission, business:business, courier:courier,
-               ward:ward, courR:courR });
-    $('legend').innerHTML=parts.map(function(x){
-      var pct=total>0?(x[2]/total*100):0;
-      return '<span><i class="sw '+x[0]+'"></i>'+x[1]+' '+pct.toFixed(1)+'%</span>';
-    }).join('');
 
     // ⭐ THE OTHER HALF OF THE ARGUMENT. The chart answers what the BUSINESS
     // pays; a reader's next question is always what THEY pay. The incumbents'
