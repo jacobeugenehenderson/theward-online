@@ -189,7 +189,12 @@
     // ⛔ ONLY WHAT VARIES. Menu and customer-total were identical down all five
     //   incumbent rows — five rows of apparatus for one changing number — and both are
     //   drawn better by the customer bars above (Jacob: "what is all of this for then").
-    var head='<text x="'+C3+'" y="'+(TOP-13)+'" text-anchor="end" font-size="11" fill="currentColor" opacity="0.55" letter-spacing="0.6">BUSINESS KEEPS</text>';
+    // ⛔ A BAR WITH NO LABEL MEANS NOTHING. The commission was stripped from the rows
+    //   on the grounds that "the bar already is it" — which left the bar unnamed, while
+    //   the footnote said "what the business PAYS" and the column said "KEEPS". Two
+    //   framings, one figure, neither anchored (Jacob: "this table isn't saying much").
+    var head='<text x="'+L+'" y="'+(TOP-13)+'" font-size="11" fill="currentColor" opacity="0.55" letter-spacing="0.6">COMMISSION</text>'+
+             '<text x="'+C3+'" y="'+(TOP-13)+'" text-anchor="end" font-size="11" fill="currentColor" opacity="0.55" letter-spacing="0.6">BUSINESS KEEPS</text>';
 
     var bars=rows.map(function(r,i){
       var y=TOP+i*(BH+GAP);
@@ -200,9 +205,16 @@
       var cell=function(cx,v){ return '<text x="'+cx+'" y="'+(y+14)+'" text-anchor="end" font-size="14" fill="currentColor" opacity="'+op+'" >'+M(v)+'</text>'; };
       return '<rect x="'+L+'" y="'+y+'" width="'+w.toFixed(1)+'" height="'+BH+'" fill="'+(r[2]?'var(--cary-rule)':'var(--cary-rule)')+'" opacity="'+(r[2]?'1':'0.42')+'"/>'+
              '<text x="'+(L-10)+'" y="'+(y+14)+'" text-anchor="end" font-size="13.5" fill="currentColor"'+(r[2]?' font-weight="600"':' opacity="0.75"')+'>'+r[0]+'</text>'+
+             '<text x="'+(L+w+8).toFixed(1)+'" y="'+(y+14)+'" font-size="12.5" fill="currentColor" opacity="'+op+'" >'+Math.round(r[1]*100)+'%</text>'+
              cell(C3,kept);
     }).join('');
 
+    // ⭐ THE CAP IS A POINT, NOT A LEGEND ENTRY. The line was explained — "the dashed
+    //   line is the 15% cap" — where what matters is how many tiers are on the wrong
+    //   side of it. Counted from RIVALS so it cannot go stale if the list changes.
+    var over=RIVALS.filter(function(r){ return r[1]>CAP; }).length;
+    var cap=$('vs-cap');
+    if(cap) cap.innerHTML='<b>'+over+' of these tiers sit above the 15% cap</b> — permanent in New York, San Francisco, Denver, Seattle and Washington DC.';
     var capX=x(CAP), H=TOP+rows.length*(BH+GAP)+16;
     return svg.innerHTML=
       '<line x1="'+capX.toFixed(1)+'" y1="'+(TOP-6)+'" x2="'+capX.toFixed(1)+'" y2="'+(H-14)+'" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3" opacity="0.65"/>'+
