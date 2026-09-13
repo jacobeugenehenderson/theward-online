@@ -77,31 +77,28 @@
     var w=POUR_WEEKS_FIRST*Math.pow(POUR_LEARN, Math.log(n)/Math.log(2));
     return Math.max(POUR_FLOOR, w);
   }
-  // ⭐ THE CEILING IS PART OF THE DIAL'S VALUE, not a note under it. How many
-  // pours a roster can actually author is the only thing the reader needs from
-  // the learning curve — the curve itself, the weeks-per-pour and the operator
-  // count were three sentences of working shown to reach one number.
-  // ⭐ THE CEILING FOLLOWS CARTOGRAPHERS, NOT PAYROLL. Pouring is commissioned,
-  // so the constraint is no longer how many operators are employed — it is how
-  // many retained cartographers there are and how much of their year this is.
+  // ⛔ THERE IS NO POUR CEILING, BECAUSE WE PAY CARTOGRAPHERS. A ceiling is what
+  // a fixed payroll gives you; a commission is not fixed. Asking for a fifth pour
+  // does not hit a wall, it commissions a fifth cartographer — so the count is
+  // DERIVED from the work: enough to keep the installed base, and enough to pour
+  // the year, whichever is larger.
   // ⛔ A retainer is PART-TIME by construction; counting a full working year
-  // against it would claim capacity nobody is being paid for.
+  // against it would claim time nobody is being paid for.
   var CARTO_WEEKS=20;   // ○ how much of a year a retained cartographer gives
+  function cartographers(hoods, pours, per){
+    var keep = Math.ceil(hoods/Math.max(1,per));
+    var pour = Math.ceil(pours*pourWeeks(hoods)/CARTO_WEEKS);
+    return Math.max(1, keep, pour);
+  }
   function clustersNow(){
     var a=assumptions();
-    return Math.max(1, Math.ceil(a.hoods/Math.max(1,+el('cluster').value)));
-  }
-  function capacityNow(){
-    var a=assumptions();
-    return Math.floor(clustersNow()*CARTO_WEEKS/pourWeeks(a.hoods));
+    return cartographers(a.hoods, a.pours, +el('cluster').value);
   }
 
   // The leverage, drawn: revenue rises with neighborhoods while the roster does
   // not. Pours are taken at what the operators can actually author.
   function netAt(n, ctx){
-    var w=pourWeeks(n);
-    var cap=Math.floor(Math.max(1,Math.ceil(n/ctx.cluster))*CARTO_WEEKS/w);
-    var poursRev=ctx.pourIsRevenue?Math.min(ctx.pours,cap)*tierVal:0;
+    var poursRev=ctx.pourIsRevenue?ctx.pours*tierVal:0;
     var annual=ctx.pourIsRevenue?n*tierVal*ANNUAL:0;
     var delivery=n*ctx.rests*ctx.perrest*CARY_TAKE*12;
     var rails=(n*ctx.rests*ctx.perrest+n*ctx.localflow)*PLATFORM_FEE*12;
@@ -239,9 +236,7 @@
     // ⛔ Under absorption with internally-funded pours, the institution is paying
     // itself: that is a transfer, not income, and counting it inflates the unit.
     var pourIsRevenue=(topo!=='inst');   // a pour an institution absorbs is a cost, and only a cost
-    // ⛔ Only pours that can actually be authored are earned. The capacity line
-    // says when the dial is over; the reading must not bill what it warns about.
-    var poursDone=Math.min(a.pours, capacityNow());
+    var poursDone=a.pours;
     var commissionAll=poursDone*(+el('commission').value);
     var cost=sal+loading+setup+retainerAll+commissionAll+takeAll;
     // ⭐ Support is charged on every neighborhood standing, not on this year's
@@ -287,18 +282,6 @@
     el('take-row').style.display=takeCount>0?'':'none';
     el('o-sal').textContent=K(sal); el('o-load').textContent=K(loading); el('o-setup').textContent=K(setup);
     el('o-pours').textContent=K(poursRev); el('o-ann').textContent=K(annual);
-    // ⭐ THE ONE COUNTERINTUITIVE COUPLING ON THE PAGE, SAID WHERE IT LANDS.
-    // Unchecking a PERSON collapses a REVENUE line, because a pour has to be
-    // authored by somebody — and with nothing on the row to say so it reads as
-    // the page malfunctioning (Jacob, 2026-09-12: "I also misunderstood what I
-    // was looking at").
-    var capRow=document.getElementById('pours-cap-row'),
-        capTxt=document.getElementById('pours-cap');
-    if(capRow&&capTxt){
-      capRow.style.display = (poursDone < a.pours) ? '' : 'none';
-      capTxt.textContent = poursDone+' of '+a.pours+' \u2014 all '+clusters+
-        ' cartographer'+(clusters===1?'':'s')+' can pour in a year';
-    }
     var pl=document.getElementById('pours-label');
     if(pl) pl.innerHTML=(TOPO[topo].poursLabel||'Pours').replace(' / yr','');
     ['tier-row','annual-row','pours-row','ann-row'].forEach(function(id){
@@ -497,10 +480,7 @@
     el('rests-v').textContent=a.rests;
     el('perrest-v').textContent=K(a.perrest);
     el('localflow-v').textContent=K(a.localflow);
-    var cap=capacityNow();
-    el('pours-v').innerHTML = a.pours>cap
-      ? a.pours+' <b class="over">&middot; over the ceiling of '+cap+'</b>'
-      : a.pours+' <span class="ceil">&middot; ceiling '+cap+'</span>';
+    el('pours-v').textContent = a.pours;
 
     var deliveryPerHood=a.rests*a.perrest;
     var p1=deliveryPerHood*PLATFORM_FEE*12*a.hoods;
