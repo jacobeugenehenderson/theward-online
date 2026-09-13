@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="../../css/tokens.css?v=7ce1d022c15e">
-<link rel="stylesheet" href="../../css/site.css?v=b67cd614b883">
+<link rel="stylesheet" href="../../css/site.css?v=336a28409e8c">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 
 <!-- ⛔ THIS PAGE DECLARES NO CSS OF ITS OWN AND CARRIES NO PLACEMENT
@@ -135,14 +135,6 @@
       <p class="note" id="proc-note">Stripe and Square publish <b>2.9% + 30¢</b> for online payments. Adyen publishes <b>$0.13 + interchange + scheme fees + 0.60%</b> — the modeled figure adds typical US card-not-present interchange and scheme fees to that markup. The institutional rate is a scenario, not a quote.</p>
     </div>
 
-    <div class="dial" id="spread-row" hidden>
-      <div class="dial-head"><span class="dial-label"><span>The in-house saving</span></span><span class="dial-val" id="spread-v">$2.11</span></div>
-      <div class="seg" id="spreadsel" role="group" aria-label="Where the in-house saving goes">
-        <button type="button" data-v="pass" aria-pressed="true">To the customer</button>
-        <button type="button" data-v="keep">To the Ward</button>
-      </div>
-    </div>
-
 
     <div class="dial">
       <div class="dial-head"><label class="dial-label" for="keep"><span>Fee the restaurant pays</span></label><span class="dial-val" id="keep-v">5% &middot; $2.75</span></div>
@@ -156,7 +148,6 @@
         <div class="sb-seg sb-proc" id="sb-proc"></div>
         <div class="sb-seg sb-cour" id="sb-cour"></div>
         <div class="sb-seg sb-ward" id="sb-ward"></div>
-        <div class="sb-seg sb-spread" id="sb-spread"></div>
         <div class="sb-grip" id="grip-cour" role="slider" tabindex="0"
              aria-label="Courier&rsquo;s share of the service charge" aria-valuemin="50" aria-valuemax="90" aria-valuenow="75"></div>
       </div>
@@ -192,7 +183,6 @@
       <div class="line"><dt>Sales tax</dt><dd id="o-tax">—</dd></div>
       <div class="line"><dt>Service charge</dt><dd id="o-svc">—</dd></div>
       <div class="line"><dt>Processing</dt><dd id="o-proc">—</dd></div>
-      <div class="line" id="platfee-row"><dt>Platform fee</dt><dd id="o-platfee">—</dd></div>
       <div class="line" id="tip-row"><dt>Tip</dt><dd id="o-tip">—</dd></div>
       <div class="line tot"><dt>Total</dt><dd id="o-total">—</dd></div>
     </dl>
@@ -272,6 +262,6 @@
 </footer>
 
 <script src="../../js/site.js?v=0f3be1550239"></script>
-<script src="../../js/split.js?v=b29b13b3e741"></script>
+<script src="../../js/split.js?v=5f2843c7f5c0"></script>
 </body>
 </html>

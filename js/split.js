@@ -25,7 +25,7 @@
     var W=560,H=300,TOP=26,BOT=14,LW=104,RW=104,H0=H-TOP-BOT;
     var k=H0/d.total, GAP=3;
 
-    var left=[['Food',d.sub],['Tax',d.tax],['Service charge',d.svc],['Processing',d.proc],['Platform fee',d.procSpread||0]];
+    var left=[['Food',d.sub],['Tax',d.tax],['Service charge',d.svc],['Processing',d.proc]];
     if(d.tip>0) left.push(['Tip',d.tip]);
     left=left.filter(function(x){return x[1]>0;});
     var right=[['Business',d.business,HUE.business],['Courier',d.courier,HUE.courier],
@@ -48,8 +48,7 @@
       ['Tax','Business',d.tax],
       ['Service charge','Courier',Math.round(d.svc*d.courR)],
       ['Service charge','The Ward',svcToPool],
-      ['Processing','Processor',d.proc],
-      ['Platform fee','The Ward',d.procSpread||0]
+      ['Processing','Processor',d.proc]
     ];
     if(d.tip>0) flows.push(['Tip','Courier',d.tip]);
 
@@ -124,7 +123,7 @@
   // charge the customer less, or charge the same and keep it — NAMED as the
   // Ward's, never left sitting in a line labelled "processing".
   var INHOUSE={r:25,f:10};
-  var owner='indep', spread='pass';
+  var owner='indep';
   function drawVs(sub, ourRate){
     var svg=$('vs'); if(!svg) return;
     var rows=[['The Ward',ourRate,true]].concat(RIVALS.map(function(r){return [r[0],r[1],false];}));
@@ -150,18 +149,17 @@
 
   // The bar IS the money: segment widths are dollars, so the grips sit where
   // the divisions actually fall rather than where a ratio would put them.
-  function drawSplit(proc, procSpread, svc, commission, courierCut, ward){
+  function drawSplit(proc, svc, commission, courierCut, ward){
     // ⛔ Processing is IN the bar and leaves it first. It is money Cary
     // collects and does not keep — a reader who cannot see it leave assumes
     // it was kept, which is the exact accusation the pass-through rule exists
     // to answer. It is fixed, not draggable: it is a published rate.
-    var pot=proc+procSpread+svc+commission; if(!pot) pot=1;
+    var pot=proc+svc+commission; if(!pot) pot=1;
     var f0=proc/pot, f1=f0+courierCut/pot, f2=f1+ward/pot;
     $('pot-v').textContent=M(pot);
     $('sb-proc').style.width=(f0*100).toFixed(2)+'%';
     $('sb-cour').style.width=((f1-f0)*100).toFixed(2)+'%';
     $('sb-ward').style.width=((f2-f1)*100).toFixed(2)+'%';
-    $('sb-spread').style.width=((1-f2)*100).toFixed(2)+'%';
     $('grip-cour').style.left=(f1*100).toFixed(2)+'%';
     $('grip-cour').setAttribute('aria-valuenow', Math.round(COUR*100));
     $('grip-cour').setAttribute('aria-valuetext', Math.round(COUR*100)+'% of the service charge, '+M(courierCut));
@@ -169,7 +167,7 @@
       '<div class="k-proc"><b>'+M(proc)+'</b>Processor <span>· at cost, straight out</span></div>'+
       '<div class="k-cour"><b>'+M(courierCut)+'</b>Courier <span>· '+Math.round(COUR*100)+'% of the service charge</span></div>'+
       '<div class="k-ward"><b>'+M(ward)+'</b>The Ward <span>· pays the neighborhood’s Local Host</span></div>'+
-      (procSpread>0?'<div class="k-spread"><b>'+M(procSpread)+'</b>The Ward <span>· the in-house saving</span></div>':'');
+      '';
   }
 
   function calc(){
@@ -182,36 +180,36 @@
 
     var tax=Math.round(sub*taxR);
     var svc=Math.round(sub*svcR);
-    // what the customer is CHARGED, and what is actually PAID out — equal
-    // everywhere except an owner keeping its own saving.
-    var chargeRate=PROC, payRate=PROC;
-    if(owner==='inst'){ payRate=INHOUSE; if(spread==='pass') chargeRate=INHOUSE; }
+    // ⛔ THE PAGE OFFERED SOMETHING THE PRODUCT DOES NOT DO. A second control asked
+    // where the difference between the market rate and an in-house rate should go —
+    // to the customer, or kept. Keeping it means charging the customer Stripe's rate,
+    // paying $0.28 and pocketing $2.11, and we do not do that (Jacob, 2026-09-13:
+    // "we just don't do that"). It was never two destinations; it was one behaviour
+    // and one fiction. ⭐ ONE RATE, CHARGED AND PAID: a cheaper rail makes a cheaper
+    // order, and that is the only version that can sit in the same document as
+    // "processing is passed through at cost".
+    var rate = owner==='inst' ? INHOUSE : PROC;
     var basis=sub+tax+svc;
-    var atMarket = sub>0?Math.round(basis*(PROC.r/10000))+PROC.f:0;
-    var inHouse  = sub>0?Math.round(basis*(INHOUSE.r/10000))+INHOUSE.f:0;
-    $('spread-v').textContent=M(Math.max(0, atMarket-inHouse));
-    var proc    = sub>0?Math.round(basis*(chargeRate.r/10000))+chargeRate.f:0;
-    var procPaid= sub>0?Math.round(basis*(payRate.r/10000))+payRate.f:0;
-    var procSpread=proc-procPaid;
+    var procPaid= sub>0?Math.round(basis*(rate.r/10000))+rate.f:0;
     var vol=+$('vol').value;
-    var total=sub+tax+svc+proc+tip;
+    var total=sub+tax+svc+procPaid+tip;
 
     var commission=Math.round(sub*(1-keepR));
     var business=sub-commission+tax;
     var courier=Math.round(svc*courR)+tip;
     var pool=(svc-Math.round(svc*courR))+commission;
-    var ward=pool+procSpread;
+    var ward=pool;
 
     $('sub-v').textContent='$'+(sub/100).toFixed(0);
     $('tax-v').textContent=(+$('tax').value/1000).toFixed(3).replace(/0+$/,'').replace(/\.$/,'')+'%';
     $('svc-v').textContent=$('svc').value+'%';
     $('tip-v').textContent='$'+$('tip').value;
     $('markup-v').textContent=$('markup').value+'%';
-    $('proc-v').textContent=(chargeRate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+chargeRate.f+'¢';
+    $('proc-v').textContent=(rate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+rate.f+'¢';
     $('vol-v').textContent=vol;
     $('keep-v').textContent=(+$('keep').value)+'% · '+M(commission);
     $('rule-comm').textContent=(+$('keep').value)+'%';
-    drawSplit(procPaid, procSpread, svc, commission, courier-tip, ward-procSpread);
+    drawSplit(procPaid, svc, commission, courier-tip, ward);
 
 
     $('o-food').textContent=M(sub);
@@ -219,12 +217,7 @@
     $('o-svc').textContent=M(svc);
     // ⛔ §8.5 OF THE LICENCE: an amount represented to the customer as
     // reimbursement of processing cost may not exceed the processing cost. An
-    // owner that processes in-house and keeps the difference may keep it — it
-    // just may not be called processing. So the customer's bill shows the real
-    // processing charge and the retained spread as the platform's own fee.
     $('o-proc').textContent=M(procPaid);
-    $('o-platfee').textContent=M(procSpread);
-    $('platfee-row').style.display=procSpread>0?'':'none';
     $('o-tip').textContent=M(tip);
     $('tip-row').style.display=tip>0?'':'none';
     $('o-total').textContent=M(total);
@@ -239,7 +232,7 @@
 
     var parts=[['s-rest','Business',business],['s-cour','Courier',courier],
                ['s-plat','The Ward',ward],['s-proc','Processor',procPaid]];
-    drawFlow({ sub:sub, tax:tax, svc:svc, proc:procPaid, procSpread:procSpread, tip:tip, total:total,
+    drawFlow({ sub:sub, tax:tax, svc:svc, proc:procPaid, tip:tip, total:total,
                commission:commission, business:business, courier:courier,
                ward:ward, courR:courR });
     $('legend').innerHTML=parts.map(function(x){
@@ -284,11 +277,10 @@
   function bases(){
     var sub=+$('sub').value*100, tax=Math.round(sub*(+$('tax').value/100000)),
         svc=Math.round(sub*(+$('svc').value/100));
-    var pay=(owner==='inst')?INHOUSE:PROC, chg=(owner==='inst'&&spread==='keep')?PROC:pay;
-    var proc    =sub>0?Math.round((sub+tax+svc)*(pay.r/10000))+pay.f:0;
-    var charged =sub>0?Math.round((sub+tax+svc)*(chg.r/10000))+chg.f:0;
+    var rate=(owner==='inst')?INHOUSE:PROC;
+    var proc    =sub>0?Math.round((sub+tax+svc)*(rate.r/10000))+rate.f:0;
     var commission=Math.round(sub*(+$('keep').value/100));
-    return { proc:proc, svc:svc, commission:commission, pot:charged+svc+commission };
+    return { proc:proc, svc:svc, commission:commission, pot:proc+svc+commission };
   }
   function clamp(v,lo,hi){ return v<lo?lo:(v>hi?hi:v); }
   function gripTo(which, frac){
@@ -334,16 +326,14 @@
   pickOne('ownersel', function(v,b){
     owner=v;
     $('owner-v').textContent=b.textContent;
-    $('spread-row').hidden = owner!=='inst';
     // ⛔ An institution that owns the rails IS the acquirer, so there is no
     // processor to choose. Leaving Stripe lit while the rate read 0.25% + 10¢
     // showed a selection the arithmetic was ignoring.
     $('procsel').hidden = owner==='inst';
     $('proc-note').innerHTML = owner==='inst'
-      ? 'Processed in-house at a <b>scenario rate, not a quote</b> — an acquirer that is also the issuer internalises interchange, and no published figure covers that.'
+      ? 'Processed in-house at a <b>scenario rate, not a quote</b> — an acquirer that is also the issuer internalises interchange, and no published figure covers that. <b>The Ward is a team inside that institution here</b>, so the cheaper rail and the Ward’s share land in the same pocket.'
       : 'Stripe and Square publish <b>2.9% + 30¢</b> for online payments. Adyen publishes <b>$0.13 + interchange + scheme fees + 0.60%</b> — the modeled figure adds typical US card-not-present interchange and scheme fees to that markup. The institutional rate is a scenario, not a quote.';
   });
-  pickOne('spreadsel', function(v,b){ spread=v; });
 
   // ⭐ The Ask hands the shape over in the URL, so the two pages agree about
   // who owns the rails instead of each asking separately.
