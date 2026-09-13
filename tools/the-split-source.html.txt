@@ -232,15 +232,15 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
       <p>Matching the counter price is one of the rules of selling here.</p>
     </div>
     <div class="rule">
-      <h4>Tips are the courier's, entire</h4>
-      <p>Not split, not matched against a wage floor, not counted toward anyone else's share.</p>
+      <h4>Tips are the courier&rsquo;s, entire</h4>
+      <p>Not split, matched against a wage floor, or counted toward anyone else&rsquo;s share.</p>
     </div>
     <div class="rule">
       <h4>Processing is a pass-through</h4>
       <p>What is charged must be what is paid.</p>
     </div>
     <div class="rule">
-      <h4>The Local Host is paid from the platform's own share</h4>
+      <h4>The Local Host is paid from the platform&rsquo;s own share</h4>
       <p>A division of what the platform already collects.</p>
     </div>
   </div>
