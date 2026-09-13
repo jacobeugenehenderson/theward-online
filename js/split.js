@@ -224,6 +224,13 @@
     $('proc-v').textContent=(rate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+rate.f+'¢';
     $('keep-v').textContent=(+$('keep').value)+'% · '+M(commission);
     $('rule-comm').textContent=(+$('keep').value)+'%';
+    // ⭐ THE RULE THAT MAKES THE COMPARISON TRUE, and the only one that was not
+    //   written down. The page's customer-side claim wins by $6.96, of which $8.25 is
+    //   markup the incumbents carry and MINUS $3.25 is fees we carry — so the whole
+    //   advantage rests on OUR menu being unmarked, which is a commitment about us
+    //   rather than an assumption about them. It quotes the commission because that
+    //   is the reason it holds: at 5% there is little left to mark up for.
+    $('rule-comm2').textContent=(+$('keep').value)+'%';
     drawSplit(procPaid, svc, commission, courier-tip, ward);
 
 

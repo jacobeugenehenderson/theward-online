@@ -216,6 +216,10 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
   <h2>The rules</h2>
   <div class="rulegrid">
     <div class="rule">
+      <h4>Menu prices match in-store</h4>
+      <p>What a restaurant charges here is what it charges at the counter. <b>The comparison above only holds because of it</b> &mdash; the incumbents&rsquo; menus are marked up to survive their commission, and at <b id="rule-comm2">5%</b> there is little reason to do it here.</p>
+    </div>
+    <div class="rule">
       <h4>A fee, and a small one</h4>
       <p><b id="rule-comm">5%</b> of food. The business keeps the rest, and pays nothing to be listed.</p>
     </div>
@@ -461,6 +465,13 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     $('proc-v').textContent=(rate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+rate.f+'¢';
     $('keep-v').textContent=(+$('keep').value)+'% · '+M(commission);
     $('rule-comm').textContent=(+$('keep').value)+'%';
+    // ⭐ THE RULE THAT MAKES THE COMPARISON TRUE, and the only one that was not
+    //   written down. The page's customer-side claim wins by $6.96, of which $8.25 is
+    //   markup the incumbents carry and MINUS $3.25 is fees we carry — so the whole
+    //   advantage rests on OUR menu being unmarked, which is a commitment about us
+    //   rather than an assumption about them. It quotes the commission because that
+    //   is the reason it holds: at 5% there is little left to mark up for.
+    $('rule-comm2').textContent=(+$('keep').value)+'%';
     drawSplit(procPaid, svc, commission, courier-tip, ward);
 
 
