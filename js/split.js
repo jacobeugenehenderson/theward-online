@@ -268,6 +268,20 @@
     drawWhole({menu:sub, tax:tax, svc:svc, fee:procPaid, total:total},
               {business:business, courier:courier, ward:ward, proc:procPaid, total:total},
               {menu:sub, markup:iFood-sub, tax:iTax, svc:iFee, fee:INCUMBENT_DELIVERY, total:iTotal});
+    // ⭐ THE COMPARISON THAT LOOKS LIKE IT GOES THE OTHER WAY. Our named rate is
+    //   HIGHER than theirs — 22% against a capped 15% — and a reader has no reason to
+    //   distrust that until someone points at what each is charged ON. Theirs is the
+    //   smaller number because the thing it is applied to was made bigger, by them.
+    //   ⛔ Nothing new is computed here: sub, iFood and both rates are already on the
+    //   page, in the bars directly above. This says out loud the one step the reader
+    //   would otherwise have to take on their own, and it is wired so it cannot drift
+    //   from the figures it is describing.
+    var wr=$('w-rates');
+    if(wr) wr.innerHTML = sub>0
+      ? '<b>'+Math.round(svcR*100)+'% is charged on '+M(sub)+'.</b> Theirs is '+
+        Math.round(CAP*100)+'% charged on '+M(iFood)+'.'
+      : '';
+
     var vc=$('vs-cust');
     if(vc) vc.innerHTML = sub>0
       ? (function(){

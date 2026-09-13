@@ -83,6 +83,7 @@ header h1{font-size:clamp(34px,6vw,52px); font-weight:600; line-height:1.02; let
 .whole-tot{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; font-weight:600; font-size:17px}
 .whole-bar{height:34px; margin-top:7px}
 .whole-key{margin-top:20px}
+.w-rates{max-width:none; margin-top:14px}
 .c-food{background:var(--verdigris)} .c-mark{background:var(--amber)} .c-ward{background:var(--ink)} .c-tax{background:var(--ink-3)} .c-svc{background:var(--brick)} .c-proc{background:var(--rule)}
 .sb-key .k-food{border-color:var(--verdigris)} .sb-key .k-mark{border-color:var(--amber)} .sb-key .k-tax{border-color:var(--ink-3)} .sb-key .k-svc{border-color:var(--brick)} .sb-key .k-proc2{border-color:var(--rule)} .sb-key .k-ward{border-color:var(--ink)}
 .sb-key{display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:10px; margin-top:11px; font-size:12px}
@@ -144,6 +145,7 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
   <div class="whole-row"><span class="whole-lbl">The same order on an incumbent</span><span class="whole-tot" id="w3-tot">$83.06</span></div>
   <div class="splitbar whole-bar" id="w3"></div>
   <div class="sb-key whole-key" id="w-key"></div>
+  <p class="note w-rates" id="w-rates"></p>
 </section>
 
 <div class="sheet">
@@ -517,6 +519,20 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     drawWhole({menu:sub, tax:tax, svc:svc, fee:procPaid, total:total},
               {business:business, courier:courier, ward:ward, proc:procPaid, total:total},
               {menu:sub, markup:iFood-sub, tax:iTax, svc:iFee, fee:INCUMBENT_DELIVERY, total:iTotal});
+    // ⭐ THE COMPARISON THAT LOOKS LIKE IT GOES THE OTHER WAY. Our named rate is
+    //   HIGHER than theirs — 22% against a capped 15% — and a reader has no reason to
+    //   distrust that until someone points at what each is charged ON. Theirs is the
+    //   smaller number because the thing it is applied to was made bigger, by them.
+    //   ⛔ Nothing new is computed here: sub, iFood and both rates are already on the
+    //   page, in the bars directly above. This says out loud the one step the reader
+    //   would otherwise have to take on their own, and it is wired so it cannot drift
+    //   from the figures it is describing.
+    var wr=$('w-rates');
+    if(wr) wr.innerHTML = sub>0
+      ? '<b>'+Math.round(svcR*100)+'% is charged on '+M(sub)+'.</b> Theirs is '+
+        Math.round(CAP*100)+'% charged on '+M(iFood)+'.'
+      : '';
+
     var vc=$('vs-cust');
     if(vc) vc.innerHTML = sub>0
       ? (function(){

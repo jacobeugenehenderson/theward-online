@@ -1645,6 +1645,7 @@ a { color: inherit; }
 .tool--split .whole-tot{font-family:var(--f-sys); font-variant-numeric:tabular-nums; font-weight:600; font-size:17px}
 .tool--split .whole-bar{height:34px; margin-top:7px}
 .tool--split .whole-key{margin-top:20px}
+.tool--split .w-rates{max-width:none; margin-top:14px}
 .tool--split .c-food{background:var(--cary-rule)} .tool--split .c-mark{background:var(--sign)} .tool--split .c-ward{background:var(--text)} .tool--split .c-tax{background:var(--text-faint)} .tool--split .c-svc{background:var(--cary-rule)} .tool--split .c-proc{background:var(--rule)}
 .tool--split .sb-key .k-food{border-color:var(--cary-rule)} .tool--split .sb-key .k-mark{border-color:var(--sign)} .tool--split .sb-key .k-tax{border-color:var(--text-faint)} .tool--split .sb-key .k-svc{border-color:var(--cary-rule)} .tool--split .sb-key .k-proc2{border-color:var(--rule)} .tool--split .sb-key .k-ward{border-color:var(--text)}
 .tool--split .sb-key{display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:10px; margin-top:11px; font-size:12px}
