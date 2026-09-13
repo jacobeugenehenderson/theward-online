@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="../../css/tokens.css?v=7ce1d022c15e">
-<link rel="stylesheet" href="../../css/site.css?v=5c706cd67958">
+<link rel="stylesheet" href="../../css/site.css?v=365f0e6bc2a8">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 
 <!-- ⛔ THIS PAGE DECLARES NO CSS OF ITS OWN AND CARRIES NO PLACEMENT
@@ -186,9 +186,18 @@
     <dl>
       <div class="line tot mt-1"><dt>Paid-external tender</dt><dd id="p-pos">—</dd></div>
     </dl>
+    <h4 class="mini">What the customer pays</h4>
+    <div class="cmp">
+      <div class="cmp-row"><span class="cmp-lbl">Here</span><span class="cmp-tot" id="cmp-tot-here">$74.29</span></div>
+      <div class="splitbar cmp-bar" id="cmp-here"></div>
+      <div class="cmp-row"><span class="cmp-lbl">On an incumbent</span><span class="cmp-tot" id="cmp-tot-rival">$81.25</span></div>
+      <div class="splitbar cmp-bar" id="cmp-rival"></div>
+      <div class="sb-key" id="cmp-key"></div>
+    </div>
+
     <h4 class="mini">The same order elsewhere </h4>
     <figure class="figbox">
-      <svg id="vs" viewBox="0 0 620 230" role="img" aria-label="What the business pays on the same order, compared across delivery platforms, against the 15 percent regulatory cap" class="fig-svg"></svg>
+      <svg id="vs" viewBox="0 0 700 285" role="img" aria-label="What the business pays on the same order, compared across delivery platforms, against the 15 percent regulatory cap" class="fig-svg"></svg>
       <figcaption class="note fignote" id="vs-cust"></figcaption>
       <figcaption class="note fignote" id="vs-month"></figcaption>
       <figcaption class="note fignote">What the business pays on food + tax. The dashed line is the 15% cap, permanent in New York, San Francisco, Denver, Seattle and Washington DC.</figcaption>
@@ -251,6 +260,6 @@
 </footer>
 
 <script src="../../js/site.js?v=0f3be1550239"></script>
-<script src="../../js/split.js?v=799815a89cd0"></script>
+<script src="../../js/split.js?v=3540f4c4c341"></script>
 </body>
 </html>

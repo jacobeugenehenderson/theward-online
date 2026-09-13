@@ -72,7 +72,7 @@
     var lBars=left.map(function(b){
       var B=ly[b[0]];
       return '<rect x="'+(LW-9)+'" y="'+B.y.toFixed(1)+'" width="9" height="'+B.h.toFixed(1)+'" fill="currentColor" opacity="0.35"/>'+
-             '<text x="'+(LW-14)+'" y="'+(B.y+B.h/2+4).toFixed(1)+'" text-anchor="end" font-size="13.5" fill="currentColor">'+b[0]+'</text>'+
+             '<text x="'+(LW-14)+'" y="'+(B.y+B.h/2+4).toFixed(1)+'" text-anchor="end" font-size="15" fill="currentColor">'+b[0]+'</text>'+
              '<text x="'+(LW-14)+'" y="'+(B.y+B.h/2+16).toFixed(1)+'" text-anchor="end" font-size="10" fill="currentColor" opacity="0.55" >'+M(b[1])+'</text>';
     }).join('');
 
@@ -138,6 +138,25 @@
   // Ward's, never left sitting in a line labelled "processing".
   var INHOUSE={r:25,f:10};
   var owner='indep';
+  // ⭐ THE MARKUP IS A PICTURE, NOT A SENTENCE. Two bars to ONE scale: the food block
+  //   on the incumbent's bar is visibly bigger because the menu is marked up, and the
+  //   bar is longer because the customer pays more. Nothing to read — the difference
+  //   is the shape (Jacob, 2026-09-13: "split out the whole customer bar the way we
+  //   did with what cary collects").
+  function drawCustomer(here, rival){
+    var max = Math.max(here.total, rival.total) || 1;
+    var seg = function(cls, v){ return v>0 ? '<div class="sb-seg '+cls+'" style="width:'+(v/max*100).toFixed(2)+'%"></div>' : ''; };
+    $('cmp-here').innerHTML  = seg('c-food',here.food)+seg('c-tax',here.tax)+seg('c-svc',here.svc)+seg('c-proc',here.fee);
+    $('cmp-rival').innerHTML = seg('c-food',rival.food)+seg('c-tax',rival.tax)+seg('c-svc',rival.svc)+seg('c-proc',rival.fee);
+    $('cmp-tot-here').textContent  = M(here.total);
+    $('cmp-tot-rival').textContent = M(rival.total);
+    $('cmp-key').innerHTML =
+      '<div class="k-food"><b>'+M(here.food)+' · '+M(rival.food)+'</b>Menu <span>· marked up there</span></div>'+
+      '<div class="k-tax"><b>'+M(here.tax)+' · '+M(rival.tax)+'</b>Sales tax</div>'+
+      '<div class="k-svc"><b>'+M(here.svc)+' · '+M(rival.svc)+'</b>Service charge</div>'+
+      '<div class="k-proc2"><b>'+M(here.fee)+' · '+M(rival.fee)+'</b>Processing <span>· delivery fee there</span></div>';
+  }
+
   // ⭐ BOTH SIDES OF THE ORDER, IN ONE TABLE. This answered only what the BUSINESS
   //   keeps; the customer's half lived in a caption underneath. And the customer
   //   figure is the same on every incumbent row, which is not a simplification — a
@@ -147,28 +166,43 @@
   //   ⛔ The incumbent figure carries a 15% menu markup and ours carries none, which
   //   is the whole comparison, and is why "Menu prices match in-store" is the first
   //   rule on the page.
-  function drawVs(sub, ourRate, hereTotal, rivalTotal){
+  function drawVs(sub, ourRate, hereMenu, rivalMenu, hereTotal, rivalTotal){
     var svg=$('vs'); if(!svg) return;
     var rows=[['The Ward',ourRate,true]].concat(RIVALS.map(function(r){return [r[0],r[1],false];}));
-    var W=620,L=132,R=210,TOP=26,BH=21,GAP=9;
+    var W=700,L=150,R=370,TOP=50,BH=24,GAP=10;
     var maxR=0.35, plot=W-L-R;
     var x=function(v){ return L+(v/maxR)*plot; };
+    // \u2b50 THREE COLUMNS, LABELLED ONCE. Every row used to repeat "keeps" and
+    //   "customer", and the one fact that decides the whole comparison \u2014 that the
+    //   SAME DISH IS LISTED HIGHER THERE \u2014 was not in the table at all; it sat in a
+    //   caption underneath among two other fee figures. The menu price is now the
+    //   FIRST column, so the markup is the first thing read, and the headings carry
+    //   the words so the rows carry only money (Jacob, 2026-09-13: "still not clear
+    //   that restaurants jack up the prices, too many words which are also confusing").
+    //   \u26d4 The commission is gone from the row text because the BAR already is it.
+    var C1=W-270, C2=W-155, C3=W-6;
+    var head='<text x="'+C1+'" y="'+(TOP-13)+'" text-anchor="end" font-size="11" fill="currentColor" opacity="0.55" letter-spacing="0.6">MENU</text>'+
+             '<text x="'+C2+'" y="'+(TOP-13)+'" text-anchor="end" font-size="11" fill="currentColor" opacity="0.55" letter-spacing="0.6">BUSINESS KEEPS</text>'+
+             '<text x="'+C3+'" y="'+(TOP-13)+'" text-anchor="end" font-size="11" fill="currentColor" opacity="0.55" letter-spacing="0.6">CUSTOMER PAYS</text>';
 
     var bars=rows.map(function(r,i){
       var y=TOP+i*(BH+GAP);
       var w=Math.max(1,x(r[1])-L);
-      var kept=Math.round(sub*(1-r[1]));
+      var menu=r[2]?hereMenu:rivalMenu;
+      var kept=Math.round(menu*(1-r[1]));
       var pays=r[2]?hereTotal:rivalTotal;
+      var op=r[2]?'0.95':'0.7';
+      var cell=function(cx,v){ return '<text x="'+cx+'" y="'+(y+14)+'" text-anchor="end" font-size="14" fill="currentColor" opacity="'+op+'" >'+M(v)+'</text>'; };
       return '<rect x="'+L+'" y="'+y+'" width="'+w.toFixed(1)+'" height="'+BH+'" fill="'+(r[2]?'var(--cary-rule)':'var(--cary-rule)')+'" opacity="'+(r[2]?'1':'0.42')+'"/>'+
-             '<text x="'+(L-10)+'" y="'+(y+13)+'" text-anchor="end" font-size="11.5" fill="currentColor"'+(r[2]?' font-weight="600"':' opacity="0.75"')+'>'+r[0]+'</text>'+
-             '<text x="'+(W-6)+'" y="'+(y+13)+'" text-anchor="end" font-size="12.5" fill="currentColor" opacity="'+(r[2]?'0.95':'0.7')+'" >'+Math.round(r[1]*100)+'% · keeps '+M(kept)+' · customer '+M(pays)+'</text>';
+             '<text x="'+(L-10)+'" y="'+(y+14)+'" text-anchor="end" font-size="13.5" fill="currentColor"'+(r[2]?' font-weight="600"':' opacity="0.75"')+'>'+r[0]+'</text>'+
+             cell(C1,menu)+cell(C2,kept)+cell(C3,pays);
     }).join('');
 
     var capX=x(CAP), H=TOP+rows.length*(BH+GAP)+16;
     return svg.innerHTML=
-      '<line x1="'+capX.toFixed(1)+'" y1="'+(TOP-8)+'" x2="'+capX.toFixed(1)+'" y2="'+(H-14)+'" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3" opacity="0.65"/>'+
-      '<text x="'+(capX+5).toFixed(1)+'" y="'+(TOP-11)+'" font-size="11" fill="currentColor" opacity="0.65" letter-spacing="0.9">15% CAP</text>'+
-      bars;
+      '<line x1="'+capX.toFixed(1)+'" y1="'+(TOP-6)+'" x2="'+capX.toFixed(1)+'" y2="'+(H-14)+'" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3" opacity="0.65"/>'+
+      '<text x="'+(capX+5).toFixed(1)+'" y="'+(TOP-31)+'" font-size="12.5" fill="currentColor" opacity="0.65" letter-spacing="1">15% CAP</text>'+
+      head+bars;
   }
 
   // The bar IS the money: segment widths are dollars, so the divisions fall
@@ -285,11 +319,13 @@
     var iFee=Math.round(iFood*INCUMBENT_SERVICE);
     var iTax=Math.round(iFood*taxR);
     var iTotal=iFood+iFee+INCUMBENT_DELIVERY+iTax;
-    drawVs(sub, 1-keepR, total, iTotal);
+    drawVs(sub, 1-keepR, sub, iFood, total, iTotal);
+    drawCustomer({food:sub, tax:tax, svc:svc, fee:procPaid, total:total},
+                 {food:iFood, tax:iTax, svc:iFee, fee:INCUMBENT_DELIVERY, total:iTotal});
     var vc=$('vs-cust');
     if(vc) vc.innerHTML = sub>0
-      ? '<b>The customer pays '+M(total)+' here, about '+M(iTotal)+' on an incumbent.</b> '+
-        'The same food marked up '+Math.round(mk*100)+'% to '+M(iFood)+', a 15% service fee and a '+M(INCUMBENT_DELIVERY)+' delivery fee.'
+      ? '<b>The same dish is '+M(sub)+' here and '+M(iFood)+' there.</b> Restaurants raise delivery menus to survive a 15\u201330% commission; at '+
+        (+$('keep').value)+'% there is little reason to.'
       : '';
     // ⛔ THE MONTH IS NOT THIS PAGE'S TO ASSUME. "Orders / restaurant / month" was a
     //   dial set to 40, implying $2,200 of trade — while The Ask, which actually models
