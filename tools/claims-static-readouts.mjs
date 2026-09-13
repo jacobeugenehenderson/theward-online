@@ -50,8 +50,15 @@ for (const [pagePath, scriptPath] of PAGES) {
   // element a script touches. Any bare `<span id>` is a
   // candidate; the `if (!live) continue` below drops the ones
   // the script never writes to, so a span that is pure markup costs nothing.
-  for (const m of html.matchAll(/<span id="([^"]+)">([^<]*)<\/span>/g))
-    if (!(m[1] in statics)) statics[m[1]] = m[2]
+  for (const m of html.matchAll(/<(span|p|dt|b|em)[^>]*\sid="([^"]+)"[^>]*>([\s\S]*?)<\/\1>/g)) {
+    const id = m[2], body = m[3]
+    // \u2b50 EMPTY OR AN EM DASH IS A PLACEHOLDER, NOT A CLAIM. The reading panel is
+    // FILLED at runtime by design \u2014 nobody writes "$1,867k" into markup \u2014 so those
+    // are skipped. What is left is an element carrying REAL TEXT that the script
+    // also writes, which is a readout whether it sits in a span or a paragraph.
+    if (!(id in statics) && body.replace(/<[^>]+>/g,'').trim().replace(/\u2014/,'') !== '')
+      statics[id] = body
+  }
 
   const vals = {}
   for (const m of html.matchAll(/<input[^>]*>/g)) {
@@ -98,6 +105,14 @@ for (const [pagePath, scriptPath] of PAGES) {
 
   const norm = (x) => String(x).replace(/<[^>]+>/g, '').replace(/&middot;/g, '·')
                         .replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim()
+
+  // \u26d4 WHAT THIS CHECK CANNOT SEE, stated so its silence is not read as coverage.
+  // It compares markup against what the script writes ON LOAD. An element the script
+  // only writes on INTERACTION \u2014 #proc-note on The Split is written inside the
+  // owner-scenario click handler and never at load \u2014 has no live value to compare
+  // against, so it is skipped, not passed. Mutating that paragraph on 2026-09-13 was
+  // NOT caught, and the widening above did not close it. Those few are verified by
+  // hand; driving the scenario buttons and re-comparing would close it properly.
 
   for (const [id, source] of Object.entries(statics)) {
     const live = norm(byId[id]._t || byId[id]._h)

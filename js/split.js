@@ -332,7 +332,7 @@
     $('procsel').hidden = owner==='inst';
     $('proc-note').innerHTML = owner==='inst'
       ? 'Processed in-house at a <b>scenario rate, not a quote</b> — an acquirer that is also the issuer internalises interchange, and no published figure covers that. <b>The Ward is a team inside that institution here</b>, so the cheaper rail and the Ward’s share land in the same pocket.'
-      : 'Stripe and Square publish <b>2.9% + 30¢</b> for online payments. Adyen publishes <b>$0.13 + interchange + scheme fees + 0.60%</b> — the modeled figure adds typical US card-not-present interchange and scheme fees to that markup. The institutional rate is a scenario, not a quote.';
+      : 'Stripe and Square publish <b>2.9% + 30¢</b> for online payments. Adyen publishes <b>$0.13 + interchange + scheme fees + 0.60%</b> — the modeled figure adds typical US card-not-present interchange and scheme fees to that markup. ';
   });
 
   // ⭐ The Ask hands the shape over in the URL, so the two pages agree about

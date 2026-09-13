@@ -394,7 +394,7 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
     </dl>
     <h4>Earned by the studio</h4>
     <dl>
-      <div class="line" id="pours-row"><dt id="pours-label">Pours commissioned</dt><dd id="o-pours">—</dd></div>
+      <div class="line" id="pours-row"><dt id="pours-label">Neighborhoods poured</dt><dd id="o-pours">—</dd></div>
       <div class="line" id="ann-row"><dt id="ann-label">Support on the installed base</dt><dd id="o-ann">—</dd></div>
       <div class="line"><dt>The Ward&rsquo;s share of food orders</dt><dd id="o-del">—</dd></div>
       <div class="line"><dt>Fee on other local commerce</dt><dd id="o-rails">—</dd></div>
@@ -408,10 +408,10 @@ footer{margin-top:62px; padding-top:20px; border-top:1px solid var(--rule); font
     </dl>
     <h4 id="raise-head">What must be raised</h4>
     <dl>
-      <div class="line"><dt id="gap-label">Gap before sponsor fee</dt><dd id="o-gap">—</dd></div>
+      <div class="line"><dt id="gap-label">Cost, less what the unit earns</dt><dd id="o-gap">—</dd></div>
       <div class="line" id="spon-line"><dt>Fiscal sponsor fee</dt><dd id="o-spon">—</dd></div>
       <div class="line" id="under-line"><dt>Underwritten, per year</dt><dd id="o-under">—</dd></div>
-      <div class="line total"><dt id="ask-label">The ask</dt><dd id="o-ask">—</dd></div>
+      <div class="line total"><dt id="ask-label">The budget line</dt><dd id="o-ask">—</dd></div>
     </dl>
     <div class="sentence" id="sentence"></div>
     <div class="curve">
