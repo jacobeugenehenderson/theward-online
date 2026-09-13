@@ -6,6 +6,11 @@
 (function(){
   var $=function(i){return document.getElementById(i);};
   var M=function(c){ return '$'+(c/100).toFixed(2); };
+  // ⭐ A YEAR OF TRADE IS NOT AN ORDER. M() is built for one order — cents matter on
+  //   $74.29 and read as noise on $24000.00, which is how the monthly figures came
+  //   out once they were computed from a month of food rather than a count of orders.
+  //   Whole dollars, grouped, for anything at that scale.
+  var MB=function(c){ return '$'+Math.round(c/100).toLocaleString('en-US'); };
 
   // ◆ Published 2026 rates, for comparison only.
   var RIVALS=[
@@ -112,6 +117,15 @@
   var CAP=0.15;   // NYC · SF · Denver · Seattle · DC
   // ◆ Published consumer-side fees on the major platforms, 2026.
   var INCUMBENT_SERVICE=0.15, INCUMBENT_DELIVERY=299;
+  // ○ THE ONE FIGURE ON THIS PAGE NOBODY PUBLISHES — a restaurant raising its menu
+  //   prices to survive a 30% commission. It was a DIAL, which invited the reader to
+  //   tune the number that decides the customer comparison, and that is the opposite
+  //   of how every other incumbent figure here is handled: sourced, fixed, stated.
+  //   Widely documented, so it stays; a slider, so it went (Jacob, 2026-09-13, third
+  //   time of asking: "these controls don't do anything useful").
+  var INCUMBENT_MARKUP=0.15;
+  // ◆ The Ask's food-per-restaurant-per-month, in cents. Shared, and checked.
+  var MONTHLY=800000;
   var PROC={r:290,f:30};
   // ⭐ A payments institution that owns the rails is its own acquirer, so the
   // processing line stops being a cost paid out and becomes a rate paid to
@@ -192,7 +206,6 @@
     var rate = owner==='inst' ? INHOUSE : PROC;
     var basis=sub+tax+svc;
     var procPaid= sub>0?Math.round(basis*(rate.r/10000))+rate.f:0;
-    var vol=+$('vol').value;
     var total=sub+tax+svc+procPaid+tip;
 
     var commission=Math.round(sub*(1-keepR));
@@ -208,9 +221,7 @@
     //   COUR rather than typed — it used to live in the bar's key and vanished with it.
     $('cour-note').innerHTML='The courier is paid <b>'+Math.round(COUR*100)+'%</b> of it.';
     $('tip-v').textContent='$'+$('tip').value;
-    $('markup-v').textContent=$('markup').value+'%';
     $('proc-v').textContent=(rate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+rate.f+'¢';
-    $('vol-v').textContent=vol;
     $('keep-v').textContent=(+$('keep').value)+'% · '+M(commission);
     $('rule-comm').textContent=(+$('keep').value)+'%';
     drawSplit(procPaid, svc, commission, courier-tip, ward);
@@ -249,9 +260,11 @@
     // pays; a reader's next question is always what THEY pay. The incumbents'
     // damage on that side is mostly menu markup — a restaurant raising prices
     // to survive a 30% commission has no reason to do it here.
-    // ⛔ Service and delivery fees are published; the markup is the dial,
-    // because it is the one number nobody publishes.
-    var mk=+$('markup').value/100;
+    // ⛔ Service and delivery fees are published; the markup is not, and was a DIAL
+    // until 2026-09-13 for exactly that reason — which had it backwards. The one
+    // figure nobody publishes is the last one a reader should be invited to tune,
+    // because tuning it moves the comparison this page exists to make.
+    var mk=INCUMBENT_MARKUP;
     var iFood=Math.round(sub*(1+mk));
     var iFee=Math.round(iFood*INCUMBENT_SERVICE);
     var iTax=Math.round(iFood*taxR);
@@ -261,20 +274,24 @@
       ? '<b>The customer pays '+M(total)+' here, about '+M(iTotal)+' on an incumbent.</b> '+
         'The same food marked up '+Math.round(mk*100)+'% to '+M(iFood)+', a 15% service fee and a '+M(INCUMBENT_DELIVERY)+' delivery fee.'
       : '';
+    // ⛔ THE MONTH IS NOT THIS PAGE'S TO ASSUME. "Orders / restaurant / month" was a
+    //   dial set to 40, implying $2,200 of trade — while The Ask, which actually models
+    //   volume, assumes $8,000. The same restaurant, 3.6x apart, and this page was
+    //   underselling its own best sentence by that factor. The monthly figure now comes
+    //   from The Ask's number, so the two cannot disagree, and it is held to that by
+    //   tools/claims-pages-agree.mjs rather than by anyone remembering.
+    //   ⭐ Computed in DOLLARS of trade, not rounded per order and multiplied.
     var vm=$('vs-month');
     if(vm){
-      if(!vol){ vm.innerHTML=''; }
-      else {
-        var lo=Math.round(sub*RIVALS[0][1])*vol, hi=Math.round(sub*RIVALS[RIVALS.length-1][1])*vol;
-        var ours=commission*vol;
-        vm.innerHTML='<b>At '+vol+' orders a month</b>, the business pays '+M(ours)+' in fees here. The same orders cost '+
-          M(lo)+' to '+M(hi)+' on the platforms above — <b>'+M(lo-ours)+' to '+M(hi-ours)+' a month kept, '+
-          M((lo-ours)*12)+' to '+M((hi-ours)*12)+' a year.</b>';
-      }
+      var lo=Math.round(MONTHLY*RIVALS[0][1]), hi=Math.round(MONTHLY*RIVALS[RIVALS.length-1][1]);
+      var ours=Math.round(MONTHLY*(+$('keep').value/100));
+      vm.innerHTML='<b>At '+MB(MONTHLY)+' of food a month</b>, the business pays '+MB(ours)+' in fees here. The same trade costs '+
+        MB(lo)+' to '+MB(hi)+' on the platforms above — <b>'+MB(lo-ours)+' to '+MB(hi-ours)+' a month kept, '+
+        MB((lo-ours)*12)+' to '+MB((hi-ours)*12)+' a year.</b>';
     }
   }
 
-  ['sub','tax','svc','tip','vol','keep','markup'].forEach(function(id){ $(id).addEventListener('input',calc); });
+  ['sub','tax','svc','tip','keep'].forEach(function(id){ $(id).addEventListener('input',calc); });
 
   // ⛔ NO GRIP. The bar had a drag handle on the courier/Ward division, and there
   //   is nothing to experiment with: the payouts are CALCULATED from the stated

@@ -38,6 +38,15 @@ const TERMS = [
   { name: 'service charge, on food',
     ask:   slider(askHtml,   'svc',  'service charge on The Ask'),
     split: slider(splitHtml, 'svc',  'service charge on The Split') },
+  { name: 'food through Cary, per restaurant per month',
+    // \u26d4 THE SAME RESTAURANT, AND THEY WERE 3.6x APART. The Split assumed 40 orders
+    // a month at $55 \u2014 $2,200 of trade \u2014 while The Ask, which actually models volume,
+    // assumed $8,000. The Split was underselling its own best sentence by that factor.
+    // The Ask's slider is in dollars; The Split holds it in cents.
+    ask:   slider(askHtml, 'perrest', 'food per restaurant on The Ask'),
+    split: (() => { const m = /var MONTHLY=(\d+)/.exec(splitJs)
+                    if (!m) { console.log('\u2718 cannot find MONTHLY in split.js \u2014 the extractor is stale, not the pages'); process.exitCode = 1; return null }
+                    return Number(m[1]) / 100 })() },
   { name: 'commission the restaurant pays',
     ask:   slider(askHtml,   'comm', 'commission on The Ask'),
     split: slider(splitHtml, 'keep', 'fee the restaurant pays on The Split') },
