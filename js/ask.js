@@ -22,8 +22,8 @@
 
     {id:'jh',band:'Studio & mission',name:'Jacob Henderson — principal &amp; creative director',owns:'Direction, the look, the doctrine',pay:110000,
      why:'Owner of the studio, creative director of the nonprofit. Currently zero.',modes:['custodial','product']},
-    {id:'host',band:'Studio & mission',name:'Network operations &amp; trust',owns:'Stands Local Hosts up &middot; \u00a714 intervention &middot; the public line',pay:60000,
-     why:'Brings a ward live, stands its Local Host up, and stays the escalation. Ordinary local moderation is the Local Host\u2019s under \u00a73.3; this seat is \u00a714 \u2014 harm, fraud, abuse, and a Local Host that stops moderating. \u26d4 The Section 230 posture rests on it.',modes:['custodial','product']},
+    {id:'host',band:'Studio & mission',name:'Network operations &amp; trust',owns:'Brings wards live &middot; the public line',pay:60000,
+     why:'Stands each Local Host up, and steps in when something goes wrong.',modes:['custodial','product']},
     {id:'ed',band:'Studio & mission',name:'Founding executive director',owns:'The raise, governance, the sponsor',pay:80000,
      why:'Works the grant cycle. Nothing gets funded until this seat is filled.',modes:['custodial','product']},
     {id:'grants',band:'Studio & mission',name:'Grants associate',owns:'The second raiser',pay:62000,
