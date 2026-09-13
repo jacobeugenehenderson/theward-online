@@ -12,6 +12,7 @@
  *
  * Source format, deliberately small:
  *   # title          the document title
+ *   >> line          the kicker above the title
  *   > line           the standing notice under it
  *   ## N. HEADING    a numbered section (also the contents list)
  *   ### N.N Heading  a subsection
@@ -34,7 +35,7 @@ const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, 
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
 const lines = readFileSync(SRC, 'utf8').split('\n')
-let title = '', notice = ''
+let title = '', kicker = '', notice = ''
 const sections = []          // { n, label, id, blocks }
 // the paragraphs before the first `##` are the preamble, so a section is open
 // from the start rather than created by the first heading
@@ -52,6 +53,8 @@ for (const raw of lines) {
   if (!line) { closeRuns(); continue }
 
   if (line.startsWith('# '))  { title = line.slice(2); continue }
+  // ⛔ `>>` before `>`: the single-caret test matches both otherwise.
+  if (line.startsWith('>> ')) { kicker = line.slice(3); continue }
   if (line.startsWith('> '))  { notice = line.slice(2); continue }
 
   if (line.startsWith('## ')) {
@@ -151,9 +154,9 @@ const page = `<!doctype html>
 <main class="shell lic" id="main">
 
   <section class="sec pro-head">
-    <p class="pro-kicker">Working draft &mdash; for research and due diligence</p>
+    <p class="pro-kicker">${esc(kicker)}</p>
     <h1>Platform License Agreement</h1>
-    <p class="lede">${esc(notice)}. Nothing here is executed, offered, or in force. Terms, numbers, and structure are subject to change and to legal review.</p>
+    <p class="lede">${esc(notice)}</p>
   </section>
 
   <section class="sec">

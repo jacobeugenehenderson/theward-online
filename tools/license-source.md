@@ -1,5 +1,6 @@
 # THE WARD PLATFORM LICENSE AGREEMENT
-> Draft for discussion and legal review
+>> Working draft for research and due diligence.
+> This document describes the proposed licensing and operating structure for a Ward. It is provided for evaluation and remains subject to legal review and revision before use with a Host.
 
 This Platform License Agreement (the “Agreement”) is entered into as of the Effective Date stated in the applicable Ward Schedule by and between the owner and operator of The Ward identified in that Ward Schedule (“The Ward”) and the person or entity identified as the Host (“Host”).
 
