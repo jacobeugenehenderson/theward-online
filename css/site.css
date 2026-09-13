@@ -1552,11 +1552,23 @@ a { color: inherit; }
 }
 
 
+/* ── The two claims about places beyond the first instance ─────────────────
+   ⭐ Side by side rather than stacked: at the end of a long prospectus, two
+   short blocks in a column read as trailing items. As a pair they read as one
+   answer to "where else does this go".
+   ⚠️ The columns are EQUAL WIDTH but not equal weight — the left is work
+   underway, the right is inventory held. The words carry that distinction; the
+   layout deliberately does not try to. */
+.beyond{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--s4) var(--s5); align-items:start}
+@media (max-width:760px){ .beyond{grid-template-columns:minmax(0,1fr); gap:var(--s5)} }
+.beyond-col > h2{font-family:var(--f-sys); font-weight:700; font-size:clamp(1.15rem,2.4vw,1.5rem); letter-spacing:-0.01em; margin:0 0 var(--s2)}
+.beyond-col > p{margin:0; max-width:46ch}
+
 /* ── The deployment inventory on /works ────────────────────────────────────
    ⭐ Folded by default. Forty names is a wall of text that says one thing, and
    the one thing is already in the sentence above it; the list is there to be
    COUNTED by a reader who wants to check, not read by one who does not. */
-.domains{max-width:var(--measure); margin-top:var(--s3)}
+.domains{margin-top:var(--s3)}
 .domains > summary{
   cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:var(--s1);
   font-family:var(--f-sys); font-size:0.78rem; font-weight:700;
@@ -1568,7 +1580,7 @@ a { color: inherit; }
 .domains[open] > summary::after{content:"\25B4"}
 .domains > summary:focus-visible{outline:2px solid var(--live); outline-offset:3px}
 .dom-list{
-  columns:3 11rem; column-gap:var(--s4); margin:var(--s2) 0 0; padding:0;
+  columns:2 9rem; column-gap:var(--s4); margin:var(--s2) 0 0; padding:0;
   list-style:none; font-family:var(--f-sys); font-size:0.86rem;
 }
 .dom-list li{break-inside:avoid; padding:2px 0; color:var(--text)}
