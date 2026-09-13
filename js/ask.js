@@ -295,7 +295,7 @@
     var capRow=document.getElementById('pours-cap-row'),
         capTxt=document.getElementById('pours-cap');
     if(capRow&&capTxt){
-      capRow.style.display = (pourIsRevenue && poursDone < a.pours) ? '' : 'none';
+      capRow.style.display = (poursDone < a.pours) ? '' : 'none';
       capTxt.textContent = poursDone+' of '+a.pours+' \u2014 all '+clusters+
         ' cartographer'+(clusters===1?'':'s')+' can pour in a year';
     }
