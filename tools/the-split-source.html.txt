@@ -143,6 +143,7 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     <div class="dial">
       <div class="dial-head"><label class="dial-label" for="svc"><span>Service charge</span></label><span class="dial-val" id="svc-v">22%</span></div>
       <input type="range" id="svc" min="0" max="40" step="1" value="22">
+      <p class="note" id="cour-note">The courier is paid <b>75%</b> of it.</p>
     </div>
 
     <h3 style="margin-top:30px">How it divides</h3>
@@ -530,6 +531,11 @@ footer{margin-top:54px; padding-top:18px; border-top:1px solid var(--rule); font
     $('sub-v').textContent='$'+(sub/100).toFixed(0);
     $('tax-v').textContent=(+$('tax').value/1000).toFixed(3).replace(/0+$/,'').replace(/\.$/,'')+'%';
     $('svc-v').textContent=$('svc').value+'%';
+    // ⭐ WRITTEN FROM COUR, NOT TYPED. It is the only place the courier's share is
+    //   stated on this page, and it is injected from the constant the arithmetic uses,
+    //   so the sentence and the bar cannot disagree. Kept on that condition (Jacob,
+    //   2026-09-13: "we can leave it if it's connected to the knobs").
+    $('cour-note').innerHTML='The courier is paid <b>'+Math.round(COUR*100)+'%</b> of it.';
     $('proc-v').textContent=(rate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+rate.f+'¢';
     $('keep-v').textContent=(+$('keep').value)+'% · '+M(commission);
     drawSplit(procPaid, svc, commission, courier, ward);

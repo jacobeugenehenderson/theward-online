@@ -279,6 +279,11 @@
     $('sub-v').textContent='$'+(sub/100).toFixed(0);
     $('tax-v').textContent=(+$('tax').value/1000).toFixed(3).replace(/0+$/,'').replace(/\.$/,'')+'%';
     $('svc-v').textContent=$('svc').value+'%';
+    // ⭐ WRITTEN FROM COUR, NOT TYPED. It is the only place the courier's share is
+    //   stated on this page, and it is injected from the constant the arithmetic uses,
+    //   so the sentence and the bar cannot disagree. Kept on that condition (Jacob,
+    //   2026-09-13: "we can leave it if it's connected to the knobs").
+    $('cour-note').innerHTML='The courier is paid <b>'+Math.round(COUR*100)+'%</b> of it.';
     $('proc-v').textContent=(rate.r/100).toFixed(2).replace(/\.?0+$/,'')+'% + '+rate.f+'¢';
     $('keep-v').textContent=(+$('keep').value)+'% · '+M(commission);
     drawSplit(procPaid, svc, commission, courier, ward);
