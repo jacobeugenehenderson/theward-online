@@ -121,7 +121,7 @@
   function drawVs(sub, ourRate, costHere, costAt){
     var svg=$('vs'); if(!svg) return;
     var rows=[['The Ward',ourRate,true]].concat(RIVALS.map(function(r){return [r[0],r[1],false];}));
-    var W=700,L=150,R=230,TOP=50,BH=24,GAP=10;
+    var W=1000,L=190,R=300,TOP=52,BH=26,GAP=11;
     var maxR=0.35, plot=W-L-R;
     var x=function(v){ return L+(v/maxR)*plot; };
     // \u2b50 THREE COLUMNS, LABELLED ONCE. Every row used to repeat "keeps" and
@@ -132,7 +132,7 @@
     //   the words so the rows carry only money (Jacob, 2026-09-13: "still not clear
     //   that restaurants jack up the prices, too many words which are also confusing").
     //   \u26d4 The commission is gone from the row text because the BAR already is it.
-    var C3=W-6;
+    var C3=W-8;
     // ⛔ ONLY WHAT VARIES. Menu and customer-total were identical down all five
     //   incumbent rows — five rows of apparatus for one changing number — and both are
     //   drawn better by the customer bars above (Jacob: "what is all of this for then").
