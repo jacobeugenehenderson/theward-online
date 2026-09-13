@@ -83,7 +83,10 @@
     // where it crosses zero
     var be=null;
     for(var j=1;j<pts.length;j++){ if(pts[j-1]<0 && pts[j]>=0){ be=ns[j]; break; } }
-    var cur=sliderFromHoods(ctx.hoods)/100*60;
+    // ⭐ PLACED ON THE CHART'S OWN AXIS. This used to read the SLIDER's position and
+    // scale it, which only worked while the slider happened to be log-scaled; the
+    // dot is a point on this curve, so derive it from the curve.
+    var cur=Math.log(Math.max(1,ctx.hoods))/Math.log(1000)*60;
     svg.innerHTML=
       '<line x1="0" y1="'+(H/2)+'" x2="'+W+'" y2="'+(H/2)+'" stroke="var(--rule)" stroke-width="1"/>'+
       '<path d="'+d+'" fill="none" stroke="var(--cary-rule)" stroke-width="2" stroke-linejoin="round"/>'+
@@ -469,10 +472,19 @@
   function foodRate(){ return SVC*(1-COURIER)+COMM; }
   var PLATFORM_FEE=0.05, ANNUAL=0.18;
 
-  // ⭐ Log scale: 0→1 neighborhood, 100→1,000. Linear would make everything
-  // below 25 a single pixel, and everything below 25 is where we actually are.
-  function hoodsFromSlider(v){ return Math.max(1, Math.round(Math.pow(10, (v/100)*3))); }
-  function sliderFromHoods(n){ return Math.round(100*Math.log(n)/Math.log(1000)); }
+  // ⭐ A LADDER, NOT A CURVE. This was 101 linear positions laid over a log curve,
+  // which is right about the SHAPE — everything below 25 would be a single pixel on
+  // a linear scale, and everything below 25 is where we actually are — and wrong
+  // about the RESOLUTION. 25 of the 101 positions moved nothing at all: EIGHT
+  // consecutive steps all read "1 neighborhood" at the bottom, while at the top one
+  // step was worth 67 of them (933 → 1,000). It read as a broken control, because
+  // dragging it did nothing and then lurched (Jacob, 2026-09-13: "I can only slide
+  // the neighborhoods on the rails slider in odd increments").
+  // ⛔ The fix is not a finer step — a finer step adds more dead positions at the
+  // bottom. Every position now names a number a person would actually say.
+  var HOODS=[1,2,3,4,5,6,7,8,9,10,12,14,16,18,20,25,30,35,40,50,
+             60,70,80,90,100,125,150,175,200,250,300,400,500,600,700,800,900,1000];
+  function hoodsFromSlider(v){ return HOODS[Math.max(0, Math.min(HOODS.length-1, v|0))]; }
 
   function readRates(){
     PLATFORM_FEE=+el('pfee').value/1000;
