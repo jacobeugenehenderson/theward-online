@@ -37,8 +37,21 @@ const CLASSIFY = {
   'Street & building base :: OpenStreetMap':            { ship: true },
   'Building footprints :: Microsoft Global ML Footprints': { ship: true, note: 'free · no account' },
   'Building footprints :: OpenStreetMap':               { ship: false },   // the note is a Europe claim
-  'Ground elevation :: USGS 3DEP':                      { ship: true },
-  'Ground elevation :: any GeoTIFF':                    { ship: true },
+  /* ⭐ ONE `USGS 3DEP` ROW BECAME TWO RESOLUTIONS AND BOTH SHIP. The reader was
+     rewritten on 2026-09-21 to take the CRS off the tile rather than assume
+     degrees, so USGS 1 m — every tile of which is UTM — went from unreadable by
+     construction to the source the shore work actually runs on. Multi-tile is
+     mosaicked and a URL list is read in place, so the panel's own step text
+     saying 1 m is "refused, by name" describes a reader that no longer exists;
+     `steps` never ship, so it stops at the product.
+     ⛔ BOTH NOTES ARE REWRITTEN because the panel's are operator register: one
+     ends in "lat/lon", which tells the person fetching a tile which projection
+     to pick, and the other carries a ⚠️ about UTM and multi-tile that the reader
+     now handles. `any GeoTIFF` left the panel in the same edit — it was an
+     overclaim while it stood — and its key goes with it rather than sitting
+     here dead. */
+  'Ground elevation :: USGS 3DEP 1/3 arc-sec':          { ship: true, note: 'public domain · ~10 m' },
+  'Ground elevation :: USGS 3DEP 1 metre':              { ship: true, note: 'public domain · ~1 m' },
   'Parcels, zoning, year built :: the county assessor': { ship: true, note: 'public record · per jurisdiction' },
   'Tree census :: OpenStreetMap':                       { ship: true, note: 'free · real trunk positions' },
   'Tree census :: city forestry inventory':             { ship: true, note: 'free · no key' },

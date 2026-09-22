@@ -37,15 +37,15 @@
           "auto": true,
           "sources": [
             {
-              "name": "USGS 3DEP",
-              "note": "US"
+              "name": "USGS 3DEP 1/3 arc-sec",
+              "note": "~10 m"
             },
             {
-              "name": "any GeoTIFF",
-              "note": "the reader is source-agnostic"
+              "name": "USGS 3DEP 1 metre",
+              "note": "~1 m"
             }
           ],
-          "terms": "public domain · free"
+          "terms": "public domain"
         },
         {
           "name": "Parcels, zoning, year built",
@@ -175,7 +175,7 @@
             },
             {
               "name": "OpenStreetMap POIs",
-              "note": ""
+              "note": "the default base"
             }
           ],
           "terms": "free"
