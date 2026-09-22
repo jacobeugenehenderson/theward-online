@@ -1,4 +1,4 @@
-> **BUILT — 2026-09-22.** The page exists at `index.html` beside this file, and
+> **BUILT — 2026-09-22.** The page is `works/citi/index.html`, and
 > the decisions that turned out to be load-bearing are written into its own
 > comments, where the next person edits. This file is kept as the record of what
 > was decided before it was drawn; `SOURCES.md` is the one that stays live,
@@ -20,7 +20,7 @@ answerable questions rather than a pitch.
 of an interface** between one system that exists and one that is being built,
 written so that either party could read it and find nothing to correct. Every
 Citi statement is Citi's own, linked. Everything else is ours, and is marked as
-proposed. ⛔ Read `SOURCES.md` in this directory before writing a single
+proposed. ⛔ Read `SOURCES.md` beside this file before writing a single
 sentence about Citi; it records what is quotable, what is trade press, and three
 claims from the original sketch that do not survive checking.
 

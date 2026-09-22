@@ -1,5 +1,15 @@
 # Sources — /works/citi/
 
+⛔ **THIS FILE LIVES UNDER `_notes/` AND THAT IS THE POINT.** GitHub Pages runs
+Jekyll here — there is no `.nojekyll` — so an underscore-prefixed directory is
+excluded from the build: `/_source/…` 404s on the live site while `/README.md`
+serves. These two documents were briefly published at `/works/citi/SOURCES.md`
+and `/works/citi/BRIEF.md`; they are candid about a bank by design, and candid
+notes do not belong at a guessable path next to the page they are about.
+⚠ The repository is public, so this is about what the SITE serves, not about
+secrecy — the file is still readable on GitHub, and the earlier commit that
+published it is still in the history.
+
 Everything the page asserts about Citi must trace to a line in this file. Each
 entry is a **published Citi page**, fetched 2026-09-22, with the sentence we are
 actually leaning on. ⛔ If a claim on the page is not here, it is ours, and it
