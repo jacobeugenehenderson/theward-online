@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Built Toward Citi &mdash; The Ward</title>
-<meta name="description" content="The Ward's commerce layer, built to fit infrastructure Citi has already published: what corresponds, what gets built in what order, and the questions still open between the two.">
+<meta name="description" content="How The Ward's commerce layer could work with Citi, starting with payments and extending beyond.">
 <!-- ⛔ NOINDEX, on the same grounds as the rest of /works: an unlisted URL sent
      to a person rather than published. The OG tags stay, because the whole use
      of an unlisted link is that somebody forwards it — and a page addressed to
@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="The Ward">
 <meta property="og:url" content="https://theward.online/works/citi/">
 <meta property="og:title" content="Built Toward Citi">
-<meta property="og:description" content="A neighborhood commerce layer, mapped against Citi's published e-commerce infrastructure — and the list of questions still open between them.">
+<meta property="og:description" content="How The Ward's commerce layer could work with Citi, starting with payments and extending beyond.">
 <meta property="og:image" content="https://theward.online/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -74,18 +74,29 @@
 <main class="shell citi" id="main">
 
   <section class="sec pro-head">
-    <p class="pro-kicker">An interface, described from our side</p>
     <h1>Built Toward Citi</h1>
-    <p class="lede">The Ward is independent infrastructure for real neighborhoods. As its commerce layer is built, it is being built to fit what Citi has already published.</p>
   </section>
 
   <section class="sec">
-    <p class="plate"><span class="plate-n">01</span><span class="plate-t">The Correspondence</span><span class="plate-s">Their components, our roles</span></p>
+    <p class="plate"><span class="plate-n">01</span><span class="plate-t">The idea</span></p>
 
     <div class="copy">
-      <p>The reason is practical rather than aspirational. A neighborhood delivery order needs someone to take the customer&rsquo;s payment, keep the funds separate, pay the business, pay the courier, and reconcile all of it. Citi&rsquo;s e&#8209;commerce business names every one of those on its own pages: consumer collections, acceptance through Spring by Citi, virtual accounts that &ldquo;automatically segregate funds,&rdquo; domestic ACH payments, gig economy pay outs, and reconciliation and reporting.</p>
-      <p>Those capabilities correspond closely to what Cary needs.</p>
-      <p>What The Ward supplies is the part a processor does not: the place, the neighborhood&rsquo;s own network of businesses and couriers, and the operating system that decides what an order means before any money moves.</p>
+      <p>Cary is The Ward&rsquo;s commerce layer. It starts with neighborhood delivery: a customer buys from a local business, a local courier delivers it, and the business and courier get paid. Citi could provide the financial infrastructure behind it.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <p class="plate"><span class="plate-n">02</span><span class="plate-t">How it could work</span></p>
+
+    <div class="beyond">
+      <div class="beyond-col">
+        <h2>The Ward</h2>
+        <p>Runs the neighborhood side: the order, the business, the courier, the rules and who is owed what.</p>
+      </div>
+      <div class="beyond-col">
+        <h2>Citi</h2>
+        <p>Provides the financial infrastructure that accepts the payment, keeps track of the money, moves the funds and reconciles the result.</p>
+      </div>
     </div>
 
     <!-- ⭐⭐ THE FIGURE ARRIVES BEFORE THE READER IS ASKED TO BELIEVE ANYTHING,
@@ -118,7 +129,7 @@
         </defs>
         <rect x="-20" y="-20" width="680" height="300" fill="url(#citi-rule)"/>
 
-        <text class="dia-k" x="4" y="14" fill="currentColor">Citi publishes</text>
+        <text class="dia-k" x="4" y="14" fill="currentColor">Citi provides</text>
         <g fill="var(--ground-2)" stroke="var(--sign-soft)" stroke-width="1.5">
           <rect x="4"   y="26" width="140" height="52" rx="2"/>
           <rect x="168" y="26" width="140" height="52" rx="2"/>
@@ -127,11 +138,11 @@
         </g>
         <g text-anchor="middle" fill="currentColor">
           <text class="dia-t" x="74"  y="49">Spring by Citi</text>
-          <text class="dia-s" x="74"  y="65">consumer collections</text>
-          <text class="dia-t" x="238" y="49">Virtual Accounts</text>
-          <text class="dia-s" x="238" y="65">funds segregated</text>
-          <text class="dia-t" x="402" y="49">Domestic Payments</text>
-          <text class="dia-s" x="402" y="65">ACH and wires</text>
+          <text class="dia-s" x="74"  y="65">Consumer collections</text>
+          <text class="dia-t" x="238" y="49">Virtual accounts</text>
+          <text class="dia-s" x="238" y="65">Funds kept separate</text>
+          <text class="dia-t" x="402" y="49">Domestic payments</text>
+          <text class="dia-s" x="402" y="65">Move business funds</text>
           <text class="dia-t" x="566" y="49">Gig Economy</text>
           <text class="dia-t" x="566" y="64">Pay Outs</text>
         </g>
@@ -149,13 +160,13 @@
               fill="var(--ground-2)" stroke="var(--cary-rule)" stroke-width="2"/>
         <g text-anchor="middle" fill="var(--text)">
           <text class="dia-t" x="74"  y="159">Neighbor pays</text>
-          <text class="dia-s" x="74"  y="175">the counter price</text>
+          <text class="dia-s" x="74"  y="175">Counter price</text>
           <text class="dia-t" x="238" y="159">Cary splits it</text>
-          <text class="dia-s" x="238" y="175">who is owed what</text>
+          <text class="dia-s" x="238" y="175">Who is owed what</text>
           <text class="dia-t" x="402" y="159">Business is paid</text>
-          <text class="dia-s" x="402" y="175">menu price, less the fee</text>
+          <text class="dia-s" x="402" y="175">Counter price, less fee</text>
           <text class="dia-t" x="566" y="159">Courier is paid</text>
-          <text class="dia-s" x="566" y="175">tips entire</text>
+          <text class="dia-s" x="566" y="175">Tips entire</text>
         </g>
         <g fill="none" stroke="var(--sign)" stroke-width="1.5">
           <path d="M146 162 H162 M156 157 L162 162 L156 167"/>
@@ -178,112 +189,38 @@
         </g>
       </svg>
       </div>
-      <figcaption>Left to right, a single delivery order. The upper rank is Citi&rsquo;s own naming, taken from its e&#8209;commerce and payments pages. The lower rank is ours. The ties are dashed because nothing connects them yet.</figcaption>
+      <figcaption>One delivery order, from payment through payout. The top row uses Citi&rsquo;s own names for services it currently offers. The bottom row shows the corresponding parts of a Ward order. The dashed lines show where they appear to correspond; nothing is connected yet.</figcaption>
     </figure>
   </section>
 
   <section class="sec">
-    <p class="plate"><span class="plate-n">02</span><span class="plate-t">The Build</span><span class="plate-s">What gets built, in what order</span></p>
+    <p class="plate"><span class="plate-n">03</span><span class="plate-t">Why Citi</span></p>
 
     <div class="copy">
-      <p class="lede">This is the current development path. Each step produces something that can be tested before moving to the next.</p>
-    </div>
-
-    <!-- ⛔ NO NUMBERS ON THESE STEPS, and the repetition is the point: two of
-         them are the same distance away, and numbering would claim a precision
-         the schedule does not have. The ladder component carries a badge in its
-         62px column; here that column carries the phase. -->
-    <div class="steps">
-      <div class="step">
-        <span class="step-k">Now</span>
-        <p><span class="step-t">Build compatible</span>Keep The Ward&rsquo;s commerce authority independent of whoever moves the money. The system decides what an order is, who is owed and what the rules are; the processor executes. Document what Spring requires. Design the payment layer so a processor sits underneath it rather than inside it. Settle the merchant&#8209;of&#8209;record and sub&#8209;merchant structure. Write down what courier payout actually demands.</p>
-      </div>
-      <div class="step">
-        <span class="step-k">Next</span>
-        <p><span class="step-t">Prove one Ward</span>Real businesses, real orders, real couriers, in one neighborhood. Record transaction volume, merchant retention, courier economics, fulfillment and repeat use &mdash; and the failures: refunds, chargebacks, disputes, and what it actually costs to run.</p>
-      </div>
-      <div class="step">
-        <span class="step-k">Then</span>
-        <p><span class="step-t">Prove it travels</span>Neighborhoods beyond the first are already underway, with different geography, institutions and local economies. Run the same commerce layer in a second Ward and document what changes &mdash; and what does not.</p>
-      </div>
-      <div class="step">
-        <span class="step-k">Then</span>
-        <p><span class="step-t">A defined pilot</span>At that point there is something concrete to test with Citi: a working operating system, transaction history, a known set of integration requirements, and a bounded deployment for Spring.</p>
-      </div>
-      <div class="step">
-        <span class="step-k">Later</span>
-        <p><span class="step-t">An institutional host</span>A Citi&#8209;backed deployment becomes one available host model: financial infrastructure and institutional scale from one side, the neighborhood layer from the other.</p>
-      </div>
+      <p class="lede">Payments are the first obvious fit, but they are not the whole reason.</p>
+      <p>The Ward brings a neighborhood&rsquo;s businesses, residents, places and services together in one place. Cary can support more than delivery: other local purchases and services can run through it as well.</p>
+      <p>Where those services involve moving people or things around a neighborhood, Citi&rsquo;s name is already on another piece of the puzzle: bikes.</p>
+      <p>There is also a separate community&#8209;investment case. Citi&rsquo;s Impact Fund invests in U.S. companies working on access, resilience and social infrastructure. That creates the possibility that Citi could help establish neighborhood infrastructure while also having a commercial role in activity that happens through it.</p>
     </div>
   </section>
 
   <section class="sec">
-    <p class="plate"><span class="plate-n">03</span><span class="plate-t">The Two Doors</span><span class="plate-s">Why this institution and not another</span></p>
+    <p class="plate"><span class="plate-n">04</span><span class="plate-t">What we would work out with Citi</span></p>
 
     <div class="copy">
-      <p class="lede">There are two distinct points of connection with Citi: its payments business and its community investment work.</p>
-    </div>
-
-    <div class="beyond">
-      <div class="beyond-col">
-        <h2>Citi Services / Commerce</h2>
-        <p>Citi&rsquo;s e&#8209;commerce business is organised around a continuum: accept the payment, hold the funds, pay everyone owed, finance. Its own pages list consumer collections, acceptance through Spring by Citi, virtual accounts that segregate funds, domestic ACH payments, gig economy pay outs and reconciliation.</p>
-        <p>A neighborhood delivery order is a small instance of exactly that shape &mdash; a two&#8209;sided marketplace where the seller is not the operator.</p>
-      </div>
-      <div class="beyond-col">
-        <h2>Citi Impact / Community Infrastructure</h2>
-        <p>The Citi Impact Fund invests Citi&rsquo;s own balance sheet in U.S. companies working on affordability, access and resilience, across four areas that include financial resilience and social infrastructure &mdash; &ldquo;solutions that expand access to essential services including housing, healthcare and transportation for underserved communities.&rdquo;</p>
-        <p>Beyond capital it says it helps companies &ldquo;reach new markets, increase demand for their offerings or build long&#8209;term resilience.&rdquo; As of June 30, 2026: 58 companies and funds, more than $215 million allocated.</p>
-      </div>
-    </div>
-
-    <p class="pull">The commercial and community cases are different. The Ward gives them common ground.</p>
-
-    <!-- ⭐ THE QUOTE IS TWO WEEKS OLD AND IT IS FROM THE PERSON WHO RUNS THE
-         FUND, which is why it gets its own block rather than a clause inside a
-         paragraph of ours. `.pull` was not reused for it: that component is this
-         site's doctrine line, and lending it to somebody else's words would blur
-         whose voice is whose on the one page where that matters most. -->
-    <figure class="quote">
-      <blockquote>
-        <p>&ldquo;In past moments of technological leaps, such as the internet and broadband infrastructure, many underserved communities have been the last to benefit.&hellip; We can invest in solutions that help meet essential community needs while the technology is evolving, not after the groundwork has been laid.&rdquo;</p>
-      </blockquote>
-      <figcaption class="quote-src">Meredith Shields, Head of Citi Impact Fund &mdash; <a href="https://www.citigroup.com/global/news/perspectives/2026/investing-inflection-point-ai-potential-community-impact">Investing at the Inflection Point</a>, September 8, 2026</figcaption>
-    </figure>
-  </section>
-
-  <section class="sec">
-    <p class="plate"><span class="plate-n">04</span><span class="plate-t">What We Need</span></p>
-
-    <div class="copy">
-      <h2>What we need from Citi is answers</h2>
-      <p>Every line below is a question whose answer changes what we build. We would rather design against a real constraint now than discover it during a pilot.</p>
-    </div>
-
-    <div class="terms">
-      <div class="term"><span class="term-k">Merchant of record</span><span class="term-v">Cary routes the whole order and pays the business and the courier the same night, so The Ward is in the funds flow by design. Whether Citi will underwrite that as one merchant with businesses beneath it, or require every business to stand as its own.</span></div>
-      <div class="term"><span class="term-k">Spring eligibility</span><span class="term-v">Spring is sold to institutional clients. Whether a platform this small is servable at all, where the floor sits, and what it costs down there.</span></div>
-      <div class="term"><span class="term-k">Courier verification</span><span class="term-v">The Ward cannot produce a list of its residents because it never collects what that would take. What a neighbor must hand over before their first payout, and whether Citi can hold it so that we never do.</span></div>
-      <div class="term"><span class="term-k">Settlement</span><span class="term-v">When funds become available to pay out from, and whether a marketplace at our size carries a rolling reserve or a hold before they do.</span></div>
-      <div class="term"><span class="term-k">Courier payouts</span><span class="term-v">We pay couriers at the end of the night. Which rails settle that fast, what each costs, and whether that cost is charged per payout or per batch &mdash; a Ward pays many small recipients every night, and that shape decides the economics.</span></div>
-      <div class="term"><span class="term-k">Tips</span><span class="term-v">Whether a tip can be carried as the courier&rsquo;s money from the start, so it never lands in our revenue and never has to be handed back out of it.</span></div>
-      <div class="term"><span class="term-k">Refunds</span><span class="term-v">Where dispute liability sits when one party cooked it and another carried it &mdash; and what happens to a courier who was already paid at the end of that night when the chargeback lands three weeks later.</span></div>
-      <div class="term"><span class="term-k">Payment methods</span><span class="term-v">Whether pay&#8209;by&#8209;bank and instant debit are open to us, and what each method costs against a card. Processing is a pass&#8209;through here, so the method a customer picks changes what that customer is charged.</span></div>
-      <div class="term"><span class="term-k">Reconciliation</span><span class="term-v">Whether our own order identifier survives into Citi&rsquo;s reporting, and whether a payout can carry the split that produced it, so the two ledgers agree without a person in the middle.</span></div>
-      <div class="term"><span class="term-k">POS coexistence</span><span class="term-v">Whether a business can keep its own acquirer at the counter while The Ward is merchant of record online, and what that leaves it to reconcile.</span></div>
-      <div class="term"><span class="term-k">Data boundaries</span><span class="term-v">What Citi retains about a neighbor who buys a sandwich, how long, and whether any of it may be used for anything other than settling that sandwich.</span></div>
-      <div class="term"><span class="term-k">Pilot conditions</span><span class="term-v">What has to be true &mdash; volume, entity, capital, insurance, controls &mdash; before Citi would put Spring under a live Ward, stated as thresholds rather than as encouragement.</span></div>
+      <p>A pilot would determine the specifics: how businesses sit within the payment structure, how quickly businesses and couriers can be paid, what Citi requires from each participant, how refunds and disputes are handled, how Ward orders reconcile with Citi&rsquo;s records, and what volume and controls Spring requires.</p>
+      <p>Cary&rsquo;s rules&mdash;the split, the courier model, the customer experience and the relationship with the local business&mdash;remain The Ward&rsquo;s.</p>
     </div>
   </section>
 
   <section class="sec">
     <div class="copy">
       <h2>Built to remain independent</h2>
-      <p>Spring is a target integration, not a dependency. The payment layer remains separable from The Ward itself, so the work above improves the platform regardless of who ultimately provides the financial infrastructure.</p>
+      <p>Citi is a target partner, not a dependency. The company handling payments can change without changing The Ward itself.</p>
     </div>
 
     <footer>
-      Citi, Spring by Citi and the Citi Impact Fund are Citigroup&rsquo;s. Every Citi statement on this page is quoted from Citi&rsquo;s own published material and linked to it. The Ward has no relationship with Citigroup, has made no approach, and claims none. Everything described here as ours is proposed and not yet built. Not legal, tax, or financial advice.
+      Working draft &mdash; The Ward has no relationship with Citigroup and has made no approach. Citi, Spring by Citi, Citi Bike and the Citi Impact Fund are Citigroup&rsquo;s or their respective owners&rsquo; marks and programs. Proposed integrations described here are not yet built.
     </footer>
   </section>
 
