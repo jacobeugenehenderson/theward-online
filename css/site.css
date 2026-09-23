@@ -1604,8 +1604,11 @@ a { color: inherit; }
 }
 /* The page's own disclaimer, inside main — the same footnote register the two
    instruments use, so a reader who has seen one recognises it as the fine print
-   rather than as the page trailing off. */
-.citi footer {
+   rather than as the page trailing off. ⭐ SHARED WITH /works/seamens, which is
+   the same kind of page addressed to a different institution — one rule, not a
+   second copy of it under another name. */
+.citi footer,
+.seamens footer {
   margin-top: var(--s5); padding-top: var(--s3);
   border-top: 1px solid var(--rule);
   font-size: 0.78rem; line-height: 1.5;
