@@ -103,7 +103,14 @@
       "⭐⭐ ⚜️ IS PRODUCT-TRUE, which is why Reviews works where Claim did not: the fleur-de-lis is the mark the app actually rates with (ls/FEATURES, 'reviews with a fleur-de-lis rating'). Also measured and rejected: 💯 and 📊 read as interface rather than object · 🥇 as competition · 🔍 as search · 🗨️ clears 1%, a dark bubble that vanishes · 🏅 0.51em and 🎗️ 0.59em narrow · 🖼️ frame-in-a-frame again.",
       "",
       "⚠️ IDENTITY SHARES CHECK-IN'S TEAL, AND IT IS A WEAKER PAIRING THAN HOME/LOBBY — recorded rather than glossed. Home and Lobby are literally one place seen twice; check-in and identity are only cousins (the Ward recognising you turn up, and who it knows you as). It shares anyway because the alternative was a NINTH hue at this lightness, and the only gap left is ~260°, wedged between indigo 232 and plum 288 — three violets in a row that nobody could tell apart. ⛔ Nothing may go near amber. ▶ The palette is the constraint now, not the vocabulary: from here a new subject either shares or displaces.",
-      "⚠️ 🔒 HERE AND 🔓 IN CHECK-IN ARE THE SAME OBJECT IN OPPOSITE STATES, deliberately: turning up UNLOCKS, and what you keep stays LOCKED. ⛔ Not the ☕ case — that was one picture worn by a round badge AND a square portrait, which breaks the shape grammar. These are two squares in different fields, and the reversal is legible. Also measured and rejected: 🙂 and 👤 are people (👤 is a flat silhouette as well) · 📵 is prohibition signage, and says no-phones-allowed · 📱 0.53em and 🕶️ 1.78em · 🪪 1.46em · 🗝️ 16% · 🎭 belongs to Society Pages."
+      "⚠️ 🔒 HERE AND 🔓 IN CHECK-IN ARE THE SAME OBJECT IN OPPOSITE STATES, deliberately: turning up UNLOCKS, and what you keep stays LOCKED. ⛔ Not the ☕ case — that was one picture worn by a round badge AND a square portrait, which breaks the shape grammar. These are two squares in different fields, and the reversal is legible. Also measured and rejected: 🙂 and 👤 are people (👤 is a flat silhouette as well) · 📵 is prohibition signage, and says no-phones-allowed · 📱 0.53em and 🕶️ 1.78em · 🪪 1.46em · 🗝️ 16% · 🎭 belongs to Society Pages.",
+      "",
+      "⭐ HARBOR IS A PLACE, NOT THE BANK (2026-09-22, /works/seamens §01 'Start with Provincetown'). ⚓ ⛵ 🐋 🦞 — the harbor town and its seasonal economy: anchorage, sail, whale watch, lobster. It sits with the PLACE, never on 'Why Seamen's', so the Ward is depicting a place rather than an institution. Measured 2026-09-22, Chrome/153, same baseline raster; calibration reproduced 🛍️ 🥤 🍜 exactly and 🚲 within 0.0025em, and the contrast scorer reproduced 🥾 23% · 🎒 43% · 🏞️ 81% · 🚏 72% from the notes above.",
+      "⚠️ CONTRAST IS MIDDLING AND WAS PASSED BY EYE, on the rule above: on #162f41, 🐋 99% · ⚓ 52% · ⛵ 48% · 🦞 40%. 🦞 is under 🎒's rejected 43%, and it stays because red-on-blue is a HUE contrast the luminance ratio does not see — rendered at 62px it is the most legible frame in the set. ⚓ is a silver outline and reads the way 🔑 does.",
+      "⛔ 🛟 CUT ON SIGHT — Apple draws the ring inside its own rounded square: a frame in a frame, the 🖼️ class. Held in reserve: 🐚 0.985em, 79%.",
+      "",
+      "⛔ CURRENCY WAS BUILT AND CUT (2026-09-22). 💳 💵 📒 🧮 on violet hsl(260,32%,18%), as a hero-size opening plate on /works/citi. Jacob, on seeing it: too big, and the emoji did not earn it. The page keeps only the Cary portrait on §01. ⛔ A 'city' family was turned down before it for being a pun on the name. ▶ If a Citi picture comes back, it is not this one.",
+      "⛔⛔ 💳 AND 💵 WERE MEASURED AT alpha>64, NOT THE USUAL alpha>8, and that is a finding about the instrument. At alpha>8 both report a full 1.00em box — Apple draws a faint halo out to the em edge — so they scaled as if they filled the frame and rendered at two-thirds the size of 📒 beside them. The eye caught it; the number did not. At alpha>64 they are 0.65em tall, which is the picture. ⚠️ Every other glyph on file measures the same at both thresholds (checked: 🛍️ 📒 🧮), so nothing already shipped moves. ▶ If a new glyph looks small in the render, re-measure it stricter before blaming the scale."
     ],
     "order": [
       "cary",
@@ -115,7 +122,8 @@
       "home",
       "lobby",
       "reviews",
-      "identity"
+      "identity",
+      "harbor"
     ],
     "subjects": {
       "cary": {
@@ -495,6 +503,45 @@
             "ink": {
               "inkH": 1.0,
               "inkW": 1.0,
+              "nudgeY": 0.0325
+            }
+          }
+        ]
+      },
+      "harbor": {
+        "label": "Harbor",
+        "field": "#162f41",
+        "fieldNote": "hsl(205,50%,17%) — sea blue at the knee lightness. Chosen by eye over hsl(212,45%,14%), which cleared ~3 points more ink but read as near-black; this one reads as water and stays apart from check-in teal (193°) and almanac indigo (232°).",
+        "frames": [
+          {
+            "emoji": "⚓",
+            "ink": {
+              "inkH": 0.99,
+              "inkW": 0.96,
+              "nudgeY": 0.0325
+            }
+          },
+          {
+            "emoji": "⛵",
+            "ink": {
+              "inkH": 0.99,
+              "inkW": 0.86,
+              "nudgeY": 0.0375
+            }
+          },
+          {
+            "emoji": "🐋",
+            "ink": {
+              "inkH": 0.975,
+              "inkW": 0.96,
+              "nudgeY": 0.035
+            }
+          },
+          {
+            "emoji": "🦞",
+            "ink": {
+              "inkH": 0.99,
+              "inkW": 0.8,
               "nudgeY": 0.0325
             }
           }

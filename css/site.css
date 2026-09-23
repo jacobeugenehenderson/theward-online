@@ -1491,8 +1491,20 @@ a { color: inherit; }
    rather than fixing it, and it needs absolute positioning with its own
    narrow-width fallback. Kept in mind for a diagrammatic register (the
    prospectus), where a marginal figure is the right idiom.
-   ⛔ It borrows the chapter size; it does not invent a third. */
-.trail .copy .vignette { float: left; margin: var(--s5) var(--s4) var(--s2) 0; }
+   ⛔ It borrows the chapter size; it does not invent a third.
+   ⭐ /works/seamens and /works/citi share these rules rather than copying them: a
+   portrait at the head of a section is the same plate-in-a-book idea there. */
+.trail .copy .vignette,
+.seamens .copy .vignette,
+.citi .copy .vignette { float: left; margin: var(--s5) var(--s4) var(--s2) 0; }
+/* ⚠️ No heading inside the copy there, so the chapter's top margin (sized to
+   clear an h2) would drop the card below the opening line. It starts level
+   with the lede instead. */
+.seamens .copy .vignette,
+.citi .copy .vignette { margin-top: 6px; }
+/* The Citi page's §01 is one short paragraph, shorter than the card; the copy
+   holds its float so the card cannot hang into the next section. */
+.citi .copy { display: flow-root; }
 .trail .copy .vignette + h2 { margin-top: 26px; }
 
 /* ⛔ AND NO PARAGRAPH MAY BE SPLIT BY THE CARD'S BOTTOM EDGE. A paragraph that
@@ -1506,14 +1518,20 @@ a { color: inherit; }
    second paragraph below the card correctly, and this leaves that alone.
    ⚠️ A no-op wherever there is no float — below the card, and at phone width
    where the float is off entirely. */
-.trail .copy .vignette ~ p { display: flow-root; }
+.trail .copy .vignette ~ p,
+.seamens .copy .vignette ~ p,
+.citi .copy .vignette ~ p { display: flow-root; }
 
 /* ⚠️ AND THE FLOAT DROPS ON A NARROW SCREEN, because it has to: at phone width
    the copy is the whole column, and a 130px card beside it leaves about thirty
    characters — a measure nobody can read. Stacked is the correct answer there,
    and the same 700px breakpoint the rest of the site already turns on. */
 @media (max-width: 700px) {
-  .trail .copy .vignette { float: none; margin: var(--s5) 0 var(--s2); }
+  .trail .copy .vignette,
+  .seamens .copy .vignette,
+  .citi .copy .vignette { float: none; margin: var(--s5) 0 var(--s2); }
+  .seamens .copy .vignette,
+  .citi .copy .vignette { margin-top: 0; }
   .trail .copy .vignette + h2 { margin-top: 0; }
 }
 

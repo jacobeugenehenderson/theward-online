@@ -157,7 +157,7 @@
   --vig-courier-scale: 1.459;
   --vig-courier-nudge: -0.1025em;
 
-  /* 10 square portrait(s) — round is who you are, square is something
+  /* 11 square portrait(s) — round is who you are, square is something
      in the Ward. Same measured scale and nudge per frame; the FIELD is the new part,
      and it is per-subject because a cycling picture has to stay legible on every turn.
      See the portraits._comment in data/vignette-glyphs.json for the sweep. */
@@ -298,6 +298,20 @@
   --pt-identity-2-emoji: "🔒";
   --pt-identity-2-scale: 0.970;
   --pt-identity-2-nudge: 0.0325em;
+  --pt-harbor-field: #162f41;
+  --pt-harbor-n: 4;
+  --pt-harbor-0-emoji: "⚓";
+  --pt-harbor-0-scale: 0.980;
+  --pt-harbor-0-nudge: 0.0325em;
+  --pt-harbor-1-emoji: "⛵";
+  --pt-harbor-1-scale: 0.980;
+  --pt-harbor-1-nudge: 0.0375em;
+  --pt-harbor-2-emoji: "🐋";
+  --pt-harbor-2-scale: 0.995;
+  --pt-harbor-2-nudge: 0.0350em;
+  --pt-harbor-3-emoji: "🦞";
+  --pt-harbor-3-scale: 0.980;
+  --pt-harbor-3-nudge: 0.0325em;
   /* VIGNETTES:END */
 }
 
